@@ -1,0 +1,27 @@
+{
+  "name": "solana-telegram-arb-bot",
+  "version": "1.0.0",
+  "description": "Advanced Solana Arbitrage Telegram Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@jup-ag/api": "^6.0.0",
+    "@solana/web3.js": "^1.87.6",
+    "axios": "^1.6.2",
+    "bignumber.js": "^9.1.1",
+    "dotenv": "^16.3.1",
+    "googleapis": "^129.0.0",
+    "node-cron": "^3.0.3",
+    "node-telegram-bot-api": "^0.64.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

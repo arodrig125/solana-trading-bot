@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: solana-arb-telegram-bot
+    env: node
+    runtime: node
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.x
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: PRIVATE_KEY
+        sync: false
+      - key: SHEET_ID
+        sync: false
+      - key: SIMULATION
+        value: "true"
+      - key: GOOGLE_CREDENTIALS
+        sync: false
+    disk:
+      name: bot-data
+      mountPath: /data
+      sizeGB: 1
