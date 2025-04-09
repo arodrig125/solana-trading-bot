@@ -62,7 +62,14 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
       return null;
     }
     
-    const quoteResponse = await jupiterClient.quote({
+    // Updated for Jupiter API v6
+    const quoteApi = jupiterClient.quoteApi;
+    if (!quoteApi) {
+      logger.error(`Jupiter API client doesn't have quoteApi method`);
+      return null;
+    }
+    
+    const quoteResponse = await quoteApi.getQuote({
       inputMint,
       outputMint,
       amount,
