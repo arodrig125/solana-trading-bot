@@ -62,24 +62,15 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
       return null;
     }
     
-    // Updated for Jupiter API v6
+    // Log the Jupiter client structure to debug
+    logger.info(`Jupiter client methods: ${Object.keys(jupiterClient).join(', ')}`);
+    
+    // Try the direct method first (most likely to work with v6)
     try {
-      // Direct method call for v6
-      const quoteResponse = await jupiterClient.quote({
-        inputMint,
-        outputMint,
-        amount,
-        slippageBps,
-        onlyDirectRoutes
-      });
-      
-      return quoteResponse;
-    } catch (directError) {
-      logger.warn(`Direct quote method failed, trying alternative API structure: ${directError.message}`);
-      
-      // Try alternative API structure
-      if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
-        const quoteResponse = await jupiterClient.quoteApi.getQuote({
+      // Check if quote method exists
+      if (typeof jupiterClient.quote === 'function') {
+        logger.info('Using direct quote method');
+        const quoteResponse = await jupiterClient.quote({
           inputMint,
           outputMint,
           amount,
@@ -89,8 +80,46 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
         
         return quoteResponse;
       } else {
-        throw new Error('Jupiter API structure not compatible - neither direct quote nor quoteApi.getQuote methods available');
+        throw new Error('Direct quote method not found');
       }
+    } catch (directError) {
+      logger.warn(`Direct quote method failed: ${directError.message}`);
+      
+      // Try alternative methods
+      if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
+        logger.info('Using quoteApi.getQuote method');
+        const quoteResponse = await jupiterClient.quoteApi.getQuote({
+          inputMint,
+          outputMint,
+          amount,
+          slippageBps,
+          onlyDirectRoutes
+        });
+        return quoteResponse;
+      } else if (typeof jupiterClient.quoteGet === 'function') {
+        logger.info('Using quoteGet method');
+        const quoteResponse = await jupiterClient.quoteGet({
+          inputMint,
+          outputMint,
+          amount,
+          slippageBps,
+          onlyDirectRoutes
+        });
+        return quoteResponse;
+      } else if (jupiterClient.v6 && typeof jupiterClient.v6.quote === 'function') {
+        logger.info('Using v6.quote method');
+        const quoteResponse = await jupiterClient.v6.quote({
+          inputMint,
+          outputMint,
+          amount,
+          slippageBps,
+          onlyDirectRoutes
+        });
+        return quoteResponse;
+      }
+      
+      // If we get here, no compatible method was found
+      throw new Error('No compatible Jupiter API method found');
     }
   } catch (error) {
     logger.error(`Error getting quote for ${inputMint} to ${outputMint}:`, error);

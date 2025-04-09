@@ -4,7 +4,7 @@ services:
     env: node
     runtime: node
     buildCommand: npm install
-    startCommand: node index.js
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.x
@@ -20,6 +20,8 @@ services:
         value: "true"
       - key: GOOGLE_CREDENTIALS
         sync: false
+      - key: PORT
+        value: 3000
     disk:
       name: bot-data
       mountPath: /data
