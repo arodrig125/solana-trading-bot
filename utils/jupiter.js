@@ -63,21 +63,35 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
     }
     
     // Updated for Jupiter API v6
-    const quoteApi = jupiterClient.quoteApi;
-    if (!quoteApi) {
-      logger.error(`Jupiter API client doesn't have quoteApi method`);
-      return null;
+    try {
+      // Direct method call for v6
+      const quoteResponse = await jupiterClient.quote({
+        inputMint,
+        outputMint,
+        amount,
+        slippageBps,
+        onlyDirectRoutes
+      });
+      
+      return quoteResponse;
+    } catch (directError) {
+      logger.warn(`Direct quote method failed, trying alternative API structure: ${directError.message}`);
+      
+      // Try alternative API structure
+      if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
+        const quoteResponse = await jupiterClient.quoteApi.getQuote({
+          inputMint,
+          outputMint,
+          amount,
+          slippageBps,
+          onlyDirectRoutes
+        });
+        
+        return quoteResponse;
+      } else {
+        throw new Error('Jupiter API structure not compatible - neither direct quote nor quoteApi.getQuote methods available');
+      }
     }
-    
-    const quoteResponse = await quoteApi.getQuote({
-      inputMint,
-      outputMint,
-      amount,
-      slippageBps,
-      onlyDirectRoutes
-    });
-    
-    return quoteResponse;
   } catch (error) {
     logger.error(`Error getting quote for ${inputMint} to ${outputMint}:`, error);
     return null;

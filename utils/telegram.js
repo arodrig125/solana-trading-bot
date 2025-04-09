@@ -11,7 +11,17 @@ function initBot(token) {
   }
   
   try {
-    return new TelegramBot(token, { polling: true });
+    // Add polling options to handle conflicts
+    return new TelegramBot(token, { 
+      polling: true,
+      // Add these options to handle the 409 Conflict error
+      polling_options: {
+        timeout: 10,
+        limit: 100
+      },
+      // Add a small random delay to avoid conflicts
+      onlyFirstMatch: true
+    });
   } catch (error) {
     logger.errorMessage('Error initializing Telegram bot', error);
     return null;
@@ -22,6 +32,12 @@ function initBot(token) {
 async function sendMessage(bot, chatId, message, options = {}) {
   if (!bot || !chatId) {
     logger.warningMessage('Cannot send Telegram message: bot or chatId not provided');
+    return false;
+  }
+  
+  // Validate chat ID - it should be a number, not a bot username
+  if (typeof chatId === 'string' && chatId.startsWith('@')) {
+    logger.warningMessage(`Invalid chat ID format: ${chatId}. This appears to be a username, not a chat ID.`);
     return false;
   }
   
@@ -271,6 +287,20 @@ function setupCommands(bot, callbacks) {
   // Handle errors
   bot.on('polling_error', (error) => {
     logger.error('Telegram polling error:', error);
+    
+    // If we get a 409 Conflict error, wait a bit and restart polling
+    if (error.code === 'ETELEGRAM' && error.response && error.response.statusCode === 409) {
+      logger.warn('Detected 409 Conflict error, waiting 5 seconds before restarting polling');
+      
+      // Stop polling
+      bot.stopPolling();
+      
+      // Wait 5 seconds and restart polling
+      setTimeout(() => {
+        logger.info('Restarting Telegram polling');
+        bot.startPolling();
+      }, 5000);
+    }
   });
   
   // Set bot commands for menu
