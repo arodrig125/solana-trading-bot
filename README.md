@@ -1,6 +1,6 @@
-# Solana Telegram Arbitrage Bot
+# SolarBot - Solana Trading Bot
 
-An advanced Solana arbitrage trading bot with Telegram command control, Google Sheets logging, and Jupiter Swap API integration.
+An advanced Solana arbitrage trading bot with Telegram command control, Google Sheets logging, Jupiter Swap API integration, and a professional website.
 
 ## Features
 
@@ -46,8 +46,8 @@ An advanced Solana arbitrage trading bot with Telegram command control, Google S
 
 1. Clone this repository
    ```bash
-   git clone https://github.com/yourusername/solana-telegram-arb-bot.git
-   cd solana-telegram-arb-bot
+   git clone https://github.com/arodrig125/solana-trading-bot.git
+   cd solana-trading-bot
    ```
 
 2. Install dependencies
@@ -102,7 +102,13 @@ An advanced Solana arbitrage trading bot with Telegram command control, Google S
 
 ## Deployment
 
-### Deploying on Render
+### Website Deployment
+
+The website is deployed on Vercel from the `main` branch. The website files are located in the `website/` directory.
+
+### Bot Deployment
+
+#### Deploying on Render
 
 1. Create a new Web Service on Render
 2. Connect your GitHub repository
@@ -111,6 +117,10 @@ An advanced Solana arbitrage trading bot with Telegram command control, Google S
    - Build Command: `npm install`
    - Start Command: `node index.js`
 4. Add all environment variables from your .env file
+
+#### Deploying on a VPS
+
+See the [VPS Deployment Guide](VPS_DEPLOYMENT_GUIDE.md) for detailed instructions on deploying the bot on a Virtual Private Server.
 
 ## Configuration
 
