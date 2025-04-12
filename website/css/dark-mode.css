@@ -51,12 +51,22 @@ body.dark-mode header {
     box-shadow: var(--dark-shadow);
 }
 
-body.dark-mode .navbar-nav .nav-link {
+body.dark-mode .nav-links a {
     color: var(--dark-text);
 }
 
-body.dark-mode .navbar-nav .nav-link:hover {
+body.dark-mode .nav-links a:hover {
     color: var(--primary-light);
+}
+
+body.dark-mode .mobile-menu-toggle span {
+    background-color: var(--dark-text);
+}
+
+body.dark-mode .nav-links.active,
+body.dark-mode .auth-buttons.active {
+    background-color: var(--dark-surface);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Sections */
@@ -159,7 +169,7 @@ body.dark-mode footer a:hover {
 
 /* Smooth Transition */
 body, header, .section, .feature-card, .pricing-card, .testimonial-card,
-.btn, .comparison-grid, .comparison-header .feature-column, 
+.btn, .comparison-grid, .comparison-header .feature-column,
 .comparison-header .plan-column, .feature-category, .feature-row,
 .feature-name, .feature-value, footer, footer h4, footer p, footer a {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
