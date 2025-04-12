@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - SolarBot.io</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/comparison-grid.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -190,107 +191,245 @@
     <section class="feature-comparison">
         <div class="container">
             <div class="section-header">
-                <h2>Feature Comparison</h2>
-                <p>Detailed breakdown of what's included in each plan</p>
+                <h2>Compare Features</h2>
+                <p>Find the perfect plan for your trading needs</p>
             </div>
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Basic</th>
-                            <th>Advanced</th>
-                            <th>Professional</th>
-                            <th>Enterprise</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Simulation Mode</td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Live Trading Mode</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Telegram Integration</td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Token Pairs</td>
-                            <td>5-10</td>
-                            <td>All</td>
-                            <td>All + Custom</td>
-                            <td>Unlimited</td>
-                        </tr>
-                        <tr>
-                            <td>Arbitrage Strategies</td>
-                            <td>Basic</td>
-                            <td>Advanced</td>
-                            <td>Advanced + Custom</td>
-                            <td>Custom</td>
-                        </tr>
-                        <tr>
-                            <td>Risk Management</td>
-                            <td>Basic</td>
-                            <td>Advanced</td>
-                            <td>Advanced + Custom</td>
-                            <td>Custom</td>
-                        </tr>
-                        <tr>
-                            <td>Multi-Wallet Support</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>API Access</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Analytics & Reporting</td>
-                            <td>Basic</td>
-                            <td>Detailed</td>
-                            <td>Advanced</td>
-                            <td>Custom</td>
-                        </tr>
-                        <tr>
-                            <td>Support</td>
-                            <td>Email</td>
-                            <td>Priority Email</td>
-                            <td>24/7 Priority</td>
-                            <td>Dedicated Support</td>
-                        </tr>
-                        <tr>
-                            <td>VPS Setup Assistance</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>White-Label Option</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td>Additional Fee</td>
-                            <td><i class="fas fa-check"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div class="comparison-wrapper">
+                <div class="comparison-grid">
+                    <!-- Header Row -->
+                    <div class="comparison-header">
+                        <div class="feature-column">
+                            <h3>Features</h3>
+                        </div>
+                        <div class="plan-column">
+                            <div class="plan-name">Basic</div>
+                            <div class="plan-price">$29<span>/mo</span></div>
+                            <a href="signup.html?plan=basic" class="btn btn-sm btn-outline">Select</a>
+                        </div>
+                        <div class="plan-column recommended">
+                            <div class="recommended-tag">Most Popular</div>
+                            <div class="plan-name">Advanced</div>
+                            <div class="plan-price">$79<span>/mo</span></div>
+                            <a href="signup.html?plan=advanced" class="btn btn-sm btn-primary">Select</a>
+                        </div>
+                        <div class="plan-column">
+                            <div class="plan-name">Professional</div>
+                            <div class="plan-price">$199<span>/mo</span></div>
+                            <a href="signup.html?plan=professional" class="btn btn-sm btn-outline">Select</a>
+                        </div>
+                        <div class="plan-column">
+                            <div class="plan-name">Enterprise</div>
+                            <div class="plan-price">Custom</div>
+                            <a href="contact.html" class="btn btn-sm btn-outline">Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- Trading Capabilities Category -->
+                    <div class="feature-category">
+                        <h4>Trading Capabilities</h4>
+                    </div>
+
+                    <!-- Feature Rows -->
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Simulation Mode
+                                <span class="info-tooltip" data-tooltip="Test strategies without risking real funds">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Live Trading Mode
+                                <span class="info-tooltip" data-tooltip="Execute real trades automatically">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-times"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Arbitrage Strategies
+                                <span class="info-tooltip" data-tooltip="Methods used to identify profitable trading opportunities">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><span class="feature-value">Basic</span></div>
+                        <div class="plan-column recommended"><span class="feature-value">Advanced</span></div>
+                        <div class="plan-column"><span class="feature-value">Advanced + Custom</span></div>
+                        <div class="plan-column"><span class="feature-value">Custom</span></div>
+                    </div>
+
+                    <!-- Integration & Access Category -->
+                    <div class="feature-category">
+                        <h4>Integration & Access</h4>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Telegram Integration
+                                <span class="info-tooltip" data-tooltip="Control your bot and receive alerts via Telegram">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                API Access
+                                <span class="info-tooltip" data-tooltip="Programmatic access to bot functionality">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-times"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-times"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Multi-Wallet Support
+                                <span class="info-tooltip" data-tooltip="Connect and trade with multiple wallets simultaneously">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-times"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-times"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <!-- Customization Category -->
+                    <div class="feature-category">
+                        <h4>Customization</h4>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Token Pairs
+                                <span class="info-tooltip" data-tooltip="Number of cryptocurrency pairs available for trading">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><span class="feature-value">5-10</span></div>
+                        <div class="plan-column recommended"><span class="feature-value">All</span></div>
+                        <div class="plan-column"><span class="feature-value">All + Custom</span></div>
+                        <div class="plan-column"><span class="feature-value">Unlimited</span></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Risk Management
+                                <span class="info-tooltip" data-tooltip="Tools to protect your capital and manage trading risks">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><span class="feature-value">Basic</span></div>
+                        <div class="plan-column recommended"><span class="feature-value">Advanced</span></div>
+                        <div class="plan-column"><span class="feature-value">Advanced + Custom</span></div>
+                        <div class="plan-column"><span class="feature-value">Custom</span></div>
+                    </div>
+
+                    <!-- Support & Services Category -->
+                    <div class="feature-category">
+                        <h4>Support & Services</h4>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Analytics & Reporting
+                                <span class="info-tooltip" data-tooltip="Insights and data about your trading performance">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><span class="feature-value">Basic</span></div>
+                        <div class="plan-column recommended"><span class="feature-value">Detailed</span></div>
+                        <div class="plan-column"><span class="feature-value">Advanced</span></div>
+                        <div class="plan-column"><span class="feature-value">Custom</span></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                Support
+                                <span class="info-tooltip" data-tooltip="Access to customer support and assistance">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><span class="feature-value">Email</span></div>
+                        <div class="plan-column recommended"><span class="feature-value">Priority Email</span></div>
+                        <div class="plan-column"><span class="feature-value">24/7 Priority</span></div>
+                        <div class="plan-column"><span class="feature-value">Dedicated Support</span></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                VPS Setup Assistance
+                                <span class="info-tooltip" data-tooltip="Help setting up your Virtual Private Server">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-times"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-column">
+                            <div class="feature-name">
+                                White-Label Option
+                                <span class="info-tooltip" data-tooltip="Rebrand the bot with your own branding">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="plan-column"><i class="fas fa-times"></i></div>
+                        <div class="plan-column recommended"><i class="fas fa-times"></i></div>
+                        <div class="plan-column"><span class="feature-value">Additional Fee</span></div>
+                        <div class="plan-column"><i class="fas fa-check"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-note">
+                <p>Need a custom solution? <a href="contact.html">Contact us</a> for Enterprise pricing.</p>
             </div>
         </div>
     </section>
@@ -428,5 +567,6 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/comparison-grid.js"></script>
 </body>
 </html>
