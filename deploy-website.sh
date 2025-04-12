@@ -26,6 +26,7 @@ git push origin website-with-icons
 echo "Triggering Vercel deployment..."
 
 # Vercel production deploy hook URL
+# NOTE: Update this with the new deploy hook URL after recreating the Vercel project
 DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_kT3zsi2xyA9xLsVFoW0ThIRAeHUc/c4RmDPNB6d"
 
 # Execute the deploy hook
