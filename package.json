@@ -11,11 +11,11 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@jup-ag/api": "^6.0.0",
+    "@jup-ag/api": "^6.0.40",
     "@solana/web3.js": "^1.87.6",
     "axios": "^1.6.2",
     "bignumber.js": "^9.1.1",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.5.0",
     "express": "^4.18.2",
     "googleapis": "^129.0.0",
     "node-cron": "^3.0.3",
