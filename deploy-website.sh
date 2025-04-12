@@ -25,9 +25,9 @@ git push origin website
 # Step 4: Trigger Vercel deployment
 echo "Triggering Vercel deployment..."
 
-# Vercel production deploy hook URL for dedicated website project
+# Vercel production deploy hook URL for solana-trading-bot website
 # NOTE: This hook deploys only the website directory as the root
-DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_YcHJG6sUCfsmrFGRhIcx4i4ZG8e4/jsBOCMWQr4"
+DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_wxvKJdvEevyQgz1naXRLR9ajUhGe/kRVKpXVY2X"
 
 # Execute the deploy hook
 echo "Executing deploy hook..."
