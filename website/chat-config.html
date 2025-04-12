@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Widget Configuration - SolarBot.io</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/chat-widget.css">
+    <link rel="stylesheet" href="css/chat-config.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Configure the live chat widget for SolarBot.io">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">SolarBot<span class="logo-dot">.</span>io</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content fade-in-up">
+                <h1>Chat Widget Configuration</h1>
+                <p>Customize your live chat experience for your visitors</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configuration Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Chat Widget Settings</h2>
+                <p>Configure how the chat widget appears and behaves on your website</p>
+            </div>
+
+            <div class="config-grid">
+                <!-- Configuration Form -->
+                <div class="config-form-container fade-in-up">
+                    <form id="chat-config-form" class="config-form" data-validate="true">
+                        <div class="form-group">
+                            <label for="tawk-id" class="required">Tawk.to Site ID</label>
+                            <input type="text" id="tawk-id" name="tawk-id" required placeholder="YOUR_TAWK_TO_ID">
+                            <div class="form-help">Find this in your Tawk.to dashboard under "Administration" > "Property Settings"</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="chat-name" class="required">Chat Widget Name</label>
+                            <input type="text" id="chat-name" name="chat-name" required value="SolarBot Support">
+                            <div class="form-help">This appears as the chat window title</div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="chat-color">Primary Color</label>
+                                <input type="color" id="chat-color" name="chat-color" value="#9945FF">
+                            </div>
+                            <div class="form-group">
+                                <label for="chat-position">Widget Position</label>
+                                <select id="chat-position" name="chat-position">
+                                    <option value="br" selected>Bottom Right</option>
+                                    <option value="bl">Bottom Left</option>
+                                    <option value="tr">Top Right</option>
+                                    <option value="tl">Top Left</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="welcome-message">Welcome Message</label>
+                            <textarea id="welcome-message" name="welcome-message" rows="3">👋 Welcome to SolarBot! How can we help you today?</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="offline-message">Offline Message</label>
+                            <textarea id="offline-message" name="offline-message" rows="3">Thanks for your message! We're currently offline but will get back to you as soon as possible.</textarea>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="show-prechat" name="show-prechat" checked>
+                            <label for="show-prechat">Show pre-chat form to collect visitor information</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="auto-popup" name="auto-popup">
+                            <label for="auto-popup">Automatically pop up chat widget after 30 seconds</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="hide-on-mobile" name="hide-on-mobile">
+                            <label for="hide-on-mobile">Hide widget on mobile devices</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="hide-on-pages" name="hide-on-pages">
+                            <label for="hide-on-pages">Hide widget on specific pages</label>
+                        </div>
+
+                        <div class="form-group" id="hide-pages-group" style="display: none;">
+                            <label for="hide-pages">Pages to Hide Widget (one per line)</label>
+                            <textarea id="hide-pages" name="hide-pages" rows="3">/login.html
+/signup.html
+/terms.html
+/privacy.html</textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="reset" class="btn btn-outline">Reset</button>
+                            <button type="submit" class="btn btn-primary">Save Configuration</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="chat-preview-container fade-in-up delay-1">
+                    <h3>Live Preview</h3>
+                    <div class="chat-preview">
+                        <div class="chat-preview-header">
+                            <div class="chat-preview-title">SolarBot Support</div>
+                            <div class="chat-preview-actions">
+                                <span class="minimize">_</span>
+                                <span class="close">×</span>
+                            </div>
+                        </div>
+                        <div class="chat-preview-body">
+                            <div class="chat-message agent">
+                                <div class="chat-avatar">
+                                    <img src="images/support-avatar.png" alt="Support Agent" onerror="this.src='https://via.placeholder.com/40'">
+                                </div>
+                                <div class="chat-bubble">
+                                    👋 Welcome to SolarBot! How can we help you today?
+                                </div>
+                                <div class="chat-time">Just now</div>
+                            </div>
+                            <div class="chat-message user">
+                                <div class="chat-bubble">
+                                    Hi, I have a question about the Professional plan.
+                                </div>
+                                <div class="chat-time">Just now</div>
+                            </div>
+                            <div class="chat-typing">
+                                <div class="typing-indicator">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-preview-footer">
+                            <input type="text" placeholder="Type a message...">
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="chat-button-preview">
+                        <h4>Chat Button Preview</h4>
+                        <div class="custom-chat-button expanded">
+                            <div class="chat-button-icon">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <div class="chat-button-text">Chat with us</div>
+                        </div>
+                    </div>
+
+                    <div class="integration-code">
+                        <h4>Integration Code</h4>
+                        <pre><code>&lt;!-- Add to your HTML head section --&gt;
+&lt;link rel="stylesheet" href="css/chat-widget.css"&gt;
+
+&lt;!-- Add before closing body tag --&gt;
+&lt;script src="js/chat-widget.js"&gt;&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Setup Instructions</h2>
+                <p>Follow these steps to set up your live chat widget</p>
+            </div>
+
+            <div class="steps-container fade-in-up">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Create a Tawk.to Account</h3>
+                        <p>Sign up for a free account at <a href="https://www.tawk.to" target="_blank" rel="noopener">tawk.to</a>.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Get Your Site ID</h3>
+                        <p>Find your Site ID in the Tawk.to dashboard under "Administration" > "Property Settings".</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Configure Your Widget</h3>
+                        <p>Enter your Site ID and customize the appearance and behavior of your chat widget.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Add to Your Website</h3>
+                        <p>Include the chat-widget.css and chat-widget.js files in your HTML, and update the Site ID in the JavaScript file.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Test Your Chat Widget</h3>
+                        <p>Visit your website and test the chat functionality to ensure everything is working correctly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="logo-text">SolarBot<span class="logo-dot">.</span>io</span>
+                    </div>
+                    <p>Advanced Solana arbitrage trading bot with Telegram integration and real-time analytics.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" rel="noopener" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Join our Telegram group"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Join our Discord server"><i class="fab fa-discord"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="View our GitHub repository"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="documentation.html">Setup Guide</a></li>
+                        <li><a href="documentation.html#faq">FAQ</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="documentation.html#api">API Documentation</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="refund.html">Refund Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SolarBot.io. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle hide pages group
+            const hideOnPagesCheckbox = document.getElementById('hide-on-pages');
+            const hidePagesGroup = document.getElementById('hide-pages-group');
+
+            hideOnPagesCheckbox.addEventListener('change', function() {
+                hidePagesGroup.style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Live preview updates
+            const chatNameInput = document.getElementById('chat-name');
+            const chatColorInput = document.getElementById('chat-color');
+            const welcomeMessageInput = document.getElementById('welcome-message');
+            const chatPreviewTitle = document.querySelector('.chat-preview-title');
+            const chatPreviewHeader = document.querySelector('.chat-preview-header');
+            const agentChatBubble = document.querySelector('.chat-message.agent .chat-bubble');
+
+            chatNameInput.addEventListener('input', function() {
+                chatPreviewTitle.textContent = this.value;
+            });
+
+            chatColorInput.addEventListener('input', function() {
+                chatPreviewHeader.style.backgroundColor = this.value;
+                document.querySelector('.custom-chat-button').style.backgroundColor = this.value;
+            });
+
+            welcomeMessageInput.addEventListener('input', function() {
+                agentChatBubble.textContent = this.value;
+            });
+
+            // Form submission
+            document.getElementById('chat-config-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Get form values
+                const tawkId = document.getElementById('tawk-id').value;
+                const chatName = document.getElementById('chat-name').value;
+                const chatColor = document.getElementById('chat-color').value;
+                const chatPosition = document.getElementById('chat-position').value;
+                const welcomeMessage = document.getElementById('welcome-message').value;
+                const offlineMessage = document.getElementById('offline-message').value;
+                const showPrechat = document.getElementById('show-prechat').checked;
+                const autoPopup = document.getElementById('auto-popup').checked;
+                const hideOnMobile = document.getElementById('hide-on-mobile').checked;
+                const hideOnPages = document.getElementById('hide-on-pages').checked;
+                const hidePages = document.getElementById('hide-pages').value;
+
+                // Create configuration object
+                const config = {
+                    tawkId,
+                    chatName,
+                    chatColor,
+                    chatPosition,
+                    welcomeMessage,
+                    offlineMessage,
+                    showPrechat,
+                    autoPopup,
+                    hideOnMobile,
+                    hideOnPages,
+                    hidePages: hideOnPages ? hidePages.split('\n').filter(page => page.trim() !== '') : []
+                };
+
+                // Save configuration to localStorage
+                localStorage.setItem('chatWidgetConfig', JSON.stringify(config));
+
+                // Show success message
+                const formContainer = document.querySelector('.config-form-container');
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Configuration Saved!</h3>
+                    <p>Your chat widget configuration has been saved. Update your chat-widget.js file with the Tawk.to Site ID to activate the widget.</p>
+                    <button class="btn btn-primary" id="back-to-form">Back to Configuration</button>
+                `;
+
+                // Replace form with success message
+                formContainer.innerHTML = '';
+                formContainer.appendChild(successMessage);
+
+                // Add event listener to "Back to Form" button
+                document.getElementById('back-to-form').addEventListener('click', function() {
+                    location.reload();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
