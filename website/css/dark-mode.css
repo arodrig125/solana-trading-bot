@@ -1,0 +1,166 @@
+/* Dark Mode Styles for SolarBot Website */
+
+/* Dark Mode Variables */
+:root {
+    --dark-bg: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-surface-light: #2d2d2d;
+    --dark-text: #ffffff;
+    --dark-text-secondary: rgba(255, 255, 255, 0.7);
+    --dark-text-disabled: rgba(255, 255, 255, 0.5);
+    --dark-border: rgba(255, 255, 255, 0.12);
+    --dark-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+.dark-mode-toggle i {
+    font-size: 24px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Header */
+body.dark-mode header {
+    background-color: var(--dark-surface);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .navbar-nav .nav-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .navbar-nav .nav-link:hover {
+    color: var(--primary-light);
+}
+
+/* Sections */
+body.dark-mode .section {
+    background-color: var(--dark-bg);
+}
+
+body.dark-mode .section-header h2 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .section-header p {
+    color: var(--dark-text-secondary);
+}
+
+/* Cards */
+body.dark-mode .feature-card,
+body.dark-mode .pricing-card,
+body.dark-mode .testimonial-card {
+    background-color: var(--dark-surface);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .feature-card h3,
+body.dark-mode .pricing-card h3,
+body.dark-mode .testimonial-card h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .feature-card p,
+body.dark-mode .pricing-card p,
+body.dark-mode .testimonial-card p {
+    color: var(--dark-text-secondary);
+}
+
+/* Buttons */
+body.dark-mode .btn-outline {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--dark-text);
+}
+
+/* Feature Comparison Grid */
+body.dark-mode .comparison-grid {
+    background-color: var(--dark-surface);
+}
+
+body.dark-mode .comparison-header .feature-column,
+body.dark-mode .comparison-header .plan-column {
+    background-color: var(--dark-surface-light);
+    border-bottom-color: var(--dark-border);
+}
+
+body.dark-mode .feature-category {
+    background-color: var(--dark-surface-light);
+}
+
+body.dark-mode .feature-row:hover {
+    background-color: rgba(153, 69, 255, 0.1);
+}
+
+body.dark-mode .feature-row .feature-column,
+body.dark-mode .feature-row .plan-column {
+    border-bottom-color: var(--dark-border);
+}
+
+body.dark-mode .feature-name {
+    color: var(--dark-text);
+}
+
+body.dark-mode .feature-value {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .fa-times {
+    color: var(--dark-text-disabled);
+}
+
+/* Footer */
+body.dark-mode footer {
+    background-color: var(--dark-surface);
+}
+
+body.dark-mode footer h4 {
+    color: var(--dark-text);
+}
+
+body.dark-mode footer p,
+body.dark-mode footer a {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode footer a:hover {
+    color: var(--primary-light);
+}
+
+/* Smooth Transition */
+body, header, .section, .feature-card, .pricing-card, .testimonial-card,
+.btn, .comparison-grid, .comparison-header .feature-column, 
+.comparison-header .plan-column, .feature-category, .feature-row,
+.feature-name, .feature-value, footer, footer h4, footer p, footer a {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

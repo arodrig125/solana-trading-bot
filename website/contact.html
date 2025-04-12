@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - SolarBot.io</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/faq.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Contact the SolarBot team for support, inquiries, or feedback about our Solana arbitrage trading bot.">
 </head>
 <body>
     <!-- Header -->
@@ -57,31 +62,53 @@
                 <!-- Contact Form -->
                 <div class="contact-form-container">
                     <h2>Send Us a Message</h2>
-                    <form id="contact-form" class="contact-form">
+                    <form id="contact-form" class="contact-form" data-validate="true">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name" class="required">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your full name">
+                            <div class="form-help">How we should address you in our response</div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email" class="required">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            <div class="form-help">We'll never share your email with anyone else</div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="subject" class="required">Subject</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="billing">Billing Question</option>
+                                    <option value="enterprise">Enterprise Solution</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="plan">Your Plan (if applicable)</label>
+                                <select id="plan" name="plan">
+                                    <option value="" selected>Not a customer yet</option>
+                                    <option value="basic">Basic Plan</option>
+                                    <option value="advanced">Advanced Plan</option>
+                                    <option value="professional">Professional Plan</option>
+                                    <option value="enterprise">Enterprise Plan</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <select id="subject" name="subject" required>
-                                <option value="" disabled selected>Select a subject</option>
-                                <option value="general">General Inquiry</option>
-                                <option value="support">Technical Support</option>
-                                <option value="billing">Billing Question</option>
-                                <option value="enterprise">Enterprise Solution</option>
-                                <option value="feedback">Feedback</option>
-                            </select>
+                            <label for="message" class="required">Message</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Please describe your question or issue in detail..."></textarea>
+                            <div class="form-help">The more details you provide, the better we can assist you</div>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="6" required></textarea>
+                        <div class="form-check">
+                            <input type="checkbox" id="newsletter" name="newsletter" checked>
+                            <label for="newsletter">Subscribe to our newsletter for updates and tips</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div class="form-actions">
+                            <button type="reset" class="btn btn-outline">Reset</button>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </div>
                     </form>
                 </div>
 
@@ -89,7 +116,7 @@
                 <div class="contact-info">
                     <h2>Contact Information</h2>
                     <p>We're available to answer your questions and provide support for your SolarBot experience.</p>
-                    
+
                     <div class="info-item">
                         <div class="info-icon">
                             <i class="fas fa-envelope"></i>
@@ -99,7 +126,7 @@
                             <p><a href="mailto:support@solarbot.io">support@solarbot.io</a></p>
                         </div>
                     </div>
-                    
+
                     <div class="info-item">
                         <div class="info-icon">
                             <i class="fas fa-comment-dots"></i>
@@ -109,27 +136,27 @@
                             <p>Available Monday-Friday, 9am-5pm UTC</p>
                         </div>
                     </div>
-                    
+
                     <div class="info-item">
                         <div class="info-icon">
                             <i class="fab fa-telegram"></i>
                         </div>
                         <div class="info-content">
                             <h3>Telegram Community</h3>
-                            <p><a href="https://t.me/solarbotcommunity" target="_blank">Join our Telegram group</a></p>
+                            <p><a href="https://t.me/solarbotcommunity" target="_blank" rel="noopener">Join our Telegram group</a></p>
                         </div>
                     </div>
-                    
+
                     <div class="info-item">
                         <div class="info-icon">
                             <i class="fab fa-discord"></i>
                         </div>
                         <div class="info-content">
                             <h3>Discord Server</h3>
-                            <p><a href="https://discord.gg/solarbot" target="_blank">Join our Discord server</a></p>
+                            <p><a href="https://discord.gg/solarbot" target="_blank" rel="noopener">Join our Discord server</a></p>
                         </div>
                     </div>
-                    
+
                     <div class="response-time">
                         <h3>Response Times</h3>
                         <ul>
@@ -209,10 +236,10 @@
                     </div>
                     <p>Advanced Solana arbitrage trading bot with Telegram integration and real-time analytics.</p>
                     <div class="social-links">
-                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Join our Telegram group"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Join our Discord server"><i class="fab fa-discord"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="View our GitHub repository"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -252,38 +279,47 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/form-validation.js"></script>
     <script>
-        // Contact form submission handler
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the form data to your server
-            // For now, we'll just show a success message
-            
-            // Create success message
-            const formContainer = document.querySelector('.contact-form-container');
-            const successMessage = document.createElement('div');
-            successMessage.className = 'success-message';
-            successMessage.innerHTML = `
-                <i class="fas fa-check-circle"></i>
-                <h3>Message Sent Successfully!</h3>
-                <p>Thank you for contacting us, ${name}. We'll get back to you as soon as possible.</p>
-                <button class="btn btn-primary" id="send-another">Send Another Message</button>
-            `;
-            
-            // Replace form with success message
-            formContainer.innerHTML = '';
-            formContainer.appendChild(successMessage);
-            
-            // Add event listener to "Send Another Message" button
-            document.getElementById('send-another').addEventListener('click', function() {
-                location.reload();
+        // Add fade-in-up animations to elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation classes to page sections
+            document.querySelector('.page-hero-content').classList.add('fade-in-up');
+
+            // Add animation to contact form and info
+            document.querySelector('.contact-form-container').classList.add('fade-in-up');
+            document.querySelector('.contact-info').classList.add('fade-in-up', 'delay-1');
+
+            // Add animation to FAQ items
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach((item, index) => {
+                item.classList.add('fade-in-up');
+                item.classList.add(`delay-${index + 1}`);
+            });
+
+            // Initialize FAQ toggles
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-toggle i');
+
+                    // Toggle active class
+                    faqItem.classList.toggle('active');
+
+                    // Toggle icon
+                    if (faqItem.classList.contains('active')) {
+                        icon.classList.remove('fa-plus');
+                        icon.classList.add('fa-minus');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        icon.classList.remove('fa-minus');
+                        icon.classList.add('fa-plus');
+                        answer.style.maxHeight = null;
+                    }
+                });
             });
         });
     </script>
