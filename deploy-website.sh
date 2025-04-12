@@ -25,15 +25,19 @@ git push origin website-with-icons
 # Step 4: Trigger Vercel deployment
 echo "Triggering Vercel deployment..."
 
-# Replace with your actual Vercel deploy hook URL
-DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/YOUR_PROJECT_ID/YOUR_DEPLOY_HOOK_TOKEN"
+# Vercel production deploy hook URL
+DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_kT3zsi2xyA9xLsVFoW0ThIRAeHUc/c4RmDPNB6d"
 
-# Check if deploy hook is configured
-if [[ $DEPLOY_HOOK == *"YOUR_PROJECT_ID"* ]]; then
-  echo "⚠️ Deploy hook not configured! Please update the DEPLOY_HOOK variable in this script."
-  echo "You can find your deploy hook in the Vercel dashboard under Settings > Git > Deploy Hooks."
+# Execute the deploy hook
+echo "Executing deploy hook..."
+curl -X POST $DEPLOY_HOOK
+
+# Check the response
+if [ $? -eq 0 ]; then
+  echo "✅ Deploy hook executed successfully!"
 else
-  curl -X POST $DEPLOY_HOOK
+  echo "❌ Error executing deploy hook. Please check your internet connection or the hook URL."
 fi
 
-echo "\nDeployment process completed!"
+echo ""
+echo "Deployment process completed!"
