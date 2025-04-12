@@ -27,7 +27,7 @@ echo "Triggering Vercel deployment..."
 
 # Vercel production deploy hook URL
 # NOTE: Get this from Vercel dashboard: Settings > Git > Deploy Hooks
-DEPLOY_HOOK="YOUR_NEW_DEPLOY_HOOK_URL"
+DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_uGZIlKkJyyi652gxMDKZkaubNhMT/8eMbaLohfn"
 
 # Execute the deploy hook
 echo "Executing deploy hook..."
