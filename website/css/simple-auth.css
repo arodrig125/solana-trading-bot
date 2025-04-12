@@ -1,0 +1,201 @@
+/* Simple Authentication Styles */
+
+.auth-section {
+    padding: 60px 0;
+    background-color: var(--gray-100);
+    min-height: calc(100vh - 70px - 350px); /* Subtract header and footer heights */
+}
+
+.auth-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 40px;
+}
+
+.auth-form-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.auth-form-container p {
+    color: var(--gray-500);
+    margin-bottom: 30px;
+}
+
+/* Auth Form */
+.auth-form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(153, 69, 255, 0.2);
+}
+
+/* Password Input with Toggle */
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* Plan Selection */
+.plan-selection {
+    margin-bottom: 30px;
+}
+
+.plan-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.plan-option {
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.plan-option:hover {
+    border-color: var(--primary-light);
+}
+
+.plan-option.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(153, 69, 255, 0.05);
+}
+
+.plan-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.plan-price {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.plan-features {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+/* Terms Checkbox */
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.terms-checkbox input {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.terms-checkbox label {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+}
+
+.terms-checkbox a {
+    color: var(--primary-color);
+}
+
+.terms-checkbox a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Success Message */
+.success-message {
+    text-align: center;
+    padding: 20px;
+}
+
+.success-message h3 {
+    font-size: 1.5rem;
+    color: var(--success-color);
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    margin-bottom: 20px;
+}
+
+/* Button Block */
+.btn-block {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .plan-options {
+        grid-template-columns: 1fr;
+    }
+}

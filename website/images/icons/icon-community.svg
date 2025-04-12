@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="60" fill="#FFFFFF"/>
+  <g transform="translate(20, 20)">
+    <circle cx="40" cy="20" r="15" fill="#9945FF"/>
+    <path d="M20 60C20 50 30 45 40 45C50 45 60 50 60 60V65H20V60Z" fill="#9945FF"/>
+    <circle cx="15" cy="35" r="10" fill="#B980FF"/>
+    <path d="M5 65C5 58 10 55 15 55C20 55 25 58 25 65H5Z" fill="#B980FF"/>
+    <circle cx="65" cy="35" r="10" fill="#B980FF"/>
+    <path d="M55 65C55 58 60 55 65 55C70 55 75 58 75 65H55Z" fill="#B980FF"/>
+    <circle cx="40" cy="20" r="8" fill="#FFFFFF"/>
+    <circle cx="15" cy="35" r="5" fill="#FFFFFF"/>
+    <circle cx="65" cy="35" r="5" fill="#FFFFFF"/>
+    <path d="M35 20H45M40 15V25" stroke="#14F195" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="60" fill="#FFFFFF"/>
+  <g transform="translate(20, 20)">
+    <path d="M40 10C57.6731 10 72 24.3269 72 42C72 59.6731 57.6731 74 40 74C22.3269 74 8 59.6731 8 42C8 24.3269 22.3269 10 40 10Z" fill="#9945FF"/>
+    <path d="M40 20C52.1503 20 62 29.8497 62 42C62 54.1503 52.1503 64 40 64C27.8497 64 18 54.1503 18 42C18 29.8497 27.8497 20 40 20Z" fill="#B980FF"/>
+    <path d="M40 30C46.6274 30 52 35.3726 52 42C52 48.6274 46.6274 54 40 54C33.3726 54 28 48.6274 28 42C28 35.3726 33.3726 30 40 30Z" fill="#FFFFFF"/>
+    <path d="M35 42H45M40 37V47" stroke="#14F195" stroke-width="2" stroke-linecap="round"/>
+    <path d="M15 15L25 25M65 15L55 25M15 65L25 55M65 65L55 55" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
+    <path d="M75 40H80M40 5V10M40 74V79M5 40H10" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarBot Logo Preview</title>
+    <style>
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px 60px;
+        }
+
+        .logo-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo-header {
+            padding: 15px 20px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .logo-content {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .logo-dark {
+            background-color: #121212;
+        }
+
+        /* Logo 1: Minimalist Symbol */
+        .logo-1 {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .logo-1 .outer-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #9945FF;
+            box-sizing: border-box;
+        }
+
+        .logo-1 .inner-shape {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background: linear-gradient(135deg, #9945FF 0%, #14F195 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+            border-radius: 8px;
+        }
+
+        .logo-1 .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border-radius: 50%;
+            top: 30%;
+            left: 30%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Logo 2: Futuristic Symbol */
+        .logo-2 {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .logo-2 .s-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: path('M 60,10 C 30,10 10,30 10,60 C 10,90 30,110 60,110 C 90,110 110,90 110,60 L 90,60 C 90,80 75,90 60,90 C 45,90 30,80 30,60 C 30,40 45,30 60,30 C 75,30 90,40 90,60 L 110,60 C 110,30 90,10 60,10 Z');
+            background: linear-gradient(135deg, #9945FF 0%, #00C2FF 100%);
+            box-shadow: 0 0 20px rgba(153, 69, 255, 0.5);
+        }
+
+        .logo-2 .line-1 {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: #14F195;
+            top: 40px;
+            left: 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px rgba(20, 241, 149, 0.8);
+        }
+
+        .logo-2 .line-2 {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: #14F195;
+            bottom: 40px;
+            right: 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px rgba(20, 241, 149, 0.8);
+        }
+
+        /* Logo 3: Text Logo Light */
+        .logo-3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: #121212;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-3 .solar {
+            background: linear-gradient(135deg, #9945FF 0%, #00C2FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-3 .bot {
+            font-weight: 300;
+            margin-left: 5px;
+        }
+
+        .logo-3 .dot {
+            color: #14F195;
+            margin-left: 2px;
+        }
+
+        /* Logo 4: Text Logo Dark */
+        .logo-4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-4 .solar {
+            background: linear-gradient(135deg, #9945FF 0%, #00C2FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-4 .bot {
+            font-weight: 300;
+            margin-left: 5px;
+            color: white;
+        }
+
+        .logo-4 .dot {
+            color: #14F195;
+            margin-left: 2px;
+        }
+
+        /* Logo 5: Combined Symbol + Text Light */
+        .logo-5 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-5 .symbol {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-5 .symbol .s-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #9945FF 0%, #00C2FF 100%);
+            border-radius: 12px;
+            transform: rotate(45deg);
+        }
+
+        .logo-5 .symbol .inner-shape {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background-color: white;
+            border-radius: 8px;
+            transform: rotate(45deg);
+        }
+
+        .logo-5 .symbol .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #14F195;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(20, 241, 149, 0.5);
+        }
+
+        .logo-5 .text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #121212;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-5 .text .solar {
+            color: #9945FF;
+        }
+
+        .logo-5 .text .bot {
+            font-weight: 300;
+            margin-left: 3px;
+        }
+
+        .logo-5 .text .dot {
+            color: #14F195;
+            margin-left: 2px;
+        }
+
+        /* Logo 6: Combined Symbol + Text Dark */
+        .logo-6 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-6 .symbol {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-6 .symbol .outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #9945FF;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .logo-6 .symbol .inner-ring {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border: 2px solid #14F195;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .logo-6 .symbol .s-shape {
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            background: linear-gradient(135deg, #9945FF 0%, #00C2FF 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            transform: rotate(45deg);
+        }
+
+        .logo-6 .text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-6 .text .solar {
+            background: linear-gradient(135deg, #9945FF 0%, #00C2FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-6 .text .bot {
+            font-weight: 300;
+            margin-left: 3px;
+        }
+
+        .logo-6 .text .dot {
+            color: #14F195;
+            margin-left: 2px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SolarBot Logo Concepts</h1>
+        <p>Below are six different logo concepts for SolarBot, ranging from minimalist symbols to combined text and graphic logos. Each design incorporates the Solana color palette and futuristic elements that represent automated trading.</p>
+    </div>
+
+    <div class="logo-grid">
+        <div class="logo-card">
+            <div class="logo-header">
+                <h2>Concept 1: Minimalist Symbol</h2>
+            </div>
+            <div class="logo-content">
+                <div class="logo-1">
+                    <div class="outer-circle"></div>
+                    <div class="inner-shape"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-card">
+            <div class="logo-header">
+                <h2>Concept 2: Futuristic Symbol</h2>
+            </div>
+            <div class="logo-content">
+                <div class="logo-2">
+                    <div class="s-shape"></div>
+                    <div class="line-1"></div>
+                    <div class="line-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-card">
+            <div class="logo-header">
+                <h2>Concept 3: Text Logo (Light)</h2>
+            </div>
+            <div class="logo-content">
+                <div class="logo-3">
+                    <span class="solar">Solar</span><span class="bot">Bot</span><span class="dot">.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-card">
+            <div class="logo-header">
+                <h2>Concept 4: Text Logo (Dark)</h2>
+            </div>
+            <div class="logo-content logo-dark">
+                <div class="logo-4">
+                    <span class="solar">Solar</span><span class="bot">Bot</span><span class="dot">.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-card">
+            <div class="logo-header">
+                <h2>Concept 5: Combined Logo (Light)</h2>
+            </div>
+            <div class="logo-content">
+                <div class="logo-5">
+                    <div class="symbol">
+                        <div class="s-shape"></div>
+                        <div class="inner-shape"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="text">
+                        <span class="solar">Solar</span><span class="bot">Bot</span><span class="dot">.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-card">
+            <div class="logo-header">
+                <h2>Concept 6: Combined Logo (Dark)</h2>
+            </div>
+            <div class="logo-content logo-dark">
+                <div class="logo-6">
+                    <div class="symbol">
+                        <div class="outer-ring"></div>
+                        <div class="inner-ring"></div>
+                        <div class="s-shape"></div>
+                    </div>
+                    <div class="text">
+                        <span class="solar">Solar</span><span class="bot">Bot</span><span class="dot">.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

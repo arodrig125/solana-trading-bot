@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - SolarBot.io</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">SolarBot<span class="logo-dot">.</span>io</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary active">Sign Up</a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Signup Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-form-container">
+                    <h2>Create Your Account</h2>
+                    <p>Join SolarBot today and start automating your Solana arbitrage trading.</p>
+                    
+                    <form id="signup-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <div class="password-input">
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-selection">
+                            <label>Select a Plan</label>
+                            <div class="plan-options">
+                                <div class="plan-option" data-plan="basic">
+                                    <div class="plan-name">Basic</div>
+                                    <div class="plan-price">$29/month</div>
+                                    <div class="plan-features">Simulation mode, basic features</div>
+                                </div>
+                                <div class="plan-option selected" data-plan="advanced">
+                                    <div class="plan-name">Advanced</div>
+                                    <div class="plan-price">$79/month</div>
+                                    <div class="plan-features">Live trading, all features</div>
+                                </div>
+                                <div class="plan-option" data-plan="professional">
+                                    <div class="plan-name">Professional</div>
+                                    <div class="plan-price">$199/month</div>
+                                    <div class="plan-features">Multi-wallet, API access</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></label>
+                        </div>
+                        
+                        <div id="signup-error" class="error-message" style="display: none;"></div>
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    </form>
+                    
+                    <div class="auth-divider">
+                        <span>Or sign up with</span>
+                    </div>
+                    
+                    <div class="social-auth">
+                        <button class="btn btn-social btn-google">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                        <button class="btn btn-social btn-github">
+                            <i class="fab fa-github"></i> GitHub
+                        </button>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html">Login</a></p>
+                    </div>
+                </div>
+                
+                <div class="auth-info">
+                    <div class="auth-info-content">
+                        <h2>Why Choose SolarBot?</h2>
+                        <p>Join hundreds of traders already using SolarBot to automate their Solana arbitrage trading.</p>
+                        
+                        <div class="auth-features">
+                            <div class="auth-feature">
+                                <div class="auth-feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="auth-feature-text">
+                                    <h3>Automated Trading</h3>
+                                    <p>Set your parameters and let the bot execute trades 24/7 without manual intervention.</p>
+                                </div>
+                            </div>
+                            <div class="auth-feature">
+                                <div class="auth-feature-icon">
+                                    <i class="fas fa-search-dollar"></i>
+                                </div>
+                                <div class="auth-feature-text">
+                                    <h3>Advanced Arbitrage Detection</h3>
+                                    <p>Identify profitable triangular and cross-exchange arbitrage opportunities in real-time.</p>
+                                </div>
+                            </div>
+                            <div class="auth-feature">
+                                <div class="auth-feature-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="auth-feature-text">
+                                    <h3>Risk Management</h3>
+                                    <p>Built-in risk management features to protect your capital during volatile markets.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="logo-text">SolarBot<span class="logo-dot">.</span>io</span>
+                    </div>
+                    <p>Advanced Solana arbitrage trading bot with Telegram integration and real-time analytics.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="documentation.html">Setup Guide</a></li>
+                        <li><a href="documentation.html#faq">FAQ</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="documentation.html#api">API Documentation</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="refund.html">Refund Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SolarBot.io. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password visibility
+            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+            
+            togglePasswordButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const passwordInput = this.previousElementSibling;
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.querySelector('i').classList.toggle('fa-eye');
+                    this.querySelector('i').classList.toggle('fa-eye-slash');
+                });
+            });
+            
+            // Plan selection
+            const planOptions = document.querySelectorAll('.plan-option');
+            let selectedPlan = 'advanced'; // Default selected plan
+            
+            planOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    planOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update selected plan
+                    selectedPlan = this.getAttribute('data-plan');
+                });
+            });
+            
+            // Handle signup form submission
+            const signupForm = document.getElementById('signup-form');
+            const signupError = document.getElementById('signup-error');
+            
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const termsChecked = document.getElementById('terms').checked;
+                
+                // Validate form
+                if (password !== confirmPassword) {
+                    signupError.textContent = 'Passwords do not match';
+                    signupError.style.display = 'block';
+                    return;
+                }
+                
+                if (!termsChecked) {
+                    signupError.textContent = 'You must agree to the Terms of Service and Privacy Policy';
+                    signupError.style.display = 'block';
+                    return;
+                }
+                
+                // Attempt registration
+                const result = SolarBotAuth.registerUser(email, password, name, selectedPlan);
+                
+                if (result.success) {
+                    // Store current user in local storage
+                    localStorage.setItem('solarbot_current_user', JSON.stringify(result.user));
+                    
+                    // Redirect to payment page
+                    window.location.href = 'payment.html';
+                } else {
+                    // Show error message
+                    signupError.textContent = result.message;
+                    signupError.style.display = 'block';
+                }
+            });
+            
+            // Check if user is already logged in
+            if (SolarBotAuth.isLoggedIn()) {
+                window.location.href = 'dashboard.html';
+            }
+            
+            // Check for plan parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const planParam = urlParams.get('plan');
+            
+            if (planParam) {
+                // Find the plan option with matching data-plan attribute
+                const planOption = document.querySelector(`.plan-option[data-plan="${planParam}"]`);
+                
+                if (planOption) {
+                    // Remove selected class from all options
+                    planOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to matching option
+                    planOption.classList.add('selected');
+                    
+                    // Update selected plan
+                    selectedPlan = planParam;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

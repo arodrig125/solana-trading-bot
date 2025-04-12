@@ -1,0 +1,268 @@
+// SolarBot Authentication and Subscription Management
+
+// Mock user database (in a real implementation, this would be stored on a server)
+let users = JSON.parse(localStorage.getItem('solarbot_users')) || [];
+
+// Subscription plans
+const subscriptionPlans = {
+    basic: {
+        name: 'Basic',
+        price: 29,
+        features: [
+            'Simulation mode only',
+            'Basic arbitrage detection',
+            'Telegram notifications',
+            '5-10 token pairs',
+            'Daily summary reports',
+            'Basic dashboard access',
+            'Email support'
+        ]
+    },
+    advanced: {
+        name: 'Advanced',
+        price: 79,
+        features: [
+            'Everything in Basic tier',
+            'Live trading mode',
+            'Advanced arbitrage strategies',
+            'All token pairs',
+            'Customizable profit thresholds',
+            'Detailed analytics',
+            'Priority email support',
+            'Custom risk management settings'
+        ]
+    },
+    professional: {
+        name: 'Professional',
+        price: 199,
+        features: [
+            'Everything in Advanced tier',
+            'Multi-wallet support',
+            'Advanced risk management',
+            'API access',
+            'Custom token pairs',
+            'Performance optimization',
+            'Priority 24/7 support',
+            'Strategy customization',
+            'VPS setup assistance'
+        ]
+    },
+    enterprise: {
+        name: 'Enterprise',
+        price: 'Custom',
+        features: [
+            'Everything in Professional tier',
+            'Dedicated VPS',
+            'Custom development',
+            'Multiple exchange support',
+            'Advanced reporting',
+            'Direct developer access',
+            'Custom integration options',
+            'On-demand strategy development'
+        ]
+    }
+};
+
+// User registration function
+function registerUser(email, password, name, plan) {
+    // Check if user already exists
+    if (users.find(user => user.email === email)) {
+        return {
+            success: false,
+            message: 'A user with this email already exists'
+        };
+    }
+    
+    // Create new user object
+    const newUser = {
+        id: generateUserId(),
+        email,
+        password: hashPassword(password), // In a real app, use proper password hashing
+        name,
+        plan,
+        subscriptionStatus: 'active',
+        subscriptionStart: new Date().toISOString(),
+        subscriptionEnd: calculateSubscriptionEnd(new Date(), 30), // 30 days subscription
+        createdAt: new Date().toISOString(),
+        lastLogin: new Date().toISOString()
+    };
+    
+    // Add user to database
+    users.push(newUser);
+    saveUsers();
+    
+    return {
+        success: true,
+        message: 'Registration successful',
+        user: {
+            id: newUser.id,
+            email: newUser.email,
+            name: newUser.name,
+            plan: newUser.plan,
+            subscriptionStatus: newUser.subscriptionStatus,
+            subscriptionEnd: newUser.subscriptionEnd
+        }
+    };
+}
+
+// User login function
+function loginUser(email, password) {
+    // Find user by email
+    const user = users.find(user => user.email === email);
+    
+    // Check if user exists and password is correct
+    if (!user || user.password !== hashPassword(password)) {
+        return {
+            success: false,
+            message: 'Invalid email or password'
+        };
+    }
+    
+    // Update last login
+    user.lastLogin = new Date().toISOString();
+    saveUsers();
+    
+    return {
+        success: true,
+        message: 'Login successful',
+        user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            plan: user.plan,
+            subscriptionStatus: user.subscriptionStatus,
+            subscriptionEnd: user.subscriptionEnd
+        }
+    };
+}
+
+// Check if user is logged in
+function isLoggedIn() {
+    const currentUser = JSON.parse(localStorage.getItem('solarbot_current_user'));
+    return !!currentUser;
+}
+
+// Get current user
+function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('solarbot_current_user'));
+}
+
+// Logout user
+function logoutUser() {
+    localStorage.removeItem('solarbot_current_user');
+    return {
+        success: true,
+        message: 'Logout successful'
+    };
+}
+
+// Update user subscription
+function updateSubscription(userId, newPlan) {
+    // Find user by ID
+    const user = users.find(user => user.id === userId);
+    
+    if (!user) {
+        return {
+            success: false,
+            message: 'User not found'
+        };
+    }
+    
+    // Update subscription details
+    user.plan = newPlan;
+    user.subscriptionStatus = 'active';
+    user.subscriptionStart = new Date().toISOString();
+    user.subscriptionEnd = calculateSubscriptionEnd(new Date(), 30); // 30 days subscription
+    
+    saveUsers();
+    
+    // Update current user in local storage if it's the same user
+    const currentUser = JSON.parse(localStorage.getItem('solarbot_current_user'));
+    if (currentUser && currentUser.id === userId) {
+        currentUser.plan = newPlan;
+        currentUser.subscriptionStatus = 'active';
+        currentUser.subscriptionEnd = user.subscriptionEnd;
+        localStorage.setItem('solarbot_current_user', JSON.stringify(currentUser));
+    }
+    
+    return {
+        success: true,
+        message: 'Subscription updated successfully',
+        user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            plan: user.plan,
+            subscriptionStatus: user.subscriptionStatus,
+            subscriptionEnd: user.subscriptionEnd
+        }
+    };
+}
+
+// Cancel subscription
+function cancelSubscription(userId) {
+    // Find user by ID
+    const user = users.find(user => user.id === userId);
+    
+    if (!user) {
+        return {
+            success: false,
+            message: 'User not found'
+        };
+    }
+    
+    // Update subscription status
+    user.subscriptionStatus = 'cancelled';
+    saveUsers();
+    
+    // Update current user in local storage if it's the same user
+    const currentUser = JSON.parse(localStorage.getItem('solarbot_current_user'));
+    if (currentUser && currentUser.id === userId) {
+        currentUser.subscriptionStatus = 'cancelled';
+        localStorage.setItem('solarbot_current_user', JSON.stringify(currentUser));
+    }
+    
+    return {
+        success: true,
+        message: 'Subscription cancelled successfully'
+    };
+}
+
+// Helper functions
+function generateUserId() {
+    return 'user_' + Math.random().toString(36).substr(2, 9);
+}
+
+function hashPassword(password) {
+    // In a real app, use a proper password hashing library
+    // This is just a simple hash for demonstration purposes
+    let hash = 0;
+    for (let i = 0; i < password.length; i++) {
+        const char = password.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash.toString();
+}
+
+function calculateSubscriptionEnd(startDate, days) {
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + days);
+    return endDate.toISOString();
+}
+
+function saveUsers() {
+    localStorage.setItem('solarbot_users', JSON.stringify(users));
+}
+
+// Export functions for use in other scripts
+window.SolarBotAuth = {
+    registerUser,
+    loginUser,
+    isLoggedIn,
+    getCurrentUser,
+    logoutUser,
+    updateSubscription,
+    cancelSubscription,
+    subscriptionPlans
+};

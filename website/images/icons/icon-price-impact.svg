@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="60" fill="#FFFFFF"/>
+  <g transform="translate(20, 20)">
+    <path d="M10 60V15C10 12.2386 12.2386 10 15 10H65C67.7614 10 70 12.2386 70 15V60C70 62.7614 67.7614 65 65 65H15C12.2386 65 10 62.7614 10 60Z" fill="#9945FF" fill-opacity="0.2"/>
+    <path d="M10 60V15C10 12.2386 12.2386 10 15 10H65C67.7614 10 70 12.2386 70 15V60C70 62.7614 67.7614 65 65 65H15C12.2386 65 10 62.7614 10 60Z" stroke="#9945FF" stroke-width="2"/>
+    <path d="M20 50L30 30L40 45L50 20L60 35" stroke="#9945FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 50L30 40L40 55L50 30L60 45" stroke="#14F195" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="30" cy="30" r="5" fill="#9945FF"/>
+    <circle cx="40" cy="45" r="5" fill="#9945FF"/>
+    <circle cx="50" cy="20" r="5" fill="#9945FF"/>
+    <circle cx="30" cy="40" r="5" fill="#14F195"/>
+    <circle cx="40" cy="55" r="5" fill="#14F195"/>
+    <circle cx="50" cy="30" r="5" fill="#14F195"/>
+    <path d="M15 20H25M20 15V25" stroke="#B980FF" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

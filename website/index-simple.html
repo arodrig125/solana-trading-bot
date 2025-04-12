@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarBot - Solana Arbitrage Trading Bot</title>
+    <meta name="description" content="SolarBot automatically detects and executes profitable arbitrage opportunities across Solana DEXs, 24/7.">
+    <meta name="keywords" content="Solana, arbitrage, trading bot, cryptocurrency, automated trading, DeFi">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/simple-styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index-simple.html">
+                    <img src="images/logo-solarbot.svg" alt="SolarBot" class="logo-image">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="signup.html" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="images/hero-banner.svg" alt="SolarBot Trading Platform" class="hero-banner-image">
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in-up">Automate Your <span class="highlight">Solana</span> Arbitrage Trading</h1>
+                <p class="fade-in-up delay-1">SolarBot automatically detects and executes profitable arbitrage opportunities across Solana DEXs, 24/7.</p>
+                <div class="hero-buttons fade-in-up delay-2">
+                    <a href="signup-simple.html" class="btn btn-primary btn-large">Start Trading Now</a>
+                    <a href="#how-it-works" class="btn btn-outline btn-large">See How It Works</a>
+                </div>
+                <div class="hero-stats fade-in-up delay-3">
+                    <div class="stat">
+                        <span class="stat-number">$2.5M+</span>
+                        <span class="stat-label">Trading Volume</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">0.5-3%</span>
+                        <span class="stat-label">Average Profit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Key Features</h2>
+                <p>Everything you need for successful arbitrage trading</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up delay-1">
+                    <div class="feature-icon">
+                        <img src="images/icons/icon-robot-standard.svg" alt="Automated Trading" class="feature-icon-img">
+                    </div>
+                    <h3>Automated Trading</h3>
+                    <p>Set your parameters and let the bot execute trades 24/7 without manual intervention.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-2">
+                    <div class="feature-icon">
+                        <img src="images/icons/icon-chart-standard.svg" alt="Advanced Arbitrage Detection" class="feature-icon-img">
+                    </div>
+                    <h3>Advanced Arbitrage Detection</h3>
+                    <p>Identify profitable triangular and cross-exchange arbitrage opportunities in real-time.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-3">
+                    <div class="feature-icon">
+                        <img src="images/icons/icon-telegram-standard.svg" alt="Telegram Integration" class="feature-icon-img">
+                    </div>
+                    <h3>Telegram Integration</h3>
+                    <p>Control your bot and receive real-time alerts directly through Telegram.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-4">
+                    <div class="feature-icon">
+                        <img src="images/icons/icon-shield-standard.svg" alt="Risk Management" class="feature-icon-img">
+                    </div>
+                    <h3>Risk Management</h3>
+                    <p>Built-in risk management features to protect your capital during volatile markets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>How It Works</h2>
+                <p>Simple setup, powerful results</p>
+            </div>
+            <div class="steps">
+                <div class="step fade-in-up delay-1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Sign Up & Choose a Plan</h3>
+                        <p>Create your account and select a subscription plan that fits your trading needs.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up delay-2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Deploy the Bot</h3>
+                        <p>Follow our simple guide to deploy the bot on your VPS or local machine.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up delay-3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Connect Your Wallet</h3>
+                        <p>Securely connect your Solana wallet to the bot using your private key.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up delay-4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Start Trading</h3>
+                        <p>Activate the bot and start generating profits through automated arbitrage trading.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that fits your trading needs</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card fade-in-up delay-1">
+                    <div class="pricing-header">
+                        <h3>Basic</h3>
+                        <div class="price">
+                            <span class="amount">$29</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Simulation mode only</li>
+                            <li><i class="fas fa-check"></i> Basic arbitrage detection</li>
+                            <li><i class="fas fa-check"></i> Telegram notifications</li>
+                            <li><i class="fas fa-check"></i> 5-10 token pairs</li>
+                            <li><i class="fas fa-check"></i> Email support</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="signup.html?plan=basic" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+                <div class="pricing-card popular fade-in-up delay-2">
+                    <div class="popular-tag">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Advanced</h3>
+                        <div class="price">
+                            <span class="amount">$79</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Live trading mode</li>
+                            <li><i class="fas fa-check"></i> Advanced arbitrage strategies</li>
+                            <li><i class="fas fa-check"></i> All token pairs</li>
+                            <li><i class="fas fa-check"></i> Customizable profit thresholds</li>
+                            <li><i class="fas fa-check"></i> Priority support</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="signup.html?plan=advanced" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+                <div class="pricing-card fade-in-up delay-3">
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <div class="price">
+                            <span class="amount">$199</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Multi-wallet support</li>
+                            <li><i class="fas fa-check"></i> Advanced risk management</li>
+                            <li><i class="fas fa-check"></i> API access</li>
+                            <li><i class="fas fa-check"></i> Custom token pairs</li>
+                            <li><i class="fas fa-check"></i> 24/7 priority support</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="signup.html?plan=professional" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about SolarBot</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How does SolarBot find arbitrage opportunities?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>SolarBot continuously monitors price differences across multiple DEXs and token pairs on the Solana blockchain. It uses advanced algorithms to identify triangular arbitrage opportunities (e.g., USDC → SOL → BTC → USDC) and cross-exchange price discrepancies in real-time.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my wallet secure when using SolarBot?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, your wallet security is our top priority. SolarBot runs on your own VPS or local machine, and your private keys never leave your environment. We do not have access to your funds or private keys at any time.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What kind of returns can I expect?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Returns vary based on market conditions, your settings, and the subscription tier you choose. Typically, users see opportunities ranging from 0.5% to 3% per trade. However, we cannot guarantee specific returns as cryptocurrency markets are volatile.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I need technical knowledge to use SolarBot?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, SolarBot is designed to be user-friendly. Our setup guide walks you through the process step by step. For Advanced and Professional tier users, we offer personalized setup assistance to ensure you're up and running quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>What Our Users Say</h2>
+                <p>Join hundreds of satisfied traders using SolarBot</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial fade-in-up delay-1">
+                    <div class="testimonial-content">
+                        <p>"SolarBot has completely transformed my trading strategy. The automated arbitrage detection has helped me capture opportunities I would have missed manually."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Alex M.</h4>
+                            <p>Professional Trader</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial fade-in-up delay-2">
+                    <div class="testimonial-content">
+                        <p>"The Telegram integration is a game-changer. I can control my bot and receive alerts on-the-go. The risk management features give me peace of mind."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah K.</h4>
+                            <p>Crypto Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial fade-in-up delay-3">
+                    <div class="testimonial-content">
+                        <p>"As someone new to crypto trading, SolarBot made it easy to get started with arbitrage. The setup was straightforward and the support team was incredibly helpful."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael T.</h4>
+                            <p>Beginner Trader</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content fade-in-up">
+                <h2>Ready to Start Automated Arbitrage Trading?</h2>
+                <p>Join hundreds of traders already using SolarBot to find and execute profitable opportunities.</p>
+                <div class="cta-buttons">
+                    <a href="signup-simple.html" class="btn btn-primary btn-large">Get Started Today</a>
+                    <a href="vps-deployment.html" class="btn btn-outline btn-large">Deployment Guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Get in Touch</h2>
+                <p>Have questions? We're here to help!</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-form fade-in-up delay-1">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info fade-in-up delay-2">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p><a href="mailto:contact@solarbot.io">contact@solarbot.io</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Telegram</h3>
+                            <p><a href="https://t.me/solarbotcommunity" target="_blank" rel="noopener">Join our Telegram group</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Phone</h3>
+                            <p><a href="tel:+18058764631">(805) 876-4631</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Address</h3>
+                            <p>926 Locust Ave.<br>Long Beach, CA 90813</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">SolarBot</div>
+                    <p>Advanced Solana arbitrage trading bot with Telegram integration.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" rel="noopener" title="Twitter" aria-label="Follow us on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" target="_blank" rel="noopener" title="Telegram" aria-label="Join our Telegram group"><i class="fab fa-telegram" aria-hidden="true"></i></a>
+                        <a href="#" target="_blank" rel="noopener" title="GitHub" aria-label="View our GitHub repository"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SolarBot.io. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/simple-script.js"></script>
+    <script>
+        // Intersection Observer for fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SolarBot.io</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">SolarBot<span class="logo-dot">.</span>io</span>
+                </a>
+            </div>
+            <div class="dashboard-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="nav-icons">
+                    <a href="#" class="nav-icon" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </a>
+                    <a href="#" class="nav-icon" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <div class="user-info">
+                            <img src="images/avatar.jpg" alt="User Avatar" class="user-avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="subscription.html"><i class="fas fa-credit-card"></i> Subscription</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="logout-button"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="bot-config.html">
+                            <i class="fas fa-robot"></i>
+                            <span>Bot Configuration</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="trading-history.html">
+                            <i class="fas fa-history"></i>
+                            <span>Trading History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="analytics.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="wallet.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Wallet</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="vps-setup.html">
+                            <i class="fas fa-server"></i>
+                            <span>VPS Setup</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="telegram-setup.html">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram Setup</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="support.html">
+                            <i class="fas fa-headset"></i>
+                            <span>Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="subscription-info">
+                    <div class="plan-badge advanced">Advanced Plan</div>
+                    <div class="renewal-info">Renews on Nov 15, 2023</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header-bar">
+                <h1>Dashboard</h1>
+                <div class="date-range">
+                    <i class="fas fa-calendar"></i>
+                    <span>Last 7 days</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon profit">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Profit</h3>
+                        <div class="stat-value">$1,245.32</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12.5% from last week
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon trades">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Trades</h3>
+                        <div class="stat-value">87</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8.2% from last week
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon win-rate">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Win Rate</h3>
+                        <div class="stat-value">78.3%</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 3.1% from last week
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon avg-profit">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Avg. Profit/Trade</h3>
+                        <div class="stat-value">1.8%</div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> 0.3% from last week
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bot Status -->
+            <div class="bot-status-card">
+                <div class="bot-status-header">
+                    <h2>Bot Status</h2>
+                    <div class="bot-controls">
+                        <button class="btn btn-outline btn-sm">Restart</button>
+                        <button class="btn btn-primary btn-sm">Configure</button>
+                    </div>
+                </div>
+                <div class="bot-status-content">
+                    <div class="status-item">
+                        <div class="status-label">Status</div>
+                        <div class="status-value">
+                            <span class="status-badge running">Running</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Mode</div>
+                        <div class="status-value">Simulation</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Uptime</div>
+                        <div class="status-value">3d 7h 22m</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Last Scan</div>
+                        <div class="status-value">2 minutes ago</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Min Profit %</div>
+                        <div class="status-value">0.8%</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Wallet Balance</div>
+                        <div class="status-value">245.32 USDC</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Trades and Opportunities -->
+            <div class="dashboard-row">
+                <!-- Recent Trades -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Recent Trades</h2>
+                        <a href="trading-history.html" class="view-all">View All</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="trades-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Pair</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Profit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Today, 14:32</td>
+                                        <td>SOL-USDC</td>
+                                        <td>Triangular</td>
+                                        <td>100 USDC</td>
+                                        <td class="profit">+2.3%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Today, 12:15</td>
+                                        <td>BTC-USDC</td>
+                                        <td>Cross-DEX</td>
+                                        <td>100 USDC</td>
+                                        <td class="profit">+1.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Today, 09:47</td>
+                                        <td>ETH-USDC</td>
+                                        <td>Triangular</td>
+                                        <td>100 USDC</td>
+                                        <td class="loss">-0.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yesterday, 22:03</td>
+                                        <td>JUP-USDC</td>
+                                        <td>Cross-DEX</td>
+                                        <td>100 USDC</td>
+                                        <td class="profit">+2.1%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yesterday, 18:55</td>
+                                        <td>SOL-BTC</td>
+                                        <td>Triangular</td>
+                                        <td>100 USDC</td>
+                                        <td class="profit">+1.2%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Opportunities -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Recent Opportunities</h2>
+                        <a href="opportunities.html" class="view-all">View All</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="opportunities-list">
+                            <div class="opportunity-item">
+                                <div class="opportunity-time">15 min ago</div>
+                                <div class="opportunity-path">USDC → SOL → BTC → USDC</div>
+                                <div class="opportunity-profit profit">+2.7%</div>
+                                <div class="opportunity-status executed">Executed</div>
+                            </div>
+                            <div class="opportunity-item">
+                                <div class="opportunity-time">32 min ago</div>
+                                <div class="opportunity-path">USDC → ETH → SOL → USDC</div>
+                                <div class="opportunity-profit profit">+1.9%</div>
+                                <div class="opportunity-status executed">Executed</div>
+                            </div>
+                            <div class="opportunity-item">
+                                <div class="opportunity-time">45 min ago</div>
+                                <div class="opportunity-path">USDC → JUP → USDC</div>
+                                <div class="opportunity-profit profit">+0.7%</div>
+                                <div class="opportunity-status missed">Missed</div>
+                            </div>
+                            <div class="opportunity-item">
+                                <div class="opportunity-time">1 hour ago</div>
+                                <div class="opportunity-path">USDC → RAY → SOL → USDC</div>
+                                <div class="opportunity-profit profit">+1.5%</div>
+                                <div class="opportunity-status executed">Executed</div>
+                            </div>
+                            <div class="opportunity-item">
+                                <div class="opportunity-time">1.5 hours ago</div>
+                                <div class="opportunity-path">USDC → BONK → USDC</div>
+                                <div class="opportunity-profit profit">+3.2%</div>
+                                <div class="opportunity-status executed">Executed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Chart -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Performance Chart</h2>
+                    <div class="chart-controls">
+                        <button class="btn btn-sm active">Day</button>
+                        <button class="btn btn-sm">Week</button>
+                        <button class="btn btn-sm">Month</button>
+                        <button class="btn btn-sm">Year</button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (!SolarBotAuth.isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Get current user
+            const currentUser = SolarBotAuth.getCurrentUser();
+            
+            // Update user name and subscription info
+            document.querySelector('.user-name').textContent = currentUser.name;
+            
+            const planBadge = document.querySelector('.plan-badge');
+            planBadge.textContent = `${currentUser.plan.charAt(0).toUpperCase() + currentUser.plan.slice(1)} Plan`;
+            planBadge.className = `plan-badge ${currentUser.plan}`;
+            
+            // Format subscription end date
+            const subscriptionEnd = new Date(currentUser.subscriptionEnd);
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            document.querySelector('.renewal-info').textContent = `Renews on ${subscriptionEnd.toLocaleDateString('en-US', options)}`;
+            
+            // Logout button
+            document.getElementById('logout-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                SolarBotAuth.logoutUser();
+                window.location.href = 'index.html';
+            });
+            
+            // User dropdown
+            const userDropdown = document.querySelector('.user-dropdown');
+            userDropdown.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userDropdown.contains(e.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const dashboardSidebar = document.querySelector('.dashboard-sidebar');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                dashboardSidebar.classList.toggle('active');
+            });
+            
+            // Performance Chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            // Sample data
+            const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const profitData = [0.8, 1.2, 0.5, 1.8, 2.1, 1.5, 2.3];
+            const tradesData = [12, 15, 8, 20, 18, 14, 22];
+            
+            const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientFill.addColorStop(0, 'rgba(153, 69, 255, 0.3)');
+            gradientFill.addColorStop(1, 'rgba(153, 69, 255, 0.0)');
+            
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Profit %',
+                            data: profitData,
+                            borderColor: '#9945FF',
+                            backgroundColor: gradientFill,
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Trades',
+                            data: tradesData,
+                            borderColor: '#14F195',
+                            backgroundColor: 'transparent',
+                            tension: 0.4,
+                            borderDash: [5, 5],
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Profit %'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Number of Trades'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

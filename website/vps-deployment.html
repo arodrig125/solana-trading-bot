@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPS Deployment Guide - SolarBot</title>
+    <meta name="description" content="Step-by-step guide for deploying SolarBot on a Virtual Private Server (VPS).">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/simple-styles.css">
+    <link rel="stylesheet" href="css/simple-docs.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index-simple.html">
+                    <img src="images/logo-solarbot.png" alt="SolarBot" class="logo-image">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index-simple.html#features">Features</a></li>
+                    <li><a href="index-simple.html#pricing">Pricing</a></li>
+                    <li><a href="index-simple.html#faq">FAQ</a></li>
+                    <li><a href="index-simple.html#contact">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="signup-simple.html" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Documentation Header -->
+    <section class="doc-header">
+        <div class="container">
+            <h1 class="fade-in-up">VPS Deployment Guide</h1>
+            <p class="fade-in-up delay-1">Step-by-step instructions for deploying SolarBot on a Virtual Private Server</p>
+        </div>
+    </section>
+
+    <!-- Documentation Content -->
+    <section class="doc-content">
+        <div class="container">
+            <div class="doc-grid">
+                <!-- Sidebar -->
+                <aside class="doc-sidebar fade-in-up">
+                    <div class="sidebar-nav">
+                        <ul>
+                            <li><a href="#prerequisites" class="active">Prerequisites</a></li>
+                            <li><a href="#vps-providers">VPS Providers</a></li>
+                            <li><a href="#automatic-deployment">Automatic Deployment</a></li>
+                            <li><a href="#manual-deployment">Manual Deployment</a></li>
+                            <li><a href="#configuration">Configuration</a></li>
+                            <li><a href="#telegram-setup">Telegram Setup</a></li>
+                            <li><a href="#monitoring">Monitoring</a></li>
+                            <li><a href="#troubleshooting">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="doc-main">
+                    <section id="prerequisites" class="doc-section fade-in-up delay-1">
+                        <h2>Prerequisites</h2>
+                        <p>Before you begin, make sure you have:</p>
+                        <ul>
+                            <li>A SolarBot subscription (Basic, Advanced, or Professional)</li>
+                            <li>A VPS with at least the following specifications:
+                                <ul>
+                                    <li>1 CPU core</li>
+                                    <li>2GB RAM</li>
+                                    <li>20GB SSD storage</li>
+                                    <li>Ubuntu 20.04 LTS or later</li>
+                                </ul>
+                            </li>
+                            <li>SSH access to your VPS</li>
+                            <li>A Solana wallet with SOL for transaction fees</li>
+                            <li>USDC or WSOL tokens for trading</li>
+                            <li>A Telegram bot token (obtained from @BotFather)</li>
+                        </ul>
+                    </section>
+
+                    <section id="vps-providers" class="doc-section fade-in-up">
+                        <h2>Recommended VPS Providers</h2>
+                        <p>We recommend the following VPS providers:</p>
+                        <div class="provider-cards">
+                            <div class="provider-card">
+                                <img src="images/digitalocean.png" alt="DigitalOcean">
+                                <h3>DigitalOcean</h3>
+                                <p>$5-10/month droplet</p>
+                                <a href="https://www.digitalocean.com/" target="_blank" class="btn btn-outline">Visit Website</a>
+                            </div>
+                            <div class="provider-card">
+                                <img src="images/aws-lightsail.png" alt="AWS Lightsail">
+                                <h3>AWS Lightsail</h3>
+                                <p>$5-10/month instance</p>
+                                <a href="https://aws.amazon.com/lightsail/" target="_blank" class="btn btn-outline">Visit Website</a>
+                            </div>
+                            <div class="provider-card">
+                                <img src="images/linode.png" alt="Linode">
+                                <h3>Linode</h3>
+                                <p>$5-10/month Linode</p>
+                                <a href="https://www.linode.com/" target="_blank" class="btn btn-outline">Visit Website</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="automatic-deployment" class="doc-section fade-in-up">
+                        <h2>Automatic Deployment (Recommended)</h2>
+                        <p>We provide an automatic deployment script that handles all the necessary setup steps:</p>
+
+                        <h3>Step 1: Connect to Your VPS</h3>
+                        <div class="code-block">
+                            <pre><code>ssh username@your-vps-ip</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 2: Download the Deployment Script</h3>
+                        <div class="code-block">
+                            <pre><code>wget https://solarbot.io/deploy-vps.sh</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 3: Make the Script Executable</h3>
+                        <div class="code-block">
+                            <pre><code>chmod +x deploy-vps.sh</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 4: Run the Script</h3>
+                        <div class="code-block">
+                            <pre><code>sudo ./deploy-vps.sh</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <p>The script will guide you through the setup process and prompt you for the necessary information.</p>
+
+                        <div class="note-box">
+                            <h4><i class="fas fa-info-circle"></i> Note</h4>
+                            <p>Advanced and Professional tier subscribers receive personalized setup assistance. Contact our support team if you need help with deployment.</p>
+                        </div>
+                    </section>
+
+                    <section id="manual-deployment" class="doc-section fade-in-up">
+                        <h2>Manual Deployment</h2>
+                        <p>If you prefer to set up the bot manually, follow these steps:</p>
+
+                        <h3>Step 1: Update System Packages</h3>
+                        <div class="code-block">
+                            <pre><code>sudo apt update
+sudo apt upgrade -y</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 2: Install Dependencies</h3>
+                        <div class="code-block">
+                            <pre><code>sudo apt install -y curl git build-essential</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 3: Install Node.js</h3>
+                        <div class="code-block">
+                            <pre><code>curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 4: Create a User for the Bot</h3>
+                        <div class="code-block">
+                            <pre><code>sudo adduser --disabled-password --gecos "" solarbot</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 5: Clone the Repository</h3>
+                        <div class="code-block">
+                            <pre><code>cd /home/solarbot
+sudo git clone https://github.com/arodrig125/solana-trading-bot.git
+sudo chown -R solarbot:solarbot solana-trading-bot</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 6: Install Bot Dependencies</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "cd /home/solarbot/solana-trading-bot && npm install"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 7: Install PM2 for Process Management</h3>
+                        <div class="code-block">
+                            <pre><code>sudo npm install -g pm2</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </section>
+
+                    <section id="configuration" class="doc-section fade-in-up">
+                        <h2>Configuration</h2>
+                        <p>After deployment, you need to configure the bot with your credentials:</p>
+
+                        <h3>Step 1: Create Environment File</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "cd /home/solarbot/solana-trading-bot && cp .env.example .env"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 2: Edit Environment File</h3>
+                        <div class="code-block">
+                            <pre><code>sudo nano /home/solarbot/solana-trading-bot/.env</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <p>Add the following information to the .env file:</p>
+                        <div class="code-block">
+                            <pre><code># Telegram Configuration
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+TELEGRAM_CHAT_ID=your_telegram_chat_id
+
+# Solana Wallet Configuration
+PRIVATE_KEY=[your_wallet_private_key_array]
+
+# Bot Operation Mode
+SIMULATION=true  # Set to false for live trading (Advanced and Professional plans only)
+
+# RPC Endpoint (Optional)
+RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Warning</h4>
+                            <p>Never share your private key or .env file with anyone. Keep your credentials secure at all times.</p>
+                        </div>
+
+                        <h3>Step 3: Start the Bot</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "cd /home/solarbot/solana-trading-bot && pm2 start server.js --name solarbot"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Step 4: Configure PM2 to Start on Boot</h3>
+                        <div class="code-block">
+                            <pre><code>sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u solarbot --hp /home/solarbot
+sudo -u solarbot bash -c "pm2 save"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </section>
+
+                    <section id="telegram-setup" class="doc-section fade-in-up">
+                        <h2>Telegram Setup</h2>
+                        <p>SolarBot uses Telegram for command control and notifications. Follow these steps to set up your Telegram bot:</p>
+
+                        <h3>Step 1: Create a Telegram Bot</h3>
+                        <ol>
+                            <li>Open Telegram and search for <code>@BotFather</code></li>
+                            <li>Start a chat with BotFather and send the command <code>/newbot</code></li>
+                            <li>Follow the prompts to name your bot and create a username for it</li>
+                            <li>Once created, BotFather will provide you with a token</li>
+                            <li>Copy this token and add it to your <code>.env</code> file as <code>TELEGRAM_BOT_TOKEN</code></li>
+                        </ol>
+
+                        <h3>Step 2: Get Your Chat ID</h3>
+                        <ol>
+                            <li>Start a chat with your newly created bot</li>
+                            <li>Send any message to the bot</li>
+                            <li>Start the bot with the steps above</li>
+                            <li>Send the command <code>/chatid</code> to your bot</li>
+                            <li>The bot will respond with your Chat ID</li>
+                            <li>Copy this ID and add it to your <code>.env</code> file as <code>TELEGRAM_CHAT_ID</code></li>
+                        </ol>
+
+                        <h3>Step 3: Restart the Bot</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "pm2 restart solarbot"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </section>
+
+                    <section id="monitoring" class="doc-section fade-in-up">
+                        <h2>Monitoring</h2>
+                        <p>You can monitor the bot using PM2:</p>
+
+                        <h3>View Logs</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "pm2 logs solarbot"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Monitor Process</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "pm2 monit"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Restart the Bot</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "pm2 restart solarbot"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Stop the Bot</h3>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "pm2 stop solarbot"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </section>
+
+                    <section id="troubleshooting" class="doc-section fade-in-up">
+                        <h2>Troubleshooting</h2>
+
+                        <h3>Bot Not Starting</h3>
+                        <p>Check the logs for errors:</p>
+                        <div class="code-block">
+                            <pre><code>sudo -u solarbot bash -c "pm2 logs solarbot"</code></pre>
+                            <button class="copy-button"><i class="fas fa-copy"></i></button>
+                        </div>
+
+                        <h3>Connection Issues</h3>
+                        <p>If the bot is having trouble connecting to the Solana network, try using a different RPC endpoint in your <code>.env</code> file.</p>
+
+                        <h3>Telegram Bot Not Responding</h3>
+                        <ol>
+                            <li>Make sure your <code>TELEGRAM_BOT_TOKEN</code> is correct</li>
+                            <li>Ensure your bot is not blocked or stopped</li>
+                            <li>Check that your <code>TELEGRAM_CHAT_ID</code> is correct</li>
+                        </ol>
+
+                        <h3>Out of Memory Errors</h3>
+                        <p>If you're experiencing out of memory errors, consider upgrading your VPS to a higher tier with more RAM.</p>
+
+                        <div class="support-box">
+                            <h4>Need Help?</h4>
+                            <p>If you're still experiencing issues, please contact our support team:</p>
+                            <a href="mailto:support@solarbot.io" class="btn btn-primary">Contact Support</a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">SolarBot</div>
+                    <p>Advanced Solana arbitrage trading bot with Telegram integration.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" title="Twitter" aria-label="Follow us on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" target="_blank" title="Telegram" aria-label="Join our Telegram group"><i class="fab fa-telegram" aria-hidden="true"></i></a>
+                        <a href="#" target="_blank" title="GitHub" aria-label="View our GitHub repository"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index-simple.html#features">Features</a></li>
+                        <li><a href="index-simple.html#pricing">Pricing</a></li>
+                        <li><a href="index-simple.html#faq">FAQ</a></li>
+                        <li><a href="index-simple.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SolarBot.io. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/simple-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade in animations
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+
+            // Copy code functionality
+            const copyButtons = document.querySelectorAll('.copy-button');
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.previousElementSibling;
+                    const code = codeBlock.textContent;
+
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Change button icon to indicate success
+                        const icon = this.querySelector('i');
+                        icon.classList.remove('fa-copy');
+                        icon.classList.add('fa-check');
+
+                        // Reset after 2 seconds
+                        setTimeout(() => {
+                            icon.classList.remove('fa-check');
+                            icon.classList.add('fa-copy');
+                        }, 2000);
+                    });
+                });
+            });
+
+            // Smooth scrolling for sidebar links
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+
+                        // Update active link
+                        sidebarLinks.forEach(link => link.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Highlight active section on scroll
+            const sections = document.querySelectorAll('.doc-section');
+
+            function setActiveLink() {
+                let currentSection = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    const sectionHeight = section.offsetHeight;
+
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Set active link on page load
+            setActiveLink();
+
+            // Update active link on scroll
+            window.addEventListener('scroll', setActiveLink);
+        });
+    </script>
+</body>
+</html>
