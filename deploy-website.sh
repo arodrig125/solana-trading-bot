@@ -25,9 +25,9 @@ git push origin website
 # Step 4: Trigger Vercel deployment
 echo "Triggering Vercel deployment..."
 
-# Vercel production deploy hook URL
-# NOTE: Get this from Vercel dashboard: Settings > Git > Deploy Hooks
-DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_uGZIlKkJyyi652gxMDKZkaubNhMT/l8BTgSMQ9q"
+# Vercel production deploy hook URL for dedicated website project
+# NOTE: This hook deploys only the website directory as the root
+DEPLOY_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_YcHJG6sUCfsmrFGRhIcx4i4ZG8e4/jsBOCMWQr4"
 
 # Execute the deploy hook
 echo "Executing deploy hook..."
