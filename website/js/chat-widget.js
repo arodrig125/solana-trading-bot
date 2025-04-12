@@ -2,27 +2,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Tawk.to widget
     initTawkToWidget();
-    
+
     // Add custom chat button
     addCustomChatButton();
 });
 
 // Initialize Tawk.to widget
 function initTawkToWidget() {
-    // Tawk.to widget code - Replace with your actual Tawk.to widget code
+    // Tawk.to widget code with your actual Tawk.to widget code
     var Tawk_API = Tawk_API || {};
     var Tawk_LoadStart = new Date();
-    
+
     (function() {
         var s1 = document.createElement("script");
         var s0 = document.getElementsByTagName("script")[0];
         s1.async = true;
-        s1.src = 'https://embed.tawk.to/YOUR_TAWK_TO_ID/default'; // Replace with your actual Tawk.to embed URL
+        s1.src = 'https://embed.tawk.to/67fafa60aa6e5419080f5e98/1iom642as';
         s1.charset = 'UTF-8';
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
     })();
-    
+
     // Customize Tawk.to widget behavior
     if (typeof Tawk_API !== 'undefined') {
         // Set visitor information if user is logged in
@@ -40,20 +40,20 @@ function initTawkToWidget() {
                 }
             };
         }
-        
+
         // Track chat events
         Tawk_API.onChatStarted = function() {
             trackEvent('chat_started');
         };
-        
+
         Tawk_API.onChatEnded = function() {
             trackEvent('chat_ended');
         };
-        
+
         // Hide widget on certain pages
         const hideChatOnPages = ['/login.html', '/signup.html', '/privacy.html', '/terms.html'];
         const currentPath = window.location.pathname;
-        
+
         if (hideChatOnPages.some(page => currentPath.endsWith(page))) {
             Tawk_API.hideWidget();
         }
@@ -71,22 +71,22 @@ function addCustomChatButton() {
         </div>
         <div class="chat-button-text">Chat with us</div>
     `;
-    
+
     // Add to document
     document.body.appendChild(chatButton);
-    
+
     // Add event listener
     chatButton.addEventListener('click', function() {
         if (typeof Tawk_API !== 'undefined') {
             Tawk_API.maximize();
         }
     });
-    
+
     // Show/hide text on hover
     chatButton.addEventListener('mouseenter', function() {
         this.classList.add('expanded');
     });
-    
+
     chatButton.addEventListener('mouseleave', function() {
         this.classList.remove('expanded');
     });
@@ -111,6 +111,6 @@ function trackEvent(eventName, eventData = {}) {
     if (typeof gtag !== 'undefined') {
         gtag('event', eventName, eventData);
     }
-    
+
     console.log('Event tracked:', eventName, eventData);
 }
