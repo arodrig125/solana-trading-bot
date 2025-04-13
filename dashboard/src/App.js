@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Box, theme as chakraTheme } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Import custom theme
 import theme from './theme';
@@ -17,9 +17,17 @@ import Login from './pages/Login';
 import Analytics from './pages/Analytics';
 import LandingPage from './pages/LandingPage';
 
+// Import public pages (to be created)
+import About from './pages/public/About';
+import Documentation from './pages/public/Documentation';
+import Contact from './pages/public/Contact';
+import Pricing from './pages/public/Pricing';
+
 // Import components
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import PublicHeader from './components/PublicHeader';
+import Footer from './components/Footer';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import NotificationsPanel from './components/common/NotificationsPanel';
@@ -44,12 +52,8 @@ function App() {
     setIsNotificationsOpen(!isNotificationsOpen);
   };
 
-  // Main application structure
-  const AppContent = ({ isAuthenticated, handleLogout }) => {
-    if (!isAuthenticated) {
-      return null; // Login page is rendered directly by AuthProvider
-    }
-    
+  // Authenticated application structure
+  const AuthenticatedApp = ({ handleLogout }) => {    
     return (
       <Box display="flex" height="100vh" overflow="hidden">
         <Sidebar />
@@ -58,12 +62,12 @@ function App() {
           <Box p={4} pb={8}>
             <ErrorBoundary>
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/trading" element={<Trading />} />
                 <Route path="/wallets" element={<Wallets />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/landing" element={<LandingPage />} />
+                <Route path="*" element={<Navigate to="/dashboard" />} />
               </Routes>
             </ErrorBoundary>
           </Box>
@@ -78,12 +82,31 @@ function App() {
     );
   };
 
+  // Public application structure
+  const PublicApp = ({ login }) => {
+    return (
+      <>
+        <PublicHeader />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/docs" element={<Documentation />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/login" element={<Login onLogin={login} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer />
+      </>
+    );
+  };
+
   // Loading screen
   if (isLoading) {
     return (
       <ChakraProvider theme={theme}>
         <Box height="100vh" display="flex" alignItems="center" justifyContent="center">
-          <LoadingSpinner text="Loading SolarBot Dashboard..." />
+          <LoadingSpinner text="Loading SolarBot..." />
         </Box>
       </ChakraProvider>
     );
@@ -97,10 +120,10 @@ function App() {
             <Router>
               {loading ? (
                 <LoadingSpinner text="Authenticating..." />
-              ) : !isAuthenticated ? (
-                <Login onLogin={login} />
+              ) : isAuthenticated ? (
+                <AuthenticatedApp handleLogout={logout} />
               ) : (
-                <AppContent isAuthenticated={isAuthenticated} handleLogout={logout} />
+                <PublicApp login={login} />
               )}
             </Router>
           )}

@@ -1,0 +1,135 @@
+diff --git a/package.json b/package.json
+index 1234567..abcdefg 100644
+--- a/package.json
++++ b/package.json
+@@ -11,7 +11,7 @@
+     "node": ">=18.0.0"
+   },
+   "dependencies": {
+-    "@jup-ag/api": "^6.0.40",
++    "@jup-ag/api": "^7.0.1",
+     "@solana/web3.js": "^1.87.6",
+     "axios": "^1.6.2",
+     "bignumber.js": "^9.1.1",
+diff --git a/utils/jupiter.js b/utils/jupiter.js
+index 1234567..abcdefg 100644
+--- a/utils/jupiter.js
++++ b/utils/jupiter.js
+@@ -12,13 +12,18 @@ const gasOptimizer = require('./gasOptimizer');
+ 
+ // Initialize Jupiter API client
+ async function initJupiterClient() {
+-  const jupiterClient = createJupiterApiClient();
++  // Get Solana connection
++  const connection = getSolanaConnection();
++  
++  // Initialize Jupiter API client with v7 options
++  const jupiterClient = createJupiterApiClient({
++    connection,
++    cluster: 'mainnet-beta',
++    wrapUnwrapSOL: true,
++    routeCacheDuration: 30 // Cache routes for 30 seconds
++  });
+ 
+   // Initialize gas optimizer if enabled
+   if (settings.gasOptimization?.enabled) {
+-    const connection = getSolanaConnection();
+     await gasOptimizer.initializeGasOptimizer(connection);
+     logger.info('Gas optimizer initialized');
+   }
+@@ -80,19 +85,24 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
+       return null;
+     }
+ 
++    // Convert mint addresses to strings if they are PublicKey objects
++    const inputMintStr = inputMint instanceof PublicKey ? inputMint.toString() : inputMint;
++    const outputMintStr = outputMint instanceof PublicKey ? outputMint.toString() : outputMint;
++
+     // Log the Jupiter client structure to debug
+     logger.info(`Jupiter client methods: ${Object.keys(jupiterClient).join(', ')}`);
+ 
+-    // Try the direct method first (most likely to work with v6)
++    // Try the direct method first (for v7)
+     try {
+       // Check if quote method exists
+       if (typeof jupiterClient.quote === 'function') {
+         logger.info('Using direct quote method');
+         const quoteResponse = await jupiterClient.quote({
+-          inputMint,
+-          outputMint,
++          inputMint: inputMintStr,
++          outputMint: outputMintStr,
+           amount,
+           slippageBps,
+-          onlyDirectRoutes
++          onlyDirectRoutes,
++          asLegacyTransaction: false,
++          maxAccounts: 64
+         });
+ 
+         return quoteResponse;
+@@ -106,8 +116,8 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
+       if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
+         logger.info('Using quoteApi.getQuote method');
+         const quoteResponse = await jupiterClient.quoteApi.getQuote({
+-          inputMint,
+-          outputMint,
++          inputMint: inputMintStr,
++          outputMint: outputMintStr,
+           amount,
+           slippageBps,
+           onlyDirectRoutes
+@@ -116,28 +126,30 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
+       } else if (typeof jupiterClient.quoteGet === 'function') {
+         logger.info('Using quoteGet method');
+         const quoteResponse = await jupiterClient.quoteGet({
+-          inputMint,
+-          outputMint,
++          inputMint: inputMintStr,
++          outputMint: outputMintStr,
+           amount,
+           slippageBps,
+           onlyDirectRoutes
+         });
+         return quoteResponse;
+-      } else if (jupiterClient.v6 && typeof jupiterClient.v6.quote === 'function') {
+-        logger.info('Using v6.quote method');
+-        const quoteResponse = await jupiterClient.v6.quote({
+-          inputMint,
+-          outputMint,
+-          amount,
+-          slippageBps,
+-          onlyDirectRoutes
+-        });
+-        return quoteResponse;
+       }
+ 
+-      // If we get here, no compatible method was found
+-      throw new Error('No compatible Jupiter API method found');
++      // Try fallback method for compatibility - direct API call
++      try {
++        logger.info('Attempting fallback direct API call');
++        
++        // Construct a basic request
++        const requestUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMintStr}&outputMint=${outputMintStr}&amount=${amount}&slippageBps=${slippageBps}&onlyDirectRoutes=${onlyDirectRoutes}`;
++        
++        // Use axios to make a direct API call
++        const axios = require('axios');
++        const response = await axios.get(requestUrl);
++        
++        if (response.data && response.status === 200) {
++          logger.info('Successfully got quote using fallback API call');
++          return response.data;
++        }
++      } catch (fallbackError) {
++        logger.warn(`Fallback API call failed: ${fallbackError.message}`);
++      }
++
++      // If we get here, no compatible method was found
++      throw new Error('No compatible Jupiter API method found');
++    }
++  } catch (error) {
++    logger.error(`Error getting quote for ${inputMint} to ${outputMint}:`, error);
++    return null;
++  }
++}

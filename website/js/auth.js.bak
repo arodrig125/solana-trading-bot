@@ -5,76 +5,60 @@ let users = JSON.parse(localStorage.getItem('solarbot_users')) || [];
 
 // Subscription plans
 const subscriptionPlans = {
-    starter: {
-        name: 'STARTER',
+    basic: {
+        name: 'Basic',
         price: 29,
-        yearlyPrice: 279,
-        savings: 69,
-        trialDays: 7,
         features: [
             'Simulation mode only',
             'Basic arbitrage detection',
             'Telegram notifications',
-            '5 token pairs',
+            '5-10 token pairs',
             'Daily summary reports',
             'Basic dashboard access',
-            'Community support',
-            '2-minute scan interval',
-            '100 daily scans'
+            'Email support'
         ]
     },
-    pro: {
-        name: 'PRO',
+    advanced: {
+        name: 'Advanced',
         price: 79,
-        yearlyPrice: 759,
-        savings: 189,
-        trialDays: 0,
         features: [
-            'Everything in STARTER tier',
+            'Everything in Basic tier',
             'Live trading mode',
-            'Simple and triangular arbitrage',
-            '20 token pairs',
+            'Advanced arbitrage strategies',
+            'All token pairs',
             'Customizable profit thresholds',
             'Detailed analytics',
-            'Email support',
-            '1-minute scan interval',
-            '500 daily scans'
+            'Priority email support',
+            'Custom risk management settings'
         ]
     },
-    elite: {
-        name: 'ELITE',
+    professional: {
+        name: 'Professional',
         price: 199,
-        yearlyPrice: 1899,
-        savings: 489,
-        trialDays: 0,
         features: [
-            'Everything in PRO tier',
+            'Everything in Advanced tier',
             'Multi-wallet support',
             'Advanced risk management',
             'API access',
-            '50 token pairs',
-            'Multi-hop arbitrage',
-            'Priority support',
-            '30-second scan interval',
-            '2000 daily scans'
+            'Custom token pairs',
+            'Performance optimization',
+            'Priority 24/7 support',
+            'Strategy customization',
+            'VPS setup assistance'
         ]
     },
-    institutional: {
-        name: 'INSTITUTIONAL',
-        price: 999,
-        yearlyPrice: 9590,
-        savings: 2398,
-        trialDays: 0,
+    enterprise: {
+        name: 'Enterprise',
+        price: 'Custom',
         features: [
-            'Everything in ELITE tier',
+            'Everything in Professional tier',
             'Dedicated VPS',
             'Custom development',
             'Multiple exchange support',
             'Advanced reporting',
             'Direct developer access',
-            'Unlimited token pairs',
-            '10-second scan interval',
-            'Flash-loan arbitrage'
+            'Custom integration options',
+            'On-demand strategy development'
         ]
     }
 };
@@ -88,7 +72,7 @@ function registerUser(email, password, name, plan) {
             message: 'A user with this email already exists'
         };
     }
-
+    
     // Create new user object
     const newUser = {
         id: generateUserId(),
@@ -102,11 +86,11 @@ function registerUser(email, password, name, plan) {
         createdAt: new Date().toISOString(),
         lastLogin: new Date().toISOString()
     };
-
+    
     // Add user to database
     users.push(newUser);
     saveUsers();
-
+    
     return {
         success: true,
         message: 'Registration successful',
@@ -125,7 +109,7 @@ function registerUser(email, password, name, plan) {
 function loginUser(email, password) {
     // Find user by email
     const user = users.find(user => user.email === email);
-
+    
     // Check if user exists and password is correct
     if (!user || user.password !== hashPassword(password)) {
         return {
@@ -133,11 +117,11 @@ function loginUser(email, password) {
             message: 'Invalid email or password'
         };
     }
-
+    
     // Update last login
     user.lastLogin = new Date().toISOString();
     saveUsers();
-
+    
     return {
         success: true,
         message: 'Login successful',
@@ -176,22 +160,22 @@ function logoutUser() {
 function updateSubscription(userId, newPlan) {
     // Find user by ID
     const user = users.find(user => user.id === userId);
-
+    
     if (!user) {
         return {
             success: false,
             message: 'User not found'
         };
     }
-
+    
     // Update subscription details
     user.plan = newPlan;
     user.subscriptionStatus = 'active';
     user.subscriptionStart = new Date().toISOString();
     user.subscriptionEnd = calculateSubscriptionEnd(new Date(), 30); // 30 days subscription
-
+    
     saveUsers();
-
+    
     // Update current user in local storage if it's the same user
     const currentUser = JSON.parse(localStorage.getItem('solarbot_current_user'));
     if (currentUser && currentUser.id === userId) {
@@ -200,7 +184,7 @@ function updateSubscription(userId, newPlan) {
         currentUser.subscriptionEnd = user.subscriptionEnd;
         localStorage.setItem('solarbot_current_user', JSON.stringify(currentUser));
     }
-
+    
     return {
         success: true,
         message: 'Subscription updated successfully',
@@ -219,25 +203,25 @@ function updateSubscription(userId, newPlan) {
 function cancelSubscription(userId) {
     // Find user by ID
     const user = users.find(user => user.id === userId);
-
+    
     if (!user) {
         return {
             success: false,
             message: 'User not found'
         };
     }
-
+    
     // Update subscription status
     user.subscriptionStatus = 'cancelled';
     saveUsers();
-
+    
     // Update current user in local storage if it's the same user
     const currentUser = JSON.parse(localStorage.getItem('solarbot_current_user'));
     if (currentUser && currentUser.id === userId) {
         currentUser.subscriptionStatus = 'cancelled';
         localStorage.setItem('solarbot_current_user', JSON.stringify(currentUser));
     }
-
+    
     return {
         success: true,
         message: 'Subscription cancelled successfully'

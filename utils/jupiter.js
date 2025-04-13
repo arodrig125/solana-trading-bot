@@ -8,6 +8,7 @@ const pathFinder = require('./pathFinder');
 const pathHistory = require('./pathHistory');
 const positionSizing = require('./positionSizing');
 const gasOptimizer = require('./gasOptimizer');
+const { canExecuteTransaction } = require('./wallet');
 
 // Initialize Jupiter API client
 async function initJupiterClient() {
@@ -638,8 +639,22 @@ async function findArbitrageOpportunities(jupiterClient, customMinProfitPercent 
 }
 
 // Execute a trade (in simulation or live mode)
-async function executeTrade(jupiterClient, connection, wallet, opportunity, simulationMode = true) {
+async function executeTrade(jupiterClient, connection, wallet, opportunity, simulationMode = true, walletManager = null) {
   try {
+    // Validate trade opportunity
+    const { validateTradeOpportunity } = require('./validation');
+    const validationResult = validateTradeOpportunity(opportunity, settings);
+    
+    if (!validationResult.isValid) {
+      return {
+        success: false,
+        simulation: simulationMode,
+        error: validationResult.reason,
+        opportunity,
+        validationChecks: validationResult.checks,
+        timestamp: new Date().toISOString()
+      };
+    }
     // Check if gas prices are favorable for this trade
     if (settings.gasOptimization?.enabled && !simulationMode) {
       // Convert profit amount to lamports for gas comparison
@@ -674,23 +689,181 @@ async function executeTrade(jupiterClient, connection, wallet, opportunity, simu
       };
     }
 
-    // For live trading, implement the actual trade execution
-    // This would involve creating and sending transactions using Jupiter API
+    // Live trading implementation
+    logger.info('Executing live trade...');
 
-    logger.warn('Live trading not implemented yet');
-    return {
-      success: false,
-      simulation: false,
-      error: 'Live trading not implemented yet',
-      opportunity,
-      timestamp: new Date().toISOString()
-    };
+    // Select the best wallet if wallet manager is provided
+    let selectedWallet = wallet;
+    let walletData = null;
+    
+    if (walletManager && !simulationMode) {
+      // Get the best wallet for this trade from the wallet manager
+      const bestWalletData = await walletManager.getBestWalletForTrade(connection, opportunity);
+      if (bestWalletData) {
+        selectedWallet = bestWalletData.wallet;
+        walletData = bestWalletData;
+        logger.info(`Selected wallet ${bestWalletData.displayAddress} for this trade`);
+      } else {
+        logger.warningMessage('No suitable wallet found for this trade. Using provided wallet.');
+      }
+    }
+
+    // Verify wallet can execute transaction with detailed balance checks
+    const tradeCheck = await canExecuteTransaction(connection, selectedWallet, opportunity);
+    if (!tradeCheck.canExecute) {
+      return {
+        success: false,
+        simulation: false,
+        error: tradeCheck.reason,
+        opportunity,
+        balanceCheck: tradeCheck,
+        validationChecks: validationResult.checks,
+        timestamp: new Date().toISOString(),
+        wallet: walletData ? walletData.displayAddress : null
+      };
+    }
+
+    // For triangular arbitrage, execute multiple swaps
+    if (opportunity.type === 'triangular') {
+      const trades = [];
+      let currentAmount;
+
+      // Execute each swap in the path
+      for (let i = 0; i < opportunity.path.length; i++) {
+        const step = opportunity.path[i];
+        const inputToken = getTokenBySymbol(step.from);
+        const outputToken = getTokenBySymbol(step.to);
+
+        if (!inputToken || !outputToken) {
+          throw new Error(`Invalid token in path: ${step.from} -> ${step.to}`);
+        }
+
+        // Get quote for the swap
+        const amount = i === 0 ? step.fromAmount : currentAmount;
+        const quote = await jupiterClient.quote({
+          inputMint: inputToken.mint,
+          outputMint: outputToken.mint,
+          amount: amount.toString(),
+          slippageBps: settings.trading.maxSlippagePercent * 100
+        });
+
+        if (!quote) {
+          throw new Error(`Failed to get quote for step ${i + 1}: ${step.from} -> ${step.to}`);
+        }
+
+        // Create and execute swap transaction
+        const { swapTransaction } = await jupiterClient.createSwapTransaction({
+          quoteResponse: quote,
+          userPublicKey: selectedWallet.publicKey.toString(),
+          wrapUnwrapSOL: true
+        });
+
+        // Sign and send transaction
+        const signedTx = await selectedWallet.signTransaction(swapTransaction);
+        const signature = await connection.sendRawTransaction(signedTx.serialize());
+        
+        // Wait for confirmation
+        const confirmation = await connection.confirmTransaction(signature, 'confirmed');
+
+        if (confirmation.value.err) {
+          throw new Error(`Swap ${i + 1} failed: ${confirmation.value.err}`);
+        }
+
+        trades.push({
+          step: i + 1,
+          from: step.from,
+          to: step.to,
+          inputAmount: formatAmount(amount, inputToken.decimals),
+          outputAmount: formatAmount(quote.outAmount, outputToken.decimals),
+          txId: signature
+        });
+
+        currentAmount = quote.outAmount;
+        
+        // Add delay between trades to avoid rate limiting
+        if (i < opportunity.path.length - 1) {
+          await sleep(2000); // 2 second delay
+        }
+      }
+
+      // Update wallet stats if wallet manager is provided
+      if (walletManager && walletData) {
+        await walletManager.updateWalletAfterTrade(walletData.publicKey, { success: true, trades }, connection);
+        logger.info(`Updated wallet ${walletData.displayAddress} after successful trade`);
+      }
+
+      return {
+        success: true,
+        simulation: false,
+        opportunity,
+        trades,
+        finalAmount: formatAmount(currentAmount, getTokenBySymbol(opportunity.path[0].from).decimals),
+        timestamp: new Date().toISOString(),
+        wallet: walletData ? walletData.displayAddress : null,
+        gasStats: settings.gasOptimization?.enabled ? gasOptimizer.getGasStats() : null
+      };
+    } else {
+      // For simple arbitrage, execute single swap
+      const inputToken = getTokenBySymbol(opportunity.startToken);
+      const outputToken = getTokenBySymbol(opportunity.endToken);
+
+      const quote = await jupiterClient.quote({
+        inputMint: inputToken.mint,
+        outputMint: outputToken.mint,
+        amount: opportunity.startAmount.toString(),
+        slippageBps: settings.trading.maxSlippagePercent * 100
+      });
+
+      if (!quote) {
+        throw new Error('Failed to get quote for swap');
+      }
+
+      const { swapTransaction } = await jupiterClient.createSwapTransaction({
+        quoteResponse: quote,
+        userPublicKey: selectedWallet.publicKey.toString(),
+        wrapUnwrapSOL: true
+      });
+
+      const signedTx = await selectedWallet.signTransaction(swapTransaction);
+      const signature = await connection.sendRawTransaction(signedTx.serialize());
+      
+      const confirmation = await connection.confirmTransaction(signature, 'confirmed');
+
+      if (confirmation.value.err) {
+        throw new Error(`Swap failed: ${confirmation.value.err}`);
+      }
+
+      // Update wallet stats if wallet manager is provided
+      if (walletManager && walletData) {
+        await walletManager.updateWalletAfterTrade(walletData.publicKey, { success: true, txId: signature }, connection);
+        logger.info(`Updated wallet ${walletData.displayAddress} after successful trade`);
+      }
+
+      return {
+        success: true,
+        simulation: false,
+        opportunity,
+        txId: signature,
+        inputAmount: formatAmount(opportunity.startAmount, inputToken.decimals),
+        outputAmount: formatAmount(quote.outAmount, outputToken.decimals),
+        timestamp: new Date().toISOString(),
+        wallet: walletData ? walletData.displayAddress : null,
+        gasStats: settings.gasOptimization?.enabled ? gasOptimizer.getGasStats() : null
+      };
+    }
   } catch (error) {
+    // Update wallet stats if wallet manager is provided
+    if (walletManager && walletData) {
+      await walletManager.updateWalletAfterTrade(walletData.publicKey, { success: false, error: error.message }, connection);
+      logger.info(`Updated wallet ${walletData.displayAddress} after failed trade: ${error.message}`);
+    }
+
     logger.error('Error executing trade:', error);
     return {
       success: false,
       error: error.message,
       opportunity,
+      wallet: walletData ? walletData.displayAddress : null,
       timestamp: new Date().toISOString()
     };
   }

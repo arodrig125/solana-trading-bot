@@ -24,18 +24,47 @@ function initWallet(privateKeyString) {
 // Get wallet balance
 async function getWalletBalance(connection, wallet) {
   if (!connection || !wallet) {
-    return { sol: 0, lamports: 0 };
+    logger.error('❌ Cannot get wallet balance: connection or wallet not initialized');
+    return { 
+      sol: 0, 
+      lamports: 0,
+      isEnough: false,
+      minRequired: settings.riskManagement.minWalletBalance,
+      details: 'Wallet or connection not initialized'
+    };
   }
   
   try {
     const lamports = await connection.getBalance(wallet.publicKey);
     const sol = lamports / 1_000_000_000; // Convert lamports to SOL
+    const minSol = settings.riskManagement.minWalletBalance;
     
-    logger.info(`Wallet balance: ${sol.toFixed(6)} SOL (${lamports} lamports)`);
-    return { sol, lamports };
+    // Enhanced balance reporting
+    const status = sol >= minSol ? '✅' : '⚠️';
+    const details = sol >= minSol 
+      ? `Sufficient SOL balance for trading` 
+      : `Insufficient SOL balance for transaction fees`;
+    
+    logger.info(`${status} Wallet SOL balance: ${sol.toFixed(6)} SOL (${lamports} lamports)`);
+    logger.info(`${status} Balance status: ${details}`);
+    
+    return { 
+      sol, 
+      lamports,
+      isEnough: sol >= minSol,
+      minRequired: minSol,
+      details
+    };
   } catch (error) {
-    logger.errorMessage('Error getting wallet balance', error);
-    return { sol: 0, lamports: 0 };
+    const errorMsg = `Error getting wallet balance: ${error.message}`;
+    logger.error(`❌ ${errorMsg}`);
+    return { 
+      sol: 0, 
+      lamports: 0,
+      isEnough: false,
+      minRequired: settings.riskManagement.minWalletBalance,
+      details: errorMsg
+    };
   }
 }
 
@@ -47,52 +76,207 @@ async function hasEnoughSol(connection, wallet) {
   return sol >= settings.riskManagement.minWalletBalance;
 }
 
-// Get token balance
-async function getTokenBalance(connection, wallet, tokenMint) {
-  if (!connection || !wallet || !tokenMint) return 0;
+// Get token balance with detailed reporting
+async function getTokenBalance(connection, wallet, tokenMint, requiredAmount = null) {
+  if (!connection || !wallet || !tokenMint) {
+    logger.error('❌ Cannot get token balance: missing required parameters');
+    return {
+      balance: 0,
+      error: 'Missing required parameters'
+    };
+  }
   
   try {
-    // This is a simplified version - in a real implementation,
-    // you would use the Token program to get the token account and balance
-    logger.info(`Getting balance for token ${tokenMint} in wallet ${wallet.publicKey.toString()}`);
+    const accounts = await connection.getParsedTokenAccountsByOwner(wallet.publicKey, {
+      mint: new PublicKey(tokenMint)
+    });
+
+    if (accounts.value.length === 0) {
+      const msg = `No token account found for ${tokenMint}`;
+      logger.warn(`⚠️ ${msg}`);
+      return {
+        balance: 0,
+        exists: false,
+        details: msg
+      };
+    }
+
+    const balance = accounts.value[0].account.data.parsed.info.tokenAmount.uiAmount;
+    const decimals = accounts.value[0].account.data.parsed.info.tokenAmount.decimals;
     
-    // For now, just return 0 as a placeholder
-    return 0;
+    // Enhanced balance reporting
+    const status = requiredAmount === null || balance >= requiredAmount ? '✅' : '⚠️';
+    const details = requiredAmount === null 
+      ? `Current balance` 
+      : balance >= requiredAmount 
+        ? `Sufficient balance for trade` 
+        : `Insufficient balance. Need ${requiredAmount} more`;
+
+    logger.info(`${status} Token balance: ${balance} (${decimals} decimals)`);
+    logger.info(`${status} Balance status: ${details}`);
+
+    return {
+      balance,
+      exists: true,
+      decimals,
+      isEnough: requiredAmount === null || balance >= requiredAmount,
+      requiredAmount,
+      details
+    };
   } catch (error) {
-    logger.errorMessage(`Error getting token balance for ${tokenMint}`, error);
-    return 0;
+    const errorMsg = `Error getting token balance: ${error.message}`;
+    logger.error(`❌ ${errorMsg}`);
+    return {
+      balance: 0,
+      error: errorMsg
+    };
   }
 }
 
 // Check if a transaction can be executed based on risk management settings
-async function canExecuteTransaction(connection, wallet, tradeAmount) {
+async function canExecuteTransaction(connection, wallet, opportunity) {
   if (!connection || !wallet) {
-    logger.warningMessage('Cannot execute transaction: connection or wallet not initialized');
-    return false;
+    const msg = 'Cannot execute transaction: connection or wallet not initialized';
+    logger.error(`❌ ${msg}`);
+    return {
+      canExecute: false,
+      reason: msg,
+      checks: {
+        wallet: { passed: false, error: 'Not initialized' }
+      }
+    };
   }
-  
-  // Check if wallet has enough SOL for transaction fees
-  if (!await hasEnoughSol(connection, wallet)) {
-    logger.warningMessage(`Not enough SOL for transaction fees. Minimum required: ${settings.riskManagement.minWalletBalance} SOL`);
-    return false;
+
+  const checks = {
+    wallet: { passed: true },
+    solBalance: null,
+    tokenBalance: null,
+    tradeAmount: null,
+    riskLimits: null
+  };
+
+  // Check SOL balance for transaction fees
+  const solCheck = await getWalletBalance(connection, wallet);
+  checks.solBalance = {
+    passed: solCheck.isEnough,
+    current: solCheck.sol,
+    required: solCheck.minRequired,
+    details: solCheck.details
+  };
+
+  if (!solCheck.isEnough) {
+    return {
+      canExecute: false,
+      reason: solCheck.details,
+      checks
+    };
   }
-  
-  // Check if trade amount exceeds maximum allowed
-  if (tradeAmount > settings.trading.maxTradeAmount) {
-    logger.warningMessage(`Trade amount ${tradeAmount} exceeds maximum allowed ${settings.trading.maxTradeAmount}`);
-    return false;
+
+  // Token balance check
+  if (opportunity.type === 'triangular') {
+    const startStep = opportunity.path[0];
+    const startToken = getTokenBySymbol(startStep.from);
+    if (!startToken) {
+      const msg = `Invalid start token: ${startStep.from}`;
+      logger.error(`❌ ${msg}`);
+      checks.tokenBalance = {
+        passed: false,
+        error: msg
+      };
+      return { canExecute: false, reason: msg, checks };
+    }
+
+    const requiredAmount = parseFloat(startStep.fromAmount) / (10 ** startToken.decimals);
+    const tokenCheck = await getTokenBalance(connection, wallet, startToken.mint, requiredAmount);
+    
+    checks.tokenBalance = {
+      passed: tokenCheck.isEnough,
+      symbol: startStep.from,
+      current: tokenCheck.balance,
+      required: requiredAmount,
+      details: tokenCheck.details
+    };
+
+    if (!tokenCheck.isEnough) {
+      return {
+        canExecute: false,
+        reason: tokenCheck.details,
+        checks
+      };
+    }
+  } else {
+    const startToken = getTokenBySymbol(opportunity.startToken);
+    if (!startToken) {
+      const msg = `Invalid start token: ${opportunity.startToken}`;
+      logger.error(`❌ ${msg}`);
+      checks.tokenBalance = {
+        passed: false,
+        error: msg
+      };
+      return { canExecute: false, reason: msg, checks };
+    }
+
+    const requiredAmount = parseFloat(opportunity.startAmount) / (10 ** startToken.decimals);
+    const tokenCheck = await getTokenBalance(connection, wallet, startToken.mint, requiredAmount);
+    
+    checks.tokenBalance = {
+      passed: tokenCheck.isEnough,
+      symbol: opportunity.startToken,
+      current: tokenCheck.balance,
+      required: requiredAmount,
+      details: tokenCheck.details
+    };
+
+    if (!tokenCheck.isEnough) {
+      return {
+        canExecute: false,
+        reason: tokenCheck.details,
+        checks
+      };
+    }
   }
-  
-  // Check risk management limits from analytics
+
+  // Check trade amount limits
+  const tradeAmount = parseFloat(opportunity.startAmount);
+  const maxAmount = settings.trading.maxTradeAmount;
+  checks.tradeAmount = {
+    passed: tradeAmount <= maxAmount,
+    current: tradeAmount,
+    limit: maxAmount,
+    details: tradeAmount <= maxAmount 
+      ? 'Trade amount within limits' 
+      : `Trade amount ${tradeAmount} exceeds maximum ${maxAmount}`
+  };
+
+  if (tradeAmount > maxAmount) {
+    return {
+      canExecute: false,
+      reason: checks.tradeAmount.details,
+      checks
+    };
+  }
+
+  // Check risk management limits
   const { checkRiskLimits } = require('./analytics');
   const riskCheck = checkRiskLimits();
-  
+  checks.riskLimits = {
+    passed: riskCheck.canTrade,
+    details: riskCheck.reason
+  };
+
   if (!riskCheck.canTrade) {
-    logger.warningMessage(`Risk management check failed: ${riskCheck.reason}`);
-    return false;
+    return {
+      canExecute: false,
+      reason: `Risk management: ${riskCheck.reason}`,
+      checks
+    };
   }
-  
-  return true;
+
+  // All checks passed
+  return {
+    canExecute: true,
+    checks
+  };
 }
 
 // Format wallet address for display

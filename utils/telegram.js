@@ -3,6 +3,7 @@ const { getPerformanceSummary, getRecentOpportunities, getRecentTrades, formatPe
 const settings = require('../config/settings');
 const logger = require('./logger');
 const riskManager = require('./riskManager');
+const tokenManager = require('./tokenManager');
 
 // Initialize Telegram bot
 function initBot(token) {
@@ -254,7 +255,16 @@ function setupCommands(bot, callbacks) {
     onHelp,
     onSetRiskLevel,
     onSetRiskParam,
-    onRiskSettings
+    onRiskSettings,
+    onWhitelist,
+    onBlacklist,
+    onAddToWhitelist,
+    onRemoveFromWhitelist,
+    onAddToBlacklist,
+    onRemoveFromBlacklist,
+    onSetUseWhitelist,
+    onSetUseBlacklist,
+    onTokenRisk
   } = callbacks;
 
   // Basic commands
@@ -300,6 +310,45 @@ function setupCommands(bot, callbacks) {
 
   bot.onText(/\/risk/, onRiskSettings);
 
+  // Token list management commands
+  bot.onText(/\/whitelist/, onWhitelist);
+  bot.onText(/\/blacklist/, onBlacklist);
+
+  bot.onText(/\/addwhitelist (.+)/, (msg, match) => {
+    const token = match[1].trim();
+    onAddToWhitelist(msg, token);
+  });
+
+  bot.onText(/\/removewhitelist (.+)/, (msg, match) => {
+    const token = match[1].trim();
+    onRemoveFromWhitelist(msg, token);
+  });
+
+  bot.onText(/\/addblacklist (.+)/, (msg, match) => {
+    const token = match[1].trim();
+    onAddToBlacklist(msg, token);
+  });
+
+  bot.onText(/\/removeblacklist (.+)/, (msg, match) => {
+    const token = match[1].trim();
+    onRemoveFromBlacklist(msg, token);
+  });
+
+  bot.onText(/\/usewhitelist (on|off)/, (msg, match) => {
+    const useWhitelist = match[1].toLowerCase() === 'on';
+    onSetUseWhitelist(msg, useWhitelist);
+  });
+
+  bot.onText(/\/useblacklist (on|off)/, (msg, match) => {
+    const useBlacklist = match[1].toLowerCase() === 'on';
+    onSetUseBlacklist(msg, useBlacklist);
+  });
+
+  bot.onText(/\/tokenrisk (.+)/, (msg, match) => {
+    const token = match[1].trim();
+    onTokenRisk(msg, token);
+  });
+
   // Info commands
   bot.onText(/\/status/, onStatus);
   bot.onText(/\/summary/, onSummary);
@@ -339,6 +388,11 @@ function setupCommands(bot, callbacks) {
     { command: 'summary', description: 'Get performance summary' },
     { command: 'risk', description: 'View risk management settings' },
     { command: 'setrisk', description: 'Set risk level (low/medium/high)' },
+    { command: 'whitelist', description: 'View your token whitelist' },
+    { command: 'blacklist', description: 'View your token blacklist' },
+    { command: 'addwhitelist', description: 'Add token to whitelist' },
+    { command: 'addblacklist', description: 'Add token to blacklist' },
+    { command: 'tokenrisk', description: 'Check risk assessment for a token' },
     { command: 'help', description: 'Show help message' }
   ]).catch(error => {
     logger.error('Error setting bot commands:', error);

@@ -4,6 +4,7 @@
 const logger = require('./logger');
 const tierManager = require('./tier-manager');
 const riskManager = require('./riskManager');
+const tokenManager = require('./tokenManager');
 const { getWalletBalance, getWalletInfo } = require('./wallet');
 const { executeTrade } = require('./jupiter');
 const { recordTrade, updatePerformance } = require('./analytics');
@@ -31,6 +32,41 @@ async function processOpportunity(userId, opportunity, settings, connection, wal
 
     // Get wallet balance
     const walletBalance = await getWalletBalance(connection, wallet.publicKey);
+
+    // Check if tokens are allowed for trading
+    if (opportunity.pair) {
+      const pairCheck = tokenManager.isPairAllowed(userId, opportunity.pair);
+
+      if (!pairCheck.allowed) {
+        logger.info(`Token check failed for user ${userId}: ${pairCheck.reason}`);
+        return {
+          success: false,
+          message: `Token filter prevented trade: ${pairCheck.reason}`,
+          simulation: settings.simulation
+        };
+      }
+    } else if (opportunity.path) {
+      // For multi-hop opportunities, check each token in the path
+      for (const step of opportunity.path) {
+        if (step.from && !tokenManager.isTokenAllowed(userId, step.from)) {
+          logger.info(`Token check failed for user ${userId}: ${step.from} is not allowed`);
+          return {
+            success: false,
+            message: `Token filter prevented trade: ${step.from} is not allowed for trading`,
+            simulation: settings.simulation
+          };
+        }
+
+        if (step.to && !tokenManager.isTokenAllowed(userId, step.to)) {
+          logger.info(`Token check failed for user ${userId}: ${step.to} is not allowed`);
+          return {
+            success: false,
+            message: `Token filter prevented trade: ${step.to} is not allowed for trading`,
+            simulation: settings.simulation
+          };
+        }
+      }
+    }
 
     // Apply risk management checks
     const riskCheck = riskManager.shouldExecuteTrade(userId, opportunity);
