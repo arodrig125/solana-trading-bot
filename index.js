@@ -125,6 +125,9 @@ async function startScanning() {
 
 // Find arbitrage opportunities
 async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
+  // Import required modules
+  const jupiter = require('./utils/jupiter');
+  const pathHistory = require('./utils/path-history');
   logger.info('Scanning for arbitrage opportunities...');
   logger.info(`Using RPC endpoint: ${settings.rpc.endpoint}`);
 
