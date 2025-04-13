@@ -151,34 +151,54 @@ function formatOpportunity(opportunity) {
 
 // Format opportunity for Telegram message (HTML)
 function formatOpportunityHTML(opportunity) {
+  // Determine emoji based on profit percentage
+  let profitEmoji = '💰';
+  if (opportunity.profitPercent >= 5) {
+    profitEmoji = '🔥'; // Fire for high profit
+  } else if (opportunity.profitPercent >= 2) {
+    profitEmoji = '💰'; // Money bag for good profit
+  } else if (opportunity.profitPercent >= 1) {
+    profitEmoji = '📈'; // Chart for decent profit
+  } else {
+    profitEmoji = '💸'; // Flying money for low profit
+  }
+
   if (opportunity.type === 'triangular') {
-    return `<b>💰 Triangular Arbitrage Opportunity</b>\n\n` +
+    return `<b>🔺 Triangular Arbitrage Opportunity ${profitEmoji}</b>\n\n` +
       `<b>Path:</b>\n` +
-      opportunity.path.map(step =>
-        `${step.from} → ${step.to}: <code>${step.fromAmount}</code> → <code>${step.toAmount}</code>`
+      opportunity.path.map((step, index) =>
+        `${index + 1}. ${step.from} → ${step.to}: <code>${step.fromAmount}</code> → <code>${step.toAmount}</code>`
       ).join('\n') + '\n\n' +
       `<b>Start:</b> <code>${opportunity.startAmount}</code>\n` +
       `<b>End:</b> <code>${opportunity.endAmount}</code>\n` +
-      `<b>Profit:</b> <code>${opportunity.profitAmount}</code> (<b>${opportunity.profitPercent.toFixed(2)}%</b>)\n` +
-      `<i>Time: ${new Date(opportunity.timestamp).toLocaleString()}</i>`;
+      `<b>Profit:</b> <code>${opportunity.profitAmount}</code> (<b>${opportunity.profitPercent.toFixed(2)}%</b>)\n\n` +
+      `<i>⏰ ${new Date(opportunity.timestamp).toLocaleString()}</i>`;
   } else if (opportunity.type === 'exchange') {
-    return `<b>💱 Exchange Arbitrage Opportunity</b>\n\n` +
+    return `<b>💱 Exchange Arbitrage Opportunity ${profitEmoji}</b>\n\n` +
       `<b>Pair:</b> ${opportunity.pair}\n` +
-      `<b>Input:</b> <code>${opportunity.inputAmount}</code>\n` +
-      `<b>Output 1:</b> <code>${opportunity.outputAmount1}</code>\n` +
-      `<b>Output 2:</b> <code>${opportunity.outputAmount2}</code>\n` +
-      `<b>Profit:</b> <code>${opportunity.profitAmount}</code> (<b>${opportunity.profitPercent.toFixed(2)}%</b>)\n` +
-      `<i>Time: ${new Date(opportunity.timestamp).toLocaleString()}</i>`;
+      `<b>Exchange 1:</b> ${opportunity.exchange1 || 'Unknown'}\n` +
+      `<b>Exchange 2:</b> ${opportunity.exchange2 || 'Unknown'}\n\n` +
+      `<b>Details:</b>\n` +
+      `• Input: <code>${opportunity.inputAmount}</code>\n` +
+      `• Output 1: <code>${opportunity.outputAmount1}</code>\n` +
+      `• Output 2: <code>${opportunity.outputAmount2}</code>\n` +
+      `• Profit: <code>${opportunity.profitAmount}</code> (<b>${opportunity.profitPercent.toFixed(2)}%</b>)\n\n` +
+      `<i>⏰ ${new Date(opportunity.timestamp).toLocaleString()}</i>`;
   } else if (opportunity.type === 'dynamic') {
-    return `<b>🔄 Dynamic Arbitrage Opportunity</b>\n\n` +
-      `<b>Path:</b> ${opportunity.path.join(' → ')}\n` +
-      `<b>Start:</b> <code>${opportunity.startAmount}</code> ${opportunity.startToken}\n` +
-      `<b>End:</b> <code>${opportunity.endAmount}</code> ${opportunity.startToken}\n` +
-      `<b>Profit:</b> <code>${opportunity.profitAmount}</code> ${opportunity.startToken} (<b>${opportunity.profitPercent.toFixed(2)}%</b>)\n` +
-      `<i>Time: ${new Date(opportunity.timestamp).toLocaleString()}</i>`;
+    return `<b>🌐 Dynamic Arbitrage Opportunity ${profitEmoji}</b>\n\n` +
+      `<b>Path (${opportunity.path.length} hops):</b> ${opportunity.path.join(' → ')}\n\n` +
+      `<b>Details:</b>\n` +
+      `• Start: <code>${opportunity.startAmount}</code> ${opportunity.startToken}\n` +
+      `• End: <code>${opportunity.endAmount}</code> ${opportunity.startToken}\n` +
+      `• Profit: <code>${opportunity.profitAmount}</code> ${opportunity.startToken} (<b>${opportunity.profitPercent.toFixed(2)}%</b>)\n\n` +
+      `<i>⏰ ${new Date(opportunity.timestamp).toLocaleString()}</i>`;
   }
 
-  return 'Unknown opportunity type';
+  // Fallback for unknown types
+  return `<b>📊 Arbitrage Opportunity</b>\n\n` +
+    `<b>Type:</b> ${opportunity.type || 'Unknown'}\n` +
+    `<b>Profit:</b> <code>${opportunity.profitAmount || '?'}</code> (<b>${opportunity.profitPercent ? opportunity.profitPercent.toFixed(2) : '?'}%</b>)\n\n` +
+    `<i>⏰ ${new Date(opportunity.timestamp || Date.now()).toLocaleString()}</i>`;
 }
 
 // Format trade for Telegram message
@@ -444,7 +464,56 @@ function setupCommands(bot, callbacks) {
       await bot.answerCallbackQuery(query.id);
 
       // Handle different callback types
-      if (data === 'refresh_data') {
+      if (data === 'status') {
+        // Call the status command handler
+        await onStatus({ chat: { id: chatId } });
+      } else if (data === 'performance') {
+        // Call the performance command handler
+        try {
+          // Import performance metrics
+          let performanceMetrics;
+          try {
+            performanceMetrics = require('./performance-metrics');
+          } catch (error) {
+            await sendMessage(bot, chatId, '❌ Performance metrics module not available');
+            return;
+          }
+
+          // Get performance metrics summary
+          const metrics = performanceMetrics.getMetricsSummary();
+
+          // Format message
+          const message = `<b>📊 Performance Metrics</b>\n\n` +
+            `<b>Scanning:</b>\n` +
+            `• Total scans: ${metrics.scanning.totalScans}\n` +
+            `• Avg scan time: ${metrics.scanning.averageScanTime}ms\n` +
+            `• Scans per hour: ${metrics.scanning.scansPerHour}\n\n` +
+
+            `<b>Opportunities:</b>\n` +
+            `• Total found: ${metrics.opportunities.total}\n` +
+            `• By type: ${Object.entries(metrics.opportunities.byType).map(([k, v]) => `${k}: ${v}`).join(', ')}\n` +
+            `• Avg profit: ${metrics.opportunities.averageProfit}\n` +
+            `• Highest profit: ${metrics.opportunities.highestProfit}\n\n` +
+
+            `<b>API:</b>\n` +
+            `• Total calls: ${metrics.api.totalCalls}\n` +
+            `• Success rate: ${metrics.api.successRate}\n` +
+            `• Avg call time: ${metrics.api.averageCallTime}ms\n\n` +
+
+            `<b>System:</b>\n` +
+            `• Uptime: ${metrics.system.uptime}\n` +
+            `• Memory: ${metrics.system.memory}`;
+
+          await sendMessage(bot, chatId, message);
+        } catch (error) {
+          logger.error('Error sending performance metrics:', error);
+          await sendMessage(bot, chatId, '❌ Error retrieving performance metrics');
+        }
+      } else if (data === 'opportunities') {
+        await onOpportunities({ chat: { id: chatId } });
+      } else if (data === 'help') {
+        await onHelp({ chat: { id: chatId } });
+      } else if (data === 'refresh_data') {
         // Send a temporary message
         await bot.editMessageText('🔄 Refreshing data...', {
           chat_id: chatId,
@@ -490,6 +559,18 @@ function setupCommands(bot, callbacks) {
             }
           });
         }
+      } else if (data === 'pause') {
+        // Call the pause command handler
+        await onPause({ chat: { id: chatId } });
+
+        // Send confirmation message
+        await bot.sendMessage(chatId, '<b>⏸️ Scanning Paused</b>\n\nArbitrage scanning has been paused. Use the Resume button to start scanning again.');
+      } else if (data === 'resume') {
+        // Call the resume command handler
+        await onResume({ chat: { id: chatId } });
+
+        // Send confirmation message
+        await bot.sendMessage(chatId, '<b>▶️ Scanning Resumed</b>\n\nArbitrage scanning has been resumed. You will receive notifications for new opportunities.');
       } else if (data === 'settings') {
         // Show settings menu
         const settingsMessage = '<b>⚙️ Bot Settings</b>\n\n' +

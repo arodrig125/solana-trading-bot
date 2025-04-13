@@ -358,26 +358,85 @@ setupCommands(bot, {
     const walletInfo = await getWalletInfo(connection, wallet);
     const summary = getPerformanceSummary();
 
-    sendMessage(bot, msg.chat.id,
-      `📊 *Bot Status*\n\n` +
-      `*Scanning:* ${isScanning ? '✅ Running' : '⏸️ Paused'}\n` +
-      `*Mode:* ${simulationMode ? '🟢 Simulation' : '🔴 Live'}\n` +
-      `*Min Profit:* ${minProfitPercent}%\n\n` +
+    // Get system uptime
+    const uptime = process.uptime();
+    const days = Math.floor(uptime / 86400);
+    const hours = Math.floor((uptime % 86400) / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = Math.floor(uptime % 60);
+    const uptimeStr = days > 0 ?
+      `${days}d ${hours}h ${minutes}m` :
+      hours > 0 ?
+        `${hours}h ${minutes}m ${seconds}s` :
+        `${minutes}m ${seconds}s`;
+
+    // Get memory usage
+    const memoryUsage = process.memoryUsage();
+    const memoryUsedMB = Math.round(memoryUsage.heapUsed / 1024 / 1024 * 100) / 100;
+    const memoryTotalMB = Math.round(memoryUsage.heapTotal / 1024 / 1024 * 100) / 100;
+
+    // Get recent opportunities count
+    const recentOpportunities = getRecentOpportunities(10);
+    const last24hOpportunities = recentOpportunities.filter(
+      opp => (Date.now() - opp.timestamp) < 24 * 60 * 60 * 1000
+    ).length;
+
+    // Create inline keyboard
+    const inlineKeyboard = {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: '🔄 Refresh', callback_data: 'status' },
+            { text: '📈 Performance', callback_data: 'performance' }
+          ],
+          [
+            { text: '💰 Opportunities', callback_data: 'opportunities' },
+            { text: '⚙️ Settings', callback_data: 'settings' }
+          ],
+          [
+            isScanning ?
+              { text: '⏸️ Pause Scanning', callback_data: 'pause' } :
+              { text: '▶️ Resume Scanning', callback_data: 'resume' }
+          ]
+        ]
+      }
+    };
+
+    await bot.sendMessage(
+      msg.chat.id,
+      `📊 *SolarBot Status*\n\n` +
+      `*Bot Status:*\n` +
+      `• Scanning: ${isScanning ? '🟢 Running' : '🔴 Paused'}\n` +
+      `• Mode: ${simulationMode ? '🟢 SIMULATION' : '🔴 LIVE TRADING'}\n` +
+      `• Min Profit: ${minProfitPercent}%\n` +
+      `• Scan Interval: ${settings.scanning.interval / 1000}s\n\n` +
 
       `*Wallet:*\n` +
-      `Address: \`${walletInfo.displayAddress}\`\n` +
-      `Balance: ${walletInfo.sol.toFixed(6)} SOL\n` +
-      `Status: ${walletInfo.status}\n\n` +
+      `• Address: \`${walletInfo.displayAddress}\`\n` +
+      `• Balance: ${walletInfo.sol.toFixed(6)} SOL\n` +
+      `• Status: ${walletInfo.status}\n\n` +
 
       `*Today's Stats:*\n` +
-      `Opportunities: ${summary.today.trades}\n` +
-      `Successful: ${summary.today.successfulTrades}\n` +
-      `Profit: ${summary.today.profit.toFixed(6)} USDC\n\n` +
+      `• Opportunities: ${summary.today.trades}\n` +
+      `• Successful: ${summary.today.successfulTrades}\n` +
+      `• Profit: ${summary.today.profit.toFixed(6)} USDC\n\n` +
 
       `*Overall:*\n` +
-      `Total Trades: ${summary.overall.totalTrades}\n` +
-      `Success Rate: ${summary.overall.successRate.toFixed(2)}%\n` +
-      `Total Profit: ${summary.overall.totalProfit.toFixed(6)} USDC`
+      `• Total Trades: ${summary.overall.totalTrades}\n` +
+      `• Success Rate: ${summary.overall.successRate.toFixed(2)}%\n` +
+      `• Total Profit: ${summary.overall.totalProfit.toFixed(6)} USDC\n\n` +
+
+      `*System:*\n` +
+      `• Uptime: ${uptimeStr}\n` +
+      `• Memory: ${memoryUsedMB}MB / ${memoryTotalMB}MB\n` +
+      `• Recent Opportunities: ${last24hOpportunities} (24h)\n\n` +
+
+      `_Last updated: ${new Date().toLocaleString()}_`,
+      {
+        parse_mode: 'Markdown',
+        disable_web_page_preview: true,
+        ...inlineKeyboard
+      }
     );
   },
 
@@ -481,12 +540,39 @@ async function main() {
     // Send welcome message if chat ID is set
     if (TELEGRAM_CHAT_ID) {
       try {
-        await sendMessage(
-          bot,
+        // Create inline keyboard with quick actions
+        const inlineKeyboard = {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                { text: '📊 Status', callback_data: 'status' },
+                { text: '📈 Performance', callback_data: 'performance' }
+              ],
+              [
+                { text: '💰 Opportunities', callback_data: 'opportunities' },
+                { text: '⚙️ Settings', callback_data: 'settings' }
+              ],
+              [
+                { text: '❓ Help', callback_data: 'help' }
+              ]
+            ]
+          }
+        };
+
+        await bot.sendMessage(
           TELEGRAM_CHAT_ID,
-          '🤖 *Solana Arbitrage Bot is now connected and running!*\n\n' +
-          `Mode: ${simulationMode ? '🟢 Simulation' : '�� Live'}\n` +
-          'Send /help to see available commands.'
+          '🌟 *SolarBot Arbitrage Trading* 🌟\n\n' +
+          'Your advanced trading assistant is now connected and ready!\n\n' +
+          '*Current Status:*\n' +
+          `• Mode: ${simulationMode ? '🟢 SIMULATION' : '🔴 LIVE TRADING'}\n` +
+          `• Min Profit: ${minProfitPercent}%\n` +
+          `• Scanning: ${settings.scanning.interval / 1000}s intervals\n\n` +
+          'Use the buttons below to get started or type /help for all commands.',
+          {
+            parse_mode: 'Markdown',
+            disable_web_page_preview: true,
+            ...inlineKeyboard
+          }
         );
         logger.successMessage(`Sent welcome message to chat ID: ${TELEGRAM_CHAT_ID}`);
       } catch (error) {
