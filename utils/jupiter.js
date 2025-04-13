@@ -1,20 +1,28 @@
-const { createJupiterApiClient } = require('@jup-ag/api');
+/**
+ * Jupiter API integration for Solana arbitrage bot
+ * This file contains functions for interacting with Jupiter API
+ */
+
 const { Connection, PublicKey } = require('@solana/web3.js');
+const { createJupiterApiClient } = require('@jup-ag/api');
 const BigNumber = require('bignumber.js');
-const { TOKEN_PAIRS, TOKENS, TRIANGULAR_PATHS, WHITELISTED_TOKENS, BLACKLISTED_TOKENS } = require('../config/tokens');
-const settings = require('../config/settings');
 const logger = require('./logger');
-const pathFinder = require('./pathFinder');
-const pathHistory = require('./pathHistory');
-const positionSizing = require('./positionSizing');
-const gasOptimizer = require('./gasOptimizer');
+const settings = require('../config/settings');
+const { TOKENS, WHITELISTED_TOKENS, BLACKLISTED_TOKENS } = require('../config/tokens');
+const gasOptimizer = require('./gas-optimizer');
+const pathHistory = require('./path-history');
+const positionSizing = require('./position-sizing');
+const circuitBreaker = require('./circuit-breaker');
+
+// Track consecutive failures for backoff
+let consecutiveFailures = 0;
 
 // Initialize Jupiter API client
 async function initJupiterClient() {
   // Get Solana connection
   const connection = getSolanaConnection();
-
-  // Initialize Jupiter API client with v7 options
+  
+  // Initialize Jupiter API client with v6 options
   const jupiterClient = createJupiterApiClient({
     connection,
     cluster: 'mainnet-beta',
@@ -33,29 +41,13 @@ async function initJupiterClient() {
 
 // Get Solana connection
 function getSolanaConnection() {
-  const endpoint = process.env.RPC_ENDPOINT || settings.advanced.rpcEndpoint || 'https://api.mainnet-beta.solana.com';
-  logger.info(`Using RPC endpoint: ${endpoint}`);
-  return new Connection(endpoint, 'confirmed');
-}
-
-// Get token info by mint address
-function getTokenByMint(mintAddress) {
-  return Object.values(TOKENS).find(token => token.mint === mintAddress);
-}
-
-// Get token by symbol
-function getTokenBySymbol(symbol) {
-  return Object.values(TOKENS).find(token => token.symbol === symbol);
-}
-
-// Format amount based on token decimals
-function formatAmount(amount, decimals) {
-  return new BigNumber(amount).dividedBy(new BigNumber(10).pow(decimals)).toNumber();
-}
-
-// Parse amount to token decimals
-function parseAmount(amount, decimals) {
-  return new BigNumber(amount).multipliedBy(new BigNumber(10).pow(decimals)).integerValue().toString();
+  const endpoint = settings.rpc.endpoint;
+  const connection = new Connection(endpoint, {
+    commitment: 'confirmed',
+    disableRetryOnRateLimit: false,
+    confirmTransactionInitialTimeout: 60000
+  });
+  return connection;
 }
 
 // Calculate profit percentage
@@ -63,33 +55,39 @@ function calculateProfitPercentage(inputAmount, outputAmount) {
   return new BigNumber(outputAmount).minus(inputAmount).dividedBy(inputAmount).multipliedBy(100).toNumber();
 }
 
-// Check if a token is allowed (not blacklisted or is whitelisted)
-function isTokenAllowed(mintAddress) {
-  // Check if token is blacklisted
-  if (BLACKLISTED_TOKENS.includes(mintAddress)) {
-    return false;
-  }
-
-  // If whitelist is empty, all non-blacklisted tokens are allowed
-  if (WHITELISTED_TOKENS.length === 0) {
-    return true;
-  }
-
-  // If whitelist is not empty, only whitelisted tokens are allowed
-  return WHITELISTED_TOKENS.includes(mintAddress);
+// Format amount with token decimals
+function formatAmount(amount, decimals) {
+  return new BigNumber(amount).dividedBy(new BigNumber(10).pow(decimals)).toNumber();
 }
 
-// Sleep function to add delay between API calls
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+// Parse amount to token decimals
+function parseAmount(amount, decimals) {
+  return new BigNumber(amount).multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0);
+}
 
-// Rate limiting variables
-let lastApiCallTime = 0;
-const minTimeBetweenCalls = 200; // 200ms between calls to avoid rate limiting
-let consecutiveFailures = 0;
-const maxRetries = 3;
+// Get token by mint address
+function getTokenByMint(mint) {
+  return Object.values(TOKENS).find(token => token.mint === mint);
+}
 
-// Exponential backoff function
-function getBackoffTime() {
+// Get token by symbol
+function getTokenBySymbol(symbol) {
+  return Object.values(TOKENS).find(token => token.symbol === symbol);
+}
+
+// Check if token is allowed
+function isTokenAllowed(mint) {
+  // If whitelist is empty, allow all tokens except blacklisted ones
+  if (WHITELISTED_TOKENS.length === 0) {
+    return !BLACKLISTED_TOKENS.includes(mint);
+  }
+  
+  // Otherwise, only allow whitelisted tokens
+  return WHITELISTED_TOKENS.includes(mint);
+}
+
+// Calculate backoff time based on consecutive failures
+function calculateBackoffTime() {
   // Start with 1 second, then 2, then 4, etc.
   return Math.min(1000 * Math.pow(2, consecutiveFailures - 1), 10000); // Max 10 seconds
 }
@@ -130,29 +128,6 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
     } catch (directError) {
       logger.warn(`Direct quote method failed: ${directError.message}`);
 
-      // Try alternative methods
-      if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
-        logger.info('Using quoteApi.getQuote method');
-        const quoteResponse = await jupiterClient.quoteApi.getQuote({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-        return quoteResponse;
-      } else if (typeof jupiterClient.quoteGet === 'function') {
-        logger.info('Using quoteGet method');
-        const quoteResponse = await jupiterClient.quoteGet({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-        return quoteResponse;
-      }
-
       // Try fallback method for compatibility - direct API call
       try {
         logger.info('Attempting fallback direct API call');
@@ -170,196 +145,6 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
         }
       } catch (fallbackError) {
         logger.warn(`Fallback API call failed: ${fallbackError.message}`);
-      }
-
-      // If we get here, no compatible method was found
-      throw new Error('No compatible Jupiter API method found');
-    }
-  } catch (error) {
-    logger.error(`Error getting quote for ${inputMint} to ${outputMint}:`, error);
-    return null;
-  }
-}
-
-    // Convert mint addresses to strings if they are PublicKey objects
-    const inputMintStr = inputMint instanceof PublicKey ? inputMint.toString() : inputMint;
-    const outputMintStr = outputMint instanceof PublicKey ? outputMint.toString() : outputMint;
-
-    // Log the Jupiter client structure to debug
-    logger.info(`Jupiter client methods: ${Object.keys(jupiterClient).join(', ')}`);
-
-    // Try the v6 method first
-    try {
-      // Check if v6 quoteGet method exists
-      if (typeof jupiterClient.quoteGet === 'function') {
-        logger.debug('Using quoteGet method (v6)');
-        const quoteResponse = await jupiterClient.quoteGet({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-
-        return quoteResponse;
-      } else {
-        throw new Error('quoteGet method not found');
-      }
-    } catch (directError) {
-      logger.warn(`Direct quote method failed: ${directError.message}`);
-
-      // Try alternative methods
-      if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
-        logger.info('Using quoteApi.getQuote method');
-        const quoteResponse = await jupiterClient.quoteApi.getQuote({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-        return quoteResponse;
-      } else if (typeof jupiterClient.quoteGet === 'function') {
-        logger.info('Using quoteGet method');
-        const quoteResponse = await jupiterClient.quoteGet({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-        return quoteResponse;
-      }
-
-      // Try fallback method for compatibility - direct API call
-      try {
-        logger.info('Attempting fallback direct API call');
-
-        // Construct a basic request
-        const requestUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMintStr}&outputMint=${outputMintStr}&amount=${amount}&slippageBps=${slippageBps}&onlyDirectRoutes=${onlyDirectRoutes}`;
-
-        // Use axios to make a direct API call
-        const axios = require('axios');
-        const response = await axios.get(requestUrl);
-
-        if (response.data && response.status === 200) {
-          logger.info('Successfully got quote using fallback API call');
-          return response.data;
-        }
-      } catch (fallbackError) {
-        logger.warn(`Fallback API call failed: ${fallbackError.message}`);
-      }
-
-      // If we get here, no compatible method was found
-      throw new Error('No compatible Jupiter API method found');
-    }
-  } catch (error) {
-    logger.error(`Error getting quote for ${inputMint} to ${outputMint}:`, error);
-    return null;
-  }
-}
-
-    // Convert mint addresses to strings if they are PublicKey objects
-    const inputMintStr = inputMint instanceof PublicKey ? inputMint.toString() : inputMint;
-    const outputMintStr = outputMint instanceof PublicKey ? outputMint.toString() : outputMint;
-
-    // Log the Jupiter client structure to debug
-    logger.info(`Jupiter client methods: ${Object.keys(jupiterClient).join(', ')}`);
-
-    // Try the direct method first (for v6)
-    try {
-      // Check if quote method exists
-      if (typeof jupiterClient.quote === 'function') {
-        logger.info('Using direct quote method');
-        const quoteResponse = await jupiterClient.quote({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-
-        return quoteResponse;
-      } else {
-        throw new Error('Direct quote method not found');
-      }
-    } catch (directError) {
-      logger.warn(`Direct quote method failed: ${directError.message}`);
-
-      // Try alternative methods
-      if (jupiterClient.quoteApi && typeof jupiterClient.quoteApi.getQuote === 'function') {
-        logger.info('Using quoteApi.getQuote method');
-        const quoteResponse = await jupiterClient.quoteApi.getQuote({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-        return quoteResponse;
-      } else if (typeof jupiterClient.quoteGet === 'function') {
-        logger.info('Using quoteGet method');
-        const quoteResponse = await jupiterClient.quoteGet({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
-        return quoteResponse;
-      }
-
-      // Try fallback method for compatibility - direct API call
-      try {
-        logger.info('Attempting fallback direct API call');
-
-        // Apply rate limiting
-        const now = Date.now();
-        const timeSinceLastCall = now - lastApiCallTime;
-        if (timeSinceLastCall < minTimeBetweenCalls) {
-          const delayNeeded = minTimeBetweenCalls - timeSinceLastCall;
-          logger.debug(`Rate limiting: Waiting ${delayNeeded}ms before API call`);
-          await sleep(delayNeeded);
-        }
-        lastApiCallTime = Date.now();
-
-        // Construct a basic request
-        const requestUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMintStr}&outputMint=${outputMintStr}&amount=${amount}&slippageBps=${slippageBps}&onlyDirectRoutes=${onlyDirectRoutes}`;
-
-        // Use axios to make a direct API call
-        const axios = require('axios');
-        const response = await axios.get(requestUrl, {
-          headers: {
-            'User-Agent': 'SolarBot/1.0',
-            'Accept': 'application/json'
-          },
-          timeout: 5000 // 5 second timeout
-        });
-
-        if (response.data && response.status === 200) {
-          logger.info('Successfully got quote using fallback API call');
-          return response.data;
-        }
-      } catch (fallbackError) {
-        // Check if it's a rate limiting error
-        if (fallbackError.response && fallbackError.response.status === 429) {
-          consecutiveFailures++;
-          const backoffTime = getBackoffTime();
-          logger.warn(`Rate limit exceeded (${consecutiveFailures}/${maxRetries}). Backing off for ${backoffTime}ms`);
-
-          // If we haven't exceeded max retries, wait and try again
-          if (consecutiveFailures <= maxRetries) {
-            await sleep(backoffTime);
-            // Recursive call with the same parameters
-            return getQuote(jupiterClient, inputMint, outputMint, amount, slippageBps, onlyDirectRoutes);
-          }
-        }
-
-        logger.warn(`Fallback API call failed: ${fallbackError.message}`);
-        // Reset consecutive failures if it's not a rate limiting error
-        if (!fallbackError.response || fallbackError.response.status !== 429) {
-          consecutiveFailures = 0;
-        }
       }
 
       // If we get here, no compatible method was found
@@ -718,6 +503,7 @@ async function checkDynamicArbitrage(jupiterClient, startTokenMint, pathLength, 
             logger.warn(`Suspiciously high profit for path: ${pathData.tokenSymbols.join(' → ')}: ${formattedProfitAmount} from ${formattedStartAmount} ${startToken.symbol}`);
             // We'll still return it but with a warning
           }
+
           const result = {
             type: 'dynamic',
             pathLength,
@@ -741,223 +527,73 @@ async function checkDynamicArbitrage(jupiterClient, startTokenMint, pathLength, 
 
     return null;
   } catch (error) {
-    logger.error(`Error checking dynamic arbitrage with path length ${pathLength}:`, error);
+    logger.error('Error checking dynamic arbitrage:', error);
     return null;
   }
 }
 
-// Find arbitrage opportunities
-async function findArbitrageOpportunities(jupiterClient, customMinProfitPercent = null) {
+// Execute a swap transaction
+async function executeSwap(jupiterClient, wallet, inputMint, outputMint, amount, slippageBps = 100) {
   try {
-    logger.info('Scanning for arbitrage opportunities...');
-
-    const opportunities = [];
-    let minProfitPercent = customMinProfitPercent || settings.trading.defaultMinProfitPercent;
-
-    // Adjust profit threshold based on gas prices if enabled
-    if (settings.gasOptimization?.enabled && settings.gasOptimization?.adjustProfitThresholds) {
-      const connection = getSolanaConnection();
-      minProfitPercent = await gasOptimizer.adjustProfitThreshold(connection, minProfitPercent);
-      logger.info(`Adjusted minimum profit threshold to ${minProfitPercent.toFixed(2)}% based on gas prices`);
+    // Check if circuit breaker is triggered
+    if (circuitBreaker.isTriggered()) {
+      logger.warn('Circuit breaker triggered, skipping swap execution');
+      return null;
     }
 
-    // Limit concurrent requests
-    const maxConcurrent = settings.scanning.maxConcurrentRequests || 3;
-
-    // Check token pairs for simple arbitrage
-    const pairPromises = [];
-    for (const pair of TOKEN_PAIRS) {
-      pairPromises.push(checkSimpleArbitrage(jupiterClient, pair));
-
-      // Process in batches to avoid rate limiting
-      if (pairPromises.length >= maxConcurrent) {
-        const results = await Promise.all(pairPromises);
-        opportunities.push(...results.filter(Boolean));
-        pairPromises.length = 0;
-      }
+    // Get quote
+    const quote = await getQuote(jupiterClient, inputMint, outputMint, amount, slippageBps);
+    if (!quote) {
+      logger.error('Failed to get quote for swap execution');
+      return null;
     }
 
-    // Process any remaining pair promises
-    if (pairPromises.length > 0) {
-      const results = await Promise.all(pairPromises);
-      opportunities.push(...results.filter(Boolean));
+    // Create transaction
+    const { swapTransaction } = await jupiterClient.createSwapTransaction({
+      quoteResponse: quote,
+      userPublicKey: wallet.publicKey.toString(),
+      wrapUnwrapSOL: true
+    });
+
+    // Sign and send transaction
+    const signature = await wallet.signAndSendTransaction(swapTransaction);
+    logger.info(`Swap transaction sent: ${signature}`);
+
+    // Wait for confirmation
+    const connection = getSolanaConnection();
+    const confirmation = await connection.confirmTransaction(signature, 'confirmed');
+    
+    if (confirmation.value.err) {
+      logger.error(`Swap transaction failed: ${confirmation.value.err}`);
+      return null;
     }
 
-    // Check for triangular arbitrage
-    const triangularPromises = [];
-    for (const path of TRIANGULAR_PATHS) {
-      // Get token A info
-      const tokenA = getTokenByMint(path.a);
-      if (!tokenA) continue;
-
-      // Calculate amount in token decimals
-      const amount = parseAmount(
-        settings.trading.defaultQuoteAmount,
-        tokenA.decimals
-      );
-
-      triangularPromises.push(checkTriangularArbitrage(jupiterClient, path, amount));
-
-      // Process in batches to avoid rate limiting
-      if (triangularPromises.length >= maxConcurrent) {
-        const results = await Promise.all(triangularPromises);
-        opportunities.push(...results.filter(Boolean));
-        triangularPromises.length = 0;
-      }
-    }
-
-    // Process any remaining triangular promises
-    if (triangularPromises.length > 0) {
-      const results = await Promise.all(triangularPromises);
-      opportunities.push(...results.filter(Boolean));
-    }
-
-    // Check for dynamic arbitrage opportunities if enabled
-    if (settings.scanning.dynamicArbitrage?.enabled) {
-      // Initialize path history
-      await pathHistory.initializePathHistory();
-
-      // Get dynamic arbitrage settings
-      const dynamicSettings = settings.scanning.dynamicArbitrage;
-      const baseTokens = dynamicSettings.baseTokens || [TOKENS.USDC.mint];
-      const pathLengths = dynamicSettings.pathLengths || [3, 4];
-
-      // Process each base token
-      for (const baseTokenMint of baseTokens) {
-        const baseToken = getTokenByMint(baseTokenMint);
-        if (!baseToken) {
-          logger.warn(`Base token not found for mint: ${baseTokenMint}`);
-          continue;
-        }
-
-        // Calculate amount in token decimals
-        const baseAmount = parseAmount(
-          settings.trading.defaultQuoteAmount,
-          baseToken.decimals
-        );
-
-        // Check each path length
-        for (const pathLength of pathLengths) {
-          logger.debug(`Checking dynamic arbitrage with ${baseToken.symbol} as base token and path length ${pathLength}`);
-
-          // Use dynamic position sizing if enabled
-          const useDynamicSizing = settings.riskManagement.positionSizing?.enabled || false;
-
-          const dynamicResult = await checkDynamicArbitrage(
-            jupiterClient,
-            baseTokenMint,
-            pathLength,
-            baseAmount,
-            useDynamicSizing
-          );
-
-          if (dynamicResult) {
-            opportunities.push(dynamicResult);
-
-            const positionInfo = dynamicResult.dynamicSizing
-              ? `(Position: ${dynamicResult.positionSizeUSDC} USDC)`
-              : '';
-
-            logger.info(`Found dynamic arbitrage opportunity with ${baseToken.symbol} and path length ${pathLength}: ${dynamicResult.profitPercent.toFixed(2)}% ${positionInfo}`);
-          }
-        }
-      }
-    }
-
-    // Sort opportunities by profit percentage (highest first)
-    opportunities.sort((a, b) => b.profitPercent - a.profitPercent);
-
-    // Limit the number of opportunities to process
-    const limitedOpportunities = opportunities.slice(0, settings.scanning.maxOpportunities);
-
-    if (limitedOpportunities.length > 0) {
-      logger.info(`Found ${limitedOpportunities.length} arbitrage opportunities!`);
-
-      // Log the types of opportunities found
-      const opportunityTypes = {};
-      limitedOpportunities.forEach(opp => {
-        opportunityTypes[opp.type] = (opportunityTypes[opp.type] || 0) + 1;
-      });
-
-      logger.info(`Opportunity types: ${JSON.stringify(opportunityTypes)}`);
-    }
-
-    return limitedOpportunities;
-  } catch (error) {
-    logger.error('Error finding arbitrage opportunities:', error);
-    return [];
-  }
-}
-
-// Execute a trade (in simulation or live mode)
-async function executeTrade(jupiterClient, connection, wallet, opportunity, simulationMode = true) {
-  try {
-    // Check if gas prices are favorable for this trade
-    if (settings.gasOptimization?.enabled && !simulationMode) {
-      // Convert profit amount to lamports for gas comparison
-      const profitInToken = parseFloat(opportunity.profitAmount);
-      const token = getTokenBySymbol(opportunity.startToken);
-      const decimals = token?.decimals || 9;
-      const profitLamports = profitInToken * (10 ** decimals);
-
-      const isGasFavorable = await gasOptimizer.isGasPriceFavorable(connection, profitLamports);
-
-      if (!isGasFavorable) {
-        logger.warn(`Skipping trade due to unfavorable gas prices. Profit: ${opportunity.profitAmount} ${opportunity.startToken}, Profit %: ${opportunity.profitPercent.toFixed(2)}%`);
-        return {
-          success: false,
-          reason: 'unfavorable-gas-price',
-          gasStats: gasOptimizer.getGasStats()
-        };
-      }
-
-      logger.info(`Gas prices are favorable for trade. Proceeding with execution.`);
-    }
-
-    if (simulationMode) {
-      logger.info(`Simulating trade for opportunity: ${JSON.stringify(opportunity)}`);
-      return {
-        success: true,
-        simulation: true,
-        opportunity,
-        txId: 'simulation-tx-id',
-        timestamp: new Date().toISOString(),
-        gasStats: settings.gasOptimization?.enabled ? gasOptimizer.getGasStats() : null
-      };
-    }
-
-    // For live trading, implement the actual trade execution
-    // This would involve creating and sending transactions using Jupiter API
-
-    logger.warn('Live trading not implemented yet');
+    logger.info(`Swap transaction confirmed: ${signature}`);
     return {
-      success: false,
-      simulation: false,
-      error: 'Live trading not implemented yet',
-      opportunity,
+      signature,
+      inputMint,
+      outputMint,
+      inputAmount: formatAmount(amount, getTokenByMint(inputMint).decimals),
+      outputAmount: formatAmount(quote.outAmount, getTokenByMint(outputMint).decimals),
       timestamp: new Date().toISOString()
     };
   } catch (error) {
-    logger.error('Error executing trade:', error);
-    return {
-      success: false,
-      error: error.message,
-      opportunity,
-      timestamp: new Date().toISOString()
-    };
+    logger.error('Error executing swap:', error);
+    circuitBreaker.recordFailure();
+    return null;
   }
 }
 
 module.exports = {
   initJupiterClient,
-  getSolanaConnection,
-  findArbitrageOpportunities,
+  getQuote,
+  checkTriangularArbitrage,
+  checkSimpleArbitrage,
   checkDynamicArbitrage,
-  executeTrade,
-  getTokenByMint,
-  getTokenBySymbol,
+  executeSwap,
   formatAmount,
   parseAmount,
-  calculateProfitPercentage,
-  isTokenAllowed
+  getTokenByMint,
+  getTokenBySymbol,
+  calculateProfitPercentage
 };
