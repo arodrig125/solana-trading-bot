@@ -188,25 +188,22 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
     // Log the Jupiter client structure to debug
     logger.info(`Jupiter client methods: ${Object.keys(jupiterClient).join(', ')}`);
 
-    // Try the direct method first (for v7)
+    // Try the v6 method first
     try {
-      // Check if quote method exists
-      if (typeof jupiterClient.quote === 'function') {
-        logger.info('Using direct quote method');
-        const quoteResponse = await jupiterClient.quote({
+      // Check if v6 quoteGet method exists
+      if (typeof jupiterClient.quoteGet === 'function') {
+        logger.debug('Using quoteGet method (v6)');
+        const quoteResponse = await jupiterClient.quoteGet({
           inputMint: inputMintStr,
           outputMint: outputMintStr,
           amount,
           slippageBps,
-          onlyDirectRoutes,
-          // Add additional parameters for v7
-          asLegacyTransaction: false,
-          maxAccounts: 64
+          onlyDirectRoutes
         });
 
         return quoteResponse;
       } else {
-        throw new Error('Direct quote method not found');
+        throw new Error('quoteGet method not found');
       }
     } catch (directError) {
       logger.warn(`Direct quote method failed: ${directError.message}`);
