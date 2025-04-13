@@ -6,12 +6,16 @@
     <title>Login - SolarBot.io</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/light-footer.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/breadcrumbs.css">
+    <link rel="stylesheet" href="css/mobile-enhancements.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="auth-page">
     <!-- Header -->
     <header>
         <div class="container">
@@ -48,7 +52,7 @@
                 <div class="auth-form-container">
                     <h2>Login to Your Account</h2>
                     <p>Welcome back! Please enter your credentials to access your dashboard.</p>
-                    
+
                     <form id="login-form" class="auth-form">
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -73,11 +77,11 @@
                         <div id="login-error" class="error-message" style="display: none;"></div>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
-                    
+
                     <div class="auth-divider">
                         <span>Or login with</span>
                     </div>
-                    
+
                     <div class="social-auth">
                         <button class="btn btn-social btn-google">
                             <i class="fab fa-google"></i> Google
@@ -86,17 +90,17 @@
                             <i class="fab fa-github"></i> GitHub
                         </button>
                     </div>
-                    
+
                     <div class="auth-footer">
                         <p>Don't have an account? <a href="signup.html">Sign up</a></p>
                     </div>
                 </div>
-                
+
                 <div class="auth-info">
                     <div class="auth-info-content">
                         <h2>Welcome to SolarBot</h2>
                         <p>Access your dashboard to manage your arbitrage bot, view performance metrics, and configure your trading settings.</p>
-                        
+
                         <div class="auth-features">
                             <div class="auth-feature">
                                 <div class="auth-feature-icon">
@@ -191,31 +195,31 @@
             // Toggle password visibility
             const togglePassword = document.querySelector('.toggle-password');
             const passwordInput = document.querySelector('#password');
-            
+
             togglePassword.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
                 this.querySelector('i').classList.toggle('fa-eye');
                 this.querySelector('i').classList.toggle('fa-eye-slash');
             });
-            
+
             // Handle login form submission
             const loginForm = document.getElementById('login-form');
             const loginError = document.getElementById('login-error');
-            
+
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
-                
+
                 // Attempt login
                 const result = SolarBotAuth.loginUser(email, password);
-                
+
                 if (result.success) {
                     // Store current user in local storage
                     localStorage.setItem('solarbot_current_user', JSON.stringify(result.user));
-                    
+
                     // Redirect to dashboard
                     window.location.href = 'dashboard.html';
                 } else {
@@ -224,7 +228,7 @@
                     loginError.style.display = 'block';
                 }
             });
-            
+
             // Check if user is already logged in
             if (SolarBotAuth.isLoggedIn()) {
                 window.location.href = 'dashboard.html';

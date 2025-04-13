@@ -117,6 +117,7 @@
 .doc-section p {
     margin-bottom: 15px;
     line-height: 1.7;
+    color: #000000; /* Make text black */
 }
 
 .doc-section ul, .doc-section ol {
@@ -126,6 +127,7 @@
 
 .doc-section ul li, .doc-section ol li {
     margin-bottom: 8px;
+    color: #000000; /* Make list items black */
 }
 
 /* Code Blocks */
@@ -261,25 +263,25 @@ code {
     .doc-layout {
         grid-template-columns: 1fr;
     }
-    
+
     .doc-sidebar {
         position: relative;
         top: 0;
         height: auto;
         margin-bottom: 30px;
     }
-    
+
     .sidebar-nav {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
         border-left: none;
     }
-    
+
     .sidebar-nav li {
         margin-bottom: 0;
     }
-    
+
     .sidebar-nav a {
         padding: 8px 15px;
         background-color: var(--light-dark);
@@ -287,7 +289,7 @@ code {
         border-left: none;
         margin-left: 0;
     }
-    
+
     .sidebar-nav a.active {
         background-color: var(--primary-color);
         color: var(--light-color);
@@ -298,15 +300,15 @@ code {
     .page-hero-content h1 {
         font-size: 2rem;
     }
-    
+
     .doc-section h2 {
         font-size: 1.8rem;
     }
-    
+
     .doc-section h3 {
         font-size: 1.3rem;
     }
-    
+
     .commands-table {
         display: block;
         overflow-x: auto;
@@ -317,15 +319,15 @@ code {
     .sidebar-nav {
         flex-direction: column;
     }
-    
+
     .sidebar-nav a {
         width: 100%;
     }
-    
+
     .code-block pre {
         padding: 15px;
     }
-    
+
     .code-block code {
         font-size: 0.8rem;
     }

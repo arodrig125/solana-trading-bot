@@ -804,6 +804,7 @@ nav {
 .cta .btn-outline {
     border-color: var(--light-color);
     color: var(--light-color);
+    background-color: rgba(255, 255, 255, 0.2); /* Add semi-transparent white background */
 }
 
 .cta .btn-outline:hover {

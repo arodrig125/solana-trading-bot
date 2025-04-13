@@ -6,12 +6,16 @@
     <title>Sign Up - SolarBot.io</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/light-footer.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/breadcrumbs.css">
+    <link rel="stylesheet" href="css/mobile-enhancements.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="auth-page">
     <!-- Header -->
     <header>
         <div class="container">
@@ -48,7 +52,7 @@
                 <div class="auth-form-container">
                     <h2>Create Your Account</h2>
                     <p>Join SolarBot today and start automating your Solana arbitrage trading.</p>
-                    
+
                     <form id="signup-form" class="auth-form">
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -76,7 +80,7 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div class="plan-selection">
                             <label>Select a Plan</label>
                             <div class="plan-options">
@@ -97,20 +101,20 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="terms-checkbox">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms">I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></label>
                         </div>
-                        
+
                         <div id="signup-error" class="error-message" style="display: none;"></div>
                         <button type="submit" class="btn btn-primary btn-block">Create Account</button>
                     </form>
-                    
+
                     <div class="auth-divider">
                         <span>Or sign up with</span>
                     </div>
-                    
+
                     <div class="social-auth">
                         <button class="btn btn-social btn-google">
                             <i class="fab fa-google"></i> Google
@@ -119,17 +123,17 @@
                             <i class="fab fa-github"></i> GitHub
                         </button>
                     </div>
-                    
+
                     <div class="auth-footer">
                         <p>Already have an account? <a href="login.html">Login</a></p>
                     </div>
                 </div>
-                
+
                 <div class="auth-info">
                     <div class="auth-info-content">
                         <h2>Why Choose SolarBot?</h2>
                         <p>Join hundreds of traders already using SolarBot to automate their Solana arbitrage trading.</p>
-                        
+
                         <div class="auth-features">
                             <div class="auth-feature">
                                 <div class="auth-feature-icon">
@@ -223,7 +227,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Toggle password visibility
             const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-            
+
             togglePasswordButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const passwordInput = this.previousElementSibling;
@@ -233,57 +237,57 @@
                     this.querySelector('i').classList.toggle('fa-eye-slash');
                 });
             });
-            
+
             // Plan selection
             const planOptions = document.querySelectorAll('.plan-option');
             let selectedPlan = 'advanced'; // Default selected plan
-            
+
             planOptions.forEach(option => {
                 option.addEventListener('click', function() {
                     // Remove selected class from all options
                     planOptions.forEach(opt => opt.classList.remove('selected'));
-                    
+
                     // Add selected class to clicked option
                     this.classList.add('selected');
-                    
+
                     // Update selected plan
                     selectedPlan = this.getAttribute('data-plan');
                 });
             });
-            
+
             // Handle signup form submission
             const signupForm = document.getElementById('signup-form');
             const signupError = document.getElementById('signup-error');
-            
+
             signupForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
                 const confirmPassword = document.getElementById('confirm-password').value;
                 const termsChecked = document.getElementById('terms').checked;
-                
+
                 // Validate form
                 if (password !== confirmPassword) {
                     signupError.textContent = 'Passwords do not match';
                     signupError.style.display = 'block';
                     return;
                 }
-                
+
                 if (!termsChecked) {
                     signupError.textContent = 'You must agree to the Terms of Service and Privacy Policy';
                     signupError.style.display = 'block';
                     return;
                 }
-                
+
                 // Attempt registration
                 const result = SolarBotAuth.registerUser(email, password, name, selectedPlan);
-                
+
                 if (result.success) {
                     // Store current user in local storage
                     localStorage.setItem('solarbot_current_user', JSON.stringify(result.user));
-                    
+
                     // Redirect to payment page
                     window.location.href = 'payment.html';
                 } else {
@@ -292,27 +296,27 @@
                     signupError.style.display = 'block';
                 }
             });
-            
+
             // Check if user is already logged in
             if (SolarBotAuth.isLoggedIn()) {
                 window.location.href = 'dashboard.html';
             }
-            
+
             // Check for plan parameter in URL
             const urlParams = new URLSearchParams(window.location.search);
             const planParam = urlParams.get('plan');
-            
+
             if (planParam) {
                 // Find the plan option with matching data-plan attribute
                 const planOption = document.querySelector(`.plan-option[data-plan="${planParam}"]`);
-                
+
                 if (planOption) {
                     // Remove selected class from all options
                     planOptions.forEach(opt => opt.classList.remove('selected'));
-                    
+
                     // Add selected class to matching option
                     planOption.classList.add('selected');
-                    
+
                     // Update selected plan
                     selectedPlan = planParam;
                 }
