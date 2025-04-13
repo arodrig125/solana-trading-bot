@@ -8,6 +8,7 @@ const {
   findArbitrageOpportunities,
   executeTrade
 } = require('./utils/jupiter');
+const pathFinder = require('./utils/path-finder');
 const {
   recordOpportunity,
   recordTrade,
@@ -69,6 +70,15 @@ const credentialsSetup = setupCredentials();
 // Initialize Jupiter client
 const jupiterClient = initJupiterClient();
 logger.successMessage('Jupiter API client initialized');
+
+// Initialize path finder
+pathFinder.initializePathFinder(jupiterClient)
+  .then(() => {
+    logger.successMessage('Path finder initialized');
+  })
+  .catch(error => {
+    logger.errorMessage('Failed to initialize path finder:', error);
+  });
 
 // Initialize Solana connection
 const connection = new Connection(settings.rpc.endpoint, {

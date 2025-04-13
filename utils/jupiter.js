@@ -13,6 +13,7 @@ const gasOptimizer = require('./gas-optimizer');
 const pathHistory = require('./path-history');
 const positionSizing = require('./position-sizing');
 const circuitBreaker = require('./circuit-breaker');
+const pathFinder = require('./path-finder');
 
 // Track consecutive failures for backoff
 let consecutiveFailures = 0;
@@ -21,7 +22,7 @@ let consecutiveFailures = 0;
 async function initJupiterClient() {
   // Get Solana connection
   const connection = getSolanaConnection();
-  
+
   // Initialize Jupiter API client with v6 options
   const jupiterClient = createJupiterApiClient({
     connection,
@@ -81,7 +82,7 @@ function isTokenAllowed(mint) {
   if (WHITELISTED_TOKENS.length === 0) {
     return !BLACKLISTED_TOKENS.includes(mint);
   }
-  
+
   // Otherwise, only allow whitelisted tokens
   return WHITELISTED_TOKENS.includes(mint);
 }
@@ -562,7 +563,7 @@ async function executeSwap(jupiterClient, wallet, inputMint, outputMint, amount,
     // Wait for confirmation
     const connection = getSolanaConnection();
     const confirmation = await connection.confirmTransaction(signature, 'confirmed');
-    
+
     if (confirmation.value.err) {
       logger.error(`Swap transaction failed: ${confirmation.value.err}`);
       return null;
