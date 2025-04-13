@@ -9,6 +9,7 @@ const {
   executeTrade
 } = require('./utils/jupiter');
 const pathFinder = require('./utils/path-finder');
+const userManager = require('./utils/user-manager');
 const {
   recordOpportunity,
   recordTrade,
@@ -71,8 +72,14 @@ const credentialsSetup = setupCredentials();
 const jupiterClient = initJupiterClient();
 logger.successMessage('Jupiter API client initialized');
 
-// Initialize path finder
-pathFinder.initializePathFinder(jupiterClient)
+// Initialize user manager
+userManager.initializeUserManager()
+  .then(() => {
+    logger.successMessage('User manager initialized');
+
+    // Initialize path finder
+    return pathFinder.initializePathFinder(jupiterClient);
+  })
   .then(() => {
     logger.successMessage('Path finder initialized');
   })
@@ -115,25 +122,57 @@ async function startScanning() {
     return;
   }
 
+  // Get user ID (in single-user mode, use the default user ID)
+  const userId = settings.multiUserMode ? TELEGRAM_CHAT_ID : settings.defaultUserId;
+
+  // Get user's tier information
+  const tierName = userManager.getUserTierName(userId);
+  const userSimulationOnly = userManager.isSimulationOnly(userId);
+
+  // If user is limited to simulation mode, force simulation mode
+  const effectiveSimulationMode = userSimulationOnly ? true : simulationMode;
+
+  // If user is limited to simulation mode but trying to use live mode, warn them
+  if (userSimulationOnly && !simulationMode) {
+    logger.warn(`User ${userId} is limited to simulation mode by their ${tierName} tier. Forcing simulation mode.`);
+
+    if (TELEGRAM_CHAT_ID) {
+      try {
+        await sendMessage(
+          bot,
+          TELEGRAM_CHAT_ID,
+          '⚠️ *Tier Limitation*\n\n' +
+          `Your current subscription tier (${tierName}) is limited to simulation mode only.\n\n` +
+          'To enable live trading, please upgrade your subscription.'
+        );
+      } catch (error) {
+        logger.errorMessage('Error sending Telegram message', error);
+      }
+    }
+  }
+
   isScanning = true;
-  logger.successMessage(`Starting background scanning in ${simulationMode ? 'SIMULATION' : 'LIVE'} mode`);
+  logger.successMessage(`Starting background scanning in ${effectiveSimulationMode ? 'SIMULATION' : 'LIVE'} mode`);
   logger.info(`Minimum profit percentage: ${minProfitPercent}%`);
+  logger.info(`User tier: ${tierName}`);
 
   if (TELEGRAM_CHAT_ID) {
     try {
       await sendMessage(
         bot,
         TELEGRAM_CHAT_ID,
-        `🔍 Bot is now scanning for arbitrage opportunities in ${simulationMode ? '🟢 SIMULATION' : '🔴 LIVE'} mode.\n` +
-        `🎯 Minimum profit percentage: ${minProfitPercent}%`
+        `🔍 Bot is now scanning for arbitrage opportunities in ${effectiveSimulationMode ? '🟢 SIMULATION' : '🔴 LIVE'} mode.\n` +
+        `🎯 Minimum profit percentage: ${minProfitPercent}%\n` +
+        `👑 Subscription tier: ${tierName}`
       );
     } catch (error) {
       logger.errorMessage('Error sending Telegram message', error);
     }
   }
 
-  // Start scanning with initial interval
-  scanInterval = setTimeout(runScan, settings.scanning.interval);
+  // Start scanning with user's tier-specific interval
+  const userScanInterval = userManager.getUserScanInterval(userId);
+  scanInterval = setTimeout(runScan, userScanInterval);
 }
 
 
@@ -141,7 +180,54 @@ async function startScanning() {
 // Run a single scan
 async function runScan() {
   try {
-    const opportunities = await findArbitrageOpportunities(jupiterClient, minProfitPercent);
+    // Get user ID (in single-user mode, use the default user ID)
+    const userId = settings.multiUserMode ? TELEGRAM_CHAT_ID : settings.defaultUserId;
+
+    // Check if user has reached their daily scan limit
+    const canScan = await userManager.recordUserScan(userId);
+    if (!canScan) {
+      logger.warn(`User ${userId} has reached their daily scan limit. Skipping scan.`);
+
+      // If in multi-user mode and we have a chat ID, notify the user
+      if (settings.multiUserMode && TELEGRAM_CHAT_ID) {
+        await sendMessage(
+          bot,
+          TELEGRAM_CHAT_ID,
+          '⚠️ *Daily Scan Limit Reached*\n\n' +
+          'You have reached your daily scan limit for your current subscription tier.\n\n' +
+          'To continue scanning, please upgrade your subscription.'
+        );
+      }
+
+      // Schedule next scan anyway (will check limit again)
+      scheduleNextScan();
+      return;
+    }
+
+    // Get user's allowed arbitrage types
+    const allowedTypes = userManager.getAllowedArbitrageTypes(userId);
+
+    // Get user's scan interval (for adaptive scanning)
+    const userScanInterval = userManager.getUserScanInterval(userId);
+
+    // Check if user is limited to simulation mode
+    const userSimulationOnly = userManager.isSimulationOnly(userId);
+
+    // If user is limited to simulation mode, force simulation mode
+    const effectiveSimulationMode = userSimulationOnly ? true : simulationMode;
+
+    // Get user's max concurrent requests
+    const maxConcurrentRequests = userManager.getMaxConcurrentRequests(userId);
+
+    // Update settings based on user's tier
+    const scanOptions = {
+      allowedTypes,
+      maxConcurrentRequests,
+      userId
+    };
+
+    // Run the scan with user-specific settings
+    const opportunities = await findArbitrageOpportunities(jupiterClient, minProfitPercent, scanOptions);
 
     if (opportunities.length > 0) {
       logger.info(`Found ${opportunities.length} arbitrage opportunities!`);
@@ -220,16 +306,28 @@ async function runScan() {
   }
 
   // Schedule next scan with adaptive interval if still scanning
-  if (isScanning) {
-    // Get recommended scan interval based on performance metrics
-    let nextInterval = settings.scanning.interval; // Default interval
+  scheduleNextScan();
+}
 
-    if (performanceMetrics) {
+/**
+ * Schedule the next scan based on user tier and adaptive interval
+ */
+function scheduleNextScan() {
+  if (isScanning) {
+    // Get user ID (in single-user mode, use the default user ID)
+    const userId = settings.multiUserMode ? TELEGRAM_CHAT_ID : settings.defaultUserId;
+
+    // Get user's scan interval
+    let nextInterval = userManager.getUserScanInterval(userId);
+
+    // If adaptive intervals are enabled, adjust based on performance metrics
+    if (settings.scanning.adaptiveIntervals && performanceMetrics) {
       const recommendedInterval = performanceMetrics.getRecommendedScanInterval();
 
-      // Use recommended interval if it's valid
+      // Use recommended interval if it's valid and within user's tier limits
       if (recommendedInterval && recommendedInterval > 0) {
-        nextInterval = recommendedInterval;
+        // Make sure we don't go below the user's tier limit
+        nextInterval = Math.max(recommendedInterval, nextInterval);
         logger.debug(`Using adaptive scan interval: ${nextInterval}ms`);
       }
     }
@@ -353,10 +451,67 @@ setupCommands(bot, {
     logger.info(`Minimum profit percentage set to ${profit}% by user: ${msg.chat.id}`);
   },
 
+  // Tier management (admin only)
+  onSetTier: async (msg, userId, tier) => {
+    // Check if user is admin
+    if (msg.chat.id.toString() !== process.env.ADMIN_CHAT_ID) {
+      await sendMessage(bot, msg.chat.id, '❌ This command is only available to administrators.');
+      return;
+    }
+
+    // Set the user's tier
+    const success = await userManager.setUserTier(userId, tier);
+
+    if (success) {
+      await sendMessage(
+        bot,
+        msg.chat.id,
+        `✅ User ${userId} tier set to ${tier} successfully.`
+      );
+
+      // Notify the user if possible
+      try {
+        await sendMessage(
+          bot,
+          userId,
+          `🎉 *Your Subscription Has Been Updated*\n\n` +
+          `Your SolarBot subscription tier has been updated to: *${tier}*\n\n` +
+          `Use /status to see your new features and limits.`
+        );
+      } catch (error) {
+        logger.warn(`Could not notify user ${userId} about tier change: ${error.message}`);
+      }
+    } else {
+      await sendMessage(
+        bot,
+        msg.chat.id,
+        `❌ Failed to set user ${userId} tier to ${tier}. Please check the tier name and try again.`
+      );
+    }
+  },
+
   // Info commands
   onStatus: async (msg) => {
     const walletInfo = await getWalletInfo(connection, wallet);
     const summary = getPerformanceSummary();
+
+    // Get user ID from message
+    const userId = msg.chat.id;
+
+    // Get user's tier information
+    const tierName = userManager.getUserTierName(userId);
+    const userSimulationOnly = userManager.isSimulationOnly(userId);
+    const userScanInterval = userManager.getUserScanInterval(userId) / 1000; // Convert to seconds
+    const maxPairs = userManager.getMaxTokenPairs(userId);
+    const maxConcurrentRequests = userManager.getMaxConcurrentRequests(userId);
+    const allowedTypes = userManager.getAllowedArbitrageTypes(userId);
+    const supportLevel = userManager.getSupportLevel(userId);
+
+    // Get user's usage statistics
+    const usage = userManager.getUserUsage(userId);
+    const dailyScansLimit = userManager.getUserLimit(userId, 'maxDailyScans');
+    const dailyScansUsed = usage.dailyScans;
+    const dailyScansRemaining = dailyScansLimit - dailyScansUsed;
 
     // Get system uptime
     const uptime = process.uptime();
@@ -409,7 +564,14 @@ setupCommands(bot, {
       `• Scanning: ${isScanning ? '🟢 Running' : '🔴 Paused'}\n` +
       `• Mode: ${simulationMode ? '🟢 SIMULATION' : '🔴 LIVE TRADING'}\n` +
       `• Min Profit: ${minProfitPercent}%\n` +
-      `• Scan Interval: ${settings.scanning.interval / 1000}s\n\n` +
+      `• Scan Interval: ${userScanInterval}s\n\n` +
+
+      `*Subscription:*\n` +
+      `• Tier: ${tierName} ${userSimulationOnly ? '(🟢 Simulation Only)' : ''}\n` +
+      `• Daily Scans: ${dailyScansUsed}/${dailyScansLimit} (${dailyScansRemaining} remaining)\n` +
+      `• Max Pairs: ${maxPairs === Infinity ? 'Unlimited' : maxPairs}\n` +
+      `• Arbitrage Types: ${allowedTypes.join(', ')}\n` +
+      `• Support Level: ${supportLevel}\n\n` +
 
       `*Wallet:*\n` +
       `• Address: \`${walletInfo.displayAddress}\`\n` +
@@ -482,8 +644,21 @@ setupCommands(bot, {
   },
 
   onHelp: (msg) => {
+    // Get user ID from message
+    const userId = msg.chat.id;
+
+    // Get user's tier information
+    const tierName = userManager.getUserTierName(userId);
+    const userSimulationOnly = userManager.isSimulationOnly(userId);
+
+    // Check if user is admin
+    const isAdmin = userId.toString() === process.env.ADMIN_CHAT_ID;
+
     sendMessage(bot, msg.chat.id,
-      '🤖 *Solana Arbitrage Bot Help*\n\n' +
+      '🌟 *SolarBot Arbitrage Trading Help*\n\n' +
+      `*Your Subscription: ${tierName}*\n` +
+      (userSimulationOnly ? '_Note: Your tier is limited to simulation mode only_\n\n' : '\n\n') +
+
       '*Basic Commands:*\n' +
       '`/ping` - Check if the bot is running\n' +
       '`/chatid` - Get your chat ID\n\n' +
@@ -497,16 +672,23 @@ setupCommands(bot, {
       '`/resume` - Resume background scanning\n\n' +
 
       '*Settings:*\n' +
-      '`/setprofit <percent>` - Set minimum profit percentage\n\n' +
+      '`/setprofit <percent>` - Set minimum profit percentage\n' +
+      (isAdmin ? '`/settier <user_id> <tier>` - Set user tier (admin only)\n\n' : '\n\n') +
 
       '*Information:*\n' +
-      '`/status` - Get current bot status\n' +
+      '`/status` - Get current bot status and tier details\n' +
       '`/summary` - Get performance summary\n' +
       '`/opportunities` - View recent opportunities\n' +
       '`/trades` - View recent trades\n' +
       '`/settings` - View current settings\n' +
       '`/performance` - View performance metrics\n' +
-      '`/help` - Show this help message'
+      '`/help` - Show this help message\n\n' +
+
+      '*Subscription Tiers:*\n' +
+      '• Basic - Free tier with simulation mode only\n' +
+      '• Pro - Standard tier with live trading\n' +
+      '• Elite - Professional tier with advanced features\n' +
+      '• Institutional - Enterprise tier with custom features'
     );
   }
 });

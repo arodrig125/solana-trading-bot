@@ -609,9 +609,19 @@ async function executeSwap(jupiterClient, wallet, inputMint, outputMint, amount,
  * Find arbitrage opportunities across different markets
  * @param {Object} jupiterClient - Jupiter API client
  * @param {number} minProfitPercent - Minimum profit percentage to consider
+ * @param {Object} options - Additional options
+ * @param {Array<string>} options.allowedTypes - Allowed arbitrage types
+ * @param {number} options.maxConcurrentRequests - Maximum concurrent requests
+ * @param {string} options.userId - User ID for tier-based restrictions
  * @returns {Promise<Array>} - Array of arbitrage opportunities
  */
-async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
+async function findArbitrageOpportunities(jupiterClient, minProfitPercent, options = {}) {
+  // Default options
+  const {
+    allowedTypes = ['exchange', 'triangular', 'dynamic'],
+    maxConcurrentRequests = settings.scanning.maxConcurrentRequests || 3,
+    userId = 'default'
+  } = options;
   // Import performance metrics
   let performanceMetrics;
   try {
@@ -639,61 +649,89 @@ async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
   const parallelProcessor = require('./parallel-processor');
 
   // Check simple arbitrage opportunities (exchange arbitrage)
-  const pairs = [
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', name: 'USDC-USDT' },
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'So11111111111111111111111111111111111111112', name: 'USDC-SOL' },
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'USDC-BTC' },
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'USDC-ETH' },
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', name: 'USDC-JUP' },
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R', name: 'USDC-RAY' },
-    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', name: 'USDC-BONK' },
-    { inputMint: 'So11111111111111111111111111111111111111112', outputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'SOL-BTC' },
-    { inputMint: 'So11111111111111111111111111111111111111112', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'SOL-ETH' },
-    { inputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'BTC-ETH' }
-  ];
+  if (allowedTypes.includes('exchange')) {
+    logger.info('Checking exchange arbitrage opportunities...');
 
-  // Process simple arbitrage opportunities in parallel
-  const simpleResults = await parallelProcessor.processArbitragePairs(
-    pairs,
-    checkSimpleArbitrage,
-    jupiterClient,
-    settings.scanning.maxConcurrentRequests
-  );
+    // Define all available pairs
+    const allPairs = [
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', name: 'USDC-USDT' },
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'So11111111111111111111111111111111111111112', name: 'USDC-SOL' },
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'USDC-BTC' },
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'USDC-ETH' },
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', name: 'USDC-JUP' },
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R', name: 'USDC-RAY' },
+      { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', name: 'USDC-BONK' },
+      { inputMint: 'So11111111111111111111111111111111111111112', outputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'SOL-BTC' },
+      { inputMint: 'So11111111111111111111111111111111111111112', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'SOL-ETH' },
+      { inputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'BTC-ETH' }
+    ];
 
-  // Add valid results to opportunities
-  simpleResults.filter(Boolean).forEach(result => {
-    opportunities.push(result);
-    logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
-    if (performanceMetrics) performanceMetrics.recordOpportunity(result);
-  });
+    // Get user manager to check pair limits
+    let userManager;
+    try {
+      userManager = require('./user-manager');
+    } catch (error) {
+      logger.debug('User manager not available, using all pairs');
+    }
+
+    // Limit pairs based on user's tier if user manager is available
+    let pairs = allPairs;
+    if (userManager) {
+      const maxPairs = userManager.getMaxTokenPairs(userId);
+      if (maxPairs < allPairs.length) {
+        // Limit to the user's max pairs
+        pairs = allPairs.slice(0, maxPairs);
+        logger.info(`Limited to ${maxPairs} pairs based on user tier`);
+      }
+    }
+
+    // Process simple arbitrage opportunities in parallel
+    const simpleResults = await parallelProcessor.processArbitragePairs(
+      pairs,
+      checkSimpleArbitrage,
+      jupiterClient,
+      maxConcurrentRequests
+    );
+
+    // Add valid results to opportunities
+    simpleResults.filter(Boolean).forEach(result => {
+      opportunities.push(result);
+      logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+      if (performanceMetrics) performanceMetrics.recordOpportunity(result);
+    });
+  }
 
   // Check triangular arbitrage opportunities
-  const paths = [
-    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'So11111111111111111111111111111111111111112', c: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'USDC-SOL-BTC' },
-    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'So11111111111111111111111111111111111111112', c: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'USDC-SOL-ETH' },
-    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', c: 'So11111111111111111111111111111111111111112', name: 'USDC-JUP-SOL' },
-    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', c: 'So11111111111111111111111111111111111111112', name: 'USDC-BONK-SOL' }
-  ];
+  if (allowedTypes.includes('triangular')) {
+    logger.info('Checking triangular arbitrage opportunities...');
 
-  // Process triangular arbitrage opportunities in parallel
-  const amount = '100000000'; // 100 USDC with 6 decimals
-  const triangularResults = await parallelProcessor.processArbitragePaths(
-    paths,
-    checkTriangularArbitrage,
-    jupiterClient,
-    amount,
-    settings.scanning.maxConcurrentRequests
-  );
+    const paths = [
+      { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'So11111111111111111111111111111111111111112', c: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'USDC-SOL-BTC' },
+      { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'So11111111111111111111111111111111111111112', c: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'USDC-SOL-ETH' },
+      { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', c: 'So11111111111111111111111111111111111111112', name: 'USDC-JUP-SOL' },
+      { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', c: 'So11111111111111111111111111111111111111112', name: 'USDC-BONK-SOL' }
+    ];
 
-  // Add valid results to opportunities
-  triangularResults.filter(Boolean).forEach(result => {
-    opportunities.push(result);
-    logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
-    if (performanceMetrics) performanceMetrics.recordOpportunity(result);
-  });
+    // Process triangular arbitrage opportunities in parallel
+    const amount = '100000000'; // 100 USDC with 6 decimals
+    const triangularResults = await parallelProcessor.processArbitragePaths(
+      paths,
+      checkTriangularArbitrage,
+      jupiterClient,
+      amount,
+      maxConcurrentRequests
+    );
+
+    // Add valid results to opportunities
+    triangularResults.filter(Boolean).forEach(result => {
+      opportunities.push(result);
+      logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+      if (performanceMetrics) performanceMetrics.recordOpportunity(result);
+    });
+  }
 
   // Check dynamic arbitrage opportunities if enabled
-  if (settings.scanning.dynamicArbitrage?.enabled) {
+  if (settings.scanning.dynamicArbitrage?.enabled && allowedTypes.includes('dynamic')) {
     try {
       // Get path history
       const pathHistoryData = await pathHistory.getAllPathHistory();

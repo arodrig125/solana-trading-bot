@@ -368,6 +368,7 @@ function setupCommands(bot, callbacks) {
     onPause,
     onResume,
     onSetProfit,
+    onSetTier,
     onStatus,
     onSummary,
     onOpportunities,
@@ -397,6 +398,13 @@ function setupCommands(bot, callbacks) {
       return;
     }
     onSetProfit(msg, profit);
+  });
+
+  // Tier management command (admin only)
+  bot.onText(/\/settier (.+) (.+)/, (msg, match) => {
+    const userId = match[1];
+    const tier = match[2].toUpperCase();
+    onSetTier(msg, userId, tier);
   });
 
   // Info commands

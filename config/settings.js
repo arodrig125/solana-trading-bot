@@ -3,7 +3,22 @@
  * This file contains various settings that control the bot's behavior
  */
 
+// Import tier configuration
+const { DEFAULT_TIER } = require('./tiers');
+
+// Default user ID for single-user mode
+const DEFAULT_USER_ID = process.env.DEFAULT_USER_ID || 'default';
+
+// Default tier for the bot
+const DEFAULT_BOT_TIER = process.env.DEFAULT_TIER || DEFAULT_TIER;
+
 module.exports = {
+  // User and tier settings
+  defaultUserId: DEFAULT_USER_ID,
+  defaultTier: DEFAULT_BOT_TIER,
+
+  // Enable multi-user mode (requires user management)
+  multiUserMode: process.env.MULTI_USER_MODE === 'true',
   // Gas optimization settings
   gasOptimization: {
     // Whether to enable gas optimization
