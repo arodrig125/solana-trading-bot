@@ -6,6 +6,10 @@
     <title>Documentation - SolarBot.io</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/documentation.css">
+    <link rel="stylesheet" href="css/terminal.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/breadcrumbs.css">
+    <link rel="stylesheet" href="css/mobile-enhancements.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +44,15 @@
             </nav>
         </div>
     </header>
+
+    <!-- Breadcrumb Navigation -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="breadcrumbs-container">
+                <!-- Breadcrumbs will be inserted by JavaScript -->
+            </div>
+        </div>
+    </section>
 
     <!-- Documentation Hero Section -->
     <section class="page-hero">
@@ -81,7 +94,7 @@
                     <section id="getting-started" class="doc-section">
                         <h2>Getting Started</h2>
                         <p>Welcome to the SolarBot documentation! This guide will help you set up and configure your Solana arbitrage trading bot for optimal performance.</p>
-                        
+
                         <h3>Prerequisites</h3>
                         <p>Before you begin, make sure you have the following:</p>
                         <ul>
@@ -91,7 +104,7 @@
                             <li>A Telegram bot token (obtained from @BotFather)</li>
                             <li>Basic knowledge of command line interfaces</li>
                         </ul>
-                        
+
                         <h3>System Requirements</h3>
                         <p>SolarBot can run on most modern computers and servers with the following minimum specifications:</p>
                         <ul>
@@ -100,7 +113,7 @@
                             <li>Stable internet connection</li>
                             <li>Linux, macOS, or Windows operating system</li>
                         </ul>
-                        
+
                         <div class="note-box">
                             <h4><i class="fas fa-info-circle"></i> Note</h4>
                             <p>For optimal performance, we recommend running SolarBot on a VPS (Virtual Private Server) to ensure 24/7 operation. See the <a href="#vps-deployment">VPS Deployment</a> section for more details.</p>
@@ -111,24 +124,24 @@
                     <section id="installation" class="doc-section">
                         <h2>Installation</h2>
                         <p>Follow these steps to install SolarBot on your system:</p>
-                        
+
                         <h3>Step 1: Clone the Repository</h3>
                         <div class="code-block">
                             <pre><code>git clone https://github.com/yourusername/solana-telegram-arb-bot.git
 cd solana-telegram-arb-bot</code></pre>
                         </div>
-                        
+
                         <h3>Step 2: Install Dependencies</h3>
                         <div class="code-block">
                             <pre><code>npm install</code></pre>
                         </div>
-                        
+
                         <h3>Step 3: Create Environment File</h3>
                         <p>Create a <code>.env</code> file based on the provided example:</p>
                         <div class="code-block">
                             <pre><code>cp .env.example .env</code></pre>
                         </div>
-                        
+
                         <h3>Step 4: Configure Environment Variables</h3>
                         <p>Edit the <code>.env</code> file with your credentials:</p>
                         <div class="code-block">
@@ -148,17 +161,17 @@ SIMULATION=true
 # RPC Endpoint (Optional)
 RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
                         </div>
-                        
+
                         <div class="warning-box">
                             <h4><i class="fas fa-exclamation-triangle"></i> Warning</h4>
                             <p>Never share your private key or .env file with anyone. Keep your credentials secure at all times.</p>
                         </div>
-                        
+
                         <h3>Step 5: Start the Bot</h3>
                         <div class="code-block">
                             <pre><code>npm start</code></pre>
                         </div>
-                        
+
                         <p>If everything is configured correctly, you should see output indicating that the bot has started successfully.</p>
                     </section>
 
@@ -166,86 +179,86 @@ RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
                     <section id="configuration" class="doc-section">
                         <h2>Configuration</h2>
                         <p>SolarBot offers extensive configuration options to customize its behavior according to your trading preferences.</p>
-                        
+
                         <h3>Configuration Files</h3>
                         <p>The main configuration files are located in the <code>config</code> directory:</p>
                         <ul>
                             <li><code>settings.js</code> - General bot settings</li>
                             <li><code>tokens.js</code> - Token addresses and pairs to monitor</li>
                         </ul>
-                        
+
                         <h3>Settings Configuration</h3>
                         <p>The <code>settings.js</code> file contains various settings that control the bot's behavior:</p>
-                        
+
                         <h4>Scanning Settings</h4>
                         <div class="code-block">
                             <pre><code>scanning: {
   // Interval between scans in milliseconds
   interval: 30000,
-  
+
   // Maximum number of opportunities to process in a single scan
   maxOpportunities: 5,
-  
+
   // Whether to automatically start scanning on bot startup
   autoStart: true,
-  
+
   // Maximum number of concurrent requests to avoid rate limiting
   maxConcurrentRequests: 3
 }</code></pre>
                         </div>
-                        
+
                         <h4>Trading Settings</h4>
                         <div class="code-block">
                             <pre><code>trading: {
   // Default minimum profit percentage to consider an opportunity valid
   defaultMinProfitPercent: 0.5,
-  
+
   // Maximum slippage percentage allowed for trades
   maxSlippagePercent: 1.0,
-  
+
   // Default amount to use for price quotes (in USDC)
   defaultQuoteAmount: 100,
-  
+
   // Maximum amount to trade in a single transaction (in USDC)
   maxTradeAmount: 1000,
-  
+
   // Whether to automatically execute trades when opportunities are found
   autoExecuteTrades: false,
-  
+
   // Minimum time between trades in milliseconds (to avoid spamming)
   minTimeBetweenTrades: 60000
 }</code></pre>
                         </div>
-                        
+
                         <h4>Risk Management Settings</h4>
                         <div class="code-block">
                             <pre><code>riskManagement: {
   // Maximum daily trading volume (in USDC)
   maxDailyVolume: 10000,
-  
+
   // Maximum number of trades per day
   maxDailyTrades: 50,
-  
+
   // Maximum percentage of wallet to use for trading
   maxWalletPercentage: 50,
-  
+
   // Minimum wallet balance to maintain (in SOL)
   minWalletBalance: 0.1,
-  
+
   // Maximum loss percentage before pausing trading
   maxLossPercentage: 5.0,
-  
+
   // Whether to enable circuit breaker (pause trading after consecutive losses)
   enableCircuitBreaker: true,
-  
+
   // Number of consecutive losses to trigger circuit breaker
   circuitBreakerThreshold: 3
 }</code></pre>
                         </div>
-                        
+
                         <h3>Token Configuration</h3>
                         <p>The <code>tokens.js</code> file contains token addresses and pairs to monitor for arbitrage opportunities:</p>
-                        
+
                         <h4>Token Definitions</h4>
                         <div class="code-block">
                             <pre><code>const TOKENS = {
@@ -268,21 +281,21 @@ RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
   // Additional tokens...
 }</code></pre>
                         </div>
-                        
+
                         <h4>Token Pairs</h4>
                         <div class="code-block">
                             <pre><code>const TOKEN_PAIRS = [
   // Stablecoin pairs
   { inputMint: TOKENS.USDC.mint, outputMint: TOKENS.USDT.mint, name: 'USDC-USDT', minProfitPercent: 0.1 },
-  
+
   // Major token pairs
   { inputMint: TOKENS.SOL.mint, outputMint: TOKENS.USDC.mint, name: 'SOL-USDC', minProfitPercent: 0.5 },
   { inputMint: TOKENS.BTC.mint, outputMint: TOKENS.USDC.mint, name: 'BTC-USDC', minProfitPercent: 0.5 },
-  
+
   // Additional pairs...
 ]</code></pre>
                         </div>
-                        
+
                         <div class="tip-box">
                             <h4><i class="fas fa-lightbulb"></i> Tip</h4>
                             <p>Start with a small number of token pairs and gradually add more as you become comfortable with the bot's performance.</p>
@@ -293,7 +306,7 @@ RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
                     <section id="telegram-setup" class="doc-section">
                         <h2>Telegram Setup</h2>
                         <p>SolarBot uses Telegram for command control and notifications. Follow these steps to set up your Telegram bot:</p>
-                        
+
                         <h3>Step 1: Create a Telegram Bot</h3>
                         <ol>
                             <li>Open Telegram and search for <code>@BotFather</code></li>
@@ -302,7 +315,7 @@ RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
                             <li>Once created, BotFather will provide you with a token (e.g., <code>123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ</code>)</li>
                             <li>Copy this token and add it to your <code>.env</code> file as <code>TELEGRAM_BOT_TOKEN</code></li>
                         </ol>
-                        
+
                         <h3>Step 2: Get Your Chat ID</h3>
                         <ol>
                             <li>Start a chat with your newly created bot</li>
@@ -312,7 +325,7 @@ RPC_ENDPOINT=https://api.mainnet-beta.solana.com</code></pre>
                             <li>The bot will respond with your Chat ID</li>
                             <li>Copy this ID and add it to your <code>.env</code> file as <code>TELEGRAM_CHAT_ID</code></li>
                         </ol>
-                        
+
                         <h3>Step 3: Configure Bot Commands (Optional)</h3>
                         <p>You can set up command suggestions for your bot by sending the following to BotFather:</p>
                         <ol>
@@ -337,7 +350,7 @@ trades - View recent trades
 settings - View current settings
 help - Show help message</code></pre>
                         </div>
-                        
+
                         <div class="note-box">
                             <h4><i class="fas fa-info-circle"></i> Note</h4>
                             <p>For security reasons, only the chat ID specified in your <code>.env</code> file will be able to control the bot. This prevents unauthorized access to your trading bot.</p>
@@ -348,7 +361,7 @@ help - Show help message</code></pre>
                     <section id="vps-deployment" class="doc-section">
                         <h2>VPS Deployment</h2>
                         <p>For optimal performance, we recommend deploying SolarBot on a Virtual Private Server (VPS) to ensure 24/7 operation.</p>
-                        
+
                         <h3>Recommended VPS Providers</h3>
                         <ul>
                             <li>DigitalOcean</li>
@@ -356,7 +369,7 @@ help - Show help message</code></pre>
                             <li>Linode</li>
                             <li>Vultr</li>
                         </ul>
-                        
+
                         <h3>Minimum VPS Specifications</h3>
                         <ul>
                             <li>1 CPU core</li>
@@ -364,16 +377,16 @@ help - Show help message</code></pre>
                             <li>20GB SSD storage</li>
                             <li>Ubuntu 20.04 LTS or later</li>
                         </ul>
-                        
+
                         <h3>Deployment Steps</h3>
-                        
+
                         <h4>Step 1: Set Up Your VPS</h4>
                         <ol>
                             <li>Create an account with your chosen VPS provider</li>
                             <li>Create a new VPS instance with Ubuntu 20.04 LTS</li>
                             <li>Set up SSH access to your VPS</li>
                         </ol>
-                        
+
                         <h4>Step 2: Install Dependencies</h4>
                         <div class="code-block">
                             <pre><code>sudo apt update
@@ -388,7 +401,7 @@ sudo apt install -y nodejs
 node -v
 npm -v</code></pre>
                         </div>
-                        
+
                         <h4>Step 3: Clone and Set Up the Bot</h4>
                         <div class="code-block">
                             <pre><code>git clone https://github.com/yourusername/solana-telegram-arb-bot.git
@@ -399,7 +412,7 @@ npm install
 cp .env.example .env
 nano .env</code></pre>
                         </div>
-                        
+
                         <h4>Step 4: Install PM2 for Process Management</h4>
                         <div class="code-block">
                             <pre><code>sudo npm install -g pm2
@@ -412,7 +425,7 @@ pm2 startup
 sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u $(whoami) --hp $(echo $HOME)
 pm2 save</code></pre>
                         </div>
-                        
+
                         <h4>Step 5: Monitor Your Bot</h4>
                         <div class="code-block">
                             <pre><code># View logs
@@ -427,7 +440,7 @@ pm2 restart solarbot
 # Stop the bot
 pm2 stop solarbot</code></pre>
                         </div>
-                        
+
                         <div class="tip-box">
                             <h4><i class="fas fa-lightbulb"></i> Tip</h4>
                             <p>Professional and Enterprise tier subscribers receive dedicated VPS setup assistance. Contact our support team for help with your deployment.</p>
@@ -438,7 +451,7 @@ pm2 stop solarbot</code></pre>
                     <section id="commands" class="doc-section">
                         <h2>Bot Commands</h2>
                         <p>SolarBot can be controlled through Telegram commands. Here's a complete list of available commands:</p>
-                        
+
                         <table class="commands-table">
                             <thead>
                                 <tr>
@@ -520,7 +533,7 @@ pm2 stop solarbot</code></pre>
                                 </tr>
                             </tbody>
                         </table>
-                        
+
                         <div class="warning-box">
                             <h4><i class="fas fa-exclamation-triangle"></i> Warning</h4>
                             <p>Be extremely careful when using the <code>/live</code> command as it will enable real trading with your funds. Always test in simulation mode first.</p>
@@ -528,41 +541,41 @@ pm2 stop solarbot</code></pre>
                     </section>
 
                     <!-- Additional sections would continue here -->
-                    
+
                     <!-- FAQ Section -->
                     <section id="faq" class="doc-section">
                         <h2>Frequently Asked Questions</h2>
-                        
+
                         <div class="faq-item">
                             <h3>How much profit can I expect from using SolarBot?</h3>
                             <p>Profit varies based on market conditions, your settings, and the subscription tier you choose. Typically, users see opportunities ranging from 0.5% to 3% per trade. However, we cannot guarantee specific returns as cryptocurrency markets are volatile.</p>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>Is my wallet secure when using SolarBot?</h3>
                             <p>Yes, your wallet security is our top priority. SolarBot runs on your own VPS or local machine, and your private keys never leave your environment. We do not have access to your funds or private keys at any time.</p>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>What happens if the bot encounters an error?</h3>
                             <p>SolarBot has built-in error handling and will attempt to recover from most errors automatically. If a critical error occurs, the bot will send an alert to your Telegram chat and log the error for troubleshooting.</p>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>Can I run multiple instances of SolarBot?</h3>
                             <p>Yes, Professional and Enterprise tier subscribers can run multiple instances of SolarBot with different configurations. This allows you to implement various strategies simultaneously.</p>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>How much SOL do I need to keep in my wallet?</h3>
                             <p>We recommend maintaining at least 0.1 SOL in your wallet for transaction fees. The exact amount depends on your trading volume and the current network congestion.</p>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>What RPC endpoint should I use?</h3>
                             <p>While SolarBot works with public RPC endpoints, we recommend using a dedicated RPC service like Helius or QuickNode for better performance and reliability, especially for Advanced and Professional tier users.</p>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>How do I update SolarBot to the latest version?</h3>
                             <p>To update SolarBot, pull the latest changes from the repository and restart the bot:</p>
@@ -572,7 +585,7 @@ npm install
 pm2 restart solarbot</code></pre>
                             </div>
                         </div>
-                        
+
                         <div class="faq-item">
                             <h3>What should I do if I encounter a problem not covered in the documentation?</h3>
                             <p>If you encounter an issue not covered in the documentation, please contact our support team through the <a href="contact.html">Contact page</a> or join our <a href="https://t.me/solarbotcommunity" target="_blank">Telegram community</a> for assistance.</p>
@@ -651,5 +664,8 @@ pm2 restart solarbot</code></pre>
 
     <script src="js/script.js"></script>
     <script src="js/documentation.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/breadcrumbs.js"></script>
+    <script src="js/mobile-menu.js"></script>
 </body>
 </html>

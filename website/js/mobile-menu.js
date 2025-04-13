@@ -20,8 +20,21 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenu.className = 'mobile-menu';
 
     // Move the navigation items to the mobile menu
-    const navItems = nav.querySelector('ul').cloneNode(true);
-    mobileMenu.appendChild(navItems);
+    const navLinks = nav.querySelector('.nav-links');
+    if (navLinks) {
+        const navItems = navLinks.cloneNode(true);
+        mobileMenu.appendChild(navItems);
+    } else {
+        const navItems = nav.querySelector('ul').cloneNode(true);
+        mobileMenu.appendChild(navItems);
+    }
+
+    // Add auth buttons if they exist
+    const authButtons = nav.querySelector('.auth-buttons');
+    if (authButtons) {
+        const authButtonsClone = authButtons.cloneNode(true);
+        mobileMenu.appendChild(authButtonsClone);
+    }
 
     // Insert the mobile menu after the navigation
     nav.parentNode.insertBefore(mobileMenu, nav.nextSibling);

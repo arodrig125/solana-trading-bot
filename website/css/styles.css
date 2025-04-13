@@ -467,7 +467,9 @@ nav {
 /* How It Works Section */
 .how-it-works {
     padding: 100px 0;
-    background-color: var(--light-dark);
+    background-color: var(--light-color);
+    border-top: 1px solid var(--light-darker);
+    border-bottom: 1px solid var(--light-darker);
 }
 
 .steps {

@@ -1,0 +1,182 @@
+/* Terminal Styling */
+
+.terminal {
+    background-color: #1E1E1E;
+    color: #F0F0F0;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    overflow-x: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.terminal-title {
+    color: #F0F0F0;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-dot.red {
+    background-color: #FF5F56;
+}
+
+.terminal-dot.yellow {
+    background-color: #FFBD2E;
+}
+
+.terminal-dot.green {
+    background-color: #27C93F;
+}
+
+.terminal-content {
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.terminal-prompt {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.terminal-command {
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+.terminal-output {
+    color: #CCCCCC;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.terminal-highlight {
+    background-color: rgba(255, 255, 0, 0.2);
+    color: #FFFF00;
+    padding: 0 2px;
+}
+
+.terminal-error {
+    color: #FF5252;
+}
+
+.terminal-success {
+    color: #4CAF50;
+}
+
+.terminal-warning {
+    color: #FFC107;
+}
+
+.terminal-info {
+    color: #2196F3;
+}
+
+/* Light Mode Terminal */
+body:not(.dark-mode) .terminal {
+    background-color: #F5F5F5;
+    color: #333333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark-mode) .terminal-title {
+    color: #333333;
+}
+
+body:not(.dark-mode) .terminal-prompt {
+    color: #4CAF50;
+}
+
+body:not(.dark-mode) .terminal-command {
+    color: #000000;
+    font-weight: bold;
+}
+
+body:not(.dark-mode) .terminal-output {
+    color: #555555;
+}
+
+body:not(.dark-mode) .terminal-highlight {
+    background-color: rgba(255, 235, 59, 0.3);
+    color: #FF9800;
+}
+
+body:not(.dark-mode) .terminal-error {
+    color: #F44336;
+}
+
+body:not(.dark-mode) .terminal-success {
+    color: #4CAF50;
+}
+
+body:not(.dark-mode) .terminal-warning {
+    color: #FF9800;
+}
+
+body:not(.dark-mode) .terminal-info {
+    color: #2196F3;
+}
+
+/* High Contrast Mode */
+body.high-contrast .terminal {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}
+
+body.high-contrast .terminal-prompt {
+    color: #00FF00;
+}
+
+body.high-contrast .terminal-command {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+body.high-contrast .terminal-output {
+    color: #FFFFFF;
+}
+
+body.high-contrast .terminal-highlight {
+    background-color: #FFFF00;
+    color: #000000;
+}
+
+body.high-contrast .terminal-error {
+    color: #FF0000;
+}
+
+body.high-contrast .terminal-success {
+    color: #00FF00;
+}
+
+body.high-contrast .terminal-warning {
+    color: #FFFF00;
+}
+
+body.high-contrast .terminal-info {
+    color: #00FFFF;
+}

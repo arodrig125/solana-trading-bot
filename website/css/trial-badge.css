@@ -12,7 +12,8 @@
     right: 20px; /* Changed from -10px to 20px to make it visible */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     animation: pulse 2s infinite;
-    z-index: 10; /* Added z-index to ensure it's above other elements */
+    z-index: 100; /* Increased z-index to ensure it's above all other elements */
+    pointer-events: none; /* Ensures clicks go through to elements below */
 }
 
 .trial-badge-sm {
@@ -26,7 +27,7 @@
     display: inline-block;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     position: relative; /* Added position relative */
-    z-index: 5; /* Added z-index */
+    z-index: 50; /* Increased z-index */
 }
 
 .savings {

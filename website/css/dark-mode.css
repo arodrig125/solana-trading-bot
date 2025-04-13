@@ -14,6 +14,58 @@
 
 /* Dark Mode Toggle Button */
 .dark-mode-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    margin-left: 15px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.dark-mode-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dark-mode-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--light-darker);
+    border-radius: 30px;
+    transition: var(--transition);
+}
+
+.dark-mode-slider:before {
+    position: absolute;
+    content: "☀️";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: var(--transition);
+    font-size: 14px;
+}
+
+.dark-mode-toggle input:checked + .dark-mode-slider {
+    background-color: var(--primary-color);
+}
+
+.dark-mode-toggle input:checked + .dark-mode-slider:before {
+    transform: translateX(30px);
+    content: "🌙";
+}
+
+/* Fixed Dark Mode Toggle for Mobile */
+.dark-mode-toggle-fixed {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -31,11 +83,11 @@
     transition: all 0.3s ease;
 }
 
-.dark-mode-toggle:hover {
+.dark-mode-toggle-fixed:hover {
     transform: scale(1.1);
 }
 
-.dark-mode-toggle i {
+.dark-mode-toggle-fixed i {
     font-size: 24px;
 }
 
@@ -88,6 +140,26 @@ body.dark-mode .section-header p {
     color: var(--dark-text-secondary);
 }
 
+/* How It Works Section */
+body.dark-mode .how-it-works {
+    background-color: var(--dark-surface);
+    border-top: 1px solid var(--dark-surface-light);
+    border-bottom: 1px solid var(--dark-surface-light);
+}
+
+body.dark-mode .step-number {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+body.dark-mode .step-content h3 {
+    color: var(--light-color);
+}
+
+body.dark-mode .step-content p {
+    color: var(--text-light);
+}
+
 /* Cards */
 body.dark-mode .feature-card,
 body.dark-mode .pricing-card,
@@ -112,11 +184,40 @@ body.dark-mode .testimonial-card p {
 body.dark-mode .btn-outline {
     border-color: var(--primary-color);
     color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .btn-outline:hover {
     background-color: var(--primary-color);
-    color: var(--dark-text);
+    color: var(--light-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    border-color: var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Feature Comparison Grid */
@@ -179,4 +280,70 @@ body, header, .section, .feature-card, .pricing-card, .testimonial-card,
 .comparison-header .plan-column, .feature-category, .feature-row,
 .feature-name, .feature-value, footer, footer h4, footer p, footer a {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Accessibility Improvements */
+
+/* High Contrast Mode */
+body.high-contrast {
+    --primary-color: #C586FF;
+    --primary-light: #D9B0FF;
+    --primary-dark: #9945FF;
+    --secondary-color: #00FF9D;
+    --secondary-light: #80FFCE;
+    --secondary-dark: #00CC7D;
+}
+
+body.high-contrast:not(.dark-mode) {
+    --text-color: #000000;
+    --text-light: #333333;
+    --text-lighter: #666666;
+    --light-color: #FFFFFF;
+    --light-dark: #F5F5F5;
+    --light-darker: #E0E0E0;
+}
+
+body.high-contrast.dark-mode {
+    --text-color: #FFFFFF;
+    --text-light: #E0E0E0;
+    --text-lighter: #B0B0B0;
+    --dark-bg: #000000;
+    --dark-surface: #121212;
+    --dark-surface-light: #1e1e1e;
+}
+
+/* Focus Styles */
+a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Skip to Content Link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    z-index: 1001;
+    transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .dark-mode-toggle-fixed:hover {
+        transform: none;
+    }
 }
