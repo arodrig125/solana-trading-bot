@@ -1,0 +1,123 @@
+/* Mobile Experience Enhancements */
+
+/* Optimize tap targets for mobile */
+@media (max-width: 768px) {
+    /* Make buttons larger on mobile */
+    .btn {
+        padding: 12px 24px;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Increase spacing between nav items */
+    nav ul li {
+        margin: 10px 0;
+    }
+    
+    /* Improve mobile menu */
+    .mobile-menu {
+        padding: 20px;
+        background-color: var(--light-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        left: 20px;
+        z-index: 100;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .mobile-menu ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .mobile-menu ul li {
+        margin: 10px 0;
+        width: 100%;
+    }
+    
+    .mobile-menu ul li a {
+        display: block;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Improve mobile menu toggle */
+    .mobile-menu-toggle {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 101;
+    }
+    
+    .mobile-menu-toggle span {
+        width: 24px;
+        height: 2px;
+        background-color: var(--dark-color);
+        margin: 3px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    /* Improve form elements on mobile */
+    input, select, textarea {
+        min-height: 44px;
+        font-size: 16px; /* Prevents iOS zoom on focus */
+    }
+    
+    /* Improve table scrolling on mobile */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Add scroll indicator for tables */
+    .table-responsive::after {
+        content: "← Swipe →";
+        display: block;
+        text-align: center;
+        padding: 10px;
+        color: var(--text-light);
+        font-size: 12px;
+    }
+    
+    /* Improve pricing cards on mobile */
+    .pricing-card {
+        margin-bottom: 20px;
+    }
+    
+    /* Improve feature list readability on mobile */
+    .pricing-features li {
+        padding: 10px 0;
+    }
+}

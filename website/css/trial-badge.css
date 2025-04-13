@@ -9,9 +9,10 @@
     border-radius: 20px;
     position: absolute;
     top: -10px;
-    right: -10px;
+    right: 20px; /* Changed from -10px to 20px to make it visible */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     animation: pulse 2s infinite;
+    z-index: 10; /* Added z-index to ensure it's above other elements */
 }
 
 .trial-badge-sm {
@@ -24,6 +25,8 @@
     margin-bottom: 8px;
     display: inline-block;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    position: relative; /* Added position relative */
+    z-index: 5; /* Added z-index */
 }
 
 .savings {
@@ -53,12 +56,12 @@
         top: -8px;
         right: -8px;
     }
-    
+
     .trial-badge-sm {
         font-size: 10px;
         padding: 2px 6px;
     }
-    
+
     .savings {
         font-size: 12px;
     }

@@ -39,15 +39,22 @@
     line-height: 1.4;
 }
 
-.pricing-features li i {
-    color: var(--success-color);
+.pricing-features li i.fa-check {
+    color: #4CAF50; /* Bright green for checks */
     margin-right: 10px;
     margin-top: 3px;
     flex-shrink: 0;
 }
 
-.pricing-features li.feature-disabled i {
-    color: var(--text-lighter);
+.pricing-features li i.fa-times {
+    color: #FF5252; /* Red for X's */
+    margin-right: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.pricing-features li.feature-disabled {
+    color: var(--text-light); /* Lighter text for disabled features */
 }
 
 /* Fix trial badge position */
@@ -96,6 +103,17 @@
     font-size: 1rem;
     color: var(--text-light);
     margin-left: 5px;
+}
+
+/* Style check and X icons in comparison grid */
+.feature-cell i.fa-check {
+    color: #4CAF50; /* Bright green for checks */
+    font-size: 16px;
+}
+
+.feature-cell i.fa-times {
+    color: #FF5252; /* Red for X's */
+    font-size: 16px;
 }
 
 /* Fix comparison grid alignment */
