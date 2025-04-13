@@ -1,0 +1,362 @@
+/* Pricing Page Alignment Fixes */
+
+/* Fix pricing cards height and alignment */
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+    align-items: stretch;
+}
+
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--light-dark);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.pricing-features {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.pricing-features ul {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.pricing-features li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.4;
+}
+
+.pricing-features li i {
+    color: var(--success-color);
+    margin-right: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.pricing-features li.feature-disabled i {
+    color: var(--text-lighter);
+}
+
+/* Fix trial badge position */
+.trial-badge {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: pulse 2s infinite;
+    z-index: 10;
+}
+
+/* Fix savings text alignment */
+.savings {
+    color: #4CAF50;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+    text-align: center;
+    display: block;
+}
+
+/* Fix price display */
+.price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.period {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-left: 5px;
+}
+
+/* Fix comparison grid alignment */
+.comparison-wrapper {
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 0 20px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.comparison-grid {
+    display: table;
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.comparison-header .plan-column {
+    padding: 25px 15px;
+    text-align: center;
+}
+
+.plan-name {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.plan-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.plan-price span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-left: 2px;
+}
+
+.feature-row {
+    display: table-row;
+}
+
+.feature-cell {
+    display: table-cell;
+    padding: 15px;
+    border-bottom: 1px solid var(--light-darker);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.feature-cell:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.feature-category {
+    display: table-row;
+    background-color: var(--light-dark);
+}
+
+.feature-category h4 {
+    display: table-cell;
+    padding: 15px;
+    font-weight: 600;
+    color: var(--dark-color);
+    border-bottom: 1px solid var(--light-darker);
+    text-align: left;
+    column-span: all;
+}
+
+.feature-category h4 {
+    column-span: all;
+}
+
+.btn-sm {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+}
+
+/* Fix enterprise plan alignment */
+.enterprise-plan {
+    background-color: var(--light-dark);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    box-shadow: var(--box-shadow);
+    margin-top: 50px;
+}
+
+.enterprise-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.enterprise-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.enterprise-content p {
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+.enterprise-content ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.enterprise-content li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.4;
+}
+
+.enterprise-content li i {
+    color: var(--success-color);
+    margin-right: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.enterprise-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+}
+
+/* Fix pricing toggle alignment */
+.pricing-toggle-section {
+    padding: 20px 0;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.toggle-label {
+    font-weight: 500;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+}
+
+.save-badge {
+    background-color: var(--primary-light);
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--light-darker);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pricing-card.popular {
+        transform: scale(1.02);
+    }
+
+    .pricing-card.popular:hover {
+        transform: scale(1.02) translateY(-5px);
+    }
+
+    .enterprise-plan {
+        flex-direction: column;
+    }
+
+    .enterprise-cta {
+        width: 100%;
+    }
+
+    /* Fix comparison grid on mobile */
+    .comparison-grid {
+        min-width: 700px;
+    }
+
+    .feature-column {
+        width: 25%;
+    }
+
+    .plan-column {
+        width: 18.75%;
+    }
+
+    .trial-badge-sm {
+        margin-bottom: 5px;
+    }
+}
