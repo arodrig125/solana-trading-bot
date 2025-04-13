@@ -6,6 +6,7 @@
     <title>Pricing - SolarBot.io</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/comparison-grid.css">
+    <link rel="stylesheet" href="css/trial-badge.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,10 +70,11 @@
     <section class="pricing-plans">
         <div class="container">
             <div class="pricing-cards">
-                <!-- Basic Plan -->
+                <!-- STARTER Plan -->
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Basic</h3>
+                        <h3>STARTER</h3>
+                        <div class="trial-badge">7-Day Free Trial</div>
                         <div class="price monthly-price">
                             <span class="amount">$29</span>
                             <span class="period">/month</span>
@@ -80,6 +82,7 @@
                         <div class="price yearly-price" style="display: none;">
                             <span class="amount">$279</span>
                             <span class="period">/year</span>
+                            <div class="savings">Save $69</div>
                         </div>
                     </div>
                     <div class="pricing-features">
@@ -97,15 +100,15 @@
                         </ul>
                     </div>
                     <div class="pricing-cta">
-                        <a href="signup.html?plan=basic" class="btn btn-outline">Get Started</a>
+                        <a href="#" data-tier="starter" class="btn btn-outline subscription-btn">Get Started</a>
                     </div>
                 </div>
 
-                <!-- Advanced Plan -->
+                <!-- PRO Plan -->
                 <div class="pricing-card popular">
                     <div class="popular-tag">Most Popular</div>
                     <div class="pricing-header">
-                        <h3>Advanced</h3>
+                        <h3>PRO</h3>
                         <div class="price monthly-price">
                             <span class="amount">$79</span>
                             <span class="period">/month</span>
@@ -113,11 +116,12 @@
                         <div class="price yearly-price" style="display: none;">
                             <span class="amount">$759</span>
                             <span class="period">/year</span>
+                            <div class="savings">Save $189</div>
                         </div>
                     </div>
                     <div class="pricing-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> Everything in Basic tier</li>
+                            <li><i class="fas fa-check"></i> Everything in STARTER tier</li>
                             <li><i class="fas fa-check"></i> Live trading mode</li>
                             <li><i class="fas fa-check"></i> Advanced arbitrage strategies</li>
                             <li><i class="fas fa-check"></i> All token pairs</li>
@@ -130,26 +134,27 @@
                         </ul>
                     </div>
                     <div class="pricing-cta">
-                        <a href="signup.html?plan=advanced" class="btn btn-primary">Get Started</a>
+                        <a href="#" data-tier="pro" class="btn btn-primary subscription-btn">Get Started</a>
                     </div>
                 </div>
 
-                <!-- Professional Plan -->
+                <!-- ELITE Plan -->
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Professional</h3>
+                        <h3>ELITE</h3>
                         <div class="price monthly-price">
                             <span class="amount">$199</span>
                             <span class="period">/month</span>
                         </div>
                         <div class="price yearly-price" style="display: none;">
-                            <span class="amount">$1,910</span>
+                            <span class="amount">$1,899</span>
                             <span class="period">/year</span>
+                            <div class="savings">Save $489</div>
                         </div>
                     </div>
                     <div class="pricing-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> Everything in Advanced tier</li>
+                            <li><i class="fas fa-check"></i> Everything in PRO tier</li>
                             <li><i class="fas fa-check"></i> Multi-wallet support</li>
                             <li><i class="fas fa-check"></i> Advanced risk management</li>
                             <li><i class="fas fa-check"></i> API access</li>
@@ -162,16 +167,25 @@
                         </ul>
                     </div>
                     <div class="pricing-cta">
-                        <a href="signup.html?plan=professional" class="btn btn-outline">Get Started</a>
+                        <a href="#" data-tier="elite" class="btn btn-outline subscription-btn">Get Started</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Enterprise Plan -->
+            <!-- INSTITUTIONAL Plan -->
             <div class="enterprise-plan">
                 <div class="enterprise-content">
-                    <h3>Enterprise</h3>
-                    <p>Need a custom solution for your trading firm or institutional needs?</p>
+                    <h3>INSTITUTIONAL</h3>
+                    <div class="price monthly-price">
+                        <span class="amount">$999</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <div class="price yearly-price" style="display: none;">
+                        <span class="amount">$9,590</span>
+                        <span class="period">/year</span>
+                        <div class="savings">Save $2,398</div>
+                    </div>
+                    <p>Enterprise-grade solution for trading firms</p>
                     <ul>
                         <li><i class="fas fa-check"></i> Dedicated VPS infrastructure</li>
                         <li><i class="fas fa-check"></i> Custom development</li>
@@ -181,7 +195,7 @@
                     </ul>
                 </div>
                 <div class="enterprise-cta">
-                    <a href="contact.html?subject=Enterprise" class="btn btn-primary">Contact Us</a>
+                    <a href="#" data-tier="institutional" class="btn btn-primary subscription-btn">Get Started</a>
                 </div>
             </div>
         </div>
@@ -203,25 +217,26 @@
                             <h3>Features</h3>
                         </div>
                         <div class="plan-column">
-                            <div class="plan-name">Basic</div>
+                            <div class="plan-name">STARTER</div>
                             <div class="plan-price">$29<span>/mo</span></div>
-                            <a href="signup.html?plan=basic" class="btn btn-sm btn-outline">Select</a>
+                            <div class="trial-badge-sm">7-Day Trial</div>
+                            <a href="#" data-tier="starter" class="btn btn-sm btn-outline subscription-btn">Select</a>
                         </div>
                         <div class="plan-column recommended">
                             <div class="recommended-tag">Most Popular</div>
-                            <div class="plan-name">Advanced</div>
+                            <div class="plan-name">PRO</div>
                             <div class="plan-price">$79<span>/mo</span></div>
-                            <a href="signup.html?plan=advanced" class="btn btn-sm btn-primary">Select</a>
+                            <a href="#" data-tier="pro" class="btn btn-sm btn-primary subscription-btn">Select</a>
                         </div>
                         <div class="plan-column">
-                            <div class="plan-name">Professional</div>
+                            <div class="plan-name">ELITE</div>
                             <div class="plan-price">$199<span>/mo</span></div>
-                            <a href="signup.html?plan=professional" class="btn btn-sm btn-outline">Select</a>
+                            <a href="#" data-tier="elite" class="btn btn-sm btn-outline subscription-btn">Select</a>
                         </div>
                         <div class="plan-column">
-                            <div class="plan-name">Enterprise</div>
-                            <div class="plan-price">Custom</div>
-                            <a href="contact.html" class="btn btn-sm btn-outline">Contact</a>
+                            <div class="plan-name">INSTITUTIONAL</div>
+                            <div class="plan-price">$999<span>/mo</span></div>
+                            <a href="#" data-tier="institutional" class="btn btn-sm btn-outline subscription-btn">Select</a>
                         </div>
                     </div>
 
@@ -568,5 +583,12 @@
 
     <script src="js/script.js"></script>
     <script src="js/comparison-grid.js"></script>
+    <!-- Stripe.js and Checkout Integration -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        // Set your publishable key
+        window.STRIPE_PUBLISHABLE_KEY = 'pk_live_51RDOtSKFKKBTUMsUq79ndPaY7yQGPR272Sy6P9IndnOKTYOi1g5FMnSSfSGoKWUq98VDpLJns1SYfK0GuqaBG9bd00Zq3VvFG8';
+    </script>
+    <script src="js/checkout.js"></script>
 </body>
 </html>
