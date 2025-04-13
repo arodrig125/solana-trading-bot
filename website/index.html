@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolarBot.io - Advanced Solana Arbitrage Bot</title>
+    <title>SolarBot | Automated Solana Arbitrage Trading Bot</title>
+    <meta name="description" content="SolarBot is a powerful Solana arbitrage trading bot that automates cross-DEX trading strategies to generate passive income with real-time analytics and Telegram integration.">
+    <meta name="keywords" content="solana arbitrage bot, crypto trading automation, jupiter dex arbitrage, solana trading bot, defi automation, passive crypto income">
+    <meta name="author" content="SolarBot Team">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="SolarBot | Automated Solana Arbitrage Trading Bot">
+    <meta property="og:description" content="SolarBot is a powerful Solana arbitrage trading bot that automates cross-DEX trading strategies to generate passive income with real-time analytics and Telegram integration.">
+    <meta property="og:image" content="https://solarbot.io/images/solarbot-og-image.png">
+    <meta property="og:url" content="https://solarbot.io">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SolarBot | Automated Solana Arbitrage Trading Bot">
+    <meta name="twitter:description" content="Automate your Solana arbitrage trading with SolarBot. Generate passive income with cross-DEX strategies and real-time analytics.">
+    <meta name="twitter:image" content="https://solarbot.io/images/solarbot-twitter-image.png">
+    <link rel="canonical" href="https://solarbot.io">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/dark-mode.css">
@@ -12,7 +26,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="description" content="SolarBot is an advanced Solana arbitrage trading bot with Telegram integration and real-time analytics.">
 </head>
 <body>
     <!-- Header -->
@@ -30,6 +43,7 @@
                     <li><a href="pricing.html">Pricing</a></li>
                     <li><a href="documentation.html">Documentation</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
                 </ul>
                 <div class="auth-buttons">
                     <a href="login.html" class="btn btn-outline">Login</a>
@@ -305,8 +319,8 @@
                 </div>
             </div>
             <div class="testimonial-controls">
-                <button class="prev-testimonial"><i class="fas fa-arrow-left"></i></button>
-                <button class="next-testimonial"><i class="fas fa-arrow-right"></i></button>
+                <button type="button" class="prev-testimonial" aria-label="Previous testimonial"><i class="fas fa-arrow-left"></i></button>
+                <button type="button" class="next-testimonial" aria-label="Next testimonial"><i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
     </section>
@@ -401,10 +415,10 @@
                     </div>
                     <p>Advanced Solana arbitrage trading bot with Telegram integration and real-time analytics.</p>
                     <div class="social-links">
-                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Join our Telegram group"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Join our Discord server"><i class="fab fa-discord"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="View our GitHub repository"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -447,5 +461,51 @@
     <script src="js/animations.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/chat-widget.js"></script>
+
+    <!-- Schema.org Structured Data for SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SolarBot",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Cloud-based",
+      "offers": {
+        "@type": "Offer",
+        "price": "49.99",
+        "priceCurrency": "USD"
+      },
+      "description": "SolarBot is a powerful Solana arbitrage trading bot that automates cross-DEX trading strategies to generate passive income with real-time analytics and Telegram integration.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127"
+      }
+    }
+    </script>
+
+    <!-- Schema.org Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SolarBot",
+      "url": "https://solarbot.io",
+      "logo": "https://solarbot.io/images/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-805-876-4631",
+        "contactType": "customer service",
+        "email": "contact@solarbot.io",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://twitter.com/solarbot",
+        "https://t.me/solarbotcommunity",
+        "https://discord.gg/solarbot",
+        "https://github.com/solarbot"
+      ]
+    }
+    </script>
 </body>
 </html>

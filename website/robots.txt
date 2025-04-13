@@ -1,0 +1,26 @@
+# robots.txt for SolarBot.io
+
+User-agent: *
+Allow: /
+
+# Main pages
+Allow: /index.html
+Allow: /features.html
+Allow: /pricing.html
+Allow: /documentation.html
+Allow: /contact.html
+Allow: /blog/
+
+# Assets
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /fonts/
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /chat-config.html
+
+# Sitemaps
+Sitemap: https://solarbot.io/sitemap.xml
