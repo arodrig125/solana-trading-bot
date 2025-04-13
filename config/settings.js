@@ -43,7 +43,16 @@ module.exports = {
     autoStart: true,
 
     // Maximum number of concurrent requests to avoid rate limiting
-    maxConcurrentRequests: 1, // Reduced to 1 to avoid rate limiting
+    maxConcurrentRequests: process.env.MAX_CONCURRENT_REQUESTS ? parseInt(process.env.MAX_CONCURRENT_REQUESTS) : 3,
+
+    // Enable adaptive scanning intervals based on performance metrics
+    adaptiveIntervals: process.env.ADAPTIVE_INTERVALS === 'true',
+
+    // Minimum scan interval in milliseconds (for adaptive scanning)
+    minScanInterval: 30000, // 30 seconds
+
+    // Maximum scan interval in milliseconds (for adaptive scanning)
+    maxScanInterval: 300000, // 5 minutes
 
     // Dynamic arbitrage settings
     dynamicArbitrage: {

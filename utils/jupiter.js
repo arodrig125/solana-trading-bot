@@ -93,6 +93,15 @@ function calculateBackoffTime() {
   return Math.min(1000 * Math.pow(2, consecutiveFailures - 1), 10000); // Max 10 seconds
 }
 
+// Performance metrics for API calls
+let performanceMetrics;
+try {
+  performanceMetrics = require('./performance-metrics');
+} catch (error) {
+  logger.debug('Performance metrics module not available');
+  performanceMetrics = null;
+}
+
 // Get quote for a token swap
 async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBps = 100, onlyDirectRoutes = false) {
   try {
@@ -111,9 +120,18 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
       // Construct a basic request to Jupiter API v6
       const requestUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMintStr}&outputMint=${outputMintStr}&amount=${amount}&slippageBps=${slippageBps}&onlyDirectRoutes=${onlyDirectRoutes}`;
 
+      // Track API call performance
+      const apiCallStart = Date.now();
+
       // Use axios to make a direct API call
       const axios = require('axios');
       const response = await axios.get(requestUrl);
+
+      // Record API call performance
+      const apiCallDuration = Date.now() - apiCallStart;
+      if (performanceMetrics) {
+        performanceMetrics.recordApiCall('jupiter/quote', true, apiCallDuration);
+      }
 
       if (response.data && response.status === 200) {
         // Only log on debug level to reduce noise
@@ -121,6 +139,11 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
         return response.data;
       }
     } catch (error) {
+      // Record failed API call
+      if (performanceMetrics) {
+        performanceMetrics.recordApiCall('jupiter/quote', false, Date.now() - (apiCallStart || Date.now()));
+      }
+
       logger.warn(`Jupiter API call failed for ${inputMintStr} to ${outputMintStr}: ${error.message}`);
     }
 

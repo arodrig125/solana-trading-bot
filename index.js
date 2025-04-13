@@ -99,6 +99,15 @@ if (!bot) {
 }
 logger.successMessage('Telegram bot initialized');
 
+// Import performance metrics
+let performanceMetrics;
+try {
+  performanceMetrics = require('./utils/performance-metrics');
+} catch (error) {
+  logger.debug('Performance metrics module not available');
+  performanceMetrics = null;
+}
+
 // Start background scanning
 async function startScanning() {
   if (isScanning) {
@@ -123,11 +132,21 @@ async function startScanning() {
     }
   }
 
+  // Start scanning with initial interval
+  scanInterval = setTimeout(runScan, settings.scanning.interval);
+}
+
 // Find arbitrage opportunities
 async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
   // Import required modules
   const jupiter = require('./utils/jupiter');
   const pathHistory = require('./utils/path-history');
+  const parallelProcessor = require('./utils/parallel-processor');
+  const performanceMetrics = require('./utils/performance-metrics');
+
+  // Start performance tracking
+  const scanStartTime = performanceMetrics.recordScanStart();
+
   logger.info('Scanning for arbitrage opportunities...');
   logger.info(`Using RPC endpoint: ${settings.rpc.endpoint}`);
 
@@ -155,17 +174,20 @@ async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
     { inputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'BTC-ETH' }
   ];
 
-  for (const pair of pairs) {
-    try {
-      const result = await jupiter.checkSimpleArbitrage(jupiterClient, pair);
-      if (result) {
-        opportunities.push(result);
-        logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
-      }
-    } catch (error) {
-      logger.error(`Error checking simple arbitrage for ${pair.name}:`, error);
-    }
-  }
+  // Process simple arbitrage opportunities in parallel
+  const simpleResults = await parallelProcessor.processArbitragePairs(
+    pairs,
+    jupiter.checkSimpleArbitrage,
+    jupiterClient,
+    settings.scanning.maxConcurrentRequests
+  );
+
+  // Add valid results to opportunities
+  simpleResults.filter(Boolean).forEach(result => {
+    opportunities.push(result);
+    logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+    performanceMetrics.recordOpportunity(result);
+  });
 
   // Check triangular arbitrage opportunities
   const paths = [
@@ -175,19 +197,22 @@ async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
     { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', c: 'So11111111111111111111111111111111111111112', name: 'USDC-BONK-SOL' }
   ];
 
-  for (const path of paths) {
-    try {
-      // Use 100 USDC as the input amount
-      const amount = '100000000'; // 100 USDC with 6 decimals
-      const result = await jupiter.checkTriangularArbitrage(jupiterClient, path, amount);
-      if (result) {
-        opportunities.push(result);
-        logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
-      }
-    } catch (error) {
-      logger.error(`Error checking triangular arbitrage for path ${path.name}:`, error);
-    }
-  }
+  // Process triangular arbitrage opportunities in parallel
+  const amount = '100000000'; // 100 USDC with 6 decimals
+  const triangularResults = await parallelProcessor.processArbitragePaths(
+    paths,
+    jupiter.checkTriangularArbitrage,
+    jupiterClient,
+    amount,
+    settings.scanning.maxConcurrentRequests
+  );
+
+  // Add valid results to opportunities
+  triangularResults.filter(Boolean).forEach(result => {
+    opportunities.push(result);
+    logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+    performanceMetrics.recordOpportunity(result);
+  });
 
   // Check dynamic arbitrage opportunities if enabled
   if (settings.scanning.dynamicArbitrage?.enabled) {
@@ -195,34 +220,52 @@ async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
       // Get path history
       const pathHistoryData = await pathHistory.getAllPathHistory();
 
-      // For each base token
+      // Prepare dynamic arbitrage tasks
+      const dynamicTasks = [];
+
+      // For each base token and path length, create a task
       for (const baseTokenMint of settings.scanning.dynamicArbitrage.baseTokens) {
-        // For each path length
         for (const pathLength of settings.scanning.dynamicArbitrage.pathLengths) {
           // Get amount based on token
           const baseToken = jupiter.getTokenByMint(baseTokenMint);
           if (!baseToken) continue;
 
-          const amount = jupiter.parseAmount(
+          const tokenAmount = jupiter.parseAmount(
             settings.trading.defaultQuoteAmount,
             baseToken.decimals
           );
 
-          // Check for dynamic arbitrage opportunities
-          const result = await jupiter.checkDynamicArbitrage(
-            jupiterClient,
+          // Add task
+          dynamicTasks.push({
             baseTokenMint,
             pathLength,
-            amount,
-            settings.riskManagement.positionSizing?.enabled
-          );
-
-          if (result) {
-            opportunities.push(result);
-            logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
-          }
+            amount: tokenAmount,
+            useDynamicPositionSizing: settings.riskManagement.positionSizing?.enabled
+          });
         }
       }
+
+      // Process dynamic arbitrage tasks in parallel
+      const dynamicResults = await parallelProcessor.processInParallel(
+        dynamicTasks,
+        async (task) => {
+          return await jupiter.checkDynamicArbitrage(
+            jupiterClient,
+            task.baseTokenMint,
+            task.pathLength,
+            task.amount,
+            task.useDynamicPositionSizing
+          );
+        },
+        settings.scanning.maxConcurrentRequests
+      );
+
+      // Add valid results to opportunities
+      dynamicResults.filter(Boolean).forEach(result => {
+        opportunities.push(result);
+        logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+        performanceMetrics.recordOpportunity(result);
+      });
     } catch (error) {
       logger.error('Error checking dynamic arbitrage:', error);
     }
@@ -237,90 +280,111 @@ async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
     logger.info(`Opportunity types: ${JSON.stringify(types)}`);
   }
 
+  // Record scan completion
+  performanceMetrics.recordScanEnd(scanStartTime, opportunities.length);
+
   return opportunities;
 }
 
-// Run scan at the specified interval
-  scanInterval = setInterval(async () => {
-    try {
-      const opportunities = await findArbitrageOpportunities(jupiterClient, minProfitPercent);
+// Run a single scan
+async function runScan() {
+  try {
+    const opportunities = await findArbitrageOpportunities(jupiterClient, minProfitPercent);
 
-      if (opportunities.length > 0) {
-        logger.info(`Found ${opportunities.length} arbitrage opportunities!`);
+    if (opportunities.length > 0) {
+      logger.info(`Found ${opportunities.length} arbitrage opportunities!`);
 
-        // Process each opportunity
-        for (const opportunity of opportunities) {
-          // Record the opportunity
-          recordOpportunity(opportunity);
+      // Process each opportunity
+      for (const opportunity of opportunities) {
+        // Record the opportunity
+        recordOpportunity(opportunity);
 
-          // Log to Google Sheets if enabled
-          if (sheetsClient && SHEET_ID) {
-            await logOpportunity(sheetsClient, SHEET_ID, opportunity);
+        // Log to Google Sheets if enabled
+        if (sheetsClient && SHEET_ID) {
+          await logOpportunity(sheetsClient, SHEET_ID, opportunity);
+        }
+
+        // Send Telegram notification
+        if (TELEGRAM_CHAT_ID) {
+          await sendOpportunityAlert(bot, TELEGRAM_CHAT_ID, opportunity);
+        }
+
+        // Execute trade if auto-execute is enabled and enough time has passed since last trade
+        if (settings.trading.autoExecuteTrades) {
+          const now = Date.now();
+          const timeSinceLastTrade = now - lastTradeTime;
+
+          if (timeSinceLastTrade < settings.trading.minTimeBetweenTrades) {
+            logger.info(`Skipping trade execution: minimum time between trades not reached (${Math.floor(timeSinceLastTrade / 1000)}s / ${Math.floor(settings.trading.minTimeBetweenTrades / 1000)}s)`);
+            continue;
           }
 
-          // Send Telegram notification
-          if (TELEGRAM_CHAT_ID) {
-            await sendOpportunityAlert(bot, TELEGRAM_CHAT_ID, opportunity);
-          }
+          // Check if we can execute the trade based on risk management
+          const tradeAmount = opportunity.startAmount || opportunity.inputAmount;
+          const canExecute = await canExecuteTransaction(
+            connection,
+            wallet,
+            tradeAmount
+          );
 
-          // Execute trade if auto-execute is enabled and enough time has passed since last trade
-          if (settings.trading.autoExecuteTrades) {
-            const now = Date.now();
-            const timeSinceLastTrade = now - lastTradeTime;
-
-            if (timeSinceLastTrade < settings.trading.minTimeBetweenTrades) {
-              logger.info(`Skipping trade execution: minimum time between trades not reached (${Math.floor(timeSinceLastTrade / 1000)}s / ${Math.floor(settings.trading.minTimeBetweenTrades / 1000)}s)`);
-              continue;
-            }
-
-            // Check if we can execute the trade based on risk management
-            const tradeAmount = opportunity.startAmount || opportunity.inputAmount;
-            const canExecute = await canExecuteTransaction(
+          if (canExecute) {
+            const trade = await executeTrade(
+              jupiterClient,
               connection,
               wallet,
-              tradeAmount
+              opportunity,
+              simulationMode
             );
 
-            if (canExecute) {
-              const trade = await executeTrade(
-                jupiterClient,
-                connection,
-                wallet,
-                opportunity,
-                simulationMode
-              );
+            // Update last trade time
+            lastTradeTime = now;
 
-              // Update last trade time
-              lastTradeTime = now;
+            // Record the trade
+            recordTrade(trade);
 
-              // Record the trade
-              recordTrade(trade);
+            // Update performance metrics
+            updatePerformance(trade);
 
-              // Update performance metrics
-              updatePerformance(trade);
+            // Send trade notification
+            if (TELEGRAM_CHAT_ID) {
+              await sendTradeAlert(bot, TELEGRAM_CHAT_ID, trade);
+            }
 
-              // Send trade notification
-              if (TELEGRAM_CHAT_ID) {
-                await sendTradeAlert(bot, TELEGRAM_CHAT_ID, trade);
-              }
-
-              // Log to Google Sheets if enabled
-              if (sheetsClient && SHEET_ID) {
-                await logTrade(sheetsClient, SHEET_ID, trade);
-              }
+            // Log to Google Sheets if enabled
+            if (sheetsClient && SHEET_ID) {
+              await logTrade(sheetsClient, SHEET_ID, trade);
             }
           }
         }
       }
-    } catch (error) {
-      logger.errorMessage('Error in scan interval', error);
+    }
+  } catch (error) {
+    logger.errorMessage('Error in scan interval', error);
 
-      // Send error notification
-      if (TELEGRAM_CHAT_ID && settings.notifications.sendErrorAlerts) {
-        await sendErrorAlert(bot, TELEGRAM_CHAT_ID, `Error during scanning: ${error.message}`);
+    // Send error notification
+    if (TELEGRAM_CHAT_ID && settings.notifications.sendErrorAlerts) {
+      await sendErrorAlert(bot, TELEGRAM_CHAT_ID, `Error during scanning: ${error.message}`);
+    }
+  }
+
+  // Schedule next scan with adaptive interval if still scanning
+  if (isScanning) {
+    // Get recommended scan interval based on performance metrics
+    let nextInterval = settings.scanning.interval; // Default interval
+
+    if (performanceMetrics) {
+      const recommendedInterval = performanceMetrics.getRecommendedScanInterval();
+
+      // Use recommended interval if it's valid
+      if (recommendedInterval && recommendedInterval > 0) {
+        nextInterval = recommendedInterval;
+        logger.debug(`Using adaptive scan interval: ${nextInterval}ms`);
       }
     }
-  }, settings.scanning.interval);
+
+    // Schedule next scan
+    scanInterval = setTimeout(runScan, nextInterval);
+  }
 }
 
 // Stop background scanning
@@ -330,9 +394,14 @@ function stopScanning() {
     return;
   }
 
-  clearInterval(scanInterval);
+  clearTimeout(scanInterval);
   isScanning = false;
   logger.successMessage('Background scanning stopped');
+
+  // Save performance metrics when stopping
+  if (performanceMetrics) {
+    performanceMetrics.saveMetrics();
+  }
 
   if (TELEGRAM_CHAT_ID) {
     sendMessage(bot, TELEGRAM_CHAT_ID, '⏹️ Bot has stopped scanning for arbitrage opportunities.')
@@ -525,6 +594,7 @@ setupCommands(bot, {
       '`/opportunities` - View recent opportunities\n' +
       '`/trades` - View recent trades\n' +
       '`/settings` - View current settings\n' +
+      '`/performance` - View performance metrics\n' +
       '`/help` - Show this help message'
     );
   }

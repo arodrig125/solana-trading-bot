@@ -387,6 +387,50 @@ function setupCommands(bot, callbacks) {
   bot.onText(/\/settings/, onSettings);
   bot.onText(/\/help/, onHelp);
 
+  // Performance command
+  bot.onText(/\/performance/, async (msg) => {
+    try {
+      // Import performance metrics
+      let performanceMetrics;
+      try {
+        performanceMetrics = require('./performance-metrics');
+      } catch (error) {
+        await sendMessage(bot, msg.chat.id, '❌ Performance metrics module not available');
+        return;
+      }
+
+      // Get performance metrics summary
+      const metrics = performanceMetrics.getMetricsSummary();
+
+      // Format message
+      const message = `<b>📊 Performance Metrics</b>\n\n` +
+        `<b>Scanning:</b>\n` +
+        `• Total scans: ${metrics.scanning.totalScans}\n` +
+        `• Avg scan time: ${metrics.scanning.averageScanTime}ms\n` +
+        `• Scans per hour: ${metrics.scanning.scansPerHour}\n\n` +
+
+        `<b>Opportunities:</b>\n` +
+        `• Total found: ${metrics.opportunities.total}\n` +
+        `• By type: ${Object.entries(metrics.opportunities.byType).map(([k, v]) => `${k}: ${v}`).join(', ')}\n` +
+        `• Avg profit: ${metrics.opportunities.averageProfit}\n` +
+        `• Highest profit: ${metrics.opportunities.highestProfit}\n\n` +
+
+        `<b>API:</b>\n` +
+        `• Total calls: ${metrics.api.totalCalls}\n` +
+        `• Success rate: ${metrics.api.successRate}\n` +
+        `• Avg call time: ${metrics.api.averageCallTime}ms\n\n` +
+
+        `<b>System:</b>\n` +
+        `• Uptime: ${metrics.system.uptime}\n` +
+        `• Memory: ${metrics.system.memory}`;
+
+      await sendMessage(bot, msg.chat.id, message);
+    } catch (error) {
+      logger.error('Error sending performance metrics:', error);
+      await sendMessage(bot, msg.chat.id, '❌ Error retrieving performance metrics');
+    }
+  });
+
   // Handle callback queries from inline keyboards
   bot.on('callback_query', async (query) => {
     try {
