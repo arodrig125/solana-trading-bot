@@ -123,7 +123,121 @@ async function startScanning() {
     }
   }
 
-  // Run scan at the specified interval
+// Find arbitrage opportunities
+async function findArbitrageOpportunities(jupiterClient, minProfitPercent) {
+  logger.info('Scanning for arbitrage opportunities...');
+  logger.info(`Using RPC endpoint: ${settings.rpc.endpoint}`);
+
+  // Adjust minimum profit threshold based on gas prices if enabled
+  let adjustedMinProfit = minProfitPercent;
+  if (settings.gasOptimization?.adjustProfitThresholds) {
+    // Simple adjustment for now
+    adjustedMinProfit = Math.max(minProfitPercent, 0.5);
+    logger.info(`Adjusted minimum profit threshold to ${adjustedMinProfit.toFixed(2)}% based on gas prices`);
+  }
+
+  const opportunities = [];
+
+  // Check simple arbitrage opportunities (exchange arbitrage)
+  const pairs = [
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', name: 'USDC-USDT' },
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'So11111111111111111111111111111111111111112', name: 'USDC-SOL' },
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'USDC-BTC' },
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'USDC-ETH' },
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', name: 'USDC-JUP' },
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: '4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R', name: 'USDC-RAY' },
+    { inputMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', outputMint: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', name: 'USDC-BONK' },
+    { inputMint: 'So11111111111111111111111111111111111111112', outputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'SOL-BTC' },
+    { inputMint: 'So11111111111111111111111111111111111111112', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'SOL-ETH' },
+    { inputMint: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', outputMint: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'BTC-ETH' }
+  ];
+
+  for (const pair of pairs) {
+    try {
+      const result = await jupiter.checkSimpleArbitrage(jupiterClient, pair);
+      if (result) {
+        opportunities.push(result);
+        logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+      }
+    } catch (error) {
+      logger.error(`Error checking simple arbitrage for ${pair.name}:`, error);
+    }
+  }
+
+  // Check triangular arbitrage opportunities
+  const paths = [
+    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'So11111111111111111111111111111111111111112', c: '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', name: 'USDC-SOL-BTC' },
+    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'So11111111111111111111111111111111111111112', c: '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', name: 'USDC-SOL-ETH' },
+    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', c: 'So11111111111111111111111111111111111111112', name: 'USDC-JUP-SOL' },
+    { a: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', b: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', c: 'So11111111111111111111111111111111111111112', name: 'USDC-BONK-SOL' }
+  ];
+
+  for (const path of paths) {
+    try {
+      // Use 100 USDC as the input amount
+      const amount = '100000000'; // 100 USDC with 6 decimals
+      const result = await jupiter.checkTriangularArbitrage(jupiterClient, path, amount);
+      if (result) {
+        opportunities.push(result);
+        logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+      }
+    } catch (error) {
+      logger.error(`Error checking triangular arbitrage for path ${path.name}:`, error);
+    }
+  }
+
+  // Check dynamic arbitrage opportunities if enabled
+  if (settings.scanning.dynamicArbitrage?.enabled) {
+    try {
+      // Get path history
+      const pathHistoryData = await pathHistory.getAllPathHistory();
+
+      // For each base token
+      for (const baseTokenMint of settings.scanning.dynamicArbitrage.baseTokens) {
+        // For each path length
+        for (const pathLength of settings.scanning.dynamicArbitrage.pathLengths) {
+          // Get amount based on token
+          const baseToken = jupiter.getTokenByMint(baseTokenMint);
+          if (!baseToken) continue;
+
+          const amount = jupiter.parseAmount(
+            settings.trading.defaultQuoteAmount,
+            baseToken.decimals
+          );
+
+          // Check for dynamic arbitrage opportunities
+          const result = await jupiter.checkDynamicArbitrage(
+            jupiterClient,
+            baseTokenMint,
+            pathLength,
+            amount,
+            settings.riskManagement.positionSizing?.enabled
+          );
+
+          if (result) {
+            opportunities.push(result);
+            logger.opportunityFound(`${result.type} - Profit: ${result.profitPercent.toFixed(2)}%`);
+          }
+        }
+      }
+    } catch (error) {
+      logger.error('Error checking dynamic arbitrage:', error);
+    }
+  }
+
+  // Log opportunity types
+  if (opportunities.length > 0) {
+    const types = opportunities.reduce((acc, opp) => {
+      acc[opp.type] = (acc[opp.type] || 0) + 1;
+      return acc;
+    }, {});
+    logger.info(`Opportunity types: ${JSON.stringify(types)}`);
+  }
+
+  return opportunities;
+}
+
+// Run scan at the specified interval
   scanInterval = setInterval(async () => {
     try {
       const opportunities = await findArbitrageOpportunities(jupiterClient, minProfitPercent);
