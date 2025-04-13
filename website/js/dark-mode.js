@@ -1,31 +1,50 @@
 // Dark Mode Toggle for SolarBot Website
 document.addEventListener('DOMContentLoaded', function() {
-    // Create dark mode toggle button
-    const darkModeToggle = document.createElement('div');
-    darkModeToggle.className = 'dark-mode-toggle';
-    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    document.body.appendChild(darkModeToggle);
+    // Create dark mode toggle button if it doesn't exist
+    if (!document.querySelector('.dark-mode-toggle')) {
+        const darkModeToggle = document.createElement('div');
+        darkModeToggle.className = 'dark-mode-toggle';
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+        darkModeToggle.setAttribute('role', 'button');
+        darkModeToggle.setAttribute('tabindex', '0');
+        document.body.appendChild(darkModeToggle);
 
-    // Check for saved user preference
-    const darkMode = localStorage.getItem('darkMode');
-    
-    // If dark mode was previously enabled, apply it
-    if (darkMode === 'enabled') {
-        enableDarkMode();
+        // Toggle dark mode on button click
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+
+        // Add keyboard support
+        darkModeToggle.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleDarkMode();
+            }
+        });
     }
 
-    // Toggle dark mode on button click
-    darkModeToggle.addEventListener('click', () => {
+    // Check for saved user preference or system preference
+    const darkMode = localStorage.getItem('darkMode');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Apply dark mode based on preference
+    if (darkMode === 'enabled' || (!darkMode && systemPrefersDark)) {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
+    }
+
+    // Function to toggle dark mode
+    function toggleDarkMode() {
         // Check current dark mode status
         const darkMode = localStorage.getItem('darkMode');
-        
+
         // Toggle dark mode
         if (darkMode !== 'enabled') {
             enableDarkMode();
         } else {
             disableDarkMode();
         }
-    });
+    }
 
     // Function to enable dark mode
     function enableDarkMode() {
@@ -49,12 +68,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check system preference
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     // Apply dark mode based on system preference if no saved preference
     if (darkMode === null && prefersDarkScheme.matches) {
         enableDarkMode();
     }
-    
+
     // Listen for changes in system preference
     prefersDarkScheme.addEventListener('change', (e) => {
         // Only apply if user hasn't manually set a preference
