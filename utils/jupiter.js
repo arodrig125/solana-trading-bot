@@ -106,51 +106,26 @@ async function getQuote(jupiterClient, inputMint, outputMint, amount, slippageBp
     const inputMintStr = inputMint instanceof PublicKey ? inputMint.toString() : inputMint;
     const outputMintStr = outputMint instanceof PublicKey ? outputMint.toString() : outputMint;
 
-    // Log the Jupiter client structure to debug
-    logger.debug(`Jupiter client methods: ${Object.keys(jupiterClient).join(', ')}`);
-
-    // Try the v6 method first
+    // Since we know the direct method is failing, go straight to the fallback API call
     try {
-      // Check if v6 quoteGet method exists
-      if (typeof jupiterClient.quoteGet === 'function') {
-        logger.debug('Using quoteGet method (v6)');
-        const quoteResponse = await jupiterClient.quoteGet({
-          inputMint: inputMintStr,
-          outputMint: outputMintStr,
-          amount,
-          slippageBps,
-          onlyDirectRoutes
-        });
+      // Construct a basic request to Jupiter API v6
+      const requestUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMintStr}&outputMint=${outputMintStr}&amount=${amount}&slippageBps=${slippageBps}&onlyDirectRoutes=${onlyDirectRoutes}`;
 
-        return quoteResponse;
-      } else {
-        throw new Error('quoteGet method not found');
+      // Use axios to make a direct API call
+      const axios = require('axios');
+      const response = await axios.get(requestUrl);
+
+      if (response.data && response.status === 200) {
+        // Only log on debug level to reduce noise
+        logger.debug('Got quote using Jupiter API v6');
+        return response.data;
       }
-    } catch (directError) {
-      logger.warn(`Direct quote method failed: ${directError.message}`);
-
-      // Try fallback method for compatibility - direct API call
-      try {
-        logger.info('Attempting fallback direct API call');
-
-        // Construct a basic request
-        const requestUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMintStr}&outputMint=${outputMintStr}&amount=${amount}&slippageBps=${slippageBps}&onlyDirectRoutes=${onlyDirectRoutes}`;
-
-        // Use axios to make a direct API call
-        const axios = require('axios');
-        const response = await axios.get(requestUrl);
-
-        if (response.data && response.status === 200) {
-          logger.info('Successfully got quote using fallback API call');
-          return response.data;
-        }
-      } catch (fallbackError) {
-        logger.warn(`Fallback API call failed: ${fallbackError.message}`);
-      }
-
-      // If we get here, no compatible method was found
-      throw new Error('No compatible Jupiter API method found');
+    } catch (error) {
+      logger.warn(`Jupiter API call failed for ${inputMintStr} to ${outputMintStr}: ${error.message}`);
     }
+
+    // If we get here, no compatible method was found
+    throw new Error('No compatible Jupiter API method found');
   } catch (error) {
     logger.error(`Error getting quote for ${inputMint} to ${outputMint}:`, error);
     return null;
@@ -163,7 +138,7 @@ async function checkTriangularArbitrage(jupiterClient, path, amount) {
     const { a, b, c, name, minProfitPercent } = path;
     const pathMinProfit = minProfitPercent || settings.trading.defaultMinProfitPercent;
     // Set a maximum reasonable profit percentage to filter out erroneous results
-    const maxReasonableProfitPercent = 10.0; // 10% is already extremely high for arbitrage
+    const maxReasonableProfitPercent = 5.0; // 5% is already extremely high for arbitrage
 
     logger.info(`Checking triangular arbitrage for path: ${name}`);
 
@@ -257,7 +232,7 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
     const { inputMint, outputMint, name, minProfitPercent } = pair;
     const pairMinProfit = minProfitPercent || settings.trading.defaultMinProfitPercent;
     // Set a maximum reasonable profit percentage to filter out erroneous results
-    const maxReasonableProfitPercent = 10.0; // 10% is already extremely high for arbitrage
+    const maxReasonableProfitPercent = 5.0; // 5% is already extremely high for arbitrage
 
     logger.info(`Checking simple arbitrage for pair: ${name}`);
 
@@ -307,8 +282,30 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
     // If the output amounts are too large compared to input, it's likely an error
     const inputAmountFormatted = formatAmount(amount, inputToken.decimals);
 
-    // For major tokens like BTC, ETH, SOL, the output amount should be much smaller than input amount (in USDC)
-    if (outputToken.category === 'major' && (formattedOutAmount1 > inputAmountFormatted * 10 || formattedOutAmount2 > inputAmountFormatted * 10)) {
+    // Token-specific validation based on known price ranges
+    if (outputToken.symbol === 'BTC') {
+      // BTC price is ~65,000 USDC, so 100 USDC should get ~0.0015 BTC
+      const maxReasonableBTC = inputAmountFormatted / 50000; // Conservative estimate
+      if (formattedOutAmount1 > maxReasonableBTC || formattedOutAmount2 > maxReasonableBTC) {
+        logger.warn(`Unrealistic BTC output amounts for ${name}: ${formattedOutAmount1} and ${formattedOutAmount2} from ${inputAmountFormatted} ${inputToken.symbol}`);
+        return null;
+      }
+    } else if (outputToken.symbol === 'ETH') {
+      // ETH price is ~3,000 USDC, so 100 USDC should get ~0.033 ETH
+      const maxReasonableETH = inputAmountFormatted / 2000; // Conservative estimate
+      if (formattedOutAmount1 > maxReasonableETH || formattedOutAmount2 > maxReasonableETH) {
+        logger.warn(`Unrealistic ETH output amounts for ${name}: ${formattedOutAmount1} and ${formattedOutAmount2} from ${inputAmountFormatted} ${inputToken.symbol}`);
+        return null;
+      }
+    } else if (outputToken.symbol === 'SOL') {
+      // SOL price is ~150 USDC, so 100 USDC should get ~0.67 SOL
+      const maxReasonableSOL = inputAmountFormatted / 100; // Conservative estimate
+      if (formattedOutAmount1 > maxReasonableSOL * 1.5 || formattedOutAmount2 > maxReasonableSOL * 1.5) {
+        logger.warn(`Unrealistic SOL output amounts for ${name}: ${formattedOutAmount1} and ${formattedOutAmount2} from ${inputAmountFormatted} ${inputToken.symbol}`);
+        return null;
+      }
+    } else if (outputToken.category === 'major' && (formattedOutAmount1 > inputAmountFormatted * 10 || formattedOutAmount2 > inputAmountFormatted * 10)) {
+      // General check for other major tokens
       logger.warn(`Unrealistic output amounts for ${name}: ${formattedOutAmount1} and ${formattedOutAmount2} from ${inputAmountFormatted} ${inputToken.symbol}`);
       return null;
     }
