@@ -102,6 +102,30 @@ module.exports = {
     // Maximum loss percentage before pausing trading
     maxLossPercentage: 5.0,
 
+    // Whether to enable stop-loss and take-profit functionality
+    enableStopLossAndTakeProfit: true,
+
+    // Interval for monitoring active trades (in milliseconds)
+    monitoringInterval: 30000,
+
+    // Default risk level (low, medium, high)
+    defaultRiskLevel: 'medium',
+
+    // Default stop-loss percentage
+    defaultStopLossPercent: 1.0,
+
+    // Default take-profit percentage
+    defaultTakeProfitPercent: 0.5,
+
+    // Default maximum position size as percentage of wallet
+    defaultMaxPositionSizePercent: 10,
+
+    // Default maximum slippage percentage
+    defaultMaxSlippage: 0.5,
+
+    // Default minimum profit threshold percentage
+    defaultMinProfitThreshold: 0.2,
+
     // Circuit breaker settings
     circuitBreaker: {
       // Whether to enable circuit breaker
