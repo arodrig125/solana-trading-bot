@@ -45,28 +45,34 @@ body.dark-mode {
     color: var(--dark-text);
 }
 
-/* Header */
+/* Header - keeping white background for logo visibility */
 body.dark-mode header {
-    background-color: var(--dark-surface);
-    box-shadow: var(--dark-shadow);
+    background-color: var(--light-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--light-darker);
 }
 
 body.dark-mode .nav-links a {
-    color: var(--dark-text);
+    color: var(--text-color);
 }
 
 body.dark-mode .nav-links a:hover {
-    color: var(--primary-light);
+    color: var(--primary-color);
 }
 
 body.dark-mode .mobile-menu-toggle span {
-    background-color: var(--dark-text);
+    background-color: var(--dark-color);
 }
 
 body.dark-mode .nav-links.active,
 body.dark-mode .auth-buttons.active {
-    background-color: var(--dark-surface);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--light-color);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+body.dark-mode .logo-text {
+    color: var(--dark-color);
 }
 
 /* Sections */
