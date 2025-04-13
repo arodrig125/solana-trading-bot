@@ -199,6 +199,18 @@ module.exports = {
     adjustProfitThresholds: true
   },
 
+  // RPC settings
+  rpc: {
+    // RPC endpoint to use
+    endpoint: process.env.RPC_ENDPOINT || 'https://api.mainnet-beta.solana.com',
+
+    // Commitment level
+    commitment: 'confirmed',
+
+    // Whether to disable retry on rate limit
+    disableRetryOnRateLimit: false
+  },
+
   // Advanced settings
   advanced: {
     // RPC endpoint to use (leave empty to use default)
