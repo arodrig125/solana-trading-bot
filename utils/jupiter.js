@@ -219,8 +219,20 @@ async function checkTriangularArbitrage(jupiterClient, path, amount) {
   try {
     const { a, b, c, name, minProfitPercent } = path;
     const pathMinProfit = minProfitPercent || settings.trading.defaultMinProfitPercent;
+    // Set a maximum reasonable profit percentage to filter out erroneous results
+    const maxReasonableProfitPercent = 10.0; // 10% is already extremely high for arbitrage
 
     logger.info(`Checking triangular arbitrage for path: ${name}`);
+
+    // Get token info
+    const tokenAInfo = getTokenByMint(a);
+    const tokenBInfo = getTokenByMint(b);
+    const tokenCInfo = getTokenByMint(c);
+
+    if (!tokenAInfo || !tokenBInfo || !tokenCInfo) {
+      logger.warn(`One or more tokens not found for path: ${name}`);
+      return null;
+    }
 
     // A -> B
     const quoteAB = await getQuote(jupiterClient, a, b, amount);
@@ -234,29 +246,53 @@ async function checkTriangularArbitrage(jupiterClient, path, amount) {
     const quoteCA = await getQuote(jupiterClient, c, a, quoteBC.outAmount);
     if (!quoteCA) return null;
 
+    // Validate the output amounts
+    const outAmountAB = new BigNumber(quoteAB.outAmount);
+    const outAmountBC = new BigNumber(quoteBC.outAmount);
+    const outAmountCA = new BigNumber(quoteCA.outAmount);
+
+    if (outAmountAB.isNaN() || outAmountBC.isNaN() || outAmountCA.isNaN() ||
+        outAmountAB.lte(0) || outAmountBC.lte(0) || outAmountCA.lte(0)) {
+      logger.warn(`Invalid output amounts for path ${name}`);
+      return null;
+    }
+
     // Calculate profit
     const startAmount = new BigNumber(amount);
-    const endAmount = new BigNumber(quoteCA.outAmount);
+    const endAmount = outAmountCA;
     const profitAmount = endAmount.minus(startAmount);
     const profitPercent = calculateProfitPercentage(startAmount, endAmount);
 
+    // Filter out unrealistic profit percentages
+    if (profitPercent > maxReasonableProfitPercent) {
+      logger.warn(`Unrealistic profit percentage for ${name}: ${profitPercent.toFixed(2)}% - likely an error`);
+      return null;
+    }
+
     // Check if profit meets minimum threshold
     if (profitPercent >= pathMinProfit) {
-      const tokenAInfo = getTokenByMint(a);
-      const tokenBInfo = getTokenByMint(b);
-      const tokenCInfo = getTokenByMint(c);
+      // Format amounts for display
+      const formattedStartAmount = formatAmount(startAmount, tokenAInfo.decimals);
+      const formattedEndAmount = formatAmount(endAmount, tokenAInfo.decimals);
+      const formattedProfitAmount = formatAmount(profitAmount, tokenAInfo.decimals);
+
+      // Sanity check: ensure the profit amount is reasonable
+      if (formattedProfitAmount > formattedStartAmount * 0.1) { // Profit > 10% of start amount
+        logger.warn(`Suspiciously high profit for ${name}: ${formattedProfitAmount} from ${formattedStartAmount} ${tokenAInfo.symbol}`);
+        // We'll still return it but with a warning since triangular arb can sometimes have higher profits
+      }
 
       const result = {
         type: 'triangular',
         name,
         path: [
-          { from: tokenAInfo.symbol, to: tokenBInfo.symbol, fromAmount: formatAmount(startAmount, tokenAInfo.decimals), toAmount: formatAmount(quoteAB.outAmount, tokenBInfo.decimals) },
-          { from: tokenBInfo.symbol, to: tokenCInfo.symbol, fromAmount: formatAmount(quoteAB.outAmount, tokenBInfo.decimals), toAmount: formatAmount(quoteBC.outAmount, tokenCInfo.decimals) },
-          { from: tokenCInfo.symbol, to: tokenAInfo.symbol, fromAmount: formatAmount(quoteBC.outAmount, tokenCInfo.decimals), toAmount: formatAmount(endAmount, tokenAInfo.decimals) }
+          { from: tokenAInfo.symbol, to: tokenBInfo.symbol, fromAmount: formatAmount(startAmount, tokenAInfo.decimals), toAmount: formatAmount(outAmountAB, tokenBInfo.decimals) },
+          { from: tokenBInfo.symbol, to: tokenCInfo.symbol, fromAmount: formatAmount(outAmountAB, tokenBInfo.decimals), toAmount: formatAmount(outAmountBC, tokenCInfo.decimals) },
+          { from: tokenCInfo.symbol, to: tokenAInfo.symbol, fromAmount: formatAmount(outAmountBC, tokenCInfo.decimals), toAmount: formatAmount(endAmount, tokenAInfo.decimals) }
         ],
-        startAmount: formatAmount(startAmount, tokenAInfo.decimals),
-        endAmount: formatAmount(endAmount, tokenAInfo.decimals),
-        profitAmount: formatAmount(profitAmount, tokenAInfo.decimals),
+        startAmount: formattedStartAmount,
+        endAmount: formattedEndAmount,
+        profitAmount: formattedProfitAmount,
         profitPercent,
         timestamp: new Date().toISOString()
       };
@@ -277,6 +313,8 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
   try {
     const { inputMint, outputMint, name, minProfitPercent } = pair;
     const pairMinProfit = minProfitPercent || settings.trading.defaultMinProfitPercent;
+    // Set a maximum reasonable profit percentage to filter out erroneous results
+    const maxReasonableProfitPercent = 10.0; // 10% is already extremely high for arbitrage
 
     logger.info(`Checking simple arbitrage for pair: ${name}`);
 
@@ -284,6 +322,13 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
     const inputToken = getTokenByMint(inputMint);
     if (!inputToken) {
       logger.warn(`Token not found for mint: ${inputMint}`);
+      return null;
+    }
+
+    // Get output token info
+    const outputToken = getTokenByMint(outputMint);
+    if (!outputToken) {
+      logger.warn(`Token not found for mint: ${outputMint}`);
       return null;
     }
 
@@ -305,6 +350,26 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
     const outAmount1 = new BigNumber(quote1.outAmount);
     const outAmount2 = new BigNumber(quote2.outAmount);
 
+    // Validate the output amounts
+    if (outAmount1.isNaN() || outAmount2.isNaN() || outAmount1.lte(0) || outAmount2.lte(0)) {
+      logger.warn(`Invalid output amounts for pair ${name}: ${outAmount1.toString()} and ${outAmount2.toString()}`);
+      return null;
+    }
+
+    // Sanity check: ensure the output amounts are within a reasonable range
+    // For example, for BTC, if input is 100 USDC, output should be around 0.0015 BTC
+    const formattedOutAmount1 = formatAmount(outAmount1, outputToken.decimals);
+    const formattedOutAmount2 = formatAmount(outAmount2, outputToken.decimals);
+
+    // If the output amounts are too large compared to input, it's likely an error
+    const inputAmountFormatted = formatAmount(amount, inputToken.decimals);
+
+    // For major tokens like BTC, ETH, SOL, the output amount should be much smaller than input amount (in USDC)
+    if (outputToken.category === 'major' && (formattedOutAmount1 > inputAmountFormatted * 10 || formattedOutAmount2 > inputAmountFormatted * 10)) {
+      logger.warn(`Unrealistic output amounts for ${name}: ${formattedOutAmount1} and ${formattedOutAmount2} from ${inputAmountFormatted} ${inputToken.symbol}`);
+      return null;
+    }
+
     // If there's a significant difference, there might be an arbitrage opportunity
     const diff = outAmount1.minus(outAmount2).abs();
     const profitPercent = calculateProfitPercentage(
@@ -312,15 +377,19 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
       BigNumber.max(outAmount1, outAmount2)
     );
 
-    if (profitPercent >= pairMinProfit) {
-      const outputToken = getTokenByMint(outputMint);
+    // Filter out unrealistic profit percentages
+    if (profitPercent > maxReasonableProfitPercent) {
+      logger.warn(`Unrealistic profit percentage for ${name}: ${profitPercent.toFixed(2)}% - likely an error`);
+      return null;
+    }
 
+    if (profitPercent >= pairMinProfit) {
       const result = {
         type: 'exchange',
         pair: name,
-        inputAmount: formatAmount(amount, inputToken.decimals),
-        outputAmount1: formatAmount(outAmount1, outputToken.decimals),
-        outputAmount2: formatAmount(outAmount2, outputToken.decimals),
+        inputAmount: inputAmountFormatted,
+        outputAmount1: formattedOutAmount1,
+        outputAmount2: formattedOutAmount2,
         profitAmount: formatAmount(diff, outputToken.decimals),
         profitPercent,
         timestamp: new Date().toISOString()
@@ -348,6 +417,9 @@ async function checkSimpleArbitrage(jupiterClient, pair) {
  */
 async function checkDynamicArbitrage(jupiterClient, startTokenMint, pathLength, amount, useDynamicPositionSizing = false) {
   try {
+    // Set a maximum reasonable profit percentage to filter out erroneous results
+    const maxReasonableProfitPercent = 10.0; // 10% is already extremely high for arbitrage
+
     // Get token info
     const startToken = getTokenByMint(startTokenMint);
     if (!startToken) {
@@ -434,8 +506,15 @@ async function checkDynamicArbitrage(jupiterClient, startTokenMint, pathLength, 
           break;
         }
 
+        // Validate the output amount
+        const outAmount = new BigNumber(quote.outAmount);
+        if (outAmount.isNaN() || outAmount.lte(0)) {
+          logger.warn(`Invalid output amount in path step ${i+1}: ${outAmount.toString()}`);
+          break;
+        }
+
         // Update current amount and token for next step
-        currentAmount = new BigNumber(quote.outAmount);
+        currentAmount = outAmount;
         currentTokenMint = outputMint;
         currentTokenDecimals = getTokenByMint(outputMint)?.decimals || 9;
 
@@ -457,6 +536,12 @@ async function checkDynamicArbitrage(jupiterClient, startTokenMint, pathLength, 
         const profitAmount = endAmount.minus(startAmount);
         const profitPercent = calculateProfitPercentage(startAmount, endAmount);
 
+        // Filter out unrealistic profit percentages
+        if (profitPercent > maxReasonableProfitPercent) {
+          logger.warn(`Unrealistic profit percentage for path: ${pathData.tokenSymbols.join(' → ')}: ${profitPercent.toFixed(2)}% - likely an error`);
+          continue;
+        }
+
         // Record this attempt in path history
         await pathHistory.recordPathAttempt(
           path,
@@ -466,14 +551,24 @@ async function checkDynamicArbitrage(jupiterClient, startTokenMint, pathLength, 
 
         // If profitable, return the opportunity
         if (profitPercent > 0) {
+          // Format amounts for display
+          const formattedStartAmount = formatAmount(startAmount, startToken.decimals);
+          const formattedEndAmount = formatAmount(endAmount, startToken.decimals);
+          const formattedProfitAmount = formatAmount(profitAmount, startToken.decimals);
+
+          // Sanity check: ensure the profit amount is reasonable
+          if (formattedProfitAmount > formattedStartAmount * 0.1) { // Profit > 10% of start amount
+            logger.warn(`Suspiciously high profit for path: ${pathData.tokenSymbols.join(' → ')}: ${formattedProfitAmount} from ${formattedStartAmount} ${startToken.symbol}`);
+            // We'll still return it but with a warning
+          }
           const result = {
             type: 'dynamic',
             pathLength,
             path: pathData.tokenSymbols,
             startToken: startToken.symbol,
-            startAmount: formatAmount(actualAmount, startToken.decimals),
-            endAmount: formatAmount(endAmount, startToken.decimals),
-            profitAmount: formatAmount(profitAmount, startToken.decimals),
+            startAmount: formattedStartAmount,
+            endAmount: formattedEndAmount,
+            profitAmount: formattedProfitAmount,
             profitPercent,
             positionSizeUSDC: useDynamicPositionSizing ? positionSizeUSDC : null,
             dynamicSizing: useDynamicPositionSizing,
