@@ -51,38 +51,49 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      // In a real app, this would call your API's login endpoint
-      // const response = await apiService.login(email, password);
-      
-      // For demo purposes
-      if (email === 'demo@solarbot.io' && password === 'demo123') {
-        const demoToken = 'demo-token-' + Math.random().toString(36).substring(2);
-        localStorage.setItem('solarbot_token', demoToken);
-        setToken(demoToken);
+      try {
+        // Try to use the real API endpoint
+        const response = await apiService.login(email, password);
+        const { token: apiToken, user: userData } = response;
+        
+        localStorage.setItem('solarbot_token', apiToken);
+        setToken(apiToken);
+        setUser(userData);
+        
+        return { success: true };
+      } catch (apiError) {
+        console.log('API login failed, falling back to demo mode:', apiError);
+        
+        // For demo purposes - fallback if API fails
+        if (email === 'demo@solarbot.io' && password === 'demo123') {
+          const demoToken = 'demo-token-' + Math.random().toString(36).substring(2);
+          localStorage.setItem('solarbot_token', demoToken);
+          setToken(demoToken);
+          
+          setUser({
+            id: 'user123',
+            name: 'SolarBot Demo User',
+            email: 'demo@solarbot.io',
+            tier: 'professional'
+          });
+          
+          return { success: true };
+        }
+        
+        // For easier testing, allow any login in this demo
+        const mockToken = 'mock-token-' + Math.random().toString(36).substring(2);
+        localStorage.setItem('solarbot_token', mockToken);
+        setToken(mockToken);
         
         setUser({
-          id: 'user123',
-          name: 'SolarBot Demo User',
-          email: 'demo@solarbot.io',
+          id: 'user' + Math.floor(Math.random() * 1000),
+          name: 'SolarBot User',
+          email: email,
           tier: 'professional'
         });
         
         return { success: true };
       }
-      
-      // For easier testing, allow any login in this demo
-      const mockToken = 'mock-token-' + Math.random().toString(36).substring(2);
-      localStorage.setItem('solarbot_token', mockToken);
-      setToken(mockToken);
-      
-      setUser({
-        id: 'user' + Math.floor(Math.random() * 1000),
-        name: 'SolarBot User',
-        email: email,
-        tier: 'professional'
-      });
-      
-      return { success: true };
     } catch (err) {
       setError(err.message || 'Login failed');
       return { success: false, error: err.message };

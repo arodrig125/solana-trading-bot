@@ -8,6 +8,7 @@ const tokenManager = require('./tokenManager');
 const { getWalletBalance, getWalletInfo } = require('./wallet');
 const { executeTrade } = require('./jupiter');
 const { recordTrade, updatePerformance } = require('./analytics');
+const alertManager = require('./alerts');
 
 /**
  * Process an arbitrage opportunity with risk management
@@ -96,8 +97,10 @@ async function processOpportunity(userId, opportunity, settings, connection, wal
       settings.simulation
     );
 
-    // Record the trade
+    // Record the trade and track metrics
     if (tradeResult.success) {
+      // Track successful trade
+      await alertManager.trackTrade(true, tradeResult.profitPercent / 100);
       await recordTrade({
         userId,
         opportunity,
@@ -115,6 +118,10 @@ async function processOpportunity(userId, opportunity, settings, connection, wal
     return tradeResult;
   } catch (error) {
     logger.errorMessage('Error processing opportunity:', error);
+    await alertManager.trackError({
+      message: `Trade error: ${error.message}`,
+      critical: false
+    });
     return {
       success: false,
       message: `Error: ${error.message}`,
@@ -146,6 +153,7 @@ async function monitorActiveTrades(userId, activeTrades, connection, wallet) {
 
         if (closeResult.success) {
           logger.info(`Stop-loss triggered for trade ${trade.id}`);
+          await alertManager.trackTrade(false, trade.stopLossPercent / 100);
           // Trade closed, don't add to updated trades
         } else {
           // Failed to close, keep monitoring
@@ -159,6 +167,7 @@ async function monitorActiveTrades(userId, activeTrades, connection, wallet) {
 
         if (closeResult.success) {
           logger.info(`Take-profit triggered for trade ${trade.id}`);
+          await alertManager.trackTrade(true, trade.takeProfitPercent / 100);
           // Trade closed, don't add to updated trades
         } else {
           // Failed to close, keep monitoring
@@ -171,6 +180,10 @@ async function monitorActiveTrades(userId, activeTrades, connection, wallet) {
       }
     } catch (error) {
       logger.errorMessage(`Error monitoring trade ${trade.id}:`, error);
+      await alertManager.trackError({
+        message: `Trade monitoring error: ${error.message}`,
+        critical: false
+      });
       // Keep monitoring despite error
       updatedTrades.push(trade);
     }

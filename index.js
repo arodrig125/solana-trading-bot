@@ -1,6 +1,7 @@
 require('dotenv').config();
 const cron = require('node-cron');
 const logger = require('./utils/logger');
+const alertManager = require('./utils/alerts');
 const { setupCredentials, getSheetsClient, initializeSheets, logOpportunity, logTrade, logDailySummary } = require('./utils/sheets');
 const {
   initJupiterClient,
@@ -539,6 +540,22 @@ setupCommands(bot, {
 });
 
 // Main function
+// System monitoring function
+async function monitorSystem() {
+  try {
+    await alertManager.checkSystemMetrics();
+  } catch (error) {
+    logger.errorMessage('Error in system monitoring', error);
+  }
+}
+
+// Start system monitoring
+function startSystemMonitoring() {
+  // Check system metrics every 5 minutes
+  setInterval(monitorSystem, 5 * 60 * 1000);
+  logger.successMessage('System monitoring started');
+}
+
 async function main() {
   try {
     // Initialize Google Sheets client if credentials are available
@@ -598,11 +615,13 @@ async function main() {
     // Start trade monitoring for stop-loss and take-profit
     if (settings.riskManagement.enableStopLossAndTakeProfit) {
       startTradeMonitoring();
+      startSystemMonitoring();
     }
 
     logger.startupMessage('Bot initialization complete!');
   } catch (error) {
     logger.errorMessage('Error in main function', error);
+    await alertManager.trackError({ message: error.message, critical: true });
 
     // Send error notification
     if (TELEGRAM_CHAT_ID && settings.notifications.sendErrorAlerts) {
@@ -631,8 +650,9 @@ process.on('SIGTERM', () => {
 });
 
 // Handle uncaught exceptions
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', async (error) => {
   logger.errorMessage('Uncaught exception', error);
+  await alertManager.trackError({ message: error.message, critical: true });
 
   // Send error notification
   if (bot && TELEGRAM_CHAT_ID && settings.notifications.sendErrorAlerts) {
@@ -646,8 +666,9 @@ process.on('uncaughtException', (error) => {
 });
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', async (reason, promise) => {
   logger.errorMessage('Unhandled promise rejection', reason);
+  await alertManager.trackError({ message: reason.toString(), critical: true });
 
   // Send error notification
   if (bot && TELEGRAM_CHAT_ID && settings.notifications.sendErrorAlerts) {

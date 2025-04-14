@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { logToSheets, logDailySummary } = require('./sheets');
 const logger = require('./logger');
+const tokenVolatility = require('./tokenVolatility');
+const timeAnalytics = require('./timeAnalytics');
 
 // File paths for storing data
 const DATA_DIR = path.join(__dirname, '..', 'data');
@@ -70,6 +72,16 @@ function recordOpportunity(opportunity) {
     opportunities.shift();
   }
   
+  // Record price points for volatility tracking
+  if (opportunity.tokenPrices) {
+    Object.entries(opportunity.tokenPrices).forEach(([token, price]) => {
+      tokenVolatility.recordPrice(token, price);
+    });
+  }
+
+  // Record for time analytics
+  timeAnalytics.recordOpportunity(enhancedOpportunity);
+  
   return saveData(OPPORTUNITIES_FILE, opportunities);
 }
 
@@ -90,6 +102,9 @@ function recordTrade(trade) {
   if (trades.length > 1000) {
     trades.shift();
   }
+
+  // Record for time analytics
+  timeAnalytics.recordTrade(enhancedTrade);
   
   return saveData(TRADES_FILE, trades);
 }
@@ -202,6 +217,17 @@ function getPerformanceSummary() {
     volume: 0
   };
   
+  // Get time-based metrics
+  const periodKeys = timeAnalytics.getPeriodKeys(Date.now());
+  const hourlyStats = timeAnalytics.getPerformanceMetrics(timeAnalytics.TIME_PERIODS.HOURLY, periodKeys.hourly) || createEmptyPeriodStats();
+  const dailyStats = timeAnalytics.getPerformanceMetrics(timeAnalytics.TIME_PERIODS.DAILY, periodKeys.daily) || createEmptyPeriodStats();
+  const weeklyStats = timeAnalytics.getPerformanceMetrics(timeAnalytics.TIME_PERIODS.WEEKLY, periodKeys.weekly) || createEmptyPeriodStats();
+  const monthlyStats = timeAnalytics.getPerformanceMetrics(timeAnalytics.TIME_PERIODS.MONTHLY, periodKeys.monthly) || createEmptyPeriodStats();
+
+  // Get best performers
+  const bestDailyTokens = timeAnalytics.getBestPerformingTokens(timeAnalytics.TIME_PERIODS.DAILY, periodKeys.daily, 3);
+  const bestDailyDEXes = timeAnalytics.getBestPerformingDEXes(timeAnalytics.TIME_PERIODS.DAILY, periodKeys.daily, 3);
+
   return {
     overall: {
       totalTrades: performance.totalTrades,
@@ -214,7 +240,17 @@ function getPerformanceSummary() {
       totalVolume: performance.totalVolume,
       averageProfitPercent: performance.averageProfitPercent
     },
-    today: todayStats,
+    timeMetrics: {
+      hourly: hourlyStats,
+      daily: dailyStats,
+      weekly: weeklyStats,
+      monthly: monthlyStats
+    },
+    bestPerformers: {
+      tokens: bestDailyTokens,
+      dexes: bestDailyDEXes
+    },
+    today: dailyStats,
     bestTrade: performance.bestTrade,
     worstTrade: performance.worstTrade,
     lastUpdated: performance.lastUpdated
@@ -222,19 +258,27 @@ function getPerformanceSummary() {
 }
 
 // Get recent opportunities
-function getRecentOpportunities(limit = 10) {
+function getRecentOpportunities(hours = 24) {
   const opportunities = loadData(OPPORTUNITIES_FILE);
-  return opportunities.slice(-limit).reverse();
+  const cutoffTime = new Date(Date.now() - hours * 60 * 60 * 1000);
+  
+  return opportunities
+    .filter(opp => new Date(opp.recordedAt) > cutoffTime)
+    .sort((a, b) => new Date(b.recordedAt) - new Date(a.recordedAt));
 }
 
 // Get recent trades
-function getRecentTrades(limit = 10) {
+function getRecentTrades(hours = 24) {
   const trades = loadData(TRADES_FILE);
-  return trades.slice(-limit).reverse();
+  const cutoffTime = new Date(Date.now() - hours * 60 * 60 * 1000);
+  
+  return trades
+    .filter(trade => new Date(trade.recordedAt) > cutoffTime)
+    .sort((a, b) => new Date(b.recordedAt) - new Date(a.recordedAt));
 }
 
 // Check if we've hit risk management limits
-function checkRiskLimits() {
+function checkRiskLimits(tokenSymbol) {
   const performance = loadData(PERFORMANCE_FILE, {
     totalTrades: 0,
     successfulTrades: 0,
@@ -301,6 +345,16 @@ function checkRiskLimits() {
     }
   }
   
+  // Check token volatility
+  const volatility = tokenVolatility.getTokenVolatility(tokenSymbol);
+  if (volatility && volatility.short > settings.riskManagement.maxVolatility) {
+    logger.warningMessage(`Token ${tokenSymbol} volatility too high: ${volatility.short.toFixed(2)}%`);
+    return {
+      canTrade: false,
+      reason: 'Token volatility too high'
+    };
+  }
+
   return {
     canTrade: true
   };

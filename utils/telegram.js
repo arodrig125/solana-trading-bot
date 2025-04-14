@@ -4,6 +4,7 @@ const settings = require('../config/settings');
 const logger = require('./logger');
 const riskManager = require('./riskManager');
 const tokenManager = require('./tokenManager');
+const telegramUI = require('./telegramUI');
 
 // Initialize Telegram bot
 function initBot(token) {
@@ -13,17 +14,74 @@ function initBot(token) {
   }
 
   try {
-    // Add polling options to handle conflicts
-    return new TelegramBot(token, {
+    // Create bot instance with polling
+    const bot = new TelegramBot(token, {
       polling: true,
-      // Add these options to handle the 409 Conflict error
       polling_options: {
         timeout: 10,
         limit: 100
       },
-      // Add a small random delay to avoid conflicts
       onlyFirstMatch: true
     });
+
+    // Handle callback queries from inline keyboards
+    bot.on('callback_query', async (query) => {
+      const chatId = query.message.chat.id;
+      const messageId = query.message.message_id;
+      const action = query.data;
+
+      try {
+        switch (action) {
+          case 'menu':
+            await bot.editMessageText(
+              'Main Menu',
+              {
+                chat_id: chatId,
+                message_id: messageId,
+                ...telegramUI.getMainMenuKeyboard()
+              }
+            );
+            break;
+
+          case 'status':
+            const status = {
+              mode: settings.get('tradingMode', 'simulation'),
+              isPaused: settings.get('isPaused', false),
+              uptime: getUptime(),
+              opportunities: await getRecentOpportunities(24).length,
+              trades: await getRecentTrades(24).length,
+              profit: await getTotalProfit(24)
+            };
+
+            await bot.editMessageText(
+              telegramUI.getStatusMessage(status),
+              {
+                chat_id: chatId,
+                message_id: messageId,
+                parse_mode: 'Markdown',
+                ...telegramUI.getTradingControlsKeyboard(
+                  status.mode === 'live',
+                  status.isPaused
+                )
+              }
+            );
+            break;
+
+          // Add more cases for other actions...
+        }
+
+        // Answer callback query to remove loading state
+        await bot.answerCallbackQuery(query.id);
+      } catch (error) {
+        logger.error('Error handling callback query:', error);
+        await bot.answerCallbackQuery(query.id, {
+          text: 'Error processing request',
+          show_alert: true
+        });
+      }
+    });
+
+    return bot;
   } catch (error) {
     logger.errorMessage('Error initializing Telegram bot', error);
     return null;
@@ -232,143 +290,68 @@ function formatRecentTrades(trades) {
 }
 
 // Setup bot commands
-function setupCommands(bot, callbacks) {
+function setupCommands(bot) {
   if (!bot) {
     logger.errorMessage('Cannot setup commands: bot not initialized');
     return null;
   }
 
-  const {
-    onStart,
-    onPing,
-    onChatId,
-    onLive,
-    onSimulate,
-    onPause,
-    onResume,
-    onSetProfit,
-    onStatus,
-    onSummary,
-    onOpportunities,
-    onTrades,
-    onSettings,
-    onHelp,
-    onSetRiskLevel,
-    onSetRiskParam,
-    onRiskSettings,
-    onWhitelist,
-    onBlacklist,
-    onAddToWhitelist,
-    onRemoveFromWhitelist,
-    onAddToBlacklist,
-    onRemoveFromBlacklist,
-    onSetUseWhitelist,
-    onSetUseBlacklist,
-    onTokenRisk
-  } = callbacks;
+  const commands = require('./telegramCommands');
 
   // Basic commands
-  bot.onText(/\/start/, onStart);
-  bot.onText(/\/ping/, onPing);
-  bot.onText(/\/chatid/, onChatId);
+  bot.onText(/\/start/, msg => commands.start(bot, msg));
+  bot.onText(/\/ping/, msg => commands.ping(bot, msg));
+  bot.onText(/\/help/, msg => commands.help(bot, msg));
 
-  // Mode commands
-  bot.onText(/\/live/, onLive);
-  bot.onText(/\/simulate/, onSimulate);
+  // Status and settings
+  bot.onText(/\/status/, msg => commands.status(bot, msg));
+  bot.onText(/\/settings/, msg => commands.settings(bot, msg));
 
-  // Control commands
-  bot.onText(/\/pause/, onPause);
-  bot.onText(/\/resume/, onResume);
+  // Trading controls
+  bot.onText(/\/live/, msg => commands.live(bot, msg));
+  bot.onText(/\/simulate/, msg => commands.simulate(bot, msg));
+  bot.onText(/\/pause/, msg => commands.pause(bot, msg));
+  bot.onText(/\/resume/, msg => commands.resume(bot, msg));
 
-  // Settings commands
-  bot.onText(/\/setprofit (.+)/, (msg, match) => {
-    const profit = parseFloat(match[1]);
-    if (isNaN(profit)) {
-      sendMessage(bot, msg.chat.id, '❌ Invalid profit percentage. Please provide a number.');
-      return;
-    }
-    onSetProfit(msg, profit);
-  });
-
-  // Risk management commands
+  // Risk management
+  bot.onText(/\/risk/, msg => commands.risk(bot, msg));
   bot.onText(/\/setrisk (low|medium|high)/, (msg, match) => {
     const riskLevel = match[1].toLowerCase();
-    onSetRiskLevel(msg, riskLevel);
+    commands.setRisk(bot, msg, riskLevel);
   });
 
-  bot.onText(/\/setriskparam (\w+) (.+)/, (msg, match) => {
-    const paramName = match[1];
-    const paramValue = parseFloat(match[2]);
-
-    if (isNaN(paramValue)) {
-      sendMessage(bot, msg.chat.id, '❌ Invalid parameter value. Please provide a number.');
-      return;
-    }
-
-    onSetRiskParam(msg, paramName, paramValue);
-  });
-
-  bot.onText(/\/risk/, onRiskSettings);
-
-  // Token list management commands
-  bot.onText(/\/whitelist/, onWhitelist);
-  bot.onText(/\/blacklist/, onBlacklist);
+  // Token management
+  bot.onText(/\/whitelist/, msg => commands.whitelist(bot, msg));
+  bot.onText(/\/blacklist/, msg => commands.blacklist(bot, msg));
 
   bot.onText(/\/addwhitelist (.+)/, (msg, match) => {
     const token = match[1].trim();
-    onAddToWhitelist(msg, token);
-  });
-
-  bot.onText(/\/removewhitelist (.+)/, (msg, match) => {
-    const token = match[1].trim();
-    onRemoveFromWhitelist(msg, token);
+    commands.addToWhitelist(bot, msg, token);
   });
 
   bot.onText(/\/addblacklist (.+)/, (msg, match) => {
     const token = match[1].trim();
-    onAddToBlacklist(msg, token);
+    commands.addToBlacklist(bot, msg, token);
+  });
+
+  bot.onText(/\/removewhitelist (.+)/, (msg, match) => {
+    const token = match[1].trim();
+    commands.removeFromWhitelist(bot, msg, token);
   });
 
   bot.onText(/\/removeblacklist (.+)/, (msg, match) => {
     const token = match[1].trim();
-    onRemoveFromBlacklist(msg, token);
+    commands.removeFromBlacklist(bot, msg, token);
   });
-
-  bot.onText(/\/usewhitelist (on|off)/, (msg, match) => {
-    const useWhitelist = match[1].toLowerCase() === 'on';
-    onSetUseWhitelist(msg, useWhitelist);
-  });
-
-  bot.onText(/\/useblacklist (on|off)/, (msg, match) => {
-    const useBlacklist = match[1].toLowerCase() === 'on';
-    onSetUseBlacklist(msg, useBlacklist);
-  });
-
-  bot.onText(/\/tokenrisk (.+)/, (msg, match) => {
-    const token = match[1].trim();
-    onTokenRisk(msg, token);
-  });
-
-  // Info commands
-  bot.onText(/\/status/, onStatus);
-  bot.onText(/\/summary/, onSummary);
-  bot.onText(/\/opportunities/, onOpportunities);
-  bot.onText(/\/trades/, onTrades);
-  bot.onText(/\/settings/, onSettings);
-  bot.onText(/\/help/, onHelp);
 
   // Handle errors
   bot.on('polling_error', (error) => {
     logger.error('Telegram polling error:', error);
 
-    // If we get a 409 Conflict error, wait a bit and restart polling
     if (error.code === 'ETELEGRAM' && error.response && error.response.statusCode === 409) {
       logger.warn('Detected 409 Conflict error, waiting 5 seconds before restarting polling');
-
-      // Stop polling
       bot.stopPolling();
-
-      // Wait 5 seconds and restart polling
+      
       setTimeout(() => {
         logger.info('Restarting Telegram polling');
         bot.startPolling();
@@ -378,28 +361,21 @@ function setupCommands(bot, callbacks) {
 
   // Set bot commands for menu
   bot.setMyCommands([
-    { command: 'start', description: 'Start the bot' },
-    { command: 'ping', description: 'Check if the bot is running' },
-    { command: 'live', description: 'Enable live trading mode' },
-    { command: 'simulate', description: 'Enable simulation mode' },
-    { command: 'pause', description: 'Pause background scanning' },
-    { command: 'resume', description: 'Resume background scanning' },
-    { command: 'status', description: 'Get current bot status' },
-    { command: 'summary', description: 'Get performance summary' },
-    { command: 'risk', description: 'View risk management settings' },
-    { command: 'setrisk', description: 'Set risk level (low/medium/high)' },
-    { command: 'whitelist', description: 'View your token whitelist' },
-    { command: 'blacklist', description: 'View your token blacklist' },
-    { command: 'addwhitelist', description: 'Add token to whitelist' },
-    { command: 'addblacklist', description: 'Add token to blacklist' },
-    { command: 'tokenrisk', description: 'Check risk assessment for a token' },
-    { command: 'help', description: 'Show help message' }
+    { command: 'start', description: '🚀 Start the bot' },
+    { command: 'status', description: '📊 View bot status and controls' },
+    { command: 'settings', description: '⚙️ Configure bot settings' },
+    { command: 'risk', description: '⚠️ Risk management' },
+    { command: 'whitelist', description: '⬜️ Token whitelist' },
+    { command: 'blacklist', description: '⬛️ Token blacklist' },
+    { command: 'help', description: '❓ Show help message' }
   ]).catch(error => {
     logger.error('Error setting bot commands:', error);
   });
 
   return bot;
 }
+
+
 
 /**
  * Format risk settings for display
