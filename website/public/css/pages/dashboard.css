@@ -1,0 +1,295 @@
+/* Dashboard Layout */
+
+/* Dashboard Container */
+.dashboard {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  background-color: var(--gray-50);
+}
+
+/* Sidebar */
+.dashboard-sidebar {
+  grid-row: 1 / -1;
+  background-color: var(--white);
+  border-right: 1px solid var(--gray-200);
+  padding: var(--spacing-6);
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.sidebar-logo {
+  height: 32px;
+}
+
+.sidebar-brand {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  color: var(--gray-600);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-all);
+}
+
+.sidebar-nav-item:hover {
+  color: var(--primary);
+  background-color: var(--gray-50);
+}
+
+.sidebar-nav-item.active {
+  color: var(--primary);
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.sidebar-nav-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Main Content */
+.dashboard-main {
+  padding: var(--spacing-6);
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-6);
+  background-color: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.dashboard-title {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.dashboard-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+}
+
+.stat-card {
+  background-color: var(--white);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-title {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-2);
+}
+
+.stat-value {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-2);
+}
+
+.stat-change {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--text-sm);
+}
+
+.stat-change.positive {
+  color: var(--success);
+}
+
+.stat-change.negative {
+  color: var(--error);
+}
+
+/* Trading Activity */
+.trading-activity {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-8);
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-6);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.activity-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.activity-filters {
+  display: flex;
+  gap: var(--spacing-4);
+}
+
+/* Wallet Section */
+.wallet-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+}
+
+.wallet-card {
+  background-color: var(--white);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.wallet-balance {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-4);
+}
+
+.wallet-address {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  background-color: var(--gray-50);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Chart Components */
+.chart-container {
+  background-color: var(--white);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-8);
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-6);
+}
+
+/* Settings Panel */
+.settings-panel {
+  background-color: var(--white);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-group {
+  margin-bottom: var(--spacing-6);
+}
+
+.settings-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: var(--z-40);
+  }
+
+  .dashboard-sidebar.active {
+    display: block;
+  }
+
+  .dashboard-header {
+    padding: var(--spacing-4);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .dashboard {
+    background-color: var(--gray-900);
+  }
+
+  .dashboard-sidebar,
+  .dashboard-header,
+  .stat-card,
+  .trading-activity,
+  .wallet-card,
+  .chart-container,
+  .settings-panel {
+    background-color: var(--gray-800);
+    border-color: var(--gray-700);
+  }
+
+  .sidebar-brand,
+  .dashboard-title,
+  .stat-value,
+  .activity-title,
+  .wallet-balance {
+    color: var(--white);
+  }
+
+  .sidebar-nav-item:hover {
+    background-color: var(--gray-700);
+  }
+
+  .wallet-address {
+    background-color: var(--gray-700);
+    color: var(--gray-300);
+  }
+}

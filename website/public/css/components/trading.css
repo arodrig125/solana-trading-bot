@@ -1,0 +1,318 @@
+/* Trading Components */
+
+/* Trading Pair Card */
+.trading-pair {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+}
+
+.trading-pair:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.pair-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.pair-icons {
+  position: relative;
+  width: 48px;
+  height: 24px;
+}
+
+.pair-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.pair-icon:first-child {
+  left: 0;
+  z-index: 1;
+}
+
+.pair-icon:last-child {
+  right: 0;
+}
+
+.pair-name {
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.pair-price {
+  text-align: right;
+}
+
+.price-value {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.price-change {
+  font-size: var(--text-sm);
+}
+
+.price-change.positive {
+  color: var(--success);
+}
+
+.price-change.negative {
+  color: var(--error);
+}
+
+/* Trading History */
+.trading-history {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.history-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-title {
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.history-filters {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.history-table {
+  width: 100%;
+}
+
+.history-table th,
+.history-table td {
+  padding: var(--spacing-4);
+  white-space: nowrap;
+}
+
+.history-table th {
+  font-weight: 500;
+  color: var(--gray-600);
+  text-align: left;
+}
+
+.trade-type {
+  font-size: var(--text-sm);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+.trade-type.buy {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.trade-type.sell {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+}
+
+/* Order Book */
+.order-book {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-book-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.order-book-title {
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.order-book-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+.order-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: var(--text-sm);
+  padding: var(--spacing-2);
+  border-radius: var(--radius-md);
+}
+
+.order-row.buy {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.order-row.sell {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Trading Form */
+.trading-form {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-4);
+}
+
+.form-tabs {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.form-tab {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.form-tab.buy {
+  color: var(--success);
+}
+
+.form-tab.buy.active {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.form-tab.sell {
+  color: var(--error);
+}
+
+.form-tab.sell.active {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Bot Controls */
+.bot-controls {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-4);
+}
+
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.bot-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-indicator.active {
+  background-color: var(--success);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.status-indicator.inactive {
+  background-color: var(--error);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+.control-actions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* Performance Metrics */
+.performance-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.metric-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.metric-title {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-2);
+}
+
+.metric-value {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .trading-pair,
+  .trading-history,
+  .order-book,
+  .trading-form,
+  .bot-controls,
+  .metric-card {
+    background-color: var(--gray-800);
+  }
+
+  .pair-name,
+  .price-value,
+  .history-title,
+  .order-book-title,
+  .metric-value {
+    color: var(--white);
+  }
+
+  .history-header,
+  .order-book-header {
+    border-color: var(--gray-700);
+  }
+
+  .order-row.buy {
+    background-color: rgba(16, 185, 129, 0.2);
+  }
+
+  .order-row.sell {
+    background-color: rgba(239, 68, 68, 0.2);
+  }
+}

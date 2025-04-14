@@ -1,0 +1,133 @@
+/* Main CSS file for SolarBot.io */
+
+/* Base Styles */
+@import 'base/variables.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+
+/* Layout Components */
+@import 'layout/grid.css';
+@import 'layout/header.css';
+@import 'layout/footer.css';
+@import 'layout/navigation.css';
+@import 'layout/breadcrumbs.css';
+
+/* Components */
+@import 'components/buttons.css';
+@import 'components/cards.css';
+@import 'components/forms.css';
+@import 'components/badges.css';
+@import 'components/alerts.css';
+@import 'components/modals.css';
+@import 'components/tables.css';
+@import 'components/chat-widget.css';
+@import 'components/trading.css';
+
+/* Pages */
+@import 'pages/home.css';
+@import 'pages/features.css';
+@import 'pages/pricing.css';
+@import 'pages/documentation.css';
+@import 'pages/blog.css';
+@import 'pages/contact.css';
+@import 'pages/auth.css';
+@import 'pages/dashboard.css';
+@import 'pages/landing.css';
+
+/* Utilities */
+@import 'utilities/animations.css';
+@import 'utilities/transitions.css';
+@import 'utilities/advanced-animations.css';
+@import 'utilities/spacing.css';
+@import 'utilities/display.css';
+@import 'utilities/colors.css';
+
+/* Themes */
+@import 'themes/light.css';
+@import 'themes/dark.css';
+
+/* Responsive */
+@import 'responsive/mobile.css';
+@import 'responsive/tablet.css';
+@import 'responsive/desktop.css';
+
+/* Custom Properties */
+:root {
+  /* Additional Theme Colors */
+  --success: #10b981;
+  --success-dark: #059669;
+  --success-light: #34d399;
+  
+  --warning: #f59e0b;
+  --warning-dark: #d97706;
+  --warning-light: #fbbf24;
+  
+  --error: #ef4444;
+  --error-dark: #dc2626;
+  --error-light: #f87171;
+  
+  /* Trading Specific Colors */
+  --buy: #10b981;
+  --sell: #ef4444;
+  --neutral: #6b7280;
+  
+  /* Chart Colors */
+  --chart-grid: rgba(107, 114, 128, 0.2);
+  --chart-line: #6366f1;
+  --chart-fill: rgba(99, 102, 241, 0.1);
+  
+  /* Additional Shadows */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  
+  /* Z-index Layers */
+  --z-negative: -1;
+  --z-elevate: 1;
+  --z-sticky: 100;
+  --z-drawer: 200;
+  --z-dropdown: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-toast: 600;
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

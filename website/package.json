@@ -1,0 +1,16 @@
+{
+  "name": "solarbot-trading",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_IsU4zowZ3K4i31EEhOz9g4ieKikt/ehr9Ajk8zQ"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "@astrojs/tailwind": "^5.0.0"
+  }
+}

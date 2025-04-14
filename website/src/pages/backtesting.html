@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarBot - Backtesting</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/backtesting.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/logo.svg" alt="SolarBot Logo" class="logo">
+                <h2>SolarBot</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="/trading"><i class="fas fa-chart-line"></i> Trading</a></li>
+                    <li><a href="/wallet"><i class="fas fa-wallet"></i> Wallet</a></li>
+                    <li><a href="/analytics"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li class="active"><a href="/backtesting"><i class="fas fa-vial"></i> Backtesting</a></li>
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Backtesting</h1>
+                <div class="user-menu">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="/images/user-avatar.png" alt="User Avatar">
+                        <span class="user-name">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper" id="backtesting-module">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="run-backtest">Run Backtest</button>
+                    <button class="tab-btn" data-tab="strategy-editor">Strategy Editor</button>
+                    <button class="tab-btn" data-tab="results-analysis">Results Analysis</button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Run Backtest Tab -->
+                    <div class="tab-pane active" id="run-backtest">
+                        <div class="backtest-grid">
+                            <div class="backtest-config-panel" id="backtest-config">
+                                <div class="panel-header">
+                                    <h3>Backtest Configuration</h3>
+                                </div>
+                                <div class="panel-content">
+                                    <div class="form-group">
+                                        <label for="strategy-selector">Trading Strategy</label>
+                                        <select id="strategy-selector">
+                                            <!-- Strategies will be populated by JS -->
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="strategy-parameters" id="strategy-parameters">
+                                        <!-- Strategy parameters will be populated by JS -->
+                                    </div>
+                                    
+                                    <div class="date-range-selector" id="date-range-selector">
+                                        <!-- Date range inputs will be populated by JS -->
+                                    </div>
+                                    
+                                    <div class="tab-selector">
+                                        <button class="tab-btn active" data-section="pairs-selector">Trading Pairs</button>
+                                        <button class="tab-btn" data-section="exchanges-selector">Exchanges</button>
+                                    </div>
+                                    
+                                    <div class="tab-section active" id="pairs-selector">
+                                        <!-- Trading pairs will be populated by JS -->
+                                    </div>
+                                    
+                                    <div class="tab-section" id="exchanges-selector">
+                                        <!-- Exchanges will be populated by JS -->
+                                    </div>
+                                    
+                                    <div class="action-buttons">
+                                        <button id="run-backtest-btn" class="btn btn-primary">Run Backtest</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="backtest-results-panel" id="backtest-results">
+                                <div class="panel-header">
+                                    <h3>Backtest Results</h3>
+                                    <div class="panel-actions">
+                                        <button id="save-backtest-btn" class="btn btn-sm">Save</button>
+                                        <button id="export-backtest-btn" class="btn btn-sm">Export</button>
+                                        <button id="compare-backtest-btn" class="btn btn-sm">Compare</button>
+                                    </div>
+                                </div>
+                                <div class="panel-content">
+                                    <div class="backtest-metrics" id="backtest-metrics">
+                                        <!-- Metrics will be populated by JS -->
+                                        <div class="placeholder-message">
+                                            <i class="fas fa-chart-area"></i>
+                                            <p>Run a backtest to see results</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="backtest-charts" id="backtest-charts">
+                                        <!-- Charts will be populated by JS -->
+                                    </div>
+                                    
+                                    <div class="backtest-trades" id="backtest-trades">
+                                        <!-- Trades table will be populated by JS -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="saved-backtests-panel" id="saved-backtests">
+                                <div class="panel-header">
+                                    <h3>Saved Backtests</h3>
+                                </div>
+                                <div class="panel-content">
+                                    <!-- Saved backtests will be populated by JS -->
+                                    <div class="placeholder-message">
+                                        <i class="fas fa-save"></i>
+                                        <p>No saved backtests yet</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="backtest-comparison-panel" id="backtest-comparison">
+                                <div class="panel-header">
+                                    <h3>Comparison</h3>
+                                </div>
+                                <div class="panel-content">
+                                    <!-- Comparison charts will be populated by JS -->
+                                    <div class="placeholder-message">
+                                        <i class="fas fa-balance-scale"></i>
+                                        <p>Select backtests to compare</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Strategy Editor Tab -->
+                    <div class="tab-pane" id="strategy-editor">
+                        <div class="strategy-editor-grid">
+                            <div class="editor-toolbar">
+                                <div class="editor-actions">
+                                    <select id="strategy-template-selector">
+                                        <!-- Strategy templates will be populated by JS -->
+                                    </select>
+                                    <button id="save-strategy-btn" class="btn btn-primary">Save Strategy</button>
+                                    <button id="test-strategy-btn" class="btn">Test Strategy</button>
+                                </div>
+                                <div id="strategy-messages" class="strategy-messages">
+                                    <!-- Messages will be displayed here -->
+                                </div>
+                            </div>
+                            
+                            <div class="editor-main">
+                                <div id="strategy-editor-container" class="code-editor-container">
+                                    <!-- Code editor will be initialized here -->
+                                </div>
+                            </div>
+                            
+                            <div class="editor-sidebar">
+                                <div class="editor-panel parameter-editor">
+                                    <div class="panel-header">
+                                        <h3>Strategy Parameters</h3>
+                                        <button class="add-parameter-btn"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                    <div class="panel-content" id="strategy-parameters-editor">
+                                        <!-- Parameters will be populated by JS -->
+                                    </div>
+                                </div>
+                                
+                                <div class="editor-panel documentation">
+                                    <div class="panel-header">
+                                        <h3>Documentation</h3>
+                                    </div>
+                                    <div class="panel-content">
+                                        <div class="doc-section">
+                                            <h4>Strategy Function</h4>
+                                            <pre><code>function(data, parameters, utils) {
+  // Your strategy code
+  // Return signal object or null
+}</code></pre>
+                                        </div>
+                                        
+                                        <div class="doc-section">
+                                            <h4>Data Structure</h4>
+                                            <p>Array of market data objects with properties:</p>
+                                            <ul>
+                                                <li><code>timestamp</code>: Time of the candle</li>
+                                                <li><code>open</code>: Opening price</li>
+                                                <li><code>high</code>: Highest price</li>
+                                                <li><code>low</code>: Lowest price</li>
+                                                <li><code>close</code>: Closing price</li>
+                                                <li><code>volume</code>: Trading volume</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="doc-section">
+                                            <h4>Available Utils</h4>
+                                            <ul>
+                                                <li><code>utils.calculateSMA(values, period)</code></li>
+                                                <li><code>utils.calculateEMA(values, period)</code></li>
+                                                <li><code>utils.calculateRSI(values, period)</code></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Analysis Tab -->
+                    <div class="tab-pane" id="results-analysis">
+                        <div class="results-analysis-grid">
+                            <div class="results-selector">
+                                <div class="panel-header">
+                                    <h3>Saved Results</h3>
+                                </div>
+                                <div class="panel-content" id="analysis-results-list">
+                                    <!-- Results list will be populated by JS -->
+                                    <div class="placeholder-message">
+                                        <i class="fas fa-search"></i>
+                                        <p>No saved results to analyze</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="analysis-charts">
+                                <div class="panel-header">
+                                    <h3>Performance Analysis</h3>
+                                </div>
+                                <div class="panel-content" id="analysis-charts">
+                                    <!-- Analysis charts will be populated by JS -->
+                                    <div class="placeholder-message">
+                                        <i class="fas fa-chart-line"></i>
+                                        <p>Select a result to analyze</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="analysis-metrics">
+                                <div class="panel-header">
+                                    <h3>Key Metrics</h3>
+                                </div>
+                                <div class="panel-content" id="analysis-metrics">
+                                    <!-- Metrics will be populated by JS -->
+                                </div>
+                            </div>
+                            
+                            <div class="optimization-panel">
+                                <div class="panel-header">
+                                    <h3>Strategy Optimization</h3>
+                                </div>
+                                <div class="panel-content" id="optimization-panel">
+                                    <!-- Optimization controls will be populated by JS -->
+                                    <div class="placeholder-message">
+                                        <i class="fas fa-sliders-h"></i>
+                                        <p>Select a strategy to optimize</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.28.1/min/vs/loader.js"></script>
+    <script>
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.28.1/min/vs' }});
+        require(['vs/editor/editor.main'], function() {
+            // Monaco editor is now loaded and ready to use
+        });
+    </script>
+    
+    <!-- Core & Utilities -->
+    <script src="/js/api-client.js"></script>
+    <script src="/js/security-service.js"></script>
+    
+    <!-- Backtesting Module -->
+    <script src="/js/modules/backtesting/backtesting-core.js"></script>
+    <script src="/js/modules/backtesting/backtesting-ui.js"></script>
+    <script src="/js/modules/backtesting/strategy-editor.js"></script>
+    
+    <script>
+        // Tab navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tabs .tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Deactivate all tabs
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    tabPanes.forEach(p => p.classList.remove('active'));
+                    
+                    // Activate the clicked tab
+                    button.classList.add('active');
+                    const tabId = button.dataset.tab;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Section tabs within the backtesting config
+            const sectionButtons = document.querySelectorAll('.tab-selector .tab-btn');
+            const sectionPanes = document.querySelectorAll('.tab-section');
+            
+            sectionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Deactivate all sections
+                    sectionButtons.forEach(b => b.classList.remove('active'));
+                    sectionPanes.forEach(p => p.classList.remove('active'));
+                    
+                    // Activate the clicked section
+                    button.classList.add('active');
+                    const sectionId = button.dataset.section;
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarBot - Risk Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/risk-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/logo.svg" alt="SolarBot Logo" class="logo">
+                <h2>SolarBot</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="/trading"><i class="fas fa-chart-line"></i> Trading</a></li>
+                    <li><a href="/wallet"><i class="fas fa-wallet"></i> Wallet</a></li>
+                    <li><a href="/analytics"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="/backtesting"><i class="fas fa-vial"></i> Backtesting</a></li>
+                    <li class="active"><a href="/risk-management"><i class="fas fa-shield-alt"></i> Risk Management</a></li>
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Risk Management</h1>
+                <div class="user-menu">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="/images/user-avatar.png" alt="User Avatar">
+                        <span class="user-name">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="risk-management-container">
+                    <div class="risk-management-header">
+                        <h2>Risk Controls</h2>
+                        <div class="risk-management-tabs">
+                            <a href="risk-management.html" class="tab-link active">
+                                <i class="fas fa-shield-alt"></i> Position Sizing
+                            </a>
+                            <a href="portfolio-risk.html" class="tab-link">
+                                <i class="fas fa-chart-pie"></i> Portfolio Analysis
+                            </a>
+                        </div>
+                        <div class="risk-profile-selector">
+                            <label for="risk-profile">Risk Profile:</label>
+                            <select id="risk-profile">
+                                <option value="conservative">Conservative</option>
+                                <option value="moderate" selected>Moderate</option>
+                                <option value="aggressive">Aggressive</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Position Sizing Calculator -->
+                    <div class="risk-card">
+                        <div class="risk-card-header">
+                            <h3>Position Size Calculator</h3>
+                        </div>
+                        <div class="risk-card-body">
+                            <div id="position-sizing-calculator" class="calculator-container">
+                                <!-- Position sizing calculator will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Limits -->
+                    <div class="risk-card">
+                        <div class="risk-card-header">
+                            <h3>Risk Limits</h3>
+                            <button class="btn-icon" title="Configure Limits"><i class="fas fa-cog"></i></button>
+                        </div>
+                        <div class="risk-card-body">
+                            <div class="risk-limits-container">
+                                <div class="risk-limits-body">
+                                    <!-- Daily Risk Limit -->
+                                    <div class="risk-limit-item">
+                                        <div class="risk-limit-header">
+                                            <div class="risk-limit-title">
+                                                <i class="fas fa-calendar-day"></i>
+                                                <span>Daily Risk Limit</span>
+                                            </div>
+                                            <div class="risk-limit-value">
+                                                <span>$52.50 / $250.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="risk-limit-description">
+                                            Maximum amount at risk per day (5% of account balance)
+                                        </div>
+                                        <div class="risk-limit-progress">
+                                            <div class="progress-bar green" style="width: 21%"></div>
+                                        </div>
+                                        <div class="risk-limit-labels">
+                                            <span>0%</span>
+                                            <span>50%</span>
+                                            <span>100%</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Weekly Risk Limit -->
+                                    <div class="risk-limit-item">
+                                        <div class="risk-limit-header">
+                                            <div class="risk-limit-title">
+                                                <i class="fas fa-calendar-week"></i>
+                                                <span>Weekly Risk Limit</span>
+                                            </div>
+                                            <div class="risk-limit-value">
+                                                <span>$487.50 / $750.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="risk-limit-description">
+                                            Maximum amount at risk per week (15% of account balance)
+                                        </div>
+                                        <div class="risk-limit-progress">
+                                            <div class="progress-bar yellow" style="width: 65%"></div>
+                                        </div>
+                                        <div class="risk-limit-labels">
+                                            <span>0%</span>
+                                            <span>50%</span>
+                                            <span>100%</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Maximum Position Size -->
+                                    <div class="risk-limit-item">
+                                        <div class="risk-limit-header">
+                                            <div class="risk-limit-title">
+                                                <i class="fas fa-balance-scale"></i>
+                                                <span>Maximum Position Size</span>
+                                            </div>
+                                            <div class="risk-limit-value">
+                                                <span>$850.00 / $1,000.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="risk-limit-description">
+                                            Maximum single position size (20% of account balance)
+                                        </div>
+                                        <div class="risk-limit-progress">
+                                            <div class="progress-bar red" style="width: 85%"></div>
+                                        </div>
+                                        <div class="risk-limit-labels">
+                                            <span>0%</span>
+                                            <span>50%</span>
+                                            <span>100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Settings -->
+                    <div class="risk-card">
+                        <div class="risk-card-header">
+                            <h3>Risk Settings</h3>
+                            <button class="btn-icon" title="Reset to Default"><i class="fas fa-undo"></i></button>
+                        </div>
+                        <div class="risk-card-body">
+                            <div class="risk-settings-container">
+                                <div class="risk-settings-body">
+                                    <!-- Position Risk Settings -->
+                                    <div class="risk-setting-group">
+                                        <h4>Position Risk Controls</h4>
+                                        
+                                        <div class="risk-setting-item">
+                                            <div class="risk-setting-label">Default Risk Per Trade (%)</div>
+                                            <div class="risk-setting-control">
+                                                <input type="number" id="default-risk" value="1.0" min="0.1" max="10" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="risk-setting-description">Percentage of account balance to risk per trade</div>
+                                        
+                                        <div class="risk-setting-item">
+                                            <div class="risk-setting-label">Max Position Size (%)</div>
+                                            <div class="risk-setting-control">
+                                                <input type="number" id="max-position" value="20" min="1" max="50">
+                                            </div>
+                                        </div>
+                                        <div class="risk-setting-description">Maximum position size as percentage of account</div>
+                                        
+                                        <div class="risk-setting-item">
+                                            <div class="risk-setting-label">Default Stop Loss (%)</div>
+                                            <div class="risk-setting-control">
+                                                <input type="number" id="default-stop" value="5" min="0.5" max="20" step="0.5">
+                                            </div>
+                                        </div>
+                                        <div class="risk-setting-description">Default stop loss percentage from entry price</div>
+                                    </div>
+                                    
+                                    <!-- Account Risk Settings -->
+                                    <div class="risk-setting-group">
+                                        <h4>Account Risk Controls</h4>
+                                        
+                                        <div class="risk-setting-item">
+                                            <div class="risk-setting-label">Max Daily Risk (%)</div>
+                                            <div class="risk-setting-control">
+                                                <input type="number" id="max-daily-risk" value="5" min="1" max="20">
+                                            </div>
+                                        </div>
+                                        <div class="risk-setting-description">Maximum daily risk as percentage of account</div>
+                                        
+                                        <div class="risk-setting-item">
+                                            <div class="risk-setting-label">Max Weekly Risk (%)</div>
+                                            <div class="risk-setting-control">
+                                                <input type="number" id="max-weekly-risk" value="15" min="3" max="50">
+                                            </div>
+                                        </div>
+                                        <div class="risk-setting-description">Maximum weekly risk as percentage of account</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-settings-actions">
+                                    <button class="btn btn-secondary">Cancel</button>
+                                    <button class="btn btn-primary">Save Settings</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Alerts -->
+                    <div class="risk-card">
+                        <div class="risk-card-header">
+                            <h3>Risk Alerts</h3>
+                            <button class="btn-icon" title="Clear All"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <div class="risk-card-body">
+                            <div class="risk-alerts-container">
+                                <div class="risk-alerts-body">
+                                    <!-- High Priority Alert -->
+                                    <div class="risk-alert-item">
+                                        <div class="risk-alert-icon high">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="risk-alert-content">
+                                            <div class="risk-alert-header">
+                                                <div class="risk-alert-title">High Concentration Risk</div>
+                                                <div class="risk-alert-time">2 hours ago</div>
+                                            </div>
+                                            <div class="risk-alert-message">
+                                                70% of your portfolio is concentrated in SOL. Consider diversifying to reduce risk.
+                                            </div>
+                                            <div class="risk-alert-actions">
+                                                <button class="btn btn-sm">Dismiss</button>
+                                                <button class="btn btn-primary btn-sm">View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Medium Priority Alert -->
+                                    <div class="risk-alert-item">
+                                        <div class="risk-alert-icon medium">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </div>
+                                        <div class="risk-alert-content">
+                                            <div class="risk-alert-header">
+                                                <div class="risk-alert-title">Approaching Weekly Risk Limit</div>
+                                                <div class="risk-alert-time">5 hours ago</div>
+                                            </div>
+                                            <div class="risk-alert-message">
+                                                You have used 65% of your weekly risk budget. Consider reducing position sizes.
+                                            </div>
+                                            <div class="risk-alert-actions">
+                                                <button class="btn btn-sm">Dismiss</button>
+                                                <button class="btn btn-primary btn-sm">View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Low Priority Alert -->
+                                    <div class="risk-alert-item">
+                                        <div class="risk-alert-icon low">
+                                            <i class="fas fa-info-circle"></i>
+                                        </div>
+                                        <div class="risk-alert-content">
+                                            <div class="risk-alert-header">
+                                                <div class="risk-alert-title">Market Volatility Increasing</div>
+                                                <div class="risk-alert-time">Yesterday</div>
+                                            </div>
+                                            <div class="risk-alert-message">
+                                                Market volatility has increased by 25%. Consider adjusting your stop loss levels.
+                                            </div>
+                                            <div class="risk-alert-actions">
+                                                <button class="btn btn-sm">Dismiss</button>
+                                                <button class="btn btn-primary btn-sm">View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/api-client.js"></script>
+    <script src="/js/security-service.js"></script>
+    
+    <!-- Risk Management Module -->
+    <script src="/js/modules/risk-management/risk-core.js"></script>
+    <script src="/js/modules/risk-management/position-sizing.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Risk profile selector
+            const profileSelector = document.getElementById('risk-profile');
+            if (profileSelector) {
+                profileSelector.addEventListener('change', function() {
+                    const selectedProfile = this.value;
+                    // Here we would apply the selected risk profile
+                    console.log('Selected risk profile:', selectedProfile);
+                    
+                    // This is where we would call the RiskManagementCore to apply the profile
+                    // For now, just show a notification
+                    showNotification(`Applied ${selectedProfile} risk profile`, 'success');
+                });
+            }
+            
+            // Helper function to show notifications
+            function showNotification(message, type = 'info') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <div class="notification-message">${message}</div>
+                        <button class="notification-close">&times;</button>
+                    </div>
+                `;
+                
+                // Add to notifications container
+                let container = document.querySelector('.notifications-container');
+                
+                if (!container) {
+                    container = document.createElement('div');
+                    container.className = 'notifications-container';
+                    document.body.appendChild(container);
+                }
+                
+                container.appendChild(notification);
+                
+                // Add close button functionality
+                const closeButton = notification.querySelector('.notification-close');
+                closeButton.addEventListener('click', () => {
+                    notification.classList.add('notification-hiding');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                });
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    notification.classList.add('notification-hiding');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 5000);
+            }
+            
+            // Save settings button
+            const saveSettingsBtn = document.querySelector('.risk-settings-actions .btn-primary');
+            if (saveSettingsBtn) {
+                saveSettingsBtn.addEventListener('click', function() {
+                    // Here we would save the risk settings
+                    // For now, just show a notification
+                    showNotification('Risk settings saved successfully', 'success');
+                });
+            }
+            
+            // Alert dismiss buttons
+            const dismissButtons = document.querySelectorAll('.risk-alert-actions .btn:not(.btn-primary)');
+            dismissButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const alertItem = this.closest('.risk-alert-item');
+                    if (alertItem) {
+                        alertItem.style.opacity = '0';
+                        alertItem.style.height = '0';
+                        alertItem.style.marginBottom = '0';
+                        alertItem.style.overflow = 'hidden';
+                        alertItem.style.transition = 'opacity 0.3s, height 0.3s, margin 0.3s';
+                        setTimeout(() => {
+                            if (alertItem.parentNode) {
+                                alertItem.parentNode.removeChild(alertItem);
+                            }
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

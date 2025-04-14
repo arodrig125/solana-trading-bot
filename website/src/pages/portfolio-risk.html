@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarBot - Portfolio Risk Analysis</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/risk-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/logo.svg" alt="SolarBot Logo" class="logo">
+                <h2>SolarBot</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="/trading"><i class="fas fa-chart-line"></i> Trading</a></li>
+                    <li><a href="/wallet"><i class="fas fa-wallet"></i> Wallet</a></li>
+                    <li><a href="/analytics"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="/backtesting"><i class="fas fa-vial"></i> Backtesting</a></li>
+                    <li class="active"><a href="/risk-management"><i class="fas fa-shield-alt"></i> Risk Management</a></li>
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Portfolio Risk Analysis</h1>
+                <div class="user-menu">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="/images/user-avatar.png" alt="User Avatar">
+                        <span class="user-name">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="risk-management-container">
+                    <div class="risk-management-header">
+                        <h2>Portfolio Analysis</h2>
+                        <div class="risk-management-tabs">
+                            <a href="risk-management.html" class="tab-link">
+                                <i class="fas fa-shield-alt"></i> Position Sizing
+                            </a>
+                            <a href="portfolio-risk.html" class="tab-link active">
+                                <i class="fas fa-chart-pie"></i> Portfolio Analysis
+                            </a>
+                        </div>
+                        <div class="risk-profile-selector">
+                            <label for="time-period">Time Period:</label>
+                            <select id="time-period">
+                                <option value="1m">1 Month</option>
+                                <option value="3m" selected>3 Months</option>
+                                <option value="6m">6 Months</option>
+                                <option value="1y">1 Year</option>
+                                <option value="all">All Time</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Risk Metrics -->
+                    <div class="risk-card" style="grid-column: 1 / -1;">
+                        <div class="risk-card-header">
+                            <h3>Portfolio Risk Metrics</h3>
+                            <button class="btn-icon" title="Export Data"><i class="fas fa-download"></i></button>
+                        </div>
+                        <div class="risk-card-body">
+                            <div class="metrics-grid">
+                                <!-- Annualized Return -->
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="metric-title">Annualized Return</div>
+                                    </div>
+                                    <div class="metric-value positive">12.5%</div>
+                                    <div class="metric-comparison">vs. Market: <span class="positive">+3.2%</span></div>
+                                </div>
+                                
+                                <!-- Volatility -->
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-wave-square"></i>
+                                        </div>
+                                        <div class="metric-title">Volatility</div>
+                                    </div>
+                                    <div class="metric-value">18.3%</div>
+                                    <div class="metric-comparison">vs. Market: <span class="positive">-4.7%</span></div>
+                                </div>
+                                
+                                <!-- Sharpe Ratio -->
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-balance-scale"></i>
+                                        </div>
+                                        <div class="metric-title">Sharpe Ratio</div>
+                                    </div>
+                                    <div class="metric-value positive">1.82</div>
+                                    <div class="metric-comparison">vs. Market: <span class="positive">+0.58</span></div>
+                                </div>
+                                
+                                <!-- Max Drawdown -->
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div class="metric-title">Max Drawdown</div>
+                                    </div>
+                                    <div class="metric-value negative">-24.6%</div>
+                                    <div class="metric-comparison">vs. Market: <span class="positive">+7.3%</span></div>
+                                </div>
+                                
+                                <!-- Diversification Ratio -->
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-project-diagram"></i>
+                                        </div>
+                                        <div class="metric-title">Diversification Ratio</div>
+                                    </div>
+                                    <div class="metric-value">1.35</div>
+                                    <div class="metric-scale">
+                                        <div class="scale-bar" style="width: 67.5%;"></div>
+                                        <div class="scale-labels">
+                                            <span>1.0</span>
+                                            <span>2.0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Value at Risk (VaR) -->
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="metric-title">Value at Risk (95%)</div>
+                                    </div>
+                                    <div class="metric-value negative">-$2,450</div>
+                                    <div class="metric-description">Daily VaR at 95% confidence</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Analysis Charts -->
+                    <div class="risk-card" style="grid-column: 1 / -1;">
+                        <div class="risk-card-header">
+                            <h3>Portfolio Visualization</h3>
+                            <div class="card-tabs">
+                                <button class="tab-btn active" data-tab="allocation">Allocation</button>
+                                <button class="tab-btn" data-tab="correlation">Correlation</button>
+                                <button class="tab-btn" data-tab="risk-return">Risk/Return</button>
+                                <button class="tab-btn" data-tab="drawdown">Drawdown</button>
+                            </div>
+                        </div>
+                        <div class="risk-card-body">
+                            <div id="portfolio-analyzer" class="analyzer-container">
+                                <!-- Portfolio analyzer will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Asset Risk Analysis -->
+                    <div class="risk-card" style="grid-column: 1 / -1;">
+                        <div class="risk-card-header">
+                            <h3>Asset Risk Analysis</h3>
+                            <div class="search-sort">
+                                <input type="text" placeholder="Search assets..." id="asset-search">
+                                <select id="asset-sort">
+                                    <option value="weight">Sort by Weight</option>
+                                    <option value="return">Sort by Return</option>
+                                    <option value="risk">Sort by Risk</option>
+                                    <option value="sharpe">Sort by Sharpe</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="risk-card-body">
+                            <div class="asset-risk-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Asset</th>
+                                            <th>Weight</th>
+                                            <th>Return</th>
+                                            <th>Volatility</th>
+                                            <th>Sharpe</th>
+                                            <th>Max DD</th>
+                                            <th>Win Rate</th>
+                                            <th>Contribution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="asset-cell">
+                                                <div class="asset-icon">SOL</div>
+                                                <div class="asset-name">Solana</div>
+                                            </td>
+                                            <td>35.2%</td>
+                                            <td class="positive">24.5%</td>
+                                            <td>31.8%</td>
+                                            <td class="positive">1.93</td>
+                                            <td class="negative">-33.6%</td>
+                                            <td>58.3%</td>
+                                            <td>
+                                                <div class="progress-bar">
+                                                    <div class="progress" style="width: 48%;"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="asset-cell">
+                                                <div class="asset-icon">BTC</div>
+                                                <div class="asset-name">Bitcoin</div>
+                                            </td>
+                                            <td>20.5%</td>
+                                            <td class="positive">15.2%</td>
+                                            <td>22.4%</td>
+                                            <td class="positive">1.65</td>
+                                            <td class="negative">-28.1%</td>
+                                            <td>54.8%</td>
+                                            <td>
+                                                <div class="progress-bar">
+                                                    <div class="progress" style="width: 25%;"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="asset-cell">
+                                                <div class="asset-icon">ETH</div>
+                                                <div class="asset-name">Ethereum</div>
+                                            </td>
+                                            <td>18.8%</td>
+                                            <td class="positive">12.8%</td>
+                                            <td>24.3%</td>
+                                            <td class="positive">1.42</td>
+                                            <td class="negative">-31.2%</td>
+                                            <td>53.6%</td>
+                                            <td>
+                                                <div class="progress-bar">
+                                                    <div class="progress" style="width: 19%;"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="asset-cell">
+                                                <div class="asset-icon">USDC</div>
+                                                <div class="asset-name">USD Coin</div>
+                                            </td>
+                                            <td>15.0%</td>
+                                            <td>2.0%</td>
+                                            <td>0.1%</td>
+                                            <td>1.00</td>
+                                            <td>0.0%</td>
+                                            <td>100.0%</td>
+                                            <td>
+                                                <div class="progress-bar">
+                                                    <div class="progress" style="width: 5%;"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="asset-cell">
+                                                <div class="asset-icon">JUP</div>
+                                                <div class="asset-name">Jupiter</div>
+                                            </td>
+                                            <td>10.5%</td>
+                                            <td class="negative">-8.3%</td>
+                                            <td>42.1%</td>
+                                            <td class="negative">-0.78</td>
+                                            <td class="negative">-45.2%</td>
+                                            <td>48.2%</td>
+                                            <td>
+                                                <div class="progress-bar">
+                                                    <div class="progress negative" style="width: 3%;"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Recommendations -->
+                    <div class="risk-card" style="grid-column: 1 / -1;">
+                        <div class="risk-card-header">
+                            <h3>Risk Optimization Recommendations</h3>
+                        </div>
+                        <div class="risk-card-body">
+                            <div class="recommendations-list">
+                                <!-- High Priority Recommendation -->
+                                <div class="recommendation-item high">
+                                    <div class="recommendation-icon">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div class="recommendation-content">
+                                        <div class="recommendation-title">Reduce SOL Exposure</div>
+                                        <div class="recommendation-description">
+                                            Solana currently represents 35.2% of your portfolio, creating concentration risk. Consider reducing your position by 10-15% to improve diversification ratio.
+                                        </div>
+                                        <div class="recommendation-actions">
+                                            <button class="btn btn-sm">Apply Automatically</button>
+                                            <button class="btn btn-sm">View Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Medium Priority Recommendation -->
+                                <div class="recommendation-item medium">
+                                    <div class="recommendation-icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="recommendation-content">
+                                        <div class="recommendation-title">Add Negative Correlation Assets</div>
+                                        <div class="recommendation-description">
+                                            Your portfolio assets show high positive correlation (0.82). Adding assets with negative correlation such as BONK or RAY could reduce overall portfolio volatility.
+                                        </div>
+                                        <div class="recommendation-actions">
+                                            <button class="btn btn-sm">View Suggestions</button>
+                                            <button class="btn btn-sm">Ignore</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Low Priority Recommendation -->
+                                <div class="recommendation-item low">
+                                    <div class="recommendation-icon">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <div class="recommendation-content">
+                                        <div class="recommendation-title">Optimize Asset Allocation</div>
+                                        <div class="recommendation-description">
+                                            Running our portfolio optimizer suggests a potential 2.3% improvement in Sharpe ratio by adjusting allocations while maintaining your current assets.
+                                        </div>
+                                        <div class="recommendation-actions">
+                                            <button class="btn btn-sm">Run Optimizer</button>
+                                            <button class="btn btn-sm">Ignore</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/api-client.js"></script>
+    <script src="/js/security-service.js"></script>
+    
+    <!-- Risk Management Module -->
+    <script src="/js/modules/risk-management/risk-core.js"></script>
+    <script src="/js/modules/risk-management/portfolio-analyzer.js"></script>
+    <script src="/js/modules/risk-management/portfolio-visualizer.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation for portfolio visualizations
+            const tabButtons = document.querySelectorAll('.card-tabs .tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Deactivate all tabs
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    
+                    // Activate the clicked tab
+                    button.classList.add('active');
+                    const tabName = button.dataset.tab;
+                    
+                    // Update the visible chart
+                    if (window.portfolioVisualizer) {
+                        // Here we would switch between charts in a real implementation
+                        console.log(`Showing ${tabName} chart`);
+                    }
+                });
+            });
+            
+            // Time period selector
+            const timePeriodSelector = document.getElementById('time-period');
+            if (timePeriodSelector) {
+                timePeriodSelector.addEventListener('change', function() {
+                    const selectedPeriod = this.value;
+                    // Here we would update the data based on the selected time period
+                    console.log('Selected time period:', selectedPeriod);
+                    
+                    // For demonstration, show a notification
+                    showNotification(`Updated to ${getTimePeriodLabel(selectedPeriod)} data`, 'info');
+                });
+            }
+            
+            // Get time period label
+            function getTimePeriodLabel(period) {
+                const labels = {
+                    '1m': '1 Month',
+                    '3m': '3 Months',
+                    '6m': '6 Months',
+                    '1y': '1 Year',
+                    'all': 'All Time'
+                };
+                return labels[period] || period;
+            }
+            
+            // Asset search functionality
+            const assetSearch = document.getElementById('asset-search');
+            if (assetSearch) {
+                assetSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const assetRows = document.querySelectorAll('.asset-risk-table tbody tr');
+                    
+                    assetRows.forEach(row => {
+                        const assetName = row.querySelector('.asset-name').textContent.toLowerCase();
+                        const assetSymbol = row.querySelector('.asset-icon').textContent.toLowerCase();
+                        
+                        if (assetName.includes(searchTerm) || assetSymbol.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            }
+            
+            // Asset sorting functionality
+            const assetSort = document.getElementById('asset-sort');
+            if (assetSort) {
+                assetSort.addEventListener('change', function() {
+                    const sortBy = this.value;
+                    sortAssetTable(sortBy);
+                });
+            }
+            
+            // Sort asset table
+            function sortAssetTable(criteria) {
+                const table = document.querySelector('.asset-risk-table table');
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                
+                // Define sorting functions for different criteria
+                const sortFunctions = {
+                    weight: (a, b) => {
+                        const valueA = parseFloat(a.cells[1].textContent);
+                        const valueB = parseFloat(b.cells[1].textContent);
+                        return valueB - valueA; // Descending
+                    },
+                    return: (a, b) => {
+                        const valueA = parseFloat(a.cells[2].textContent);
+                        const valueB = parseFloat(b.cells[2].textContent);
+                        return valueB - valueA; // Descending
+                    },
+                    risk: (a, b) => {
+                        const valueA = parseFloat(a.cells[3].textContent);
+                        const valueB = parseFloat(b.cells[3].textContent);
+                        return valueA - valueB; // Ascending (lower risk first)
+                    },
+                    sharpe: (a, b) => {
+                        const valueA = parseFloat(a.cells[4].textContent);
+                        const valueB = parseFloat(b.cells[4].textContent);
+                        return valueB - valueA; // Descending
+                    }
+                };
+                
+                // Sort the rows
+                rows.sort(sortFunctions[criteria] || sortFunctions.weight);
+                
+                // Remove existing rows
+                rows.forEach(row => tbody.removeChild(row));
+                
+                // Add sorted rows
+                rows.forEach(row => tbody.appendChild(row));
+                
+                // Show notification
+                showNotification(`Sorted by ${criteria}`, 'info');
+            }
+            
+            // Helper function to show notifications
+            function showNotification(message, type = 'info') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <div class="notification-message">${message}</div>
+                        <button class="notification-close">&times;</button>
+                    </div>
+                `;
+                
+                // Add to notifications container
+                let container = document.querySelector('.notifications-container');
+                
+                if (!container) {
+                    container = document.createElement('div');
+                    container.className = 'notifications-container';
+                    document.body.appendChild(container);
+                }
+                
+                container.appendChild(notification);
+                
+                // Add close button functionality
+                const closeButton = notification.querySelector('.notification-close');
+                closeButton.addEventListener('click', () => {
+                    notification.classList.add('notification-hiding');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                });
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    notification.classList.add('notification-hiding');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

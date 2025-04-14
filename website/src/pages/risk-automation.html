@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Automation - SolarBot</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/risk-management.css">
+    <link rel="stylesheet" href="../css/risk-automation.css">
+    
+    <!-- Vendor Dependencies -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../img/logo.svg" alt="SolarBot Logo" class="logo">
+                <h1>SolarBot</h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="trading.html"><i class="fas fa-exchange-alt"></i> Trading</a></li>
+                    <li class="active">
+                        <a href="risk-management.html"><i class="fas fa-shield-alt"></i> Risk Management</a>
+                        <ul class="submenu">
+                            <li><a href="risk-management.html">Position Sizing</a></li>
+                            <li><a href="portfolio-risk.html">Portfolio Analysis</a></li>
+                            <li class="active"><a href="risk-automation.html">Automation Rules</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="analytics.html"><i class="fas fa-chart-pie"></i> Analytics</a></li>
+                    <li><a href="backtesting.html"><i class="fas fa-vial"></i> Backtesting</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="#" id="support-link"><i class="fas fa-question-circle"></i> Support</a>
+                <a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-left">
+                    <button id="sidebar-toggle" class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>Risk Automation</h2>
+                </div>
+                
+                <div class="header-right">
+                    <div class="notifications">
+                        <button class="icon-button" id="notifications-toggle">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                    </div>
+                    
+                    <div class="user-menu">
+                        <button class="user-menu-toggle">
+                            <img src="../img/avatar.png" alt="User Avatar" class="avatar">
+                            <span>John Doe</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Risk Automation Content -->
+            <div class="content-wrapper">
+                <!-- Tabs Navigation -->
+                <div class="risk-management-container">
+                    <div class="risk-management-header">
+                        <h2>Risk Automation Rules</h2>
+                        <div class="risk-management-tabs">
+                            <a href="risk-management.html" class="tab-link">
+                                <i class="fas fa-shield-alt"></i> Position Sizing
+                            </a>
+                            <a href="portfolio-risk.html" class="tab-link">
+                                <i class="fas fa-chart-pie"></i> Portfolio Analysis
+                            </a>
+                            <a href="risk-automation.html" class="tab-link active">
+                                <i class="fas fa-robot"></i> Automation Rules
+                            </a>
+                        </div>
+                        <button id="create-rule-btn" class="primary-button">
+                            <i class="fas fa-plus"></i> Create Rule
+                        </button>
+                    </div>
+                    
+                    <!-- Main Rule List Section -->
+                    <div class="rules-container">
+                        <div class="rules-header">
+                            <div class="rules-filter">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="rule-search" placeholder="Search rules...">
+                                </div>
+                                <div class="filter-dropdown">
+                                    <label for="rule-filter">Show:</label>
+                                    <select id="rule-filter">
+                                        <option value="all">All Rules</option>
+                                        <option value="active">Active Only</option>
+                                        <option value="inactive">Inactive Only</option>
+                                        <option value="triggered">Recently Triggered</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rules-actions">
+                                <button id="import-rules-btn" class="secondary-button">
+                                    <i class="fas fa-file-import"></i> Import
+                                </button>
+                                <button id="export-rules-btn" class="secondary-button">
+                                    <i class="fas fa-file-export"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="rules-list" id="rules-list">
+                            <!-- Rules will be dynamically populated here -->
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h3>No Automation Rules Yet</h3>
+                                <p>Create your first rule to automate risk management decisions</p>
+                                <button id="create-first-rule-btn" class="primary-button">
+                                    <i class="fas fa-plus"></i> Create Rule
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Templates Section -->
+                    <div class="templates-container">
+                        <div class="templates-header">
+                            <h3>Rule Templates</h3>
+                            <p>Quick-start with pre-configured automation rules</p>
+                        </div>
+                        
+                        <div class="templates-grid">
+                            <div class="template-card" data-template="daily-loss-protection">
+                                <div class="template-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="template-content">
+                                    <h4>Daily Loss Protection</h4>
+                                    <p>Automatically reduce position sizes when daily losses exceed threshold</p>
+                                </div>
+                                <button class="use-template-btn">
+                                    <i class="fas fa-plus"></i> Use Template
+                                </button>
+                            </div>
+                            
+                            <div class="template-card" data-template="volatility-adjustment">
+                                <div class="template-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="template-content">
+                                    <h4>Volatility Adjustment</h4>
+                                    <p>Adjust position sizes based on market volatility conditions</p>
+                                </div>
+                                <button class="use-template-btn">
+                                    <i class="fas fa-plus"></i> Use Template
+                                </button>
+                            </div>
+                            
+                            <div class="template-card" data-template="winning-streak">
+                                <div class="template-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="template-content">
+                                    <h4>Winning Streak Optimizer</h4>
+                                    <p>Increase position sizes during winning streaks, reset after losses</p>
+                                </div>
+                                <button class="use-template-btn">
+                                    <i class="fas fa-plus"></i> Use Template
+                                </button>
+                            </div>
+                            
+                            <div class="template-card" data-template="drawdown-defense">
+                                <div class="template-icon">
+                                    <i class="fas fa-life-ring"></i>
+                                </div>
+                                <div class="template-content">
+                                    <h4>Drawdown Defense</h4>
+                                    <p>Reduce risk exposure during significant drawdowns</p>
+                                </div>
+                                <button class="use-template-btn">
+                                    <i class="fas fa-plus"></i> Use Template
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rule Creation/Edit Modal -->
+                <div class="modal" id="rule-modal">
+                    <div class="modal-content rule-modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-title">Create Automation Rule</h3>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <form id="rule-form">
+                                <!-- Basic Information Section -->
+                                <div class="form-section">
+                                    <h4>Basic Information</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="rule-name">Rule Name</label>
+                                            <input type="text" id="rule-name" required placeholder="e.g., Daily Loss Protection">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rule-priority">Priority</label>
+                                            <select id="rule-priority">
+                                                <option value="1">High</option>
+                                                <option value="2" selected>Medium</option>
+                                                <option value="3">Low</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rule-description">Description</label>
+                                        <textarea id="rule-description" rows="2" placeholder="Briefly describe what this rule does"></textarea>
+                                    </div>
+                                    <div class="form-group toggle-group">
+                                        <label for="rule-active">Rule Status</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="rule-active" checked>
+                                            <label for="rule-active"></label>
+                                        </div>
+                                        <span class="toggle-label" id="rule-status-label">Active</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Conditions Section -->
+                                <div class="form-section">
+                                    <h4>Conditions</h4>
+                                    <p class="form-hint">Define when this rule should be triggered</p>
+                                    
+                                    <div class="conditions-builder" id="conditions-builder">
+                                        <!-- Conditions will be added dynamically here -->
+                                        <div class="condition-group" data-group-id="root" data-group-type="and">
+                                            <div class="condition-group-header">
+                                                <div class="condition-group-operator">
+                                                    <select class="group-operator-select">
+                                                        <option value="and" selected>All conditions must be true (AND)</option>
+                                                        <option value="or">Any condition can be true (OR)</option>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="add-condition-btn">
+                                                    <i class="fas fa-plus"></i> Add Condition
+                                                </button>
+                                            </div>
+                                            <div class="conditions-list">
+                                                <!-- Initial empty condition -->
+                                                <div class="condition-item" data-condition-id="condition-1">
+                                                    <div class="condition-form">
+                                                        <div class="condition-type">
+                                                            <select class="condition-type-select">
+                                                                <option value="">-- Select Condition Type --</option>
+                                                                <optgroup label="Account Conditions">
+                                                                    <option value="dailyPnL">Daily P&L</option>
+                                                                    <option value="dailyLoss">Daily Loss</option>
+                                                                    <option value="drawdown">Drawdown</option>
+                                                                    <option value="balance">Account Balance</option>
+                                                                </optgroup>
+                                                                <optgroup label="Trading Performance">
+                                                                    <option value="winStreak">Win Streak</option>
+                                                                    <option value="lossStreak">Loss Streak</option>
+                                                                    <option value="winRate">Win Rate</option>
+                                                                </optgroup>
+                                                                <optgroup label="Market Conditions">
+                                                                    <option value="marketVolatility">Market Volatility</option>
+                                                                    <option value="priceChange">Price Change</option>
+                                                                    <option value="trendDirection">Trend Direction</option>
+                                                                </optgroup>
+                                                                <optgroup label="Time Conditions">
+                                                                    <option value="timeOfDay">Time of Day</option>
+                                                                    <option value="dayOfWeek">Day of Week</option>
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
+                                                        <div class="condition-parameters">
+                                                            <!-- Parameters will be dynamically added based on condition type -->
+                                                            <div class="placeholder-message">Select a condition type to continue</div>
+                                                        </div>
+                                                        <div class="condition-actions">
+                                                            <button type="button" class="remove-condition-btn">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <button type="button" class="secondary-button" id="add-group-btn">
+                                            <i class="fas fa-object-group"></i> Add Condition Group
+                                        </button>
+                                        <button type="button" class="secondary-button" id="test-conditions-btn">
+                                            <i class="fas fa-vial"></i> Test Conditions
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Actions Section -->
+                                <div class="form-section">
+                                    <h4>Actions</h4>
+                                    <p class="form-hint">Define what happens when conditions are met</p>
+                                    
+                                    <div class="actions-builder" id="actions-builder">
+                                        <!-- Actions will be added dynamically here -->
+                                        <div class="actions-list">
+                                            <!-- Initial empty action -->
+                                            <div class="action-item" data-action-id="action-1">
+                                                <div class="action-form">
+                                                    <div class="action-type">
+                                                        <select class="action-type-select">
+                                                            <option value="">-- Select Action Type --</option>
+                                                            <optgroup label="Position Sizing">
+                                                                <option value="adjustPositionSize">Adjust Position Size</option>
+                                                                <option value="setFixedPositionSize">Set Fixed Position Size</option>
+                                                                <option value="applyVolatilityBasedSizing">Apply Volatility-Based Sizing</option>
+                                                            </optgroup>
+                                                            <optgroup label="Risk Parameters">
+                                                                <option value="adjustRiskPercentage">Adjust Risk Percentage</option>
+                                                                <option value="adjustStopLossDistance">Adjust Stop-Loss Distance</option>
+                                                                <option value="enableTrailingStop">Enable Trailing Stop</option>
+                                                            </optgroup>
+                                                            <optgroup label="Trading Mode">
+                                                                <option value="pauseTrading">Pause Trading</option>
+                                                                <option value="resumeTrading">Resume Trading</option>
+                                                                <option value="switchToDefensiveMode">Switch to Defensive Mode</option>
+                                                            </optgroup>
+                                                            <optgroup label="Notifications">
+                                                                <option value="sendAlert">Send Alert</option>
+                                                                <option value="sendEmail">Send Email</option>
+                                                                <option value="sendTelegramMessage">Send Telegram Message</option>
+                                                            </optgroup>
+                                                        </select>
+                                                    </div>
+                                                    <div class="action-parameters">
+                                                        <!-- Parameters will be dynamically added based on action type -->
+                                                        <div class="placeholder-message">Select an action type to continue</div>
+                                                    </div>
+                                                    <div class="action-actions">
+                                                        <button type="button" class="remove-action-btn">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button type="button" class="add-action-btn">
+                                            <i class="fas fa-plus"></i> Add Action
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Execution Limits Section -->
+                                <div class="form-section">
+                                    <h4>Execution Limits</h4>
+                                    <p class="form-hint">Control how often this rule can be triggered</p>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="execution-limit-type">Limit Type</label>
+                                            <select id="execution-limit-type">
+                                                <option value="none">No Limit</option>
+                                                <option value="daily" selected>Daily</option>
+                                                <option value="hourly">Hourly</option>
+                                                <option value="total">Total (Lifetime)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="limit-value-group">
+                                            <label for="execution-limit-value">Max Executions</label>
+                                            <input type="number" id="execution-limit-value" min="1" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="secondary-button" id="cancel-rule-btn">Cancel</button>
+                                    <button type="submit" class="primary-button" id="save-rule-btn">Save Rule</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <!-- Application Scripts -->
+    <script src="../js/api-client.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/modules/risk-management/risk-core.js"></script>
+    <script src="../js/modules/risk-management/automation-core.js"></script>
+    <script src="../js/modules/risk-management/automation-conditions.js"></script>
+    <script src="../js/modules/risk-management/automation-actions.js"></script>
+    <script src="../js/modules/risk-management/rule-templates.js"></script>
+    <script src="../js/modules/risk-management/rule-builder-core.js"></script>
+</body>
+</html>

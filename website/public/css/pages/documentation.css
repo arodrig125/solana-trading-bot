@@ -1,0 +1,323 @@
+/* Documentation Page Styles */
+
+/* Documentation Layout */
+.docs-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--spacing-8);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--spacing-4);
+}
+
+/* Sidebar Navigation */
+.docs-sidebar {
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  padding: var(--spacing-6);
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.docs-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.docs-nav-section {
+  margin-bottom: var(--spacing-6);
+}
+
+.docs-nav-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-2);
+}
+
+.docs-nav-link {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-2) var(--spacing-3);
+  color: var(--gray-600);
+  border-radius: var(--radius-md);
+  transition: var(--transition-colors);
+  font-size: var(--text-sm);
+}
+
+.docs-nav-link:hover {
+  color: var(--primary);
+  background-color: var(--gray-50);
+}
+
+.docs-nav-link.active {
+  color: var(--primary);
+  background-color: rgba(99, 102, 241, 0.1);
+  font-weight: 500;
+}
+
+/* Main Content */
+.docs-content {
+  max-width: 800px;
+  padding: var(--spacing-6);
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Article Styling */
+.docs-article {
+  margin-bottom: var(--spacing-12);
+}
+
+.docs-article h1 {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--spacing-6);
+  color: var(--gray-900);
+}
+
+.docs-article h2 {
+  font-size: var(--text-2xl);
+  margin: var(--spacing-8) 0 var(--spacing-4);
+  padding-bottom: var(--spacing-2);
+  border-bottom: 2px solid var(--gray-100);
+  color: var(--gray-900);
+}
+
+.docs-article h3 {
+  font-size: var(--text-xl);
+  margin: var(--spacing-6) 0 var(--spacing-3);
+  color: var(--gray-800);
+}
+
+.docs-article p {
+  margin-bottom: var(--spacing-4);
+  line-height: 1.7;
+  color: var(--gray-700);
+}
+
+/* Code Blocks */
+.docs-code {
+  margin: var(--spacing-4) 0;
+  padding: var(--spacing-4);
+  background-color: var(--gray-900);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+
+.docs-code pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--gray-100);
+}
+
+.docs-code code {
+  display: block;
+  padding: var(--spacing-4);
+}
+
+/* API Reference */
+.api-endpoint {
+  margin: var(--spacing-6) 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+}
+
+.api-endpoint-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background-color: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.api-method {
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.api-method.get {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: var(--success);
+}
+
+.api-method.post {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+}
+
+.api-method.put {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.api-method.delete {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+}
+
+.api-endpoint-content {
+  padding: var(--spacing-4);
+}
+
+/* Interactive Examples */
+.docs-example {
+  margin: var(--spacing-6) 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+}
+
+.docs-example-preview {
+  padding: var(--spacing-6);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.docs-example-code {
+  background-color: var(--gray-50);
+  padding: var(--spacing-4);
+}
+
+/* Table of Contents */
+.docs-toc {
+  position: sticky;
+  top: var(--header-height);
+  padding: var(--spacing-6);
+  margin-left: var(--spacing-6);
+}
+
+.docs-toc-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-4);
+}
+
+.docs-toc-list {
+  font-size: var(--text-sm);
+}
+
+.docs-toc-item {
+  margin-bottom: var(--spacing-2);
+}
+
+.docs-toc-link {
+  color: var(--gray-600);
+  transition: var(--transition-colors);
+}
+
+.docs-toc-link:hover {
+  color: var(--primary);
+}
+
+.docs-toc-link.active {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* Search */
+.docs-search {
+  margin-bottom: var(--spacing-6);
+}
+
+.docs-search input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-left: var(--spacing-10);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: var(--spacing-3) center;
+  background-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .docs-container {
+    grid-template-columns: 1fr;
+  }
+
+  .docs-sidebar {
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-40);
+    background-color: var(--white);
+  }
+
+  .docs-sidebar.active {
+    display: block;
+  }
+
+  .docs-content {
+    padding: var(--spacing-4);
+  }
+
+  .docs-toc {
+    display: none;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .docs-sidebar,
+  .docs-content {
+    background-color: var(--gray-800);
+  }
+
+  .docs-nav-link:hover {
+    background-color: var(--gray-700);
+  }
+
+  .docs-nav-link.active {
+    background-color: rgba(99, 102, 241, 0.2);
+  }
+
+  .docs-article h1,
+  .docs-article h2,
+  .docs-article h3 {
+    color: var(--white);
+  }
+
+  .docs-article p {
+    color: var(--gray-300);
+  }
+
+  .api-endpoint {
+    border-color: var(--gray-700);
+  }
+
+  .api-endpoint-header {
+    background-color: var(--gray-700);
+  }
+
+  .docs-example {
+    border-color: var(--gray-700);
+  }
+
+  .docs-example-code {
+    background-color: var(--gray-900);
+  }
+
+  .docs-search input {
+    background-color: var(--gray-700);
+    border-color: var(--gray-600);
+    color: var(--white);
+  }
+}
