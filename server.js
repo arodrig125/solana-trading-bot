@@ -6,15 +6,14 @@ const cluster = require('cluster');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
-// Admin credentials (move to secure storage in production)
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH; // bcrypt hash
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+// Import scheduler
+const { setupScheduledTasks } = require('./server/services/scheduler');
 
-// Parse JSON bodies
+// Middleware setup
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/solarbot', {
@@ -22,12 +21,16 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/solarbot', {
     useUnifiedTopology: true
 }).then(() => {
     console.log('Connected to MongoDB');
+    // Initialize scheduler after DB connection (add this line)
+    setupScheduledTasks();
 }).catch(err => {
     console.error('MongoDB connection error:', err);
 });
 
 // API Routes
 app.use('/api/users', require('./routes/users'));
+// Add automation routes
+app.use('/api/automation', require('./server/routes/automationRoutes'));
 
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public')));

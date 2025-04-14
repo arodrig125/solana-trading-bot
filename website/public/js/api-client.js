@@ -192,6 +192,45 @@ class ApiClient {
   async cancelSubscription() {
     return this.request('/subscription/cancel', { method: 'POST' });
   }
+
+  /**
+   * Risk Automation methods
+   */
+  async getRules(walletId = null) {
+    const queryParams = walletId ? `?walletId=${walletId}` : '';
+    return this.request(`/automation/rules${queryParams}`);
+  }
+
+  async createRule(rule) {
+    return this.request('/automation/rules', {
+      method: 'POST',
+      body: JSON.stringify(rule)
+    });
+  }
+
+  async updateRule(ruleId, updates) {
+    return this.request(`/automation/rules/${ruleId}`, {
+      method: 'PUT',
+      body: JSON.stringify(updates)
+    });
+  }
+
+  async deleteRule(ruleId) {
+    return this.request(`/automation/rules/${ruleId}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async evaluateRules(walletId = null) {
+    return this.request('/automation/rules/evaluate', {
+      method: 'POST',
+      body: JSON.stringify({ walletId })
+    });
+  }
+
+  async getRuleHistory(ruleId) {
+    return this.request(`/automation/rules/${ruleId}/history`);
+  }
 }
 
 // Create global instance
