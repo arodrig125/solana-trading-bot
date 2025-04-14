@@ -1,0 +1,15 @@
+{
+  "name": "cross-chain-arbitrage",
+  "version": "1.0.0",
+  "description": "Cross-chain arbitrage system for Solana, Ethereum, and BSC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.94.0",
+    "ethers": "^6.9.0",
+    "@binance-chain/bsc-connector": "^1.0.0"
+  }
+}
