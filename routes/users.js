@@ -6,6 +6,20 @@ const { verifyAdminToken } = require('../middleware/auth');
 // Apply admin verification to all routes
 router.use(verifyAdminToken);
 
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get all users (admin only)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of users
+ *       403:
+ *         description: Not authorized
+ */
 // Get all users (admin only)
 router.get('/', async (req, res) => {
     try {
@@ -19,6 +33,39 @@ router.get('/', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Create a new user (admin only)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - password
+ *               - role
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *       400:
+ *         description: Missing required fields or username exists
+ *       403:
+ *         description: Not authorized
+ */
 // Create new user (admin only)
 router.post('/', async (req, res) => {
     try {
@@ -62,6 +109,44 @@ router.post('/', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/users/{userId}:
+ *   put:
+ *     summary: Update a user (admin only)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *               active:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *       403:
+ *         description: Not authorized
+ *       404:
+ *         description: User not found
+ */
 // Update user (admin only)
 router.put('/:userId', async (req, res) => {
     try {
@@ -101,6 +186,29 @@ router.put('/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/users/{userId}:
+ *   delete:
+ *     summary: Delete a user (admin only)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user to delete
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       403:
+ *         description: Not authorized
+ *       404:
+ *         description: User not found
+ */
 // Delete user (admin only)
 router.delete('/:userId', async (req, res) => {
     try {
@@ -130,6 +238,20 @@ router.delete('/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/users/profile:
+ *   get:
+ *     summary: Get current user profile
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User profile
+ *       403:
+ *         description: Not authorized
+ */
 // Get current user profile
 router.get('/profile', async (req, res) => {
     try {
@@ -140,6 +262,36 @@ router.get('/profile', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/users/profile/password:
+ *   put:
+ *     summary: Update current user's password
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - currentPassword
+ *               - newPassword
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password updated successfully
+ *       400:
+ *         description: Current password incorrect
+ *       403:
+ *         description: Not authorized
+ */
 // Update current user's password
 router.put('/profile/password', async (req, res) => {
     try {

@@ -9,6 +9,7 @@ module.exports = {
     watch: false,
     env: {
       NODE_ENV: 'production',
+      MONGODB_URI: 'mongodb+srv://arodrig125:P2onw3Q4a4BGydkN@solarbot.99tdptt.mongodb.net/solarbot?retryWrites=true&w=majority',
       PM2_GRACEFUL_TIMEOUT: 4000,
       PM2_GRACEFUL_KILL_TIMEOUT: 6000
     },

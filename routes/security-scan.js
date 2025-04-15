@@ -10,6 +10,20 @@ const fs = require('fs').promises;
 // Apply authentication to all routes
 router.use(verifyToken);
 
+/**
+ * @swagger
+ * /api/security-scan/scan:
+ *   get:
+ *     summary: Get security scan results
+ *     tags: [SecurityScan]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Security scan results
+ *       403:
+ *         description: Not authorized
+ */
 // Get security scan results
 router.get('/scan', checkPermission('view_code'), async (req, res) => {
     try {
@@ -36,6 +50,20 @@ router.get('/scan', checkPermission('view_code'), async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/security-scan/history:
+ *   get:
+ *     summary: Get historical scan data
+ *     tags: [SecurityScan]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Array of previous security scan reports
+ *       403:
+ *         description: Not authorized
+ */
 // Get historical scan data
 router.get('/history', checkPermission('view_code'), async (req, res) => {
     try {
@@ -68,6 +96,38 @@ router.get('/history', checkPermission('view_code'), async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/security-scan/schedule:
+ *   post:
+ *     summary: Schedule an automated security scan
+ *     tags: [SecurityScan]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - frequency
+ *               - time
+ *             properties:
+ *               frequency:
+ *                 type: string
+ *                 enum: [daily, weekly, monthly]
+ *               time:
+ *                 type: string
+ *                 description: Time in HH:mm format
+ *     responses:
+ *       200:
+ *         description: Scan scheduled successfully
+ *       400:
+ *         description: Invalid frequency or time format
+ *       403:
+ *         description: Not authorized
+ */
 // Schedule automated scan
 router.post('/schedule', checkPermission('manage_settings'), async (req, res) => {
     try {
@@ -97,6 +157,20 @@ router.post('/schedule', checkPermission('manage_settings'), async (req, res) =>
     }
 });
 
+/**
+ * @swagger
+ * /api/security-scan/schedule:
+ *   get:
+ *     summary: Get current scan schedule
+ *     tags: [SecurityScan]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Current scan schedule
+ *       403:
+ *         description: Not authorized
+ */
 // Get current scan schedule
 router.get('/schedule', checkPermission('view_code'), async (req, res) => {
     try {
@@ -106,6 +180,38 @@ router.get('/schedule', checkPermission('view_code'), async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/security-scan/export/batch:
+ *   post:
+ *     summary: Batch export security reports
+ *     tags: [SecurityScan]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               startDate:
+ *                 type: string
+ *                 format: date
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *               format:
+ *                 type: string
+ *                 default: all
+ *     responses:
+ *       200:
+ *         description: Zip file of exported reports
+ *       404:
+ *         description: No reports found in specified date range
+ *       403:
+ *         description: Not authorized
+ */
 // Batch export reports
 router.post('/export/batch', checkPermission('view_code'), async (req, res) => {
     try {
@@ -155,6 +261,32 @@ router.post('/export/batch', checkPermission('view_code'), async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/security-scan/export/{format}:
+ *   get:
+ *     summary: Export latest security report in given format
+ *     tags: [SecurityScan]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: format
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [pdf, csv, json]
+ *         description: Export format
+ *     responses:
+ *       200:
+ *         description: Exported report file
+ *       400:
+ *         description: Unsupported format
+ *       404:
+ *         description: No reports available
+ *       403:
+ *         description: Not authorized
+ */
 // Export report in various formats
 router.get('/export/:format', checkPermission('view_code'), async (req, res) => {
     try {

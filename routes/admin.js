@@ -25,6 +25,22 @@ const verifyAdminToken = (req, res, next) => {
 // Apply admin verification to all routes
 router.use(verifyAdminToken);
 
+/**
+ * @swagger
+ * /admin/api/metrics/quick:
+ *   get:
+ *     summary: Get quick bot stats
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Quick stats for bot status, profit, trades, uptime
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get quick stats
 router.get('/metrics/quick', async (req, res) => {
     try {
@@ -40,6 +56,22 @@ router.get('/metrics/quick', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/metrics/network:
+ *   get:
+ *     summary: Get network metrics (RPC, gas, network)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Network, RPC, and gas metrics
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get network metrics
 router.get('/metrics/network', async (req, res) => {
     try {
@@ -66,6 +98,22 @@ router.get('/metrics/network', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/metrics/market:
+ *   get:
+ *     summary: Get market overview
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Top pairs and current opportunities
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get market overview
 router.get('/metrics/market', async (req, res) => {
     try {
@@ -79,6 +127,22 @@ router.get('/metrics/market', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/metrics/system:
+ *   get:
+ *     summary: Get system metrics (CPU, memory, uptime, host info)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: System metrics
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get system metrics
 router.get('/metrics/system', async (req, res) => {
     try {
@@ -104,6 +168,22 @@ router.get('/metrics/system', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/metrics/trading:
+ *   get:
+ *     summary: Get trading metrics (trades, profits, performance)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Trading metrics
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get trading metrics
 router.get('/metrics/trading', async (req, res) => {
     try {
@@ -123,6 +203,34 @@ router.get('/metrics/trading', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/alerts/history:
+ *   get:
+ *     summary: Get alert history
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: category
+ *         schema:
+ *           type: string
+ *         description: Filter by alert category
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 50
+ *         description: Number of alerts to return
+ *     responses:
+ *       200:
+ *         description: Array of alert history
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get alert history
 router.get('/alerts/history', async (req, res) => {
     try {
@@ -134,6 +242,22 @@ router.get('/alerts/history', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/alerts/active:
+ *   get:
+ *     summary: Get active alerts
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Array of active alerts
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get active alerts
 router.get('/alerts/active', async (req, res) => {
     try {
@@ -144,6 +268,31 @@ router.get('/alerts/active', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/alerts/{alertId}/acknowledge:
+ *   post:
+ *     summary: Acknowledge an alert
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: alertId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the alert to acknowledge
+ *     responses:
+ *       200:
+ *         description: Alert acknowledged
+ *       404:
+ *         description: Alert not found
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Acknowledge alert
 router.post('/alerts/:alertId/acknowledge', async (req, res) => {
     try {
@@ -159,6 +308,22 @@ router.post('/alerts/:alertId/acknowledge', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /admin/api/metrics/wallet:
+ *   get:
+ *     summary: Get wallet metrics
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Wallet balance, pending, recent transactions
+ *       401:
+ *         description: No token provided or invalid
+ *       403:
+ *         description: Not authorized
+ */
 // Get wallet metrics
 router.get('/metrics/wallet', async (req, res) => {
     try {

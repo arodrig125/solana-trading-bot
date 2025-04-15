@@ -1,3 +1,46 @@
+// --- Environment Variable Validation ---
+const { cleanEnv, str, num, bool, url } = require('envalid');
+
+cleanEnv(process.env, {
+  TELEGRAM_BOT_TOKEN: str(),
+  TELEGRAM_CHAT_ID: str(),
+  PRIVATE_KEY: str(),
+  SHEET_ID: str(),
+  SIMULATION: bool({ default: false }),
+  RPC_ENDPOINT: url(),
+  MONGODB_URI: str(),
+  ADMIN_USERNAME: str(),
+  ROLE: str(),
+  ADMIN_PASSWORD_HASH: str(),
+  JWT_SECRET: str(),
+  SENTRY_DSN: str(),
+  PORT: num({ default: 3001 }),
+  ADMIN_CHAT_ID: str({ default: '' })
+});
+
+// Global error handlers for stability
+const { sendMessage } = require('./utils/telegram');
+const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
+
+function notifyAdmin(error) {
+  if (ADMIN_CHAT_ID) {
+    sendMessage(null, ADMIN_CHAT_ID, `❗️Critical Error:\n${error.message || error}\n${error.stack || ''}`);
+  }
+}
+
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+  notifyAdmin(err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  notifyAdmin(reason instanceof Error ? reason : new Error(String(reason)));
+});
+
+const Sentry = require('@sentry/node');
+Sentry.init({ dsn: process.env.SENTRY_DSN });
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -8,15 +51,36 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const port = process.env.PORT || 3001;
 
+// --- Modularized Middleware ---
+const { apiLimiter } = require('./middleware/rateLimiter');
+const securityHeaders = require('./middleware/securityHeaders');
+const { sentryRequestHandler, sentryErrorHandler } = require('./middleware/sentryHandlers');
+
+// --- Swagger/OpenAPI Docs ---
+const { swaggerUi, swaggerSpec } = require('./swagger');
+
 // Import scheduler
 const { setupScheduledTasks } = require('./server/services/scheduler');
+
+// Sentry request handler (must be first middleware)
+app.use(sentryRequestHandler);
 
 // Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(securityHeaders);
+
+// Serve Swagger UI at /api-docs
+// Visit http://localhost:3001/api-docs for interactive API docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// --- API Rate Limiting Middleware ---
+// Apply to API and admin routes
+app.use('/api/', apiLimiter);
+app.use('/admin/api/', apiLimiter);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/solarbot', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://solarbot.99tdptt.mongodb.net/solarbot', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -124,9 +188,36 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add a robust health check endpoint
+app.get('/health', async (req, res) => {
+  const mongoState = mongoose.connection.readyState;
+  let mongoStatus = 'unknown';
+  if (mongoState === 1) mongoStatus = 'connected';
+  else if (mongoState === 2) mongoStatus = 'connecting';
+  else if (mongoState === 0) mongoStatus = 'disconnected';
+  else if (mongoState === 3) mongoStatus = 'disconnecting';
+
+  res.json({
+    status: 'ok',
+    mongo: mongoStatus,
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Add a health check endpoint
 app.get('/', (req, res) => {
   res.send('Solana Arbitrage Bot is running!');
+});
+
+// Sentry test endpoint
+app.get('/sentry-test', (req, res) => {
+  throw new Error('Sentry integration test error');
+});
+
+// Sentry undefined function test endpoint
+app.get('/sentry-test-undefined', (req, res) => {
+  myUndefinedFunction(); // This will throw a ReferenceError
 });
 
 // Add a comprehensive status endpoint
@@ -206,6 +297,7 @@ async function gracefulShutdown() {
 
 // Start the server
 const server = app.listen(port, () => {
+  // If you want to debug req.user, use an Express middleware, not here.
   console.log(`Worker ${cluster.worker.id} listening on port ${port}`);
 });
 
@@ -221,3 +313,28 @@ server.on('connection', (connection) => {
 if (!cluster.isWorker || cluster.worker.id === 1) {
   require('./index');
 }
+
+// 404 handler (for unmatched routes)
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
+
+// Sentry error handler (must be before any other error middleware)
+app.use(sentryErrorHandler);
+
+// Global Express error handler (must be last)
+app.use((err, req, res, next) => {
+  logger.error({
+    message: err.message,
+    stack: err.stack,
+    path: req.path,
+    method: req.method,
+    body: req.body,
+    user: req.user,
+    time: new Date().toISOString()
+  });
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: err.message
+  });
+});

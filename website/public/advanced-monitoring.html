@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Trading Metrics - Cross-Chain Arbitrage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/monitoring.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <style>
+        .visualization-card {
+            height: 400px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        #networkFlow {
+            height: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .visualization-card.loading .loading-overlay {
+            display: flex;
+        }
+        .refresh-indicator {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Trading Metrics - Cross-Chain Arbitrage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/monitoring.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- API Status Indicator -->
+    <div id="apiStatus" class="position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">API Status</strong>
+                <small id="apiLatency">0ms</small>
+            </div>
+            <div class="toast-body" id="apiStatusMessage">
+                Connected
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Advanced Trading Metrics</a>
+            <div class="d-flex align-items-center">
+                <span class="text-light me-3">
+                    <small>Last Update: <span id="lastRefresh">-</span></small>
+                </span>
+                <select id="timeRangeSelector" class="form-select form-select-sm me-2">
+                    <option value="1h">1 Hour</option>
+                    <option value="24h" selected>24 Hours</option>
+                    <option value="7d">7 Days</option>
+                    <option value="30d">30 Days</option>
+                </select>
+                <button id="refreshButton" class="btn btn-outline-light">
+                    <i class="bi bi-arrow-clockwise"></i> Refresh
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Digital Ocean Resource Usage -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Digital Ocean Resource Usage</h5>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <canvas id="systemResourcesChart"></canvas>
+                            </div>
+                            <div class="col-md-4">
+                                <table id="systemHealthTable" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Metric</th>
+                                            <th>Value</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Risk Analysis</h5>
+                        <canvas id="riskMetricsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Risk Metrics</h5>
+                        <table id="riskMetricsTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Equity Curve</h5>
+                        <canvas id="equityCurveChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Performance Summary</h5>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Total Profit</td>
+                                    <td id="totalProfit">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Daily ROI</td>
+                                    <td id="dailyROI">0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Win Rate</td>
+                                    <td id="winRate">0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Avg Trade Duration</td>
+                                    <td id="avgTradeDuration">0s</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gas and Liquidity -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gas Price Trends</h5>
+                        <canvas id="gasPricesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Liquidity Distribution</h5>
+                        <canvas id="liquidityDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liquidity Details -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pool Liquidity Analysis</h5>
+                        <div class="table-responsive">
+                            <table id="liquidityTable" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Pool</th>
+                                        <th>Total Liquidity</th>
+                                        <th>Utilization</th>
+                                        <th>Avg Slippage</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Usage -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">API Usage Statistics</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Total Requests</h6>
+                                        <h3 id="totalRequests">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Active Users</h6>
+                                        <h3 id="activeUsers">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Avg Response Time</h6>
+                                        <h3 id="avgResponseTime">0ms</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Error Rate</h6>
+                                        <h3 id="apiErrorRate">0%</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Toast Container for Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <!-- Toasts will be dynamically added here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api-endpoints.js"></script>
+    <script src="js/api-service.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script src="js/visualization-animations.js"></script>
+    <script src="js/visualizations.js"></script>
+    <script src="js/detailed-charts.js"></script>
+    <script src="js/monitoring-dashboard.js"></script>
+
+    <script>
+        // Initialize WebSocket connection
+        const ws = new WebSocket(`ws://${window.location.host}${API_CONFIG.websocket.endpoint}`);
+        
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            // Handle real-time updates
+            if (data.type === 'metrics_update') {
+                window.dataLoader.handleRealtimeUpdate(data);
+            }
+        };
+
+        ws.onclose = function() {
+            // Handle reconnection
+            setTimeout(() => {
+                window.location.reload();
+            }, API_CONFIG.websocket.reconnectInterval);
+        };
+
+        // Monitor API health
+        setInterval(() => {
+            const start = performance.now();
+            fetch(`${API_CONFIG.baseUrl}/health`)
+                .then(response => {
+                    const latency = performance.now() - start;
+                    document.getElementById('apiLatency').textContent = `${Math.round(latency)}ms`;
+                    document.getElementById('apiStatusMessage').textContent = 'Connected';
+                    document.getElementById('apiStatus').querySelector('.toast-header')
+                        .classList.remove('bg-danger');
+                })
+                .catch(error => {
+                    document.getElementById('apiStatusMessage').textContent = 'Disconnected';
+                    document.getElementById('apiStatus').querySelector('.toast-header')
+                        .classList.add('bg-danger');
+                });
+        }, 5000);
+    </script>
+    <script src="js/advanced-metrics.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Visualizations - Cross-Chain Arbitrage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/monitoring.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <style>
+        .visualization-card {
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        #networkFlow {
+            height: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Trading Visualizations</a>
+            <div class="d-flex">
+                <select id="timeRangeSelector" class="form-select form-select-sm me-2">
+                    <option value="1h">1 Hour</option>
+                    <option value="24h" selected>24 Hours</option>
+                    <option value="7d">7 Days</option>
+                    <option value="30d">30 Days</option>
+                </select>
+                <button id="refreshButton" class="btn btn-outline-light">
+                    <i class="bi bi-arrow-clockwise"></i> Refresh
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Opportunity Heat Map & Network Flow -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card visualization-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Opportunity Heat Map</h5>
+                        <canvas id="opportunityHeatMap"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card visualization-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cross-Chain Flow</h5>
+                        <div id="networkFlow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profit Distribution & Performance Attribution -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card visualization-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Profit Distribution by Chain</h5>
+                        <canvas id="profitDistribution"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card visualization-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Performance Attribution</h5>
+                        <canvas id="performanceAttribution"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volume Profile -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card visualization-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Volume Profile Analysis</h5>
+                        <canvas id="volumeProfile"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading Statistics -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Total Volume (24h)</h6>
+                        <h3 id="totalVolume">$0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Avg Opportunity Size</h6>
+                        <h3 id="avgOpportunitySize">$0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Success Rate</h6>
+                        <h3 id="successRate">0%</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Most Active Chain</h6>
+                        <h3 id="mostActiveChain">-</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/monitoring-dashboard.js"></script>
+    <script src="js/visualizations.js"></script>
+</body>
+</html>

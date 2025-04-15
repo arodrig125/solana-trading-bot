@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - SolarBot.io</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,9 +13,55 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Notification Container -->
+    <div id="notification-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 items-end"></div>
+    <script>
+      // Dark mode toggle
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
     <!-- Dashboard Header -->
-    <header class="dashboard-header">
+    <!-- Dashboard Tabs -->
+    <nav class="flex gap-2 mt-4 px-6" aria-label="Dashboard sections">
+      <button id="tab-dashboard" class="tab-btn px-4 py-2 rounded-t bg-violet-100 dark:bg-violet-900 text-violet-700 dark:text-violet-300 font-semibold focus:outline-none" aria-controls="section-dashboard">Dashboard</button>
+      <button id="tab-api-usage" class="tab-btn px-4 py-2 rounded-t bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold focus:outline-none" aria-controls="section-api-usage">API Usage</button>
+      <button id="tab-api-docs" class="tab-btn px-4 py-2 rounded-t bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold focus:outline-none" aria-controls="section-api-docs">API Documentation</button>
+    </nav>
+    <!-- Header -->
+    <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 shadow-md">
+      <div class="flex items-center gap-3">
+        <img src="/public/images/icons/icon-dashboard.svg" alt="Logo" class="h-8 w-8">
+        <span class="text-2xl font-bold tracking-tight text-violet-600 dark:text-violet-400">SolarBot<span class="text-green-400">.io</span></span>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Connection Monitor Widget -->
+        <div id="connection-monitor" class="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-sm font-medium">
+          <span id="conn-status-dot" class="h-3 w-3 rounded-full bg-gray-400 inline-block"></span>
+          <span id="conn-status-text">Checking...</span>
+          <span id="conn-latency" class="ml-2 text-xs text-gray-500"></span>
+        </div>
+        <button id="theme-toggle" class="p-2 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-violet-100 dark:hover:bg-violet-800 transition">
+          <i class="fas fa-moon dark:hidden"></i>
+          <i class="fas fa-sun hidden dark:inline"></i>
+        </button>
+        <div class="relative">
+          <button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-violet-100 dark:hover:bg-violet-800">
+            <img src="/public/images/avatar.jpg" alt="User" class="h-7 w-7 rounded-full border-2 border-violet-400">
+            <span class="font-medium">John Doe</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <!-- Dropdown (implement JS for toggle) -->
+        </div>
+        <button class="relative p-2 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-violet-100 dark:hover:bg-violet-800">
+          <i class="fas fa-bell"></i>
+          <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+        </button>
+      </div>
+    </header>
         <div class="container">
             <div class="logo">
                 <a href="index.html">
@@ -57,7 +105,123 @@
     </header>
 
     <!-- Dashboard Layout -->
-    <div class="dashboard-layout">
+    <div class="flex min-h-[calc(100vh-64px)]">
+      <!-- Sidebar -->
+      <aside class="w-60 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col p-4">
+        <nav class="flex-1">
+          <ul class="space-y-2">
+            <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-violet-100 dark:bg-violet-900 text-violet-700 dark:text-violet-300 font-semibold"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-robot"></i> Bot Config</a></li>
+            <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-history"></i> Trades</a></li>
+            <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-chart-line"></i> Analytics</a></li>
+            <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-wallet"></i> Wallet</a></li>
+            <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-cog"></i> Settings</a></li>
+          </ul>
+        </nav>
+        <div class="mt-8 text-xs text-gray-500 dark:text-gray-400">
+          <div>Advanced Plan</div>
+          <div class="text-green-500">Renews: Nov 15, 2023</div>
+        </div>
+      </aside>
+      <!-- Main Content -->
+      <main class="flex-1 p-8 bg-gray-50 dark:bg-gray-900">
+        <!-- Tab Sections -->
+        <section id="section-dashboard" class="tab-section active" aria-label="Dashboard section">
+          <!-- Existing dashboard content here -->
+        <!-- Metrics Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col gap-2 shadow hover:shadow-lg transition">
+            <div class="flex items-center gap-2 text-green-500"><i class="fas fa-dollar-sign"></i> PnL</div>
+            <div class="text-2xl font-bold">$2,340</div>
+            <div class="text-xs text-green-500">+8.2% from last week</div>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col gap-2 shadow hover:shadow-lg transition">
+            <div class="flex items-center gap-2 text-blue-500"><i class="fas fa-exchange-alt"></i> Trades</div>
+            <div class="text-2xl font-bold">158</div>
+            <div class="text-xs text-blue-500">+12 this week</div>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col gap-2 shadow hover:shadow-lg transition">
+            <div class="flex items-center gap-2 text-yellow-500"><i class="fas fa-trophy"></i> Win Rate</div>
+            <div class="text-2xl font-bold">72%</div>
+            <div class="text-xs text-yellow-500">Best: 80%</div>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col gap-2 shadow hover:shadow-lg transition">
+            <div class="flex items-center gap-2 text-purple-500"><i class="fas fa-clock"></i> Uptime</div>
+            <div class="text-2xl font-bold">99.98%</div>
+            <div class="text-xs text-purple-500">Last outage: 2d ago</div>
+          </div>
+        </div>
+        <!-- Main Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-8 shadow">
+          <h3 class="text-lg font-semibold mb-4">Performance (Last 7 Days)</h3>
+          <canvas id="performanceChart" class="w-full h-72"></canvas>
+        </div>
+
+        <!-- Advanced Analytics -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-8 shadow animate-fade-in" aria-label="Analytics section">
+          <h3 class="text-lg font-semibold mb-4">Analytics</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h4 class="font-semibold mb-2">Cumulative Profit</h4>
+              <div class="relative w-full h-48">
+                <canvas id="analytics-cumprofit" class="w-full h-48"></canvas>
+                <div id="analytics-cumprofit-spinner" class="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-gray-800/80 z-10 hidden">
+                  <svg class="animate-spin h-6 w-6 text-violet-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Win Rate Over Time</h4>
+              <div class="relative w-full h-48">
+                <canvas id="analytics-winrate" class="w-full h-48"></canvas>
+                <div id="analytics-winrate-spinner" class="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-gray-800/80 z-10 hidden">
+                  <svg class="animate-spin h-6 w-6 text-violet-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Trade Volume by Pair</h4>
+              <div class="relative w-full h-48">
+                <canvas id="analytics-volume" class="w-full h-48"></canvas>
+                <div id="analytics-volume-spinner" class="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-gray-800/80 z-10 hidden">
+                  <svg class="animate-spin h-6 w-6 text-violet-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Live Trade Feed -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-8 shadow animate-fade-in">
+          <h3 class="text-lg font-semibold mb-4">Live Trade Feed</h3>
+          <div id="trade-feed" class="h-48 overflow-y-auto flex flex-col gap-2" aria-label="Live Trade Feed">
+            <div id="trade-feed-loading" class="flex items-center justify-center h-full text-gray-400">
+              <svg class="animate-spin h-6 w-6 mr-2 text-violet-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+              Loading live trades...
+            </div>
+          </div>
+        </div>
+        <!-- Recent Trades Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow">
+          <h3 class="text-lg font-semibold mb-4">Recent Trades</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead>
+                <tr class="text-gray-500 dark:text-gray-400">
+                  <th class="px-2 py-1">Time</th>
+                  <th class="px-2 py-1">Pair</th>
+                  <th class="px-2 py-1">Type</th>
+                  <th class="px-2 py-1">Amount</th>
+                  <th class="px-2 py-1">Status</th>
+                </tr>
+              </thead>
+              <tbody id="trades-table-body">
+                <!-- JS will populate -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
@@ -356,14 +520,524 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
+        <section id="section-api-usage" class="tab-section" aria-label="API Usage section">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-8 shadow animate-fade-in">
+            <h3 class="text-lg font-semibold mb-4">API Usage Analytics</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <h4 class="font-semibold mb-2">Requests by Endpoint</h4>
+                <canvas id="api-usage-endpoint" class="w-full h-40"></canvas>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">Errors by Endpoint</h4>
+                <canvas id="api-usage-errors" class="w-full h-40"></canvas>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">Rate Limit Violations</h4>
+                <canvas id="api-usage-ratelimit" class="w-full h-40"></canvas>
+              </div>
+            </div>
+            <button id="api-usage-download" class="mt-6 px-4 py-2 bg-violet-500 text-white rounded shadow hover:bg-violet-600 transition">Download CSV</button>
+          </div>
+        </section>
+        <section id="section-api-docs" class="tab-section" aria-label="API Documentation section">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-8 shadow animate-fade-in">
+            <h3 class="text-lg font-semibold mb-4">API Documentation</h3>
+            <iframe id="swagger-ui" src="https://petstore.swagger.io/?url=https://raw.githubusercontent.com/arodrig125/solana-trading-bot/main/openapi.json" class="w-full h-[70vh] rounded border border-gray-200 dark:border-gray-700 bg-white" title="Swagger API Documentation" aria-label="Swagger API Documentation"></iframe>
+          </div>
+        </section>
+      </main>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="src/pages/api-usage.js"></script>
+      <script>
+        // Tab navigation logic
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabSections = document.querySelectorAll('.tab-section');
+        tabBtns.forEach(btn => {
+          btn.onclick = function() {
+            tabBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
+            tabSections.forEach(s => s.classList.remove('active'));
+            this.setAttribute('aria-selected', 'true');
+            document.getElementById(this.getAttribute('aria-controls')).classList.add('active');
+            // On tab switch, render API charts if needed
+            if (this.id === 'tab-api-usage') {
+              window.renderApiUsageCharts();
+            }
+          };
+        });
+        // Download CSV (mock)
+        document.getElementById('api-usage-download').onclick = function() {
+          const csv = 'Endpoint,Requests,Errors,RateLimit\n' +
+            ['GET /wallets,120,2,0','POST /trade,80,6,1','GET /dashboard/stats,200,1,0','GET /trading/history,90,3,0'].join('\n');
+          const blob = new Blob([csv], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'api-usage.csv';
+          a.click();
+          URL.revokeObjectURL(url);
+        };
+      </script>
+    
     </div>
 
     <script src="js/script.js"></script>
     <script src="js/auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Dark/light mode toggle
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+          if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.theme = 'light';
+          } else {
+            document.documentElement.classList.add('dark');
+            localStorage.theme = 'dark';
+          }
+        });
+
+        // --- Notification Utility ---
+        function showToast({ message, type = 'info', duration = 3500 }) {
+          const container = document.getElementById('notification-container');
+          const toast = document.createElement('div');
+          let color = 'bg-blue-500';
+          if (type === 'success') color = 'bg-green-500';
+          if (type === 'error') color = 'bg-red-500';
+          if (type === 'warning') color = 'bg-yellow-500';
+          toast.className = `flex items-center gap-2 px-4 py-2 rounded-md shadow-lg text-white ${color} animate-fade-in-up`;
+          toast.innerHTML = `<span>${message}</span><button class='ml-2 text-xl leading-none focus:outline-none'>&times;</button>`;
+          container.appendChild(toast);
+          // Dismiss on click or after duration
+          toast.querySelector('button').onclick = () => toast.remove();
+          setTimeout(() => toast.remove(), duration);
+        }
+        // Fade-in animation
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fade-in-up { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} } .animate-fade-in-up { animation: fade-in-up 0.3s; }`;
+        document.head.appendChild(style);
+
+        document.addEventListener('DOMContentLoaded', async function() {
+          // --- Advanced Analytics Charts ---
+          async function renderAnalyticsCharts() {
+            // Show loading spinners
+            ["analytics-cumprofit","analytics-winrate","analytics-volume"].forEach(id => {
+              const ctx = document.getElementById(id).getContext('2d');
+              ctx.clearRect(0,0,400,200);
+              ctx.font = "14px Poppins, sans-serif";
+              ctx.fillStyle = "#a3a3a3";
+              ctx.fillText("Loading...", 20, 40);
+            });
+            try {
+              const stats = await window.solarbotApi.getDashboardStats();
+              // Cumulative Profit
+              const cumProfitLabels = stats.profitHistory?.map(item => item.date) || [];
+              let cumProfits = stats.profitHistory?.map(item => item.cumulativeProfit ?? item.profit) || [];
+              // If not provided, calculate cumulative
+              if (cumProfits.length && !stats.profitHistory[0].cumulativeProfit) {
+                let sum = 0;
+                cumProfits = cumProfits.map(p => (sum += p));
+              }
+              new Chart(document.getElementById('analytics-cumprofit').getContext('2d'), {
+                type: 'line',
+                data: {
+                  labels: cumProfitLabels,
+                  datasets: [{
+                    label: 'Cumulative Profit',
+                    data: cumProfits,
+                    borderColor: '#9945FF',
+                    backgroundColor: 'rgba(153,69,255,0.08)',
+                    fill: true,
+                    tension: 0.4
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                  scales: { y: { title: { display: true, text: 'Profit ($)' } } }
+                }
+              });
+              // Win Rate Over Time
+              const winRateLabels = stats.profitHistory?.map(item => item.date) || [];
+              const winRates = stats.profitHistory?.map(item => item.winRate !== undefined ? Math.round(item.winRate * 100) : null) || [];
+              new Chart(document.getElementById('analytics-winrate').getContext('2d'), {
+                type: 'bar',
+                data: {
+                  labels: winRateLabels,
+                  datasets: [{
+                    label: 'Win Rate (%)',
+                    data: winRates,
+                    backgroundColor: '#14F195',
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                  scales: {
+                    y: { min: 0, max: 100, title: { display: true, text: 'Win Rate (%)' } }
+                  }
+                }
+              });
+              // Trade Volume by Pair
+              const volumeByPair = {};
+              (stats.tradesHistory || []).forEach(item => {
+                if (!volumeByPair[item.pair]) volumeByPair[item.pair] = 0;
+                volumeByPair[item.pair] += item.count;
+              });
+              new Chart(document.getElementById('analytics-volume').getContext('2d'), {
+                type: 'bar',
+                data: {
+                  labels: Object.keys(volumeByPair),
+                  datasets: [{
+                    label: 'Trades',
+                    data: Object.values(volumeByPair),
+                    backgroundColor: '#6366f1',
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                  scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Trades' } }
+                  }
+                }
+              });
+            } catch (err) {
+              showToast({ message: `Failed to load analytics: ${err.message}`, type: 'error' });
+            }
+          }
+          renderAnalyticsCharts();
+
+          // --- Connection Monitor ---
+          const connMonitor = document.getElementById('connection-monitor');
+          const connDot = document.getElementById('conn-status-dot');
+          const connText = document.getElementById('conn-status-text');
+          const connLatency = document.getElementById('conn-latency');
+          let lastStatus = null;
+          let lastLatency = null;
+
+          async function checkConnection() {
+            const start = Date.now();
+            try {
+              // Use a lightweight endpoint
+              const status = await window.solarbotApi.getBotStatus();
+              const latency = Date.now() - start;
+              // Update widget
+              connDot.className = 'h-3 w-3 rounded-full inline-block ' + (status.online ? 'bg-green-400' : 'bg-yellow-400');
+              connText.textContent = status.online ? 'Online' : 'Bot Offline';
+              connLatency.textContent = `${latency}ms`;
+              // Toast if status changes
+              if (lastStatus !== null && status.online !== lastStatus) {
+                showToast({ message: status.online ? 'Bot is back online!' : 'Bot went offline!', type: status.online ? 'success' : 'warning' });
+              }
+              // Toast if latency spikes
+              if (latency > 1000 && (!lastLatency || lastLatency <= 1000)) {
+                showToast({ message: `High latency: ${latency}ms`, type: 'warning' });
+              }
+              lastStatus = status.online;
+              lastLatency = latency;
+            } catch (err) {
+              connDot.className = 'h-3 w-3 rounded-full inline-block bg-red-500';
+              connText.textContent = 'Disconnected';
+              connLatency.textContent = '';
+              if (lastStatus !== false) {
+                showToast({ message: 'Lost connection to API!', type: 'error' });
+              }
+              lastStatus = false;
+            }
+          }
+          // Initial check
+          checkConnection();
+          // Poll every 10s
+          setInterval(checkConnection, 10000);
+
+          // --- Live Trade Feed ---
+          const tradeFeed = document.getElementById('trade-feed');
+          const tradeFeedLoading = document.getElementById('trade-feed-loading');
+          let tradeFeedLastTs = null;
+          let tradeFeedLoadedOnce = false;
+          let tradeFeedTrades = [];
+
+          async function fetchTradeFeed() {
+            try {
+              const params = { limit: 10 };
+              if (tradeFeedLastTs) params.since = tradeFeedLastTs;
+              const res = await window.solarbotApi.getTradingHistory(params);
+              let trades = res.trades || [];
+              if (!tradeFeedLoadedOnce) {
+                // Initial load
+                tradeFeedTrades = trades;
+                tradeFeedLoadedOnce = true;
+                tradeFeedLoading.style.display = 'none';
+                if (trades.length === 0) {
+                  tradeFeed.innerHTML = "<div class='text-gray-400 text-center mt-8'>No trades yet.</div>";
+                  return;
+                }
+                tradeFeed.innerHTML = '';
+                trades.reverse().forEach(trade => renderTradeFeedItem(trade, false));
+                tradeFeedLastTs = trades.length ? trades[0].timestamp : null;
+              } else if (trades.length > 0) {
+                // New trades
+                trades.reverse().forEach(trade => renderTradeFeedItem(trade, true));
+                tradeFeedLastTs = trades[0].timestamp;
+              }
+            } catch (err) {
+              tradeFeed.innerHTML = `<div class='text-red-500 text-center mt-8'>Failed to load live trades: ${err.message}</div>`;
+            }
+          }
+
+          function renderTradeFeedItem(trade, highlight) {
+            if (highlight) {
+              showToast({ message: `New trade: ${trade.type.toUpperCase()} ${trade.amount} ${trade.pair} @ $${trade.price ?? ''}`, type: trade.status === 'success' ? 'success' : 'warning' });
+            }
+            const div = document.createElement('div');
+            div.className = `flex items-center gap-3 px-2 py-1 rounded transition ${highlight ? 'bg-violet-100 dark:bg-violet-900 animate-pulse' : ''}`;
+            div.innerHTML = `
+              <span class='text-xs text-gray-500 w-32'>${new Date(trade.timestamp).toLocaleTimeString()}</span>
+              <span class='font-medium w-20'>${trade.pair}</span>
+              <span class='w-16 ${trade.type === 'buy' ? 'text-green-500' : 'text-red-500'}'>${trade.type}</span>
+              <span class='w-20'>${trade.amount}</span>
+              <span class='w-20'>${trade.price ? '$' + trade.price : ''}</span>
+              <span class='w-20'><span class='px-2 py-1 rounded text-xs ${trade.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}'>${trade.status}</span></span>
+            `;
+            tradeFeed.prepend(div);
+            if (highlight) {
+              setTimeout(() => div.classList.remove('animate-pulse', 'bg-violet-100', 'dark:bg-violet-900'), 1200);
+            }
+            // Keep only last 20 trades
+            while (tradeFeed.childElementCount > 20) {
+              tradeFeed.removeChild(tradeFeed.lastChild);
+            }
+          }
+
+          // Initial load
+          fetchTradeFeed();
+          // Poll every 5 seconds
+          setInterval(fetchTradeFeed, 5000);
+
+
+          // Check if user is logged in
+          if (!SolarBotAuth.isLoggedIn()) {
+            window.location.href = 'login.html';
+            return;
+          }
+
+          // Show loading states
+          const metrics = [
+            { el: document.querySelectorAll('.stat-card')[0], key: 'pnl', label: 'PnL' },
+            { el: document.querySelectorAll('.stat-card')[1], key: 'trades', label: 'Trades' },
+            { el: document.querySelectorAll('.stat-card')[2], key: 'winRate', label: 'Win Rate' },
+            { el: document.querySelectorAll('.stat-card')[3], key: 'uptime', label: 'Uptime' }
+          ];
+          metrics.forEach(m => m.el.querySelector('.text-2xl').textContent = '...');
+
+          // Fetch dashboard stats
+          try {
+            const stats = await window.solarbotApi.getDashboardStats();
+            // Example stats: { pnl: 2340, trades: 158, winRate: 0.72, uptime: 99.98, profitHistory: [...], tradesHistory: [...] }
+            metrics[0].el.querySelector('.text-2xl').textContent = `$${stats.pnl?.toLocaleString() ?? 'N/A'}`;
+            metrics[1].el.querySelector('.text-2xl').textContent = stats.trades ?? 'N/A';
+            metrics[2].el.querySelector('.text-2xl').textContent = stats.winRate !== undefined ? `${Math.round(stats.winRate * 100)}%` : 'N/A';
+            metrics[3].el.querySelector('.text-2xl').textContent = stats.uptime !== undefined ? `${stats.uptime}%` : 'N/A';
+
+            // Update chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            const labels = stats.profitHistory?.map(item => item.date) || [];
+            const profitData = stats.profitHistory?.map(item => item.profit) || [];
+            const tradesData = stats.tradesHistory?.map(item => item.count) || [];
+
+            const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientFill.addColorStop(0, 'rgba(153, 69, 255, 0.3)');
+            gradientFill.addColorStop(1, 'rgba(153, 69, 255, 0.0)');
+
+            new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'Profit %',
+                    data: profitData,
+                    borderColor: '#9945FF',
+                    backgroundColor: gradientFill,
+                    tension: 0.4,
+                    fill: true,
+                    yAxisID: 'y'
+                  },
+                  {
+                    label: 'Trades',
+                    data: tradesData,
+                    borderColor: '#14F195',
+                    backgroundColor: 'transparent',
+                    tension: 0.4,
+                    borderDash: [5, 5],
+                    yAxisID: 'y1'
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { position: 'top' }
+                },
+                scales: {
+                  y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: { display: true, text: 'Profit %' }
+                  },
+                  y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: { drawOnChartArea: false },
+                    title: { display: true, text: 'Number of Trades' }
+                  }
+                }
+              }
+            });
+          } catch (err) {
+            metrics.forEach(m => m.el.querySelector('.text-2xl').textContent = 'Error');
+            document.getElementById('performanceChart').parentElement.innerHTML += `<div class='text-red-500 mt-2'>Failed to load stats: ${err.message}</div>`;
+            showToast({ message: `Failed to load dashboard stats: ${err.message}`, type: 'error' });
+          }
+
+          // --- Interactive Trades Table ---
+          // State
+          let tradesTableState = {
+            sortBy: 'timestamp',
+            sortDir: 'desc',
+            filterPair: '',
+            filterStatus: '',
+            page: 1,
+            pageSize: 10,
+            total: 0,
+            pairs: [],
+          };
+
+          // Elements
+          const tbody = document.getElementById('trades-table-body');
+          const filterPair = document.getElementById('trade-filter-pair');
+          const filterStatus = document.getElementById('trade-filter-status');
+          const pagination = document.getElementById('trades-pagination');
+          const sortIcons = {
+            timestamp: document.getElementById('sort-timestamp'),
+            pair: document.getElementById('sort-pair'),
+            type: document.getElementById('sort-type'),
+            amount: document.getElementById('sort-amount'),
+            status: document.getElementById('sort-status'),
+          };
+
+          async function fetchAndRenderTradesTable() {
+            tbody.innerHTML = `<tr><td colspan='5' class='text-center text-gray-400'>Loading...</td></tr>`;
+            try {
+              const params = {
+                limit: tradesTableState.pageSize,
+                offset: (tradesTableState.page - 1) * tradesTableState.pageSize,
+                sortBy: tradesTableState.sortBy,
+                sortDir: tradesTableState.sortDir,
+              };
+              if (tradesTableState.filterPair) params.pair = tradesTableState.filterPair;
+              if (tradesTableState.filterStatus) params.status = tradesTableState.filterStatus;
+              const tradesRes = await window.solarbotApi.getTradingHistory(params);
+              const trades = tradesRes.trades || [];
+              tradesTableState.total = tradesRes.total || trades.length;
+
+              // Populate pair filter dropdown
+              if (tradesTableState.pairs.length === 0 && trades.length > 0) {
+                const pairs = [...new Set(trades.map(t => t.pair))];
+                tradesTableState.pairs = pairs;
+                pairs.forEach(pair => {
+                  const opt = document.createElement('option');
+                  opt.value = pair;
+                  opt.textContent = pair;
+                  filterPair.appendChild(opt);
+                });
+              }
+
+              tbody.innerHTML = '';
+              if (trades.length === 0) {
+                tbody.innerHTML = `<tr><td colspan='5' class='text-center text-gray-400'>No trades found.</td></tr>`;
+              } else {
+                trades.forEach(trade => {
+                  const row = document.createElement('tr');
+                  row.innerHTML = `
+                    <td class='px-2 py-1'>${new Date(trade.timestamp).toLocaleString()}</td>
+                    <td class='px-2 py-1'>${trade.pair}</td>
+                    <td class='px-2 py-1'>${trade.type}</td>
+                    <td class='px-2 py-1'>${trade.amount}</td>
+                    <td class='px-2 py-1'><span class='px-2 py-1 rounded text-xs ${trade.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}'>${trade.status}</span></td>
+                  `;
+                  tbody.appendChild(row);
+                });
+              }
+              renderTradesPagination();
+              renderSortIcons();
+            } catch (err) {
+              tbody.innerHTML = `<tr><td colspan='5' class='text-red-500'>Failed to load trades: ${err.message}</td></tr>`;
+              showToast({ message: `Failed to load recent trades: ${err.message}`, type: 'error' });
+            }
+          }
+
+          function renderTradesPagination() {
+            const { page, pageSize, total } = tradesTableState;
+            const totalPages = Math.ceil(total / pageSize) || 1;
+            pagination.innerHTML = '';
+            if (totalPages <= 1) return;
+            for (let i = 1; i <= totalPages; i++) {
+              const btn = document.createElement('button');
+              btn.textContent = i;
+              btn.className = `px-2 py-1 rounded ${i === page ? 'bg-violet-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} mx-1`;
+              btn.onclick = () => {
+                tradesTableState.page = i;
+                fetchAndRenderTradesTable();
+              };
+              pagination.appendChild(btn);
+            }
+          }
+
+          function renderSortIcons() {
+            Object.keys(sortIcons).forEach(key => {
+              sortIcons[key].innerHTML = '';
+              if (tradesTableState.sortBy === key) {
+                sortIcons[key].innerHTML = tradesTableState.sortDir === 'asc' ? '▲' : '▼';
+              }
+            });
+          }
+
+          // Event listeners
+          filterPair.onchange = function() {
+            tradesTableState.filterPair = this.value;
+            tradesTableState.page = 1;
+            fetchAndRenderTradesTable();
+          };
+          filterStatus.onchange = function() {
+            tradesTableState.filterStatus = this.value;
+            tradesTableState.page = 1;
+            fetchAndRenderTradesTable();
+          };
+          Object.keys(sortIcons).forEach(key => {
+            sortIcons[key].parentElement.onclick = function() {
+              if (tradesTableState.sortBy === key) {
+                tradesTableState.sortDir = tradesTableState.sortDir === 'asc' ? 'desc' : 'asc';
+              } else {
+                tradesTableState.sortBy = key;
+                tradesTableState.sortDir = 'desc';
+              }
+              tradesTableState.page = 1;
+              fetchAndRenderTradesTable();
+            };
+          });
+
+          // Initial load
+          fetchAndRenderTradesTable();
+
+
+          // Optionally: refresh every 60s
+          setTimeout(() => window.location.reload(), 60000);
+        });
             // Check if user is logged in
             if (!SolarBotAuth.isLoggedIn()) {
                 window.location.href = 'login.html';

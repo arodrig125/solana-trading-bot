@@ -7,6 +7,20 @@ const fs = require('fs').promises;
 // Apply authentication to all routes
 router.use(verifyToken);
 
+/**
+ * @swagger
+ * /api/code-review/files:
+ *   get:
+ *     summary: Get list of reviewable files
+ *     tags: [CodeReview]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of files
+ *       403:
+ *         description: Not authorized
+ */
 // Get list of reviewable files
 router.get('/files', checkPermission('view_code'), async (req, res) => {
     try {
@@ -38,6 +52,27 @@ router.get('/files', checkPermission('view_code'), async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/code-review/file/{filepath}:
+ *   get:
+ *     summary: Get file content (with sensitive data masked)
+ *     tags: [CodeReview]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: filepath
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: File path (relative to project root)
+ *     responses:
+ *       200:
+ *         description: File content (masked if code reviewer)
+ *       403:
+ *         description: Not authorized
+ */
 // Get file content (with sensitive data masked)
 router.get('/file/:filepath(*)', checkPermission('view_code'), async (req, res) => {
     try {
@@ -61,6 +96,41 @@ router.get('/file/:filepath(*)', checkPermission('view_code'), async (req, res) 
     }
 });
 
+/**
+ * @swagger
+ * /api/code-review/fix:
+ *   post:
+ *     summary: Submit a code fix proposal
+ *     tags: [CodeReview]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - filePath
+ *               - description
+ *               - suggestedFix
+ *             properties:
+ *               filePath:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               suggestedFix:
+ *                 type: string
+ *               lineNumbers:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *     responses:
+ *       200:
+ *         description: Code fix proposal submitted
+ *       403:
+ *         description: Not authorized
+ */
 // Submit a code fix
 router.post('/fix', checkPermission('submit_fixes'), async (req, res) => {
     try {
@@ -89,6 +159,20 @@ router.post('/fix', checkPermission('submit_fixes'), async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/code-review/errors:
+ *   get:
+ *     summary: Get error reports (with sensitive data masked)
+ *     tags: [CodeReview]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Array of error reports (masked)
+ *       403:
+ *         description: Not authorized
+ */
 // Get error reports
 router.get('/errors', checkPermission('view_error_reports'), async (req, res) => {
     try {

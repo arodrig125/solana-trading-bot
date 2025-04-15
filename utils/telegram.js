@@ -7,6 +7,7 @@ const tokenManager = require('./tokenManager');
 const telegramUI = require('./telegramUI');
 
 // Initialize Telegram bot
+const { isAdmin } = require('./telegramAuth');
 function initBot(token) {
   if (!token) {
     logger.errorMessage('No Telegram bot token provided');
@@ -297,6 +298,14 @@ function setupCommands(bot) {
   }
 
   const commands = require('./telegramCommands');
+
+  // DEBUG: Log every incoming message
+  bot.on('message', async (msg) => {
+    logger.info(`[DEBUG] Incoming message from @${msg.from.username || msg.from.id}: ${msg.text}`);
+    // DEBUG: Log admin check result
+    const adminResult = await isAdmin(msg.from);
+    logger.info(`[DEBUG] isAdmin(@${msg.from.username || msg.from.id}): ${adminResult}`);
+  });
 
   // Basic commands
   bot.onText(/\/start/, msg => commands.start(bot, msg));

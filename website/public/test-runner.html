@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Handshake Test Runner</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .test-controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .test-results {
+            margin-top: 20px;
+        }
+
+        .test-case {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #ddd;
+        }
+
+        .test-case.passed {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+
+        .test-case.failed {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+
+        .test-name {
+            font-weight: bold;
+        }
+
+        .test-error {
+            margin-top: 5px;
+            color: #d32f2f;
+            font-family: monospace;
+            padding: 8px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 4px;
+        }
+
+        .summary-item {
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2196f3;
+            transition: width 0.3s ease;
+        }
+
+        button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .detailed-metrics {
+            margin-top: 20px;
+        }
+
+        .metrics-section {
+            margin-bottom: 30px;
+        }
+
+        .metrics-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .charts-container canvas {
+            height: 200px;
+            background: white;
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .performance-report {
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .performance-report h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        .report-section {
+            margin-top: 15px;
+        }
+
+        .report-section h4 {
+            margin: 15px 0 10px 0;
+            color: #444;
+        }
+
+        .report-section ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .report-section li {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .metrics-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .metrics-panel h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .metric-item {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2196f3;
+        }
+
+        .test-groups {
+            margin-bottom: 15px;
+        }
+
+        .group-select {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .group-select label {
+            margin-right: 10px;
+            color: #666;
+        }
+
+        .group-select select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        .group-description {
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button.primary {
+            background: #2196f3;
+        }
+
+        button:hover {
+            background: #1976d2;
+        }
+
+        button:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        .log-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #263238;
+            color: #fff;
+            border-radius: 4px;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+        }
+
+        .log-entry.info {
+            color: #81d4fa;
+        }
+
+        .log-entry.error {
+            color: #ff8a80;
+        }
+
+        .log-entry.success {
+            color: #b9f6ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WebSocket Handshake Test Runner</h1>
+        
+        <div class="test-controls">
+            <div class="test-groups">
+                <div class="group-select">
+                    <label for="testGroup">Select Test Group:</label>
+                    <select id="testGroup">
+                        <option value="all">All Tests</option>
+                        <option value="Basic Handshake">Basic Handshake Tests</option>
+                        <option value="Security">Security Tests</option>
+                        <option value="Performance">Performance Tests</option>
+                        <option value="Edge Cases">Edge Cases</option>
+                        <option value="Cleanup">Cleanup Tests</option>
+                    </select>
+                </div>
+                <div class="group-description" id="groupDescription">
+                    Select a test group to see its description
+                </div>
+            </div>
+            <div class="control-buttons">
+                <button id="runTests" class="primary">Run Tests</button>
+                <button id="clearResults">Clear Results</button>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-item">Total Tests: <span id="totalTests">0</span></div>
+            <div class="summary-item">Passed: <span id="passedTests">0</span></div>
+            <div class="summary-item">Failed: <span id="failedTests">0</span></div>
+            <div class="summary-item">Success Rate: <span id="successRate">0%</span></div>
+        </div>
+
+        <div class="metrics-panel">
+            <h3>Real-time Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-label">Avg. Handshake Time</div>
+                    <div class="metric-value" id="avgHandshakeTime">-</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Message Throughput</div>
+                    <div class="metric-value" id="messageThroughput">-</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Active Connections</div>
+                    <div class="metric-value" id="activeConnections">-</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Memory Usage</div>
+                    <div class="metric-value" id="memoryUsage">-</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Network Latency</div>
+                    <div class="metric-value" id="networkLatency">-</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Error Rate</div>
+                    <div class="metric-value" id="errorRate">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="testResults" class="test-results">
+            <!-- Test results will be inserted here -->
+        </div>
+
+        <div class="log-container">
+            <div id="testLog">
+                <!-- Test logs will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Load dependencies -->
+    <script src="js/security-service.js"></script>
+    <script src="js/handshake-service.js"></script>
+    <script src="js/websocket-service.js"></script>
+    <script src="js/modules/monitoring/connection-monitor.js"></script>
+    <script src="js/modules/testing/scenario-builder.js"></script>
+    <script src="js/modules/reporting/report-generator.js"></script>
+    <script src="js/modules/api/api-client.js"></script>
+    <script src="js/modules/api/websocket-api-client.js"></script>
+    <script src="js/tests/test-config.js"></script>
+    <script src="js/tests/performance-config.js"></script>
+    <script src="js/tests/performance-metrics.js"></script>
+    <script src="js/tests/handshake-test.js"></script>
+    <script src="js/tests/advanced-handshake-test.js"></script>
+    <script src="js/test-runner.js"></script>
+
+    <script>
+        // Initialize scenario builder, report generator, and API clients
+        window.scenarioBuilder.initialize();
+        window.reportGenerator.initialize();
+        window.apiClient.initialize();
+        window.wsApiClient.initialize();
+
+        // Override console methods to capture logs
+        const originalConsole = {
+            log: console.log,
+            error: console.error,
+            group: console.group,
+            groupEnd: console.groupEnd
+        };
+
+        function addLogEntry(message, type = 'info') {
+            const logContainer = document.getElementById('testLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = message;
+            logContainer.appendChild(entry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        console.log = (...args) => {
+            originalConsole.log(...args);
+            addLogEntry(args.join(' '), 'info');
+        };
+
+        console.error = (...args) => {
+            originalConsole.error(...args);
+            addLogEntry(args.join(' '), 'error');
+        };
+
+        console.group = (label) => {
+            originalConsole.group(label);
+            addLogEntry(`▼ ${label}`, 'info');
+        };
+
+        console.groupEnd = () => {
+            originalConsole.groupEnd();
+            addLogEntry('▲ End Group', 'info');
+        };
+
+        // Test runner UI
+        document.getElementById('runTests').addEventListener('click', async () => {
+            // Clear previous results
+            document.getElementById('testResults').innerHTML = '';
+            document.getElementById('testLog').innerHTML = '';
+            document.getElementById('progressFill').style.width = '0%';
+
+            const tester = new HandshakeTest();
+            tester.assertTest = function(name, condition, error = null) {
+                this.testResults.push({ name, passed: condition, error });
+                
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `test-case ${condition ? 'passed' : 'failed'}`;
+                
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'test-name';
+                nameDiv.textContent = name;
+                resultDiv.appendChild(nameDiv);
+
+                if (!condition && error) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'test-error';
+                    errorDiv.textContent = error;
+                    resultDiv.appendChild(errorDiv);
+                }
+
+                document.getElementById('testResults').appendChild(resultDiv);
+
+                // Update progress
+                const progress = (this.testResults.length / 10) * 100;
+                document.getElementById('progressFill').style.width = `${progress}%`;
+
+                // Update summary
+                const passed = this.testResults.filter(r => r.passed).length;
+                const total = this.testResults.length;
+                document.getElementById('totalTests').textContent = total;
+                document.getElementById('passedTests').textContent = passed;
+                document.getElementById('failedTests').textContent = total - passed;
+                document.getElementById('successRate').textContent = 
+                    `${Math.round((passed / total) * 100)}%`;
+            };
+
+            await tester.runTests();
+        });
+
+        document.getElementById('clearResults').addEventListener('click', () => {
+            document.getElementById('testResults').innerHTML = '';
+            document.getElementById('testLog').innerHTML = '';
+            document.getElementById('progressFill').style.width = '0%';
+            document.getElementById('totalTests').textContent = '0';
+            document.getElementById('passedTests').textContent = '0';
+            document.getElementById('failedTests').textContent = '0';
+            document.getElementById('successRate').textContent = '0%';
+        });
+    </script>
+</body>
+</html>

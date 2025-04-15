@@ -61,13 +61,16 @@ let isScanning = false;
 let simulationMode = SIMULATION === 'true';
 let scanInterval;
 let monitorInterval;
-let minProfitPercent = settings.trading.defaultMinProfitPercent;
+let minProfitPercent;
 let lastTradeTime = 0;
 let activeTrades = [];
 let sheetsClient = null;
 
 // Initialize components
 logger.startupMessage('Starting Solana Arbitrage Telegram Bot...');
+
+// Initialize settings
+minProfitPercent = settings.trading.defaultMinProfitPercent;
 
 // Setup Google credentials if needed
 const credentialsSetup = setupCredentials();

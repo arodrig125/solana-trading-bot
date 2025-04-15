@@ -13,30 +13,46 @@ const authMiddleware = async (req, res, next) => {
     // Get token from Authorization header
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ success: false, message: 'No token provided' });
+      return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
-    
+
     const token = authHeader.split(' ')[1];
-    
-    // Verify token
-    const decoded = jwt.verify(token, JWT_SECRET);
-    
+
+    // Verify token (checks signature and expiration)
+    let decoded;
+    try {
+      decoded = jwt.verify(token, JWT_SECRET);
+    } catch (err) {
+      return res.status(401).json({ success: false, message: 'Unauthorized' });
+    }
+
+    // Check for required claims
+    if (!decoded.userId || !decoded.role) {
+      return res.status(401).json({ success: false, message: 'Unauthorized' });
+    }
+
     // Find user in database
     const user = await mongoose.connection.db.collection('users')
       .findOne({ _id: mongoose.Types.ObjectId(decoded.userId) });
-    
+
     if (!user) {
-      return res.status(401).json({ success: false, message: 'Invalid token' });
+      return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
-    
-    // Attach user to request
+
+    // Optional: Check for token revocation (e.g., user.disabled, or token blacklist)
+    if (user.disabled) {
+      return res.status(401).json({ success: false, message: 'Unauthorized' });
+    }
+
+    // Attach user to request, including role
     req.user = {
       id: user._id.toString(),
       email: user.email,
+      role: user.role || decoded.role,
       subscription: user.subscription || 'free',
       defaultWalletId: user.defaultWalletId
     };
-    
+
     next();
   } catch (error) {
     console.error('Auth error:', error);

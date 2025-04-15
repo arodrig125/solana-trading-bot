@@ -4,6 +4,237 @@
  */
 
 class SecurityService {
+    constructor() {
+        this.keyPair = null;
+        this.sessionKey = null;
+        this.messageCounter = 0;
+        this.lastMessageTimestamp = 0;
+        this.pendingMessages = new Map();
+        this.RATE_LIMIT_WINDOW = 1000; // 1 second
+        this.MAX_MESSAGES_PER_WINDOW = 50;
+        this.messageQueue = [];
+        this.initializeCrypto();
+    }
+
+    async initializeCrypto() {
+        try {
+            // Generate ephemeral key pair for message signing
+            this.keyPair = await window.crypto.subtle.generateKey(
+                {
+                    name: 'ECDSA',
+                    namedCurve: 'P-256'
+                },
+                true,
+                ['sign', 'verify']
+            );
+
+            // Generate session key for message encryption
+            this.sessionKey = await window.crypto.subtle.generateKey(
+                {
+                    name: 'AES-GCM',
+                    length: 256
+                },
+                true,
+                ['encrypt', 'decrypt']
+            );
+        } catch (error) {
+            console.error('Failed to initialize crypto:', error);
+            throw new Error('Cryptographic initialization failed');
+        }
+    }
+
+    // WebSocket Message Security
+    async secureWebSocketMessage(message) {
+        if (!this.keyPair || !this.sessionKey) {
+            throw new Error('Security not initialized');
+        }
+
+        // Rate limiting check
+        if (!this.checkRateLimit()) {
+            throw new Error('Rate limit exceeded');
+        }
+
+        // Prepare message with metadata
+        const preparedMessage = {
+            id: crypto.randomUUID(),
+            timestamp: Date.now(),
+            sequence: ++this.messageCounter,
+            data: message,
+            nonce: this.generateNonce()
+        };
+
+        // Sign the message
+        const signature = await this.signMessage(preparedMessage);
+        
+        // Encrypt the message
+        const encrypted = await this.encryptMessage(preparedMessage);
+
+        return {
+            payload: encrypted,
+            signature: signature,
+            id: preparedMessage.id
+        };
+    }
+
+    async verifyWebSocketMessage(message) {
+        if (!message || !message.payload || !message.signature) {
+            throw new Error('Invalid message format');
+        }
+
+        // Decrypt the message
+        const decrypted = await this.decryptMessage(message.payload);
+
+        // Verify signature
+        const isValid = await this.verifySignature(decrypted, message.signature);
+        if (!isValid) {
+            throw new Error('Invalid message signature');
+        }
+
+        // Verify sequence and replay protection
+        if (!this.verifySequence(decrypted)) {
+            throw new Error('Invalid message sequence');
+        }
+
+        // Store message ID for replay protection
+        this.pendingMessages.set(message.id, Date.now());
+        this.cleanupPendingMessages();
+
+        return decrypted.data;
+    }
+
+    // Cryptographic Operations
+    async signMessage(message) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(JSON.stringify(message));
+        
+        const signature = await window.crypto.subtle.sign(
+            {
+                name: 'ECDSA',
+                hash: { name: 'SHA-256' }
+            },
+            this.keyPair.privateKey,
+            data
+        );
+
+        return Array.from(new Uint8Array(signature))
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('');
+    }
+
+    async verifySignature(message, signature) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(JSON.stringify(message));
+        const signatureArray = new Uint8Array(
+            signature.match(/.{2}/g).map(byte => parseInt(byte, 16))
+        );
+
+        return await window.crypto.subtle.verify(
+            {
+                name: 'ECDSA',
+                hash: { name: 'SHA-256' }
+            },
+            this.keyPair.publicKey,
+            signatureArray,
+            data
+        );
+    }
+
+    async encryptMessage(message) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(JSON.stringify(message));
+        const iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+        const encrypted = await window.crypto.subtle.encrypt(
+            {
+                name: 'AES-GCM',
+                iv: iv
+            },
+            this.sessionKey,
+            data
+        );
+
+        const encryptedArray = new Uint8Array(encrypted);
+        const result = new Uint8Array(iv.length + encryptedArray.length);
+        result.set(iv);
+        result.set(encryptedArray, iv.length);
+
+        return Array.from(result)
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('');
+    }
+
+    async decryptMessage(encryptedData) {
+        const data = new Uint8Array(
+            encryptedData.match(/.{2}/g).map(byte => parseInt(byte, 16))
+        );
+
+        const iv = data.slice(0, 12);
+        const encrypted = data.slice(12);
+
+        const decrypted = await window.crypto.subtle.decrypt(
+            {
+                name: 'AES-GCM',
+                iv: iv
+            },
+            this.sessionKey,
+            encrypted
+        );
+
+        const decoder = new TextDecoder();
+        return JSON.parse(decoder.decode(decrypted));
+    }
+
+    // Security Utilities
+    generateNonce() {
+        return window.crypto.getRandomValues(new Uint8Array(16))
+            .reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
+    }
+
+    verifySequence(message) {
+        // Verify message is not too old
+        const MAX_MESSAGE_AGE = 30000; // 30 seconds
+        if (Date.now() - message.timestamp > MAX_MESSAGE_AGE) {
+            return false;
+        }
+
+        // Verify message is not from the future
+        if (message.timestamp > Date.now() + 5000) { // 5 second grace period
+            return false;
+        }
+
+        // Verify sequence number is greater than last message
+        if (message.sequence <= this.messageCounter) {
+            return false;
+        }
+
+        this.messageCounter = message.sequence;
+        return true;
+    }
+
+    checkRateLimit() {
+        const now = Date.now();
+        this.messageQueue.push(now);
+        
+        // Remove messages outside the current window
+        this.messageQueue = this.messageQueue.filter(
+            time => now - time < this.RATE_LIMIT_WINDOW
+        );
+
+        return this.messageQueue.length <= this.MAX_MESSAGES_PER_WINDOW;
+    }
+
+    cleanupPendingMessages() {
+        const now = Date.now();
+        const MESSAGE_EXPIRY = 300000; // 5 minutes
+
+        for (const [id, timestamp] of this.pendingMessages) {
+            if (now - timestamp > MESSAGE_EXPIRY) {
+                this.pendingMessages.delete(id);
+            }
+        }
+    }
+
+    // Key Management
   constructor() {
     this.tokenRefreshTimer = null;
     this.sessionTimeoutTimer = null;

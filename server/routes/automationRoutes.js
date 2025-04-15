@@ -10,13 +10,13 @@ const RuleEvaluator = require('../services/ruleEvaluator');
 
 // Middleware imports - use your existing auth and rate limit middleware
 const { authMiddleware } = require('../middleware/auth');
-const { rateLimit } = require('../middleware/rateLimit');
+const { userRateLimit } = require('../middleware/rateLimit');
 
 // Initialize rule evaluator
 const ruleEvaluator = new RuleEvaluator();
 
 // Rate limiting configs based on subscription tier
-const getRulesRateLimit = rateLimit({
+const getRulesRateLimit = userRateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   maxRequests: {
     free: 20,
@@ -26,7 +26,7 @@ const getRulesRateLimit = rateLimit({
   message: 'Too many requests, please try again later'
 });
 
-const evaluateRulesRateLimit = rateLimit({
+const evaluateRulesRateLimit = userRateLimit({
   windowMs: 60 * 1000, // 1 minute
   maxRequests: {
     free: 5,
