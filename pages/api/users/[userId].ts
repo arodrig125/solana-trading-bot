@@ -47,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(400).json({ error: 'Cannot delete the last admin user' });
           }
         }
-        await userDoc.remove();
+        await userDoc.deleteOne();
         res.json({ message: 'User deleted successfully' });
       } catch (error: any) {
         res.status(500).json({ error: error.message });
