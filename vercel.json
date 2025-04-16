@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "outputDirectory": "website",
   "buildCommand": "next build",
   "installCommand": "npm install",
   "framework": "nextjs",
   "github": {
-    "silent": false
+    "silent": false,
+    "autoAlias": true
   }
 }
