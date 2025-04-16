@@ -1,4 +1,11 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
+import path from 'path';
+import fs from 'fs/promises';
+import { verifyToken, checkPermission } from '../middleware/auth';
+
 const router = Router();
-// (Paste the code from code-review.js here and add type annotations)
+
+// Apply authentication to all routes
+router.use(verifyToken as any);
+
 export default router;

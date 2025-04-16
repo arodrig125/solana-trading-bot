@@ -1,134 +1,244 @@
-# SolarBot - Solana Trading Bot
+# SolarBot – Solana Trading Bot & REST API
 
-An advanced Solana arbitrage trading bot with Telegram command control, Google Sheets logging, Jupiter Swap API integration, and a professional website.
+An advanced Solana arbitrage trading bot featuring:
+- RESTful API with authentication, wallet management, trading, analytics, and admin endpoints
+- Telegram command interface
+- Google Sheets logging
+- Jupiter Swap API integration
+- Robust error handling and security (rate limiting, Sentry, security headers)
+- Professional onboarding and documentation
+
+---
+
+## Table of Contents
+- [Features](#features)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Generating Secrets](#generating-secrets)
+- [Running the Server](#running-the-server)
+- [API Usage](#api-usage)
+- [Admin Features](#admin-features)
+- [Error Handling](#error-handling)
+- [Deployment (Digital Ocean)](#deployment-digital-ocean)
+- [Troubleshooting](#troubleshooting)
+- [Security Best Practices](#security-best-practices)
+- [Support](#support)
+
+---
 
 ## Features
+- 🔍 **Arbitrage & Trading**: Triangular/cross-exchange, customizable thresholds
+- 🤖 **Telegram Bot**: Real-time alerts, command control, summaries
+- 📊 **Analytics**: Google Sheets integration, performance tracking
+- ⚙️ **REST API**: Wallet, trade, analytics, admin, 2FA endpoints
+- 🔒 **Security**: JWT, rate limiting, Sentry, security headers, tiered access
 
-- 🔍 **Advanced Arbitrage Detection**
-  - Triangular arbitrage (e.g., USDC → SOL → BTC → USDC)
-  - Cross-exchange arbitrage
-  - Customizable profit thresholds
+---
 
-- 🤖 **Telegram Bot Interface**
-  - Real-time notifications
-  - Command-based control
-  - Performance reports
-  - Trade summaries
+## Architecture
+```
++---------------------+
+|   Telegram Client   |
++---------------------+
+           |
+           v
++---------------------+      +--------------------+
+|   Express.js API    |<---->|   MongoDB Atlas    |
++---------------------+      +--------------------+
+           |
+           v
++---------------------+
+|   Trading Engine    |
++---------------------+
+           |
+           v
++---------------------+
+|  Solana Blockchain  |
++---------------------+
+```
 
-- 📊 **Analytics & Reporting**
-  - Google Sheets integration
-  - Performance tracking
-  - Daily summaries
-  - Trade history
+---
 
-- ⚙️ **Advanced Configuration**
-  - Token whitelist/blacklist
-  - Risk management settings
-  - Customizable scanning intervals
-  - Profit thresholds
+## Prerequisites
+- Node.js (v18+ recommended)
+- npm
+- MongoDB Atlas or local MongoDB
+- Telegram Bot Token (from @BotFather)
+- Solana wallet private key (array format)
+- Google Sheets API credentials (optional)
+- Digital Ocean (for production deployment)
 
-- 🔒 **Risk Management**
-  - Circuit breaker (stops after consecutive losses)
-  - Daily volume limits
-  - Maximum trade limits
-  - Minimum wallet balance requirements
+---
 
-## Setup
-
-### Prerequisites
-
-1. Node.js (v18 or higher)
-2. Telegram Bot Token (from @BotFather)
-3. Solana Wallet Private Key
-4. Google Sheets API credentials (optional)
-
-### Installation
-
-1. Clone this repository
+## Installation
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/arodrig125/solana-trading-bot.git
    cd solana-trading-bot
    ```
-
-2. Install dependencies
+2. **Install dependencies:**
    ```bash
    npm install
    ```
-
-3. Create a `.env` file based on `.env.example`
+3. **Copy and edit the .env file:**
    ```bash
    cp .env.example .env
+   # Edit .env with your credentials (see next section)
    ```
 
-4. Edit the `.env` file with your credentials
-   ```
-   TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-   TELEGRAM_CHAT_ID=your_telegram_chat_id
-   PRIVATE_KEY=[your_wallet_private_key_array]
-   SHEET_ID=your_google_sheet_id
-   SIMULATION=true
-   ```
+---
 
-5. Start the bot
-   ```bash
-   npm start
-   ```
+## Environment Variables
+Below are the required `.env` variables with descriptions:
 
-### Google Sheets Setup (Optional)
+| Name                  | Description                                      |
+|-----------------------|--------------------------------------------------|
+| TELEGRAM_BOT_TOKEN    | Telegram bot token from @BotFather               |
+| TELEGRAM_CHAT_ID      | Your Telegram chat ID                            |
+| PRIVATE_KEY           | Solana wallet private key (array format)         |
+| SHEET_ID              | Google Sheet ID for analytics                    |
+| SIMULATION            | true/false for simulation mode                   |
+| RPC_ENDPOINT          | Solana RPC endpoint                              |
+| MONGODB_URI           | MongoDB Atlas connection string                  |
+| ADMIN_USERNAME        | Username for admin API access                    |
+| ADMIN_PASSWORD_HASH   | Bcrypt hash of admin password                    |
+| JWT_SECRET            | Secret for JWT signing                           |
+| PORT                  | Port to run the Express server                   |
+| SENTRY_DSN            | Sentry DSN for error tracking                    |
 
-1. Create a Google Cloud project
-2. Enable the Google Sheets API
-3. Create a service account and download the credentials.json file
-4. Place the credentials.json file in the root directory
-5. Create a Google Sheet and share it with the service account email
-6. Add the Sheet ID to your .env file
+**Example:**
+```
+TELEGRAM_BOT_TOKEN=1234:abcd
+TELEGRAM_CHAT_ID=5678
+PRIVATE_KEY=[1,2,3,...]
+SHEET_ID=your-google-sheet-id
+SIMULATION=true
+RPC_ENDPOINT=https://api.mainnet-beta.solana.com
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/db
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD_HASH=$2b$10$EFL/xpij.70fDbA.EySTweOlxx.Fri5WCUVLUooiFSjQLWoQp2blq
+JWT_SECRET=supersecretjwtkey
+PORT=3005
+SENTRY_DSN=https://xxxxxxx@sentry.io/xxxxxx
+```
 
-## Telegram Commands
+---
 
-- `/start` - Start the bot and show available commands
-- `/ping` - Check if the bot is running
-- `/chatid` - Get your chat ID
-- `/live` - Enable live trading mode
-- `/simulate` - Enable simulation mode
-- `/pause` - Pause background scanning
-- `/resume` - Resume background scanning
-- `/setprofit <percent>` - Set minimum profit percentage
-- `/status` - Get current bot status
-- `/summary` - Get performance summary
-- `/opportunities` - View recent opportunities
-- `/trades` - View recent trades
-- `/settings` - View current settings
-- `/help` - Show help message
+## Generating Secrets
+- **Admin Password Hash (bcrypt):**
+  Run in Node.js REPL:
+  ```js
+  const bcrypt = require('bcrypt');
+  bcrypt.hash('your_admin_password', 10).then(console.log);
+  ```
+  Use the output as `ADMIN_PASSWORD_HASH` in your `.env`.
 
-## Deployment
+- **JWT Secret:**
+  Use a long, random string (e.g., from `openssl rand -hex 32`).
 
-### Website Deployment
+---
 
-The website is deployed on Vercel from the `main` branch. The website files are located in the `website/` directory.
+## Running the Server
+- **Development:**
+  ```bash
+  npm run dev
+  ```
+- **Production:**
+  ```bash
+  npm start
+  ```
+- The API will be available at `http://localhost:<PORT>`
 
-### Bot Deployment
+---
 
-#### Deploying on Render
+## API Usage
+### Authentication
+- Register and login endpoints return a JWT for authenticated requests.
+- Pass JWT as `Authorization: Bearer <token>` header.
 
-1. Create a new Web Service on Render
-2. Connect your GitHub repository
-3. Use the following settings:
-   - Environment: Node
-   - Build Command: `npm install`
-   - Start Command: `node index.js`
-4. Add all environment variables from your .env file
+### Example: Register
+```bash
+curl -X POST http://localhost:3005/api/auth/register \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"user1","password":"mypassword"}'
+```
 
-#### Deploying on a VPS
+### Example: Login
+```bash
+curl -X POST http://localhost:3005/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"user1","password":"mypassword"}'
+```
 
-See the [VPS Deployment Guide](VPS_DEPLOYMENT_GUIDE.md) for detailed instructions on deploying the bot on a Virtual Private Server.
+### Example: Get Wallets
+```bash
+curl http://localhost:3005/api/wallet \
+  -H 'Authorization: Bearer <your_jwt>'
+```
 
-## Configuration
+### Error Handling
+All errors are returned as JSON:
+```
+{
+  "error": "Human-readable error message"
+}
+```
+Status codes are standardized:
+- `400` Bad Request
+- `401` Unauthorized
+- `403` Forbidden
+- `404` Not Found
+- `409` Conflict
+- `500` Internal Server Error
 
-You can customize the bot's behavior by editing the files in the `config` directory:
+---
 
-- `tokens.js` - Token addresses and pairs to monitor
-- `settings.js` - Bot settings (scanning interval, profit thresholds, etc.)
+## Admin Features
+- Admin endpoints require valid JWT from admin login.
+- Example: List all users
+```bash
+curl http://localhost:3005/admin/api/users \
+  -H 'Authorization: Bearer <admin_jwt>'
+```
+- Admin actions include user management, API key management, and analytics.
+
+---
+
+## Deployment (Digital Ocean)
+- Provision a Droplet (Ubuntu recommended)
+- Clone repo, set up Node.js, and MongoDB credentials
+- Set up `.env` as above
+- Use `pm2` or similar to run in production
+- Set up firewall/security groups
+- (Optional) Use Nginx as reverse proxy and for HTTPS
+
+---
+
+## Troubleshooting
+- **Missing env vars:** Check `.env` and ensure all required variables are set
+- **MongoDB connection errors:** Verify URI, network access, and credentials
+- **Sentry errors:** Ensure `SENTRY_DSN` is correct or remove Sentry integration if unused
+- **Server crashes:** Check logs for variable redeclarations or import issues
+- **API returns 401/403:** Ensure JWT is sent in `Authorization` header
+
+---
+
+## Security Best Practices
+- Never commit `.env` or secrets to version control
+- Use strong, unique secrets for JWT and admin password
+- Restrict MongoDB and server access with firewalls
+- Always use HTTPS in production
+- Keep dependencies up to date
+
+---
+
+## Support
+- For issues, open an issue on GitHub or contact the maintainer
+- Contributions welcome via pull requests!
+
+---
 
 ## License
-
 MIT

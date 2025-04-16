@@ -31,15 +31,15 @@ const PricingCard = ({
   annualPrice,
   isBillingAnnual,
 }) => {
-  const bgColor = highlighted
-    ? useColorModeValue('blue.500', 'blue.300')
-    : useColorModeValue('white', 'gray.700');
-  const textColor = highlighted
-    ? 'white'
-    : useColorModeValue('gray.900', 'white');
-  const borderColor = highlighted
-    ? 'transparent'
-    : useColorModeValue('gray.200', 'gray.600');
+  // Move all useColorModeValue hooks to the top level
+  const bgColorHighlighted = useColorModeValue('blue.500', 'blue.300');
+  const bgColorDefault = useColorModeValue('white', 'gray.700');
+  const textColorDefault = useColorModeValue('gray.900', 'white');
+  const borderColorDefault = useColorModeValue('gray.200', 'gray.600');
+
+  const bgColor = highlighted ? bgColorHighlighted : bgColorDefault;
+  const textColor = highlighted ? 'white' : textColorDefault;
+  const borderColor = highlighted ? 'transparent' : borderColorDefault;
   const priceToShow = isBillingAnnual ? annualPrice : price;
 
   return (
@@ -150,6 +150,12 @@ const PricingCard = ({
 
 const Pricing = () => {
   const [annualBilling, setAnnualBilling] = useState(false);
+
+  // Move all useColorModeValue hooks to the top level
+  const faqBgColor = useColorModeValue('gray.50', 'gray.700');
+  const faqTextColor = useColorModeValue('gray.600', 'gray.300');
+  const ctaBgColor = useColorModeValue('blue.50', 'blue.900');
+  const ctaTextColor = useColorModeValue('gray.600', 'gray.300');
 
   const pricingPlans = [
     {
@@ -289,7 +295,7 @@ const Pricing = () => {
       </Box>
 
       {/* FAQ Section */}
-      <Box bg={useColorModeValue('gray.50', 'gray.700')} py={16}>
+      <Box bg={faqBgColor} py={16}>
         <Container maxW={'4xl'}>
           <VStack spacing={4} align={'start'}>
             <Heading as="h2" size="xl" mb={6}>Frequently Asked Questions</Heading>
@@ -334,7 +340,7 @@ const Pricing = () => {
 
       {/* Enterprise CTA */}
       <Box py={16}>
-        <Container maxW={'4xl'} bg={useColorModeValue('blue.50', 'blue.900')} p={10} borderRadius="lg">
+        <Container maxW={'4xl'} bg={ctaBgColor} p={10} borderRadius="lg">
           <Stack spacing={4} direction={{ base: 'column', md: 'row' }} align="center" justify="space-between">
             <Stack spacing={2} flex={1}>
               <Heading as="h2" size="lg">Need a custom solution?</Heading>

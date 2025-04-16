@@ -12,6 +12,37 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    wallets: [{
+        type: String,
+        trim: true
+    }],
+    twoFactorEnabled: {
+        type: Boolean,
+        default: false
+    },
+    twoFactorSecret: {
+        type: String,
+        default: ''
+    },
+    apiKeys: [
+        {
+            key: {
+                type: String,
+                required: true
+            },
+            label: {
+                type: String,
+                default: ''
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now
+            },
+            lastUsed: {
+                type: Date
+            }
+        }
+    ],
     role: {
         type: String,
         enum: ['admin', 'trader', 'analyst', 'viewer', 'support', 'code_reviewer'],

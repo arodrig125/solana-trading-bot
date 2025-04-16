@@ -301,7 +301,11 @@ router.put('/profile/password', async (req, res) => {
         // Verify current password
         const isValid = await user.comparePassword(currentPassword);
         if (!isValid) {
-            return res.status(400).json({ error: 'Current password is incorrect' });
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        if (!newPassword) {
+            return res.status(400).json({ error: 'Bad request' });
         }
 
         // Update password
