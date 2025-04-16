@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (password) userDoc.password = password;
         if (role) userDoc.role = role;
         if (typeof active === 'boolean') userDoc.active = active;
-        userDoc.updatedAt = Date.now();
+        userDoc.updatedAt = new Date();
         await userDoc.save();
         res.json({
           message: 'User updated successfully',
