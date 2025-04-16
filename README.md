@@ -1,5 +1,7 @@
 # SolarBot – Solana Trading Bot & REST API
 
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-brightgreen)](https://vercel.com)
+
 An advanced Solana arbitrage trading bot featuring:
 - RESTful API with authentication, wallet management, trading, analytics, and admin endpoints
 - Telegram command interface
