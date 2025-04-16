@@ -5,6 +5,7 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "github": {
-    "silent": false
+    "silent": false,
+    "autoAlias": true
   }
 }
