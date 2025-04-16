@@ -24,6 +24,7 @@ An advanced Solana arbitrage trading bot featuring:
 - [Admin Features](#admin-features)
 - [Error Handling](#error-handling)
 - [Deployment (Digital Ocean)](#deployment-digital-ocean)
+- [Website Deployment](#website-deployment)
 - [Troubleshooting](#troubleshooting)
 - [Security Best Practices](#security-best-practices)
 - [Support](#support)
@@ -215,6 +216,26 @@ curl http://localhost:3005/admin/api/users \
 - Use `pm2` or similar to run in production
 - Set up firewall/security groups
 - (Optional) Use Nginx as reverse proxy and for HTTPS
+
+---
+
+## Website Deployment
+
+The SolarBot website is automatically deployed to Vercel when changes are pushed to the `website` branch.
+
+### Automatic Deployments
+- Push changes to the `website` branch to trigger automatic deployment
+- GitHub Actions will build and deploy the website to Vercel
+- Monitor deployment status in the GitHub Actions tab
+
+### Manual Deployment
+- Run the deployment script: `./scripts/deploy-vercel.sh`
+- Or use cURL to trigger the deployment hook directly
+
+### Deployment Configuration
+- Deployment is configured via GitHub Actions workflows in `.github/workflows/`
+- Secure deployment uses GitHub Secrets for the Vercel deployment hook
+- See `DEPLOYMENT.md` for detailed deployment instructions
 
 ---
 
