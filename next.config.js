@@ -1,7 +1,11 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  // Disable the outputFileTracing to fix the routes-manifest.json error
+  output: 'standalone',
+  distDir: '.next',
+};
 
 module.exports = withSentryConfig(
   nextConfig,

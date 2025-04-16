@@ -1,10 +1,4 @@
 {
   "version": 2,
-  "buildCommand": "next build",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "github": {
-    "silent": false,
-    "autoAlias": true
-  }
+  "framework": "nextjs"
 }
