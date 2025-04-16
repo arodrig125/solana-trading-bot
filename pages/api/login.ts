@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import User from '../../models/User';
+import { IUser } from '../../types/User';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -18,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!user) {
       return res.status(401).json({ error: 'Invalid username or password' });
     }
-    const isValid = await user.comparePassword(password);
+    const isValid = await (user as unknown as IUser).comparePassword(password);
     if (!isValid) {
       return res.status(401).json({ error: 'Invalid username or password' });
     }
