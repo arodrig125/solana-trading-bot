@@ -1,6 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import User from '../models/User';
+import { IUser } from '../types/User';
 import { verifyAdminToken } from '../middleware/auth';
+import { RouteHandler } from '../types/express';
 
 const router = Router();
 
@@ -23,7 +25,7 @@ router.use(verifyAdminToken);
  */
 router.get('/', async (req: Request, res: Response) => {
     try {
-        if (!req.user?.hasPermission('manage_users')) {
+        if (!req.user || !(req.user as unknown as IUser).hasPermission('manage_users')) {
             return res.status(403).json({ error: 'Not authorized' });
         }
         const users = await User.find().select('-password');
@@ -68,7 +70,7 @@ router.get('/', async (req: Request, res: Response) => {
  */
 router.post('/', async (req: Request, res: Response) => {
     try {
-        if (!req.user?.hasPermission('manage_users')) {
+        if (!req.user || !(req.user as unknown as IUser).hasPermission('manage_users')) {
             return res.status(403).json({ error: 'Not authorized' });
         }
 
@@ -144,7 +146,7 @@ router.post('/', async (req: Request, res: Response) => {
  */
 router.put('/:userId', async (req: Request, res: Response) => {
     try {
-        if (!req.user?.hasPermission('manage_users')) {
+        if (!req.user || !(req.user as unknown as IUser).hasPermission('manage_users')) {
             return res.status(403).json({ error: 'Not authorized' });
         }
         const { userId } = req.params;
@@ -157,7 +159,7 @@ router.put('/:userId', async (req: Request, res: Response) => {
         if (password) user.password = password;
         if (role) user.role = role;
         if (typeof active === 'boolean') user.active = active;
-        user.updatedAt = Date.now();
+        user.updatedAt = new Date();
         await user.save();
         res.json({
             message: 'User updated successfully',
@@ -199,7 +201,7 @@ router.put('/:userId', async (req: Request, res: Response) => {
  */
 router.delete('/:userId', async (req: Request, res: Response) => {
     try {
-        if (!req.user?.hasPermission('manage_users')) {
+        if (!req.user || !(req.user as unknown as IUser).hasPermission('manage_users')) {
             return res.status(403).json({ error: 'Not authorized' });
         }
         const { userId } = req.params;
@@ -280,12 +282,12 @@ router.put('/profile/password', async (req: Request, res: Response) => {
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
-        const isValid = await user.comparePassword(currentPassword);
+        const isValid = await (user as unknown as IUser).comparePassword(currentPassword);
         if (!isValid) {
             return res.status(400).json({ error: 'Current password is incorrect' });
         }
         user.password = newPassword;
-        user.updatedAt = Date.now();
+        user.updatedAt = new Date();
         await user.save();
         res.json({ message: 'Password updated successfully' });
     } catch (error: any) {

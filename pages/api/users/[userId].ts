@@ -1,12 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import User from '../../../models/User';
+import { IUser } from '../../../types/User';
 import { verifyToken } from '../../../middleware/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await verifyToken(req, res, async () => {
     const user = (req as any).user;
     const { userId } = req.query;
-    if (!user || !user.hasPermission || !user.hasPermission('manage_users')) {
+    if (!user || !(user as unknown as IUser).hasPermission('manage_users')) {
       return res.status(403).json({ error: 'Not authorized' });
     }
     if (req.method === 'PUT') {
