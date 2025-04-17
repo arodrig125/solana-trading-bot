@@ -1,0 +1,10 @@
+name: solarbot
+static_sites:
+- name: web
+  github:
+    repo: arodrig125/solana-trading-bot
+    branch: website
+  source_dir: public
+  output_dir: public
+  build_command: echo "No build required"
+  environment_slug: static
