@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #9945FF;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav {
+    background: #333;
+    color: white;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    padding: 10px 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #9945FF;
+}
+
+.hero {
+    background: #f4f4f4;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    background: #9945FF;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #7d37cc;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.feature {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    text-align: center;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "6492583125": {
+    "whitelist": [
+      "SOL"
+    ],
+    "blacklist": [
+      "SCAM"
+    ],
+    "useWhitelist": false,
+    "useBlacklist": true
+  }
+}

@@ -1,7 +1,12 @@
 // WebSocket Service for Real-time Updates
 class WebSocketService {
     constructor() {
-        this.baseUrl = window.location.host;
+        // Determine base WebSocket URL based on environment
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      this.baseUrl = 'localhost:8080';
+    } else {
+      this.baseUrl = 'api.solarbot.digitalocean.app'; // PRODUCTION ENDPOINT (no port)
+    }
         this.ws = null;
         this.reconnectAttempts = 0;
         this.maxReconnectAttempts = 5;
@@ -46,7 +51,9 @@ class WebSocketService {
             });
         }
         try {
-            this.ws = new WebSocket(`ws://${this.baseUrl}/ws`);
+            // Use wss for production
+        const wsProtocol = this.baseUrl.startsWith('localhost') ? 'ws' : 'wss';
+        this.ws = new WebSocket(`${wsProtocol}://${this.baseUrl}/ws`);
             this.setupEventHandlers();
             this.registerDefaultHandlers();
         } catch (error) {

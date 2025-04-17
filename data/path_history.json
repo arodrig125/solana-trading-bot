@@ -1,0 +1,2789 @@
+{
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999708,
+    "averageProfit": -89.999708,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490181380,
+        "success": false,
+        "profitPercent": -89.999708
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.99908,
+    "averageProfit": -89.99908,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490182138,
+        "success": false,
+        "profitPercent": -89.99908
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 3,
+    "successes": 0,
+    "failures": 3,
+    "successRate": 0,
+    "totalProfit": -270.113003,
+    "averageProfit": -90.03766766666666,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490182901,
+        "success": false,
+        "profitPercent": -90.062946
+      },
+      {
+        "timestamp": 1744490603372,
+        "success": false,
+        "profitPercent": -90.025655
+      },
+      {
+        "timestamp": 1744490664450,
+        "success": false,
+        "profitPercent": -90.024402
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 3,
+    "successes": 0,
+    "failures": 3,
+    "successRate": 0,
+    "totalProfit": -270.004842,
+    "averageProfit": -90.001614,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490183690,
+        "success": false,
+        "profitPercent": -90.00306
+      },
+      {
+        "timestamp": 1744490602577,
+        "success": false,
+        "profitPercent": -90.003024
+      },
+      {
+        "timestamp": 1744490663683,
+        "success": false,
+        "profitPercent": -89.998758
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 3,
+    "successes": 0,
+    "failures": 3,
+    "successRate": 0,
+    "totalProfit": -270.003244,
+    "averageProfit": -90.00108133333333,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490184944,
+        "success": false,
+        "profitPercent": -90.004177
+      },
+      {
+        "timestamp": 1744490601823,
+        "success": false,
+        "profitPercent": -90.001762
+      },
+      {
+        "timestamp": 1744490662808,
+        "success": false,
+        "profitPercent": -89.997305
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999895,
+    "averageProfit": -89.999895,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490186091,
+        "success": false,
+        "profitPercent": -89.999895
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999941,
+    "averageProfit": -89.999941,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490187248,
+        "success": false,
+        "profitPercent": -89.999941
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.052061,
+    "averageProfit": -90.052061,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490188376,
+        "success": false,
+        "profitPercent": -90.052061
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.063014,
+    "averageProfit": -90.063014,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490189515,
+        "success": false,
+        "profitPercent": -90.063014
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.997825,
+    "averageProfit": -89.997825,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490191188,
+        "success": false,
+        "profitPercent": -89.997825
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999964966,
+    "averageProfit": -89.999964966,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490191968,
+        "success": false,
+        "profitPercent": -89.999964966
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999965519,
+    "averageProfit": -89.999965519,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490192727,
+        "success": false,
+        "profitPercent": -89.999965519
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "successRate": 0,
+    "totalProfit": -182.364032275,
+    "averageProfit": -91.1820161375,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490193635,
+        "success": false,
+        "profitPercent": -91.181757039
+      },
+      {
+        "timestamp": 1744490613839,
+        "success": false,
+        "profitPercent": -91.182275236
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "successRate": 0,
+    "totalProfit": -180.007704143,
+    "averageProfit": -90.0038520715,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490194475,
+        "success": false,
+        "profitPercent": -90.003893926
+      },
+      {
+        "timestamp": 1744490613018,
+        "success": false,
+        "profitPercent": -90.003810217
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "successRate": 0,
+    "totalProfit": -180.012017391,
+    "averageProfit": -90.0060086955,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490195321,
+        "success": false,
+        "profitPercent": -90.006331134
+      },
+      {
+        "timestamp": 1744490612179,
+        "success": false,
+        "profitPercent": -90.005686257
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.99809456,
+    "averageProfit": -89.99809456,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490196528,
+        "success": false,
+        "profitPercent": -89.99809456
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.992825007,
+    "averageProfit": -89.992825007,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490197981,
+        "success": false,
+        "profitPercent": -89.992825007
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.187010372,
+    "averageProfit": -91.187010372,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490199179,
+        "success": false,
+        "profitPercent": -91.187010372
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.176145668,
+    "averageProfit": -91.176145668,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490200358,
+        "success": false,
+        "profitPercent": -91.176145668
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999735978,
+    "averageProfit": -89.999735978,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490201551,
+        "success": false,
+        "profitPercent": -89.999735978
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 3,
+    "successes": 0,
+    "failures": 3,
+    "successRate": 0,
+    "totalProfit": -270.015616,
+    "averageProfit": -90.00520533333334,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490212295,
+        "success": false,
+        "profitPercent": -89.998419
+      },
+      {
+        "timestamp": 1744490601048,
+        "success": false,
+        "profitPercent": -90.006501
+      },
+      {
+        "timestamp": 1744490662001,
+        "success": false,
+        "profitPercent": -90.010696
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "successRate": 0,
+    "totalProfit": -179.986609,
+    "averageProfit": -89.9933045,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490600091,
+        "success": false,
+        "profitPercent": -90.003518
+      },
+      {
+        "timestamp": 1744490660731,
+        "success": false,
+        "profitPercent": -89.983091
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.994411,
+    "averageProfit": -89.994411,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490604518,
+        "success": false,
+        "profitPercent": -89.994411
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.021557,
+    "averageProfit": -90.021557,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490605768,
+        "success": false,
+        "profitPercent": -90.021557
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.997344,
+    "averageProfit": -89.997344,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490607365,
+        "success": false,
+        "profitPercent": -89.997344
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.028465,
+    "averageProfit": -90.028465,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490608490,
+        "success": false,
+        "profitPercent": -90.028465
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.99961,
+    "averageProfit": -89.99961,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490609598,
+        "success": false,
+        "profitPercent": -89.99961
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "successRate": 0,
+    "totalProfit": -180.02230424700002,
+    "averageProfit": -90.01115212350001,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490610422,
+        "success": false,
+        "profitPercent": -90.011147179
+      },
+      {
+        "timestamp": 1744490672846,
+        "success": false,
+        "profitPercent": -90.011157068
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "successRate": 0,
+    "totalProfit": -180.023449914,
+    "averageProfit": -90.011724957,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490611303,
+        "success": false,
+        "profitPercent": -90.010767723
+      },
+      {
+        "timestamp": 1744490671997,
+        "success": false,
+        "profitPercent": -90.012682191
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.177459212,
+    "averageProfit": -91.177459212,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490615024,
+        "success": false,
+        "profitPercent": -91.177459212
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.187553298,
+    "averageProfit": -91.187553298,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490616220,
+        "success": false,
+        "profitPercent": -91.187553298
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.001598034,
+    "averageProfit": -90.001598034,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490617457,
+        "success": false,
+        "profitPercent": -90.001598034
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.005041488,
+    "averageProfit": -90.005041488,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490618688,
+        "success": false,
+        "profitPercent": -90.005041488
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.001751426,
+    "averageProfit": -90.001751426,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490619898,
+        "success": false,
+        "profitPercent": -90.001751426
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.995648,
+    "averageProfit": -89.995648,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490665607,
+        "success": false,
+        "profitPercent": -89.995648
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.00632,
+    "averageProfit": -90.00632,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490666736,
+        "success": false,
+        "profitPercent": -90.00632
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.000483,
+    "averageProfit": -90.000483,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490667833,
+        "success": false,
+        "profitPercent": -90.000483
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.011705,
+    "averageProfit": -90.011705,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490668997,
+        "success": false,
+        "profitPercent": -90.011705
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.998314,
+    "averageProfit": -89.998314,
+    "recentAttempts": [
+      {
+        "timestamp": 1744490670634,
+        "success": false,
+        "profitPercent": -89.998314
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.001853071,
+    "averageProfit": -90.001853071,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594836616,
+        "success": false,
+        "profitPercent": -90.001853071
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.00117453,
+    "averageProfit": -90.00117453,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594837117,
+        "success": false,
+        "profitPercent": -90.00117453
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.033049277,
+    "averageProfit": -90.033049277,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594837562,
+        "success": false,
+        "profitPercent": -90.033049277
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.008381402,
+    "averageProfit": -90.008381402,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594838166,
+        "success": false,
+        "profitPercent": -90.008381402
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.006977366,
+    "averageProfit": -90.006977366,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594838771,
+        "success": false,
+        "profitPercent": -90.006977366
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.004951406,
+    "averageProfit": -90.004951406,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594839414,
+        "success": false,
+        "profitPercent": -90.004951406
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.003509051,
+    "averageProfit": -90.003509051,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594840024,
+        "success": false,
+        "profitPercent": -90.003509051
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.007104216,
+    "averageProfit": -90.007104216,
+    "recentAttempts": [
+      {
+        "timestamp": 1744594840960,
+        "success": false,
+        "profitPercent": -90.007104216
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.002035,
+    "averageProfit": -90.002035,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595077106,
+        "success": false,
+        "profitPercent": -90.002035
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.992664,
+    "averageProfit": -89.992664,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595077505,
+        "success": false,
+        "profitPercent": -89.992664
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.994212,
+    "averageProfit": -89.994212,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595077906,
+        "success": false,
+        "profitPercent": -89.994212
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.993456,
+    "averageProfit": -89.993456,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595078561,
+        "success": false,
+        "profitPercent": -89.993456
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.020103,
+    "averageProfit": -90.020103,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595078932,
+        "success": false,
+        "profitPercent": -90.020103
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.996116,
+    "averageProfit": -89.996116,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595079542,
+        "success": false,
+        "profitPercent": -89.996116
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.996654,
+    "averageProfit": -89.996654,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595080253,
+        "success": false,
+        "profitPercent": -89.996654
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.992674,
+    "averageProfit": -89.992674,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595080827,
+        "success": false,
+        "profitPercent": -89.992674
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.994231,
+    "averageProfit": -89.994231,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595081424,
+        "success": false,
+        "profitPercent": -89.994231
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.992495,
+    "averageProfit": -89.992495,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595082030,
+        "success": false,
+        "profitPercent": -89.992495
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.004806577,
+    "averageProfit": -90.004806577,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595082432,
+        "success": false,
+        "profitPercent": -90.004806577
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.005468194,
+    "averageProfit": -90.005468194,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595082895,
+        "success": false,
+        "profitPercent": -90.005468194
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.114076993,
+    "averageProfit": -90.114076993,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595083311,
+        "success": false,
+        "profitPercent": -90.114076993
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -94.252881862,
+    "averageProfit": -94.252881862,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595083684,
+        "success": false,
+        "profitPercent": -94.252881862
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.998298,
+    "averageProfit": -89.998298,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595436240,
+        "success": false,
+        "profitPercent": -89.998298
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.065792631,
+    "averageProfit": -90.065792631,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595437382,
+        "success": false,
+        "profitPercent": -90.065792631
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.002267383,
+    "averageProfit": -90.002267383,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595438360,
+        "success": false,
+        "profitPercent": -90.002267383
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.997567323,
+    "averageProfit": -89.997567323,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595439126,
+        "success": false,
+        "profitPercent": -89.997567323
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999263677,
+    "averageProfit": -89.999263677,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595439706,
+        "success": false,
+        "profitPercent": -89.999263677
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.00869227,
+    "averageProfit": -90.00869227,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595440339,
+        "success": false,
+        "profitPercent": -90.00869227
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.00707406,
+    "averageProfit": -90.00707406,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595440932,
+        "success": false,
+        "profitPercent": -90.00707406
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999817,
+    "averageProfit": -89.999817,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595676935,
+        "success": false,
+        "profitPercent": -89.999817
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.114991,
+    "averageProfit": -90.114991,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595677322,
+        "success": false,
+        "profitPercent": -90.114991
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.00617,
+    "averageProfit": -90.00617,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595678138,
+        "success": false,
+        "profitPercent": -90.00617
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.00153,
+    "averageProfit": -90.00153,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595678776,
+        "success": false,
+        "profitPercent": -90.00153
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.002047,
+    "averageProfit": -90.002047,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595679400,
+        "success": false,
+        "profitPercent": -90.002047
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.993298,
+    "averageProfit": -89.993298,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595679991,
+        "success": false,
+        "profitPercent": -89.993298
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.001577,
+    "averageProfit": -90.001577,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595680594,
+        "success": false,
+        "profitPercent": -90.001577
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999269,
+    "averageProfit": -89.999269,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595681190,
+        "success": false,
+        "profitPercent": -89.999269
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.304653116,
+    "averageProfit": -91.304653116,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595682432,
+        "success": false,
+        "profitPercent": -91.304653116
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.003139336,
+    "averageProfit": -90.003139336,
+    "recentAttempts": [
+      {
+        "timestamp": 1744595683200,
+        "success": false,
+        "profitPercent": -90.003139336
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.018704,
+    "averageProfit": -90.018704,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596035929,
+        "success": false,
+        "profitPercent": -90.018704
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.064837,
+    "averageProfit": -90.064837,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596036524,
+        "success": false,
+        "profitPercent": -90.064837
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.106985091,
+    "averageProfit": -90.106985091,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596037763,
+        "success": false,
+        "profitPercent": -90.106985091
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.19575158,
+    "averageProfit": -91.19575158,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596038357,
+        "success": false,
+        "profitPercent": -91.19575158
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.195022389,
+    "averageProfit": -91.195022389,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596038995,
+        "success": false,
+        "profitPercent": -91.195022389
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999978852,
+    "averageProfit": -89.999978852,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596039731,
+        "success": false,
+        "profitPercent": -89.999978852
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.193070966,
+    "averageProfit": -91.193070966,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596040447,
+        "success": false,
+        "profitPercent": -91.193070966
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.192515684,
+    "averageProfit": -91.192515684,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596041192,
+        "success": false,
+        "profitPercent": -91.192515684
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.062394,
+    "averageProfit": -90.062394,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596278955,
+        "success": false,
+        "profitPercent": -90.062394
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.995209,
+    "averageProfit": -89.995209,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596279568,
+        "success": false,
+        "profitPercent": -89.995209
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.001593,
+    "averageProfit": -90.001593,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596280391,
+        "success": false,
+        "profitPercent": -90.001593
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.996114,
+    "averageProfit": -89.996114,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596281295,
+        "success": false,
+        "profitPercent": -89.996114
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.998556,
+    "averageProfit": -89.998556,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596281886,
+        "success": false,
+        "profitPercent": -89.998556
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.066424,
+    "averageProfit": -90.066424,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596282493,
+        "success": false,
+        "profitPercent": -90.066424
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.004167354,
+    "averageProfit": -90.004167354,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596284456,
+        "success": false,
+        "profitPercent": -90.004167354
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.003968,
+    "averageProfit": -90.003968,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596635698,
+        "success": false,
+        "profitPercent": -90.003968
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.007488,
+    "averageProfit": -90.007488,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596636278,
+        "success": false,
+        "profitPercent": -90.007488
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.060714,
+    "averageProfit": -90.060714,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596636880,
+        "success": false,
+        "profitPercent": -90.060714
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.069921,
+    "averageProfit": -90.069921,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596637480,
+        "success": false,
+        "profitPercent": -90.069921
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.111849,
+    "averageProfit": -90.111849,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596638097,
+        "success": false,
+        "profitPercent": -90.111849
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.004139444,
+    "averageProfit": -90.004139444,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596639724,
+        "success": false,
+        "profitPercent": -90.004139444
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.003811296,
+    "averageProfit": -90.003811296,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596640409,
+        "success": false,
+        "profitPercent": -90.003811296
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.998990199,
+    "averageProfit": -89.998990199,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596641064,
+        "success": false,
+        "profitPercent": -89.998990199
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.046283025,
+    "averageProfit": -90.046283025,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596641693,
+        "success": false,
+        "profitPercent": -90.046283025
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999407499,
+    "averageProfit": -89.999407499,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596642472,
+        "success": false,
+        "profitPercent": -89.999407499
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.013359,
+    "averageProfit": -90.013359,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596881554,
+        "success": false,
+        "profitPercent": -90.013359
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.112549,
+    "averageProfit": -90.112549,
+    "recentAttempts": [
+      {
+        "timestamp": 1744596882178,
+        "success": false,
+        "profitPercent": -90.112549
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.036577264,
+    "averageProfit": -90.036577264,
+    "recentAttempts": [
+      {
+        "timestamp": 1744687923148,
+        "success": false,
+        "profitPercent": -90.036577264
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.013856476,
+    "averageProfit": -90.013856476,
+    "recentAttempts": [
+      {
+        "timestamp": 1744687923791,
+        "success": false,
+        "profitPercent": -90.013856476
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.003014837,
+    "averageProfit": -90.003014837,
+    "recentAttempts": [
+      {
+        "timestamp": 1744687924476,
+        "success": false,
+        "profitPercent": -90.003014837
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.124533372,
+    "averageProfit": -90.124533372,
+    "recentAttempts": [
+      {
+        "timestamp": 1744687925095,
+        "success": false,
+        "profitPercent": -90.124533372
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112",
+      "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.012574,
+    "averageProfit": -90.012574,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688164365,
+        "success": false,
+        "profitPercent": -90.012574
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.015180203,
+    "averageProfit": -90.015180203,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688165990,
+        "success": false,
+        "profitPercent": -90.015180203
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.124192697,
+    "averageProfit": -90.124192697,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688166601,
+        "success": false,
+        "profitPercent": -90.124192697
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.005523712,
+    "averageProfit": -90.005523712,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688167261,
+        "success": false,
+        "profitPercent": -90.005523712
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.012954191,
+    "averageProfit": -90.012954191,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688167906,
+        "success": false,
+        "profitPercent": -90.012954191
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -94.244358347,
+    "averageProfit": -94.244358347,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688168478,
+        "success": false,
+        "profitPercent": -94.244358347
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3-So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "path": [
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -89.999104,
+    "averageProfit": -89.999104,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688410442,
+        "success": false,
+        "profitPercent": -89.999104
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -94.242861224,
+    "averageProfit": -94.242861224,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688412048,
+        "success": false,
+        "profitPercent": -94.242861224
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.011484432,
+    "averageProfit": -90.011484432,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688412705,
+        "success": false,
+        "profitPercent": -90.011484432
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.002009002,
+    "averageProfit": -90.002009002,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688413451,
+        "success": false,
+        "profitPercent": -90.002009002
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.191252558,
+    "averageProfit": -91.191252558,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688414082,
+        "success": false,
+        "profitPercent": -91.191252558
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+      "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -91.191202009,
+    "averageProfit": -91.191202009,
+    "recentAttempts": [
+      {
+        "timestamp": 1744688414723,
+        "success": false,
+        "profitPercent": -91.191202009
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.006052482,
+    "averageProfit": -90.006052482,
+    "recentAttempts": [
+      {
+        "timestamp": 1744689003036,
+        "success": false,
+        "profitPercent": -90.006052482
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.008942639,
+    "averageProfit": -90.008942639,
+    "recentAttempts": [
+      {
+        "timestamp": 1744689003657,
+        "success": false,
+        "profitPercent": -90.008942639
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.010763245,
+    "averageProfit": -90.010763245,
+    "recentAttempts": [
+      {
+        "timestamp": 1744689004635,
+        "success": false,
+        "profitPercent": -90.010763245
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.010477444,
+    "averageProfit": -90.010477444,
+    "recentAttempts": [
+      {
+        "timestamp": 1744689005337,
+        "success": false,
+        "profitPercent": -90.010477444
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.063553188,
+    "averageProfit": -90.063553188,
+    "recentAttempts": [
+      {
+        "timestamp": 1744689247382,
+        "success": false,
+        "profitPercent": -90.063553188
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.001299245,
+    "averageProfit": -90.001299245,
+    "recentAttempts": [
+      {
+        "timestamp": 1744689491823,
+        "success": false,
+        "profitPercent": -90.001299245
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.063058926,
+    "averageProfit": -90.063058926,
+    "recentAttempts": [
+      {
+        "timestamp": 1744690084554,
+        "success": false,
+        "profitPercent": -90.063058926
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.0064066,
+    "averageProfit": -90.0064066,
+    "recentAttempts": [
+      {
+        "timestamp": 1744690329517,
+        "success": false,
+        "profitPercent": -90.0064066
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So-USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So",
+      "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.006399652,
+    "averageProfit": -90.006399652,
+    "recentAttempts": [
+      {
+        "timestamp": 1744690924186,
+        "success": false,
+        "profitPercent": -90.006399652
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-So11111111111111111111111111111111111111112": {
+    "path": [
+      "So11111111111111111111111111111111111111112",
+      "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+      "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "So11111111111111111111111111111111111111112"
+    ],
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "successRate": 0,
+    "totalProfit": -90.002367282,
+    "averageProfit": -90.002367282,
+    "recentAttempts": [
+      {
+        "timestamp": 1744691291991,
+        "success": false,
+        "profitPercent": -90.002367282
+      }
+    ]
+  }
+}

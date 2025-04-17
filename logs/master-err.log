@@ -1,0 +1,8 @@
+2025-04-14 19:59:44 -07:00: TypeError: Cannot convert undefined or null to object
+2025-04-14 19:59:44 -07:00:     at Function.values (<anonymous>)
+2025-04-14 19:59:44 -07:00:     at process.<anonymous> (/Users/arod/solana-telegram-arb-bot/cluster.js:43:35)
+2025-04-14 19:59:44 -07:00:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-04-15 07:14:28 -07:00: TypeError: Cannot convert undefined or null to object
+2025-04-15 07:14:28 -07:00:     at Function.values (<anonymous>)
+2025-04-15 07:14:28 -07:00:     at process.<anonymous> (/Users/arod/solana-telegram-arb-bot/cluster.js:43:35)
+2025-04-15 07:14:28 -07:00:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

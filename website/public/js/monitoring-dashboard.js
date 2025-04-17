@@ -14,7 +14,14 @@ class MonitoringDashboard {
 
     // Initialize WebSocket connection
     initializeWebSocket() {
-        this.socket = new WebSocket('ws://localhost:8080/monitoring');
+        // Use production WebSocket endpoint unless running locally
+    let wsUrl;
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      wsUrl = 'ws://localhost:8080/monitoring';
+    } else {
+      wsUrl = 'wss://api.solarbot.digitalocean.app/monitoring'; // PRODUCTION ENDPOINT
+    }
+    this.socket = new WebSocket(wsUrl);
         
         this.socket.onmessage = (event) => {
             const data = JSON.parse(event.data);

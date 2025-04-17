@@ -1,0 +1,259 @@
+{
+  "hourly": {
+    "2025-04-13-17": {
+      "opportunities": 10,
+      "trades": 19,
+      "successfulTrades": 13,
+      "failedTrades": 6,
+      "totalProfit": 8.299999999999999,
+      "totalVolume": 1300,
+      "bestTrade": {
+        "id": "test-trade-3",
+        "profit": 0.8,
+        "profitPercent": 3.2,
+        "timestamp": "2025-04-14T00:19:22.827Z"
+      },
+      "worstTrade": {
+        "id": "test-trade-1",
+        "profit": 0.5,
+        "profitPercent": 2.1,
+        "timestamp": "2025-04-14T00:13:27.474Z"
+      },
+      "tokens": {
+        "SOL/USDC": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544
+        }
+      },
+      "dexes": {
+        "Orca": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        },
+        "Raydium": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        }
+      },
+      "avgTradeProfit": 0.6384615384615384,
+      "avgTradeDuration": 1038.4615384615386,
+      "consecutiveWins": 1,
+      "consecutiveLosses": 0,
+      "maxConsecutiveWins": 2,
+      "profitableHours": [
+        17
+      ],
+      "winRate": 68.42105263157895,
+      "profitFactor": 8.299999999999999,
+      "sharpeRatio": 0,
+      "maxConsecutiveLosses": 1
+    }
+  },
+  "daily": {
+    "2025-04-13": {
+      "opportunities": 10,
+      "trades": 19,
+      "successfulTrades": 13,
+      "failedTrades": 6,
+      "totalProfit": 8.299999999999999,
+      "totalVolume": 1300,
+      "bestTrade": {
+        "id": "test-trade-3",
+        "profit": 0.8,
+        "profitPercent": 3.2,
+        "timestamp": "2025-04-14T00:19:22.827Z"
+      },
+      "worstTrade": {
+        "id": "test-trade-1",
+        "profit": 0.5,
+        "profitPercent": 2.1,
+        "timestamp": "2025-04-14T00:13:27.474Z"
+      },
+      "tokens": {
+        "SOL/USDC": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544
+        }
+      },
+      "dexes": {
+        "Orca": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        },
+        "Raydium": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        }
+      },
+      "avgTradeProfit": 0.6384615384615384,
+      "avgTradeDuration": 1038.4615384615386,
+      "consecutiveWins": 1,
+      "consecutiveLosses": 0,
+      "maxConsecutiveWins": 2,
+      "profitableHours": [
+        17
+      ],
+      "winRate": 68.42105263157895,
+      "profitFactor": 8.299999999999999,
+      "sharpeRatio": 0,
+      "maxConsecutiveLosses": 1
+    }
+  },
+  "weekly": {
+    "2025-15": {
+      "opportunities": 10,
+      "trades": 19,
+      "successfulTrades": 13,
+      "failedTrades": 6,
+      "totalProfit": 8.299999999999999,
+      "totalVolume": 1300,
+      "bestTrade": {
+        "id": "test-trade-3",
+        "profit": 0.8,
+        "profitPercent": 3.2,
+        "timestamp": "2025-04-14T00:19:22.827Z"
+      },
+      "worstTrade": {
+        "id": "test-trade-1",
+        "profit": 0.5,
+        "profitPercent": 2.1,
+        "timestamp": "2025-04-14T00:13:27.474Z"
+      },
+      "tokens": {
+        "SOL/USDC": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544
+        }
+      },
+      "dexes": {
+        "Orca": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        },
+        "Raydium": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        }
+      },
+      "avgTradeProfit": 0.6384615384615384,
+      "avgTradeDuration": 1038.4615384615386,
+      "consecutiveWins": 1,
+      "consecutiveLosses": 0,
+      "maxConsecutiveWins": 2,
+      "profitableHours": [
+        17
+      ],
+      "winRate": 68.42105263157895,
+      "profitFactor": 8.299999999999999,
+      "sharpeRatio": 0,
+      "maxConsecutiveLosses": 1
+    }
+  },
+  "monthly": {
+    "2025-04": {
+      "opportunities": 10,
+      "trades": 19,
+      "successfulTrades": 13,
+      "failedTrades": 6,
+      "totalProfit": 8.299999999999999,
+      "totalVolume": 1300,
+      "bestTrade": {
+        "id": "test-trade-3",
+        "profit": 0.8,
+        "profitPercent": 3.2,
+        "timestamp": "2025-04-14T00:19:22.827Z"
+      },
+      "worstTrade": {
+        "id": "test-trade-1",
+        "profit": 0.5,
+        "profitPercent": 2.1,
+        "timestamp": "2025-04-14T00:13:27.474Z"
+      },
+      "tokens": {
+        "SOL/USDC": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544
+        }
+      },
+      "dexes": {
+        "Orca": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        },
+        "Raydium": {
+          "opportunities": 10,
+          "volume": 1300,
+          "profit": 8.299999999999999,
+          "totalTrades": 11,
+          "successRate": 9.090909090909092,
+          "avgProfit": 0.7545454545454544,
+          "latency": 172.72727272727272
+        }
+      },
+      "avgTradeProfit": 0.6384615384615384,
+      "avgTradeDuration": 1038.4615384615386,
+      "consecutiveWins": 1,
+      "consecutiveLosses": 0,
+      "maxConsecutiveWins": 2,
+      "profitableHours": [
+        17
+      ],
+      "winRate": 68.42105263157895,
+      "profitFactor": 8.299999999999999,
+      "sharpeRatio": 0,
+      "maxConsecutiveLosses": 1
+    }
+  },
+  "lastUpdated": "2025-04-14T00:23:50.958Z"
+}

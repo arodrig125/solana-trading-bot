@@ -14,7 +14,7 @@ class ApiClient {
    */
   getBaseUrl() {
     // Use environment variables in production, but default to local for development
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
       return 'http://localhost:3001/api';
     } else {
       // Connect to the Digital Ocean API server

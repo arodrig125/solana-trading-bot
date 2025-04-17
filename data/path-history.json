@@ -1,0 +1,709 @@
+{
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509340252,
+    "lastSuccess": null,
+    "lastFailure": 1744509340252,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509340252,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509340949,
+    "lastSuccess": null,
+    "lastFailure": 1744509340949,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509340949,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509342756,
+    "lastSuccess": null,
+    "lastFailure": 1744509342756,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509342756,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509343280,
+    "lastSuccess": null,
+    "lastFailure": 1744509343280,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509343280,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509344287,
+    "lastSuccess": null,
+    "lastFailure": 1744509344287,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509344287,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "lastAttempt": 1744510065178,
+    "lastSuccess": null,
+    "lastFailure": 1744510065178,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509345060,
+        "success": false,
+        "profitPercent": 0
+      },
+      {
+        "timestamp": 1744510065178,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 2,
+    "successes": 0,
+    "failures": 2,
+    "lastAttempt": 1744510065555,
+    "lastSuccess": null,
+    "lastFailure": 1744510065555,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509345861,
+        "success": false,
+        "profitPercent": 0
+      },
+      {
+        "timestamp": 1744510065555,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509346609,
+    "lastSuccess": null,
+    "lastFailure": 1744509346609,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509346609,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509347713,
+    "lastSuccess": null,
+    "lastFailure": 1744509347713,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509347713,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509348877,
+    "lastSuccess": null,
+    "lastFailure": 1744509348877,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509348877,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509460187,
+    "lastSuccess": null,
+    "lastFailure": 1744509460187,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509460187,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-So11111111111111111111111111111111111111112": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509460536,
+    "lastSuccess": null,
+    "lastFailure": 1744509460536,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509460536,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509462637,
+    "lastSuccess": null,
+    "lastFailure": 1744509462637,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509462637,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509464352,
+    "lastSuccess": null,
+    "lastFailure": 1744509464352,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509464352,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509464768,
+    "lastSuccess": null,
+    "lastFailure": 1744509464768,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509464768,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509465194,
+    "lastSuccess": null,
+    "lastFailure": 1744509465194,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509465194,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509467520,
+    "lastSuccess": null,
+    "lastFailure": 1744509467520,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509467520,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509468159,
+    "lastSuccess": null,
+    "lastFailure": 1744509468159,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509468159,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509580404,
+    "lastSuccess": null,
+    "lastFailure": 1744509580404,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509580404,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509580886,
+    "lastSuccess": null,
+    "lastFailure": 1744509580886,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509580886,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509583562,
+    "lastSuccess": null,
+    "lastFailure": 1744509583562,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509583562,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509584845,
+    "lastSuccess": null,
+    "lastFailure": 1744509584845,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509584845,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509585244,
+    "lastSuccess": null,
+    "lastFailure": 1744509585244,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509585244,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509585656,
+    "lastSuccess": null,
+    "lastFailure": 1744509585656,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509585656,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509588037,
+    "lastSuccess": null,
+    "lastFailure": 1744509588037,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509588037,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509700466,
+    "lastSuccess": null,
+    "lastFailure": 1744509700466,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509700466,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-So11111111111111111111111111111111111111112": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509700819,
+    "lastSuccess": null,
+    "lastFailure": 1744509700819,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509700819,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509705059,
+    "lastSuccess": null,
+    "lastFailure": 1744509705059,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509705059,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509705416,
+    "lastSuccess": null,
+    "lastFailure": 1744509705416,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509705416,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509708274,
+    "lastSuccess": null,
+    "lastFailure": 1744509708274,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509708274,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509821223,
+    "lastSuccess": null,
+    "lastFailure": 1744509821223,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509821223,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509821594,
+    "lastSuccess": null,
+    "lastFailure": 1744509821594,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509821594,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509826160,
+    "lastSuccess": null,
+    "lastFailure": 1744509826160,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509826160,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509826566,
+    "lastSuccess": null,
+    "lastFailure": 1744509826566,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509826566,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509829913,
+    "lastSuccess": null,
+    "lastFailure": 1744509829913,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509829913,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509940734,
+    "lastSuccess": null,
+    "lastFailure": 1744509940734,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509940734,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509945195,
+    "lastSuccess": null,
+    "lastFailure": 1744509945195,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509945195,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509945658,
+    "lastSuccess": null,
+    "lastFailure": 1744509945658,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509945658,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744509948772,
+    "lastSuccess": null,
+    "lastFailure": 1744509948772,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744509948772,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744510060555,
+    "lastSuccess": null,
+    "lastFailure": 1744510060555,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744510060555,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  },
+  "So11111111111111111111111111111111111111112-Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB-DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263-EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+    "attempts": 1,
+    "successes": 0,
+    "failures": 1,
+    "lastAttempt": 1744510068566,
+    "lastSuccess": null,
+    "lastFailure": 1744510068566,
+    "avgProfitPercent": 0,
+    "totalProfitPercent": 0,
+    "history": [
+      {
+        "timestamp": 1744510068566,
+        "success": false,
+        "profitPercent": 0
+      }
+    ]
+  }
+}

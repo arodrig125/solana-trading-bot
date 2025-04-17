@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Automation Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .rule-card {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Risk Automation Dashboard</h1>
+        
+        <!-- Add New Rule Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Add New Rule</h5>
+            </div>
+            <div class="card-body">
+                <form id="newRuleForm">
+                    <div class="mb-3">
+                        <label for="ruleName" class="form-label">Rule Name</label>
+                        <input type="text" class="form-control" id="ruleName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="condition" class="form-label">Condition</label>
+                        <textarea class="form-control" id="condition" rows="3" required></textarea>
+                        <small class="text-muted">Example: {"type": "price_threshold", "value": 100}</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="action" class="form-label">Action</label>
+                        <textarea class="form-control" id="action" rows="3" required></textarea>
+                        <small class="text-muted">Example: {"type": "stop_trading", "params": {}}</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Rule</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Existing Rules -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Existing Rules</h5>
+            </div>
+            <div class="card-body">
+                <div id="rulesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fetch and display existing rules
+        async function fetchRules() {
+            try {
+                const response = await fetch('/api/automation/rules');
+                const data = await response.json();
+                const rulesList = document.getElementById('rulesList');
+                rulesList.innerHTML = '';
+
+                if (data.rules.length === 0) {
+                    rulesList.innerHTML = '<p>No rules defined yet.</p>';
+                    return;
+                }
+
+                data.rules.forEach(rule => {
+                    const ruleCard = document.createElement('div');
+                    ruleCard.className = 'card rule-card';
+                    ruleCard.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${rule.name}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Rule ID: ${rule.id}</h6>
+                            <div class="mb-2">
+                                <strong>Condition:</strong>
+                                <pre>${JSON.stringify(rule.condition, null, 2)}</pre>
+                            </div>
+                            <div class="mb-2">
+                                <strong>Action:</strong>
+                                <pre>${JSON.stringify(rule.action, null, 2)}</pre>
+                            </div>
+                            <button class="btn btn-danger btn-sm" onclick="deleteRule('${rule.id}')">Delete Rule</button>
+                        </div>
+                    `;
+                    rulesList.appendChild(ruleCard);
+                });
+            } catch (error) {
+                console.error('Error fetching rules:', error);
+            }
+        }
+
+        // Add new rule
+        document.getElementById('newRuleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('ruleName').value,
+                condition: JSON.parse(document.getElementById('condition').value),
+                action: JSON.parse(document.getElementById('action').value)
+            };
+
+            try {
+                const response = await fetch('/api/automation/rules', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    document.getElementById('newRuleForm').reset();
+                    fetchRules();
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding rule:', error);
+                alert('Error adding rule. Check console for details.');
+            }
+        });
+
+        // Delete rule
+        async function deleteRule(ruleId) {
+            if (!confirm('Are you sure you want to delete this rule?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/automation/rules/${ruleId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    fetchRules();
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error deleting rule:', error);
+                alert('Error deleting rule. Check console for details.');
+            }
+        }
+
+        // Initial load
+        fetchRules();
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+name: solarbot
+services:
+- name: web
+  github:
+    repo: arodrig125/solana-trading-bot
+    branch: website
+  build_command: npm run build
+  run_command: npm start
+  http_port: 3000
+  routes:
+  - path: /

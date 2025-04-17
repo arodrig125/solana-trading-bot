@@ -132,14 +132,8 @@ class AuthService {
    * @param {Object} userData - User registration data
    */
   async register(userData) {
-    try {
-      const result = await this.api.register(userData);
-      this.currentUser = result.user;
-      this.triggerAuthStateChange();
-      return { success: true, user: result.user };
-    } catch (error) {
-      return { success: false, message: error.message };
-    }
+    // Registration is disabled for soft launch
+    return { success: false, message: 'Registration is currently closed.' };
   }
 
   /**

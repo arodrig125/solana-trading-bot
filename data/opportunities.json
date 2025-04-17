@@ -1,0 +1,122 @@
+[
+  {
+    "type": "exchange",
+    "pair": "BTC-USDC",
+    "inputAmount": 100,
+    "outputAmount1": 19551.699416,
+    "outputAmount2": 3225.654385,
+    "profitAmount": 16326.045031,
+    "profitPercent": 506.13125531736097,
+    "timestamp": "2025-04-12T20:36:15.445Z",
+    "id": "opp-1744490201554-hv4vnlous",
+    "recordedAt": "2025-04-12T20:36:41.554Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "SOL-BTC",
+    "inputAmount": 100,
+    "outputAmount1": 2.384724,
+    "outputAmount2": 1.144987,
+    "profitAmount": 1.239737,
+    "profitPercent": 108.27520312457696,
+    "timestamp": "2025-04-12T20:36:17.341Z",
+    "id": "opp-1744490202193-3o80x35qx",
+    "recordedAt": "2025-04-12T20:36:42.193Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "BTC-USDC",
+    "inputAmount": 100,
+    "outputAmount1": 22413.46514,
+    "outputAmount2": 3225.654385,
+    "profitAmount": 19187.810755,
+    "profitPercent": 594.8501750289034,
+    "timestamp": "2025-04-12T20:36:45.818Z",
+    "id": "opp-1744490216135-ww9pdd6ws",
+    "recordedAt": "2025-04-12T20:36:56.135Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "SOL-BTC",
+    "inputAmount": 100,
+    "outputAmount1": 2.384724,
+    "outputAmount2": 1.144987,
+    "profitAmount": 1.239737,
+    "profitPercent": 108.27520312457696,
+    "timestamp": "2025-04-12T20:36:47.896Z",
+    "id": "opp-1744490216722-y6s8c7gu0",
+    "recordedAt": "2025-04-12T20:36:56.722Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "BTC-USDC",
+    "inputAmount": 100,
+    "outputAmount1": 19861.617878,
+    "outputAmount2": 3239.31071,
+    "profitAmount": 16622.307168,
+    "profitPercent": 513.1433399298704,
+    "timestamp": "2025-04-12T20:43:09.233Z",
+    "id": "opp-1744490619905-pbv3mv5ud",
+    "recordedAt": "2025-04-12T20:43:39.905Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "SOL-BTC",
+    "inputAmount": 100,
+    "outputAmount1": 2.386754,
+    "outputAmount2": 1.14765,
+    "profitAmount": 1.239104,
+    "profitPercent": 107.9688058205899,
+    "timestamp": "2025-04-12T20:43:13.277Z",
+    "id": "opp-1744490620285-kr8jglgwd",
+    "recordedAt": "2025-04-12T20:43:40.285Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "BONK-USDC",
+    "inputAmount": 100,
+    "outputAmount1": 0.001411,
+    "outputAmount2": 0.00138,
+    "profitAmount": 0.000031,
+    "profitPercent": 2.246376811594203,
+    "timestamp": "2025-04-12T20:43:12.451Z",
+    "id": "opp-1744490620667-p4eowyj5y",
+    "recordedAt": "2025-04-12T20:43:40.667Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "BTC-USDC",
+    "inputAmount": 100,
+    "outputAmount1": 19818.494053,
+    "outputAmount2": 3239.31071,
+    "profitAmount": 16579.183343,
+    "profitPercent": 511.81207445827266,
+    "timestamp": "2025-04-12T20:44:08.439Z",
+    "id": "opp-1744490681811-t2851mj0s",
+    "recordedAt": "2025-04-12T20:44:41.811Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "SOL-BTC",
+    "inputAmount": 100,
+    "outputAmount1": 2.386755,
+    "outputAmount2": 1.14765,
+    "profitAmount": 1.239105,
+    "profitPercent": 107.96889295516925,
+    "timestamp": "2025-04-12T20:44:12.675Z",
+    "id": "opp-1744490683020-3gj16yu39",
+    "recordedAt": "2025-04-12T20:44:43.020Z"
+  },
+  {
+    "type": "exchange",
+    "pair": "BONK-USDC",
+    "inputAmount": 100,
+    "outputAmount1": 0.001405,
+    "outputAmount2": 0.001381,
+    "profitAmount": 0.000024,
+    "profitPercent": 1.7378711078928313,
+    "timestamp": "2025-04-12T20:44:11.853Z",
+    "id": "opp-1744490683394-kyf50di77",
+    "recordedAt": "2025-04-12T20:44:43.394Z"
+  }
+]

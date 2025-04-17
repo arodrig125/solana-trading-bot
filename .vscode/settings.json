@@ -1,0 +1,10 @@
+{
+    "augment.completions.disableCompletionsByLanguage": [
+        "git-commit",
+        "scminput",
+        "terminal"
+    ],
+    "augment.nextEdit.showDiffInHover": true,
+    "augment.nextEdit.highlightSuggestionsInTheEditor": true,
+    "augment.nextEdit.enableGlobalBackgroundSuggestions": true
+}

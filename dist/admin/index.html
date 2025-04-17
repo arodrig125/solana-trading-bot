@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarBot Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="bg-gray-800 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="text-xl font-bold">SolarBot Admin</div>
+                <div class="flex space-x-4">
+                    <button id="refreshBtn" class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-600">
+                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                    </button>
+                    <button id="logoutBtn" class="px-4 py-2 bg-red-500 rounded hover:bg-red-600">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container mx-auto p-6">
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 text-blue-500">
+                            <i class="fas fa-robot text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Bot Status</p>
+                            <p class="text-lg font-semibold" id="botStatus">Active</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 text-green-500">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">24h Profit</p>
+                            <p class="text-lg font-semibold" id="profit24h">0 SOL</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-purple-100 text-purple-500">
+                            <i class="fas fa-exchange-alt text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Total Trades</p>
+                            <p class="text-lg font-semibold" id="totalTrades">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-yellow-100 text-yellow-500">
+                            <i class="fas fa-clock text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Uptime</p>
+                            <p class="text-lg font-semibold" id="botUptime">0d 0h 0m</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">CPU Usage</h3>
+                    <canvas id="cpuChart"></canvas>
+                    <div class="mt-4 text-center text-2xl font-bold" id="cpuUsage">--%</div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Memory Usage</h3>
+                    <canvas id="memoryChart"></canvas>
+                    <div class="mt-4 text-center text-2xl font-bold" id="memoryUsage">--%</div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Trading Performance</h3>
+                    <canvas id="tradingChart"></canvas>
+                    <div class="mt-4 text-center text-2xl font-bold" id="successRate">--%</div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Wallet Balance</h3>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold" id="walletBalance">-- SOL</div>
+                        <div class="text-sm text-gray-500" id="walletUsd">($--)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Alerts -->
+            <div class="bg-white rounded-lg shadow p-6 mb-6">
+                <h3 class="text-lg font-semibold mb-4">Active Alerts</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="px-6 py-3 text-left">Type</th>
+                                <th class="px-6 py-3 text-left">Category</th>
+                                <th class="px-6 py-3 text-left">Message</th>
+                                <th class="px-6 py-3 text-left">Severity</th>
+                                <th class="px-6 py-3 text-left">Time</th>
+                                <th class="px-6 py-3 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activeAlerts">
+                            <!-- Active alerts will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Market Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Top Trading Pairs</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2">Pair</th>
+                                    <th class="px-4 py-2">Volume (24h)</th>
+                                    <th class="px-4 py-2">Trades</th>
+                                    <th class="px-4 py-2">Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topPairs">
+                                <!-- Top pairs will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Market Opportunities</h3>
+                    <div class="overflow-y-auto max-h-80" id="opportunities">
+                        <!-- Market opportunities will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Status -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">RPC Health</h3>
+                    <canvas id="rpcChart"></canvas>
+                    <div class="mt-4 grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-500">Latency</p>
+                            <p class="text-lg font-semibold" id="rpcLatency">-- ms</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Success Rate</p>
+                            <p class="text-lg font-semibold" id="rpcSuccess">--%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Gas Tracker</h3>
+                    <canvas id="gasChart"></canvas>
+                    <div class="mt-4 grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-500">Current</p>
+                            <p class="text-lg font-semibold" id="currentGas">-- SOL</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">24h Spent</p>
+                            <p class="text-lg font-semibold" id="gasSpent">-- SOL</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Network Stats</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm text-gray-500">TPS</p>
+                            <div class="flex items-center">
+                                <div class="flex-1">
+                                    <div class="h-2 bg-gray-200 rounded">
+                                        <div class="h-2 bg-blue-500 rounded" id="tpsBar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <span class="ml-2 text-sm font-medium" id="tpsValue">-- TPS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Block Time</p>
+                            <div class="flex items-center">
+                                <div class="flex-1">
+                                    <div class="h-2 bg-gray-200 rounded">
+                                        <div class="h-2 bg-green-500 rounded" id="blockTimeBar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <span class="ml-2 text-sm font-medium" id="blockTimeValue">-- ms</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Slot</p>
+                            <p class="text-lg font-semibold" id="currentSlot">--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trading Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Recent Trades</h3>
+                    <div class="overflow-y-auto max-h-80">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2">Pair</th>
+                                    <th class="px-4 py-2">Type</th>
+                                    <th class="px-4 py-2">Amount</th>
+                                    <th class="px-4 py-2">Profit</th>
+                                    <th class="px-4 py-2">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentTrades">
+                                <!-- Recent trades will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Performance Metrics</h3>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Success Rate</div>
+                            <div class="text-2xl font-bold" id="tradeSuccessRate">--%</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Avg Execution</div>
+                            <div class="text-2xl font-bold" id="avgExecutionTime">--ms</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Avg Slippage</div>
+                            <div class="text-2xl font-bold" id="avgSlippage">--%</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Total Profit</div>
+                            <div class="text-2xl font-bold" id="totalProfit">-- SOL</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm text-gray-500">Win Rate</p>
+                            <div class="flex items-center">
+                                <div class="flex-1">
+                                    <div class="h-2 bg-gray-200 rounded">
+                                        <div class="h-2 bg-green-500 rounded" id="winRateBar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <span class="ml-2 text-sm font-medium" id="winRateValue">--%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">ROI</p>
+                            <div class="flex items-center">
+                                <div class="flex-1">
+                                    <div class="h-2 bg-gray-200 rounded">
+                                        <div class="h-2 bg-blue-500 rounded" id="roiBar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <span class="ml-2 text-sm font-medium" id="roiValue">--%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Success Rate</div>
+                            <div class="text-2xl font-bold" id="tradeSuccessRate">--%</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Avg Execution Time</div>
+                            <div class="text-2xl font-bold" id="avgExecutionTime">--ms</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Avg Slippage</div>
+                            <div class="text-2xl font-bold" id="avgSlippage">--%</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded">
+                            <div class="text-sm text-gray-500">Total Profit</div>
+                            <div class="text-2xl font-bold" id="totalProfit">-- SOL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/dashboard.js"></script>
+</body>
+</html>

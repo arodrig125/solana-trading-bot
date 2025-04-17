@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - SolarBot</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/images/favicon.ico">
+    <style>
+        .pricing {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .price-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            margin: 15px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .price-card.highlight {
+            border: 2px solid #9945FF;
+            position: relative;
+        }
+        
+        .price-card.highlight::before {
+            content: "POPULAR";
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #9945FF;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+        
+        .price-card h3 {
+            margin-top: 0;
+            color: #9945FF;
+        }
+        
+        .price {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        
+        .period {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .features-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: #9945FF;
+            margin-right: 10px;
+        }
+        
+        .features-list li.not-included::before {
+            content: "✗";
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SolarBot Pricing</h1>
+            <p>Choose the plan that fits your trading needs</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/features.html">Features</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="container">
+        <div class="pricing">
+            <div class="price-card">
+                <h3>FREE</h3>
+                <div class="price">$0<span class="period">/month</span></div>
+                <p>Perfect for beginners to test the waters</p>
+                <ul class="features-list">
+                    <li>3 Token Pairs</li>
+                    <li>Basic Arbitrage Strategy</li>
+                    <li>Community Support</li>
+                    <li class="not-included">Advanced Risk Management</li>
+                    <li class="not-included">Priority Support</li>
+                    <li class="not-included">Custom Strategies</li>
+                </ul>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+            
+            <div class="price-card highlight">
+                <h3>PRO</h3>
+                <div class="price">$49<span class="period">/month</span></div>
+                <p>For serious traders looking to maximize profits</p>
+                <ul class="features-list">
+                    <li>10 Token Pairs</li>
+                    <li>Advanced Arbitrage Strategies</li>
+                    <li>Basic Risk Management</li>
+                    <li>Email Support</li>
+                    <li class="not-included">Custom Strategies</li>
+                    <li class="not-included">Dedicated Account Manager</li>
+                </ul>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+            
+            <div class="price-card">
+                <h3>ELITE</h3>
+                <div class="price">$99<span class="period">/month</span></div>
+                <p>For professional traders and small funds</p>
+                <ul class="features-list">
+                    <li>Unlimited Token Pairs</li>
+                    <li>All Arbitrage Strategies</li>
+                    <li>Advanced Risk Management</li>
+                    <li>Priority Support</li>
+                    <li>Custom Strategies</li>
+                    <li class="not-included">Dedicated Account Manager</li>
+                </ul>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+            
+            <div class="price-card">
+                <h3>INSTITUTIONAL</h3>
+                <div class="price">$499<span class="period">/month</span></div>
+                <p>For institutional investors and large funds</p>
+                <ul class="features-list">
+                    <li>Unlimited Token Pairs</li>
+                    <li>All Arbitrage Strategies</li>
+                    <li>Advanced Risk Management</li>
+                    <li>24/7 Support</li>
+                    <li>Custom Strategies</li>
+                    <li>Dedicated Account Manager</li>
+                </ul>
+                <a href="#" class="btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SolarBot. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

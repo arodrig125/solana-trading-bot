@@ -82,7 +82,7 @@ class TradingMonitor {
   connectWebSocket() {
     // Determine WebSocket URL based on environment
     let wsUrl;
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
       wsUrl = 'ws://localhost:3001/trading-socket';
     } else {
       wsUrl = 'wss://api.solarbot.digitalocean.app/trading-socket';

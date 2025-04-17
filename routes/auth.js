@@ -36,28 +36,9 @@ const router = express.Router();
  *         description: Server error
  */
 // POST /api/auth/register
-router.post('/register', async (req, res) => {
-  try {
-    const { username, password, role } = req.body;
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Username and password are required.' });
-    }
-    // Check if username exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(409).json({ error: 'Username already exists.' });
-    }
-    // Create user (default role: viewer)
-    const user = new User({
-      username,
-      password,
-      role: role || 'viewer'
-    });
-    await user.save();
-    res.status(201).json({ message: 'User registered successfully.' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+// Registration is disabled for soft launch
+router.post('/register', (req, res) => {
+  return res.status(403).json({ error: 'Registration is currently closed.' });
 });
 
 /**

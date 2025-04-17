@@ -10,7 +10,8 @@
     "deploy": "astro build && curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_IsU4zowZ3K4i31EEhOz9g4ieKikt/ehr9Ajk8zQ"
   },
   "dependencies": {
-    "astro": "^4.0.0",
-    "@astrojs/tailwind": "^5.0.0"
+    "astro": "^5.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/adapter-static": "^2.0.0"
   }
 }

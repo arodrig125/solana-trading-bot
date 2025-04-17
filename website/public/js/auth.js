@@ -81,43 +81,10 @@ const subscriptionPlans = {
 
 // User registration function
 function registerUser(email, password, name, plan) {
-    // Check if user already exists
-    if (users.find(user => user.email === email)) {
-        return {
-            success: false,
-            message: 'A user with this email already exists'
-        };
-    }
-
-    // Create new user object
-    const newUser = {
-        id: generateUserId(),
-        email,
-        password: hashPassword(password), // In a real app, use proper password hashing
-        name,
-        plan,
-        subscriptionStatus: 'active',
-        subscriptionStart: new Date().toISOString(),
-        subscriptionEnd: calculateSubscriptionEnd(new Date(), 30), // 30 days subscription
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString()
-    };
-
-    // Add user to database
-    users.push(newUser);
-    saveUsers();
-
+    // Registration is disabled for soft launch
     return {
-        success: true,
-        message: 'Registration successful',
-        user: {
-            id: newUser.id,
-            email: newUser.email,
-            name: newUser.name,
-            plan: newUser.plan,
-            subscriptionStatus: newUser.subscriptionStatus,
-            subscriptionEnd: newUser.subscriptionEnd
-        }
+        success: false,
+        message: 'Registration is currently closed.'
     };
 }
 

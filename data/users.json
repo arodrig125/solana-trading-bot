@@ -1,0 +1,30 @@
+{
+  "6492583125": {
+    "id": "6492583125",
+    "tier": "FREE",
+    "created": 1744513140211,
+    "wallets": [],
+    "settings": {},
+    "usage": {
+      "scans": 102,
+      "lastScan": 1744554793455,
+      "dailyScans": 102,
+      "dailyReset": 1744513140211
+    },
+    "updated": 1744513140212
+  },
+  "default": {
+    "id": "default",
+    "tier": "FREE",
+    "created": 1744549316212,
+    "wallets": [],
+    "settings": {},
+    "usage": {
+      "scans": 276,
+      "lastScan": 1744594463215,
+      "dailyScans": 276,
+      "dailyReset": 1744549316212
+    },
+    "updated": 1744549316213
+  }
+}
