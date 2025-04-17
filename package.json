@@ -2,9 +2,7 @@
   "name": "solana-trading-bot",
   "version": "1.0.0",
   "description": "Solana Trading Bot with website",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
     "build": "echo 'Static site - no build step needed' && exit 0"
   },
   "keywords": [
@@ -15,9 +13,6 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
   "engines": {
     "node": ">=18.0.0"
   }
