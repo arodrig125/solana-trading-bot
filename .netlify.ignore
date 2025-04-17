@@ -1,0 +1,4 @@
+# Ignore Next.js files
+.next/
+next.config.js
+pages/

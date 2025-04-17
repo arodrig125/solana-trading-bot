@@ -6,10 +6,12 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "echo 'No build step required'"
+    "build": "echo 'No build step required'",
+    "start": "echo 'This is a static site'"
   },
   "dependencies": {
     "@netlify/functions": "^1.6.0",
     "jsonwebtoken": "9.0.2"
-  }
+  },
+  "type": "commonjs"
 }

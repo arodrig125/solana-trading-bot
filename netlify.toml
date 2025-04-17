@@ -4,3 +4,17 @@
 
 [functions]
   directory = "netlify/functions"
+
+# Disable the Next.js plugin
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# Explicitly define which plugins to use (and not use)
+[[plugins]]
+  package = "@netlify/plugin-functions-core"
+
+# Redirect all requests to index.html for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
