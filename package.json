@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "echo 'Static site - no build step needed'"
+    "build": "echo 'Static site - no build step needed' && exit 0"
   },
   "keywords": [
     "solana",
